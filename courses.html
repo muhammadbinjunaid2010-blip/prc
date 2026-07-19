@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Courses - PRC Pakistan</title>
-<link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+<link rel="icon" type="image/x-icon" href="./images/favicon.png">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#5B8DEF',secondary:'#8DAA91',accent:'#F6F2EA',dark:'#2F2F2F'}}}}</script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -460,12 +460,19 @@ lucide.createIcons();
   <button id="chatbot-toggle" class="bg-primary hover:bg-primary/90 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
   </button>
-  <div id="chatbot-box" class="hidden absolute bottom-16 right-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
-    <div class="bg-primary text-white p-4">
-      <p class="font-semibold">PRC Pakistan Assistant</p>
-      <p class="text-xs text-white/80">How can we help you today?</p>
+  <div id="chatbot-box" class="hidden absolute bottom-16 right-0 w-[380px] h-[520px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col">
+    <div class="bg-primary text-white p-4 flex-shrink-0">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <div>
+          <p class="font-semibold">PRC Pakistan Assistant</p>
+          <p class="text-xs text-white/80">How can we help you today?</p>
+        </div>
+      </div>
     </div>
-    <div id="chatbot-messages" class="p-4 h-64 overflow-y-auto space-y-3">
+    <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto space-y-3">
       <div class="bg-accent rounded-xl p-3 text-sm">Hi! I'm here to help. What can I assist you with?</div>
       <div id="chatbot-options" class="space-y-2">
         <button onclick="chatSelect('struggling')" class="w-full text-left bg-primary/10 hover:bg-primary/20 rounded-xl p-3 text-sm text-dark transition">I'm struggling with parenting/relationships</button>
@@ -474,7 +481,7 @@ lucide.createIcons();
         <button onclick="chatSelect('bug')" class="w-full text-left bg-red-50 hover:bg-red-100 rounded-xl p-3 text-sm text-dark transition">Report a bug or issue</button>
       </div>
     </div>
-    <div id="chatbot-input-area" class="hidden border-t p-3">
+    <div id="chatbot-input-area" class="hidden border-t p-3 flex-shrink-0">
       <div class="flex gap-2">
         <input id="chatbot-input" type="text" placeholder="Type your message..." class="flex-1 border rounded-full px-4 py-2 text-sm outline-none focus:border-primary">
         <button onclick="chatSend()" class="bg-primary text-white rounded-full px-4 py-2 text-sm">Send</button>
@@ -517,7 +524,51 @@ lucide.createIcons();
     msgs.scrollTop=msgs.scrollHeight;
   }
 
+  function addBackToMenu(){
+    var d=document.createElement('div');
+    d.className='space-y-2 pt-2 border-t border-gray-100';
+    var btn=document.createElement('button');
+    btn.className='w-full text-left bg-gray-100 hover:bg-gray-200 rounded-xl p-3 text-sm text-dark/70 transition font-medium';
+    btn.innerHTML='&#8592; Back to main menu';
+    btn.onclick=function(){d.remove();resetChat();};
+    d.appendChild(btn);
+    msgs.appendChild(d);
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+
+  function addFollowUp(question, options){
+    setTimeout(function(){
+      addMsg(question,false);
+      setTimeout(function(){addBtns(options);},300);
+    },600);
+  }
+
   function showInput(){inputArea.classList.remove('hidden');chatInput.focus();}
+
+  function resetChat(){
+    chatState='';chatDetails='';chatStep=0;
+    addMsg("How can we help you today?",false);
+    setTimeout(function(){
+      var d=document.createElement('div');
+      d.id='chatbot-options';
+      d.className='space-y-2';
+      var items=[
+        {t:"I'm struggling with parenting/relationships",v:'struggling'},
+        {t:'I want to book a session',v:'book'},
+        {t:'Question about a course',v:'course'},
+        {t:'Report a bug or issue',v:'bug'}
+      ];
+      items.forEach(function(it){
+        var btn=document.createElement('button');
+        btn.className='w-full text-left bg-primary/10 hover:bg-primary/20 rounded-xl p-3 text-sm text-dark transition';
+        btn.textContent=it.t;
+        btn.onclick=function(){d.remove();window.chatSelect(it.v);};
+        d.appendChild(btn);
+      });
+      msgs.appendChild(d);
+      msgs.scrollTop=msgs.scrollHeight;
+    },300);
+  }
 
   window.chatSelect=function(type){
     var opts=document.getElementById('chatbot-options');
@@ -529,7 +580,7 @@ lucide.createIcons();
       addMsg("I'm struggling with parenting/relationships",true);
       chatState='struggling';
       setTimeout(function(){
-        addMsg("I'm sorry to hear that. You're not alone - we're here to help. What area do you need support with?",false);
+        addMsg("I'm sorry to hear that. You're not alone — we're here to help. What area do you need support with?",false);
         setTimeout(function(){
           addBtns([
             {label:'Parenting challenges',action:function(){chatDetails='Parenting';afterStruggle();}},
@@ -596,12 +647,26 @@ lucide.createIcons();
   function afterStruggle(){
     addMsg("I need help with: "+chatDetails,true);
     setTimeout(function(){
-      addMsg("Thank you for sharing. I understand this can be difficult. Let me connect you with one of our coaches who specializes in "+chatDetails+". Please describe your situation briefly, and we'll arrange a session.",false);
-      setTimeout(function(){addMsg("You can also book directly or message us on WhatsApp:",false);
+      addMsg("Thank you for sharing. I understand this can be difficult. Let me connect you with one of our coaches who specializes in "+chatDetails+".",false);
+      setTimeout(function(){
+        addMsg("Here's what we can do next:",false);
         setTimeout(function(){
           addBtns([
-            {label:'Book a session now',action:function(){window.location.href='./contact.html';}},
-            {label:'Chat on WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi%20PRC%20Pakistan!%20I%20need%20help%20with%20'+encodeURIComponent(chatDetails)+'.%20Can%20you%20please%20assist%20me?','_blank');}}
+            {label:'Book a session now',action:function(){
+              addMsg("Book a session now",true);
+              addFollowUp("Would you like to know anything else?",
+                [
+                  {label:'Yes, explore more options',action:function(){resetChat();}},
+                  {label:'No, thank you!',action:function(){addMsg("You're welcome! We're here whenever you need us. Have a wonderful day! 😊",false);addBackToMenu();}}
+                ]);
+              setTimeout(function(){window.location.href='./contact.html';},800);
+            }},
+            {label:'Chat on WhatsApp',action:function(){addMsg("Chat on WhatsApp",true);window.open('https://wa.me/923212345678?text=Hi%20PRC%20Pakistan!%20I%20need%20help%20with%20'+encodeURIComponent(chatDetails)+'.%20Can%20you%20please%20assist%20me?','_blank');
+              addFollowUp("Is there anything else I can help with?",
+                [{label:'Yes, ask something else',action:function(){resetChat();}},
+                 {label:"No, that's all!",action:function(){addMsg("Glad I could help! Take care and remember — you're doing a great job as a parent. 💛",false);addBackToMenu();}}]);
+            }},
+            {label:'Back to menu',action:function(){resetChat();}}
           ]);
         },300);
       },500);
@@ -611,11 +676,24 @@ lucide.createIcons();
   function afterBook(){
     addMsg("I'm interested in: "+chatDetails,true);
     setTimeout(function(){
-      addMsg("Excellent! We'd love to help you with "+chatDetails+". Please provide your name and preferred time, and we'll set up your session. Or message us directly on WhatsApp:",false);
+      addMsg("Excellent! We'd love to help you with "+chatDetails+". Here are your options:",false);
       setTimeout(function(){
         addBtns([
-          {label:'Go to booking form',action:function(){window.location.href='./contact.html';}},
-          {label:'Book via WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi!%20I%20would%20like%20to%20book%20a%20'+encodeURIComponent(chatDetails)+'%20session.%20Please%20let%20me%20know%20available%20slots.','_blank');}}
+          {label:'Go to booking form',action:function(){
+            addMsg("Go to booking form",true);
+            addFollowUp("Anything else I can help with?",
+              [{label:'Yes, I have more questions',action:function(){resetChat();}},
+               {label:"No, I'm good!",action:function(){addMsg("Perfect! We look forward to seeing you. Have a great day! 🌟",false);addBackToMenu();}}]);
+            setTimeout(function(){window.location.href='./contact.html';},800);
+          }},
+          {label:'Book via WhatsApp',action:function(){
+            addMsg("Book via WhatsApp",true);
+            window.open('https://wa.me/923212345678?text=Hi!%20I%20would%20like%20to%20book%20a%20'+encodeURIComponent(chatDetails)+'%20session.%20Please%20let%20me%20know%20available%20slots.','_blank');
+            addFollowUp("Can I help with anything else?",
+              [{label:'Yes, more questions',action:function(){resetChat();}},
+               {label:"That's all, thanks!",action:function(){addMsg("You're welcome! See you soon. 😊",false);addBackToMenu();}}]);
+          }},
+          {label:'Back to menu',action:function(){resetChat();}}
         ]);
       },300);
     },500);
@@ -624,11 +702,24 @@ lucide.createIcons();
   function afterCourse(){
     addMsg("My question is about: "+chatDetails,true);
     setTimeout(function(){
-      addMsg("Great! For detailed information about "+chatDetails+", including curriculum, pricing, and enrollment, please visit our Courses page or message us on WhatsApp:",false);
+      addMsg("Great! For detailed information about "+chatDetails+", including curriculum, pricing, and enrollment:",false);
       setTimeout(function(){
         addBtns([
-          {label:'View course details',action:function(){window.location.href='./courses.html';}},
-          {label:'Ask on WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi!%20I%20have%20a%20question%20about%20the%20'+encodeURIComponent(chatDetails)+'%20course.','_blank');}}
+          {label:'View course details',action:function(){
+            addMsg("View course details",true);
+            addFollowUp("Anything else you'd like to know?",
+              [{label:'Yes, explore another course',action:function(){resetChat();}},
+               {label:"No, thanks!",action:function(){addMsg("Happy to help! Enjoy your learning journey with PRC! 📚",false);addBackToMenu();}}]);
+            setTimeout(function(){window.location.href='./courses.html';},800);
+          }},
+          {label:'Ask on WhatsApp',action:function(){
+            addMsg("Ask on WhatsApp",true);
+            window.open('https://wa.me/923212345678?text=Hi!%20I%20have%20a%20question%20about%20the%20'+encodeURIComponent(chatDetails)+'%20course.','_blank');
+            addFollowUp("Do you have any other questions?",
+              [{label:'Yes, ask more',action:function(){resetChat();}},
+               {label:"No, that's all!",action:function(){addMsg("Great choice! We're here if you need anything else. 😊",false);addBackToMenu();}}]);
+          }},
+          {label:'Back to menu',action:function(){resetChat();}}
         ]);
       },300);
     },500);
@@ -651,13 +742,19 @@ lucide.createIcons();
 
     if(chatState==='bug'){
       setTimeout(function(){
-        addMsg("Thank you for the details! We'll fix this ASAP. Please send this report via WhatsApp so our team gets it instantly:",false);
+        addMsg("Thank you for the details! We'll fix this ASAP. Please send this report via WhatsApp:",false);
         var fullMsg='Bug Report\n'+chatDetails+'\nIssue: '+val;
         var waUrl='https://wa.me/923212345678?text='+encodeURIComponent(fullMsg);
         setTimeout(function(){
           addBtns([
-            {label:'Send report on WhatsApp',action:function(){window.open(waUrl,'_blank');}},
-            {label:'Done, thanks!',action:function(){addMsg("We appreciate your feedback! Our team will look into this.","");}}
+            {label:'Send report on WhatsApp',action:function(){
+              addMsg("Send report on WhatsApp",true);
+              window.open(waUrl,'_blank');
+              addFollowUp("Is there anything else we can help with?",
+                [{label:'Yes, another issue',action:function(){resetChat();}},
+                 {label:"No, that's all!",action:function(){addMsg("Thanks for reporting! We appreciate your help making PRC better. 💪",false);addBackToMenu();}}]);
+            }},
+            {label:'Done, thanks!',action:function(){addMsg("We appreciate your feedback! Our team will look into this.",false);addBackToMenu();}}
           ]);
         },300);
       },500);
