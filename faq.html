@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ - PRC Pakistan</title>
+<link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#5B8DEF',secondary:'#8DAA91',accent:'#F6F2EA',dark:'#2F2F2F'}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="./style.css" rel="stylesheet">
+<meta name="description" content="Frequently asked questions about PRC Pakistan's coaching services, courses, and events.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://prcpakistan.vercel.app/faq.html">
+<meta property="og:title" content="FAQ - PRC Pakistan">
+<meta property="og:description" content="Frequently asked questions about PRC Pakistan's coaching services, courses, and events.">
+<meta property="og:image" content="https://prcpakistan.vercel.app/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FAQ - PRC Pakistan">
+<meta name="twitter:description" content="Frequently asked questions about PRC Pakistan's coaching services, courses, and events.">
+<meta name="twitter:image" content="https://prcpakistan.vercel.app/images/og-image.png">
+</head>
+<body class="font-sans text-dark bg-white">
+
+<!-- NAV -->
+<nav id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <a href="./index.html">
+        <img src="./images/logo.png" alt="PRC Pakistan" class="h-12">
+      </a>
+      <div class="hidden lg:flex items-center space-x-6">
+        <a href="./index.html" class="text-sm font-medium hover:text-primary transition">Home</a>
+        <a href="./about.html" class="text-sm font-medium hover:text-primary transition">About</a>
+        <a href="./services.html" class="text-sm font-medium hover:text-primary transition">Services</a>
+        <a href="./learning-hub.html" class="text-sm font-medium hover:text-primary transition">Learning Hub</a>
+        <a href="./courses.html" class="text-sm font-medium hover:text-primary transition">Courses</a>
+        <a href="./events.html" class="text-sm font-medium hover:text-primary transition">Events</a>
+        <a href="./resources.html" class="text-sm font-medium hover:text-primary transition">Resources</a>
+        <a href="./media.html" class="text-sm font-medium hover:text-primary transition">Media</a>
+        <a href="./faq.html" class="text-sm font-medium text-primary font-semibold transition">FAQ</a>
+        <a href="./contact.html" class="text-sm font-medium hover:text-primary transition">Contact</a>
+      </div>
+      <div class="hidden lg:block">
+        <a href="./contact.html" class="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary/90 transition">Book a Session</a>
+      </div>
+      <button id="mobile-menu-btn" class="lg:hidden text-dark">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden lg:hidden bg-white border-t">
+    <div class="px-4 py-4 space-y-3">
+      <a href="./index.html" class="block text-sm font-medium hover:text-primary transition">Home</a>
+      <a href="./about.html" class="block text-sm font-medium hover:text-primary transition">About</a>
+      <a href="./services.html" class="block text-sm font-medium hover:text-primary transition">Services</a>
+      <a href="./learning-hub.html" class="block text-sm font-medium hover:text-primary transition">Learning Hub</a>
+      <a href="./courses.html" class="block text-sm font-medium hover:text-primary transition">Courses</a>
+      <a href="./events.html" class="block text-sm font-medium hover:text-primary transition">Events</a>
+      <a href="./resources.html" class="block text-sm font-medium hover:text-primary transition">Resources</a>
+      <a href="./media.html" class="block text-sm font-medium hover:text-primary transition">Media</a>
+      <a href="./faq.html" class="block text-sm font-medium text-primary font-semibold transition">FAQ</a>
+      <a href="./contact.html" class="block text-sm font-medium hover:text-primary transition">Contact</a>
+      <a href="./contact.html" class="inline-block bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary/90 transition mt-2">Book a Session</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="pt-24 pb-16 bg-white">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h1 class="font-display text-4xl md:text-5xl text-dark mb-4">Frequently Asked Questions</h1>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Find answers to common questions about our services, courses, and coaching.</p>
+  </div>
+</section>
+
+<!-- FAQ SEARCH BAR -->
+<section class="pb-8">
+  <div class="max-w-2xl mx-auto px-4">
+    <div class="flex items-center rounded-full border border-gray-200 px-6 py-3 bg-white shadow-sm">
+      <i data-lucide="search" class="w-5 h-5 text-gray-400 mr-3"></i>
+      <input id="faq-search" type="text" placeholder="Search questions..." class="w-full outline-none text-sm text-dark placeholder-gray-400">
+    </div>
+  </div>
+</section>
+
+<!-- FAQ CATEGORIES -->
+<section class="pb-10">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="flex flex-wrap justify-center gap-3">
+      <button class="faq-filter cat-pill px-5 py-2 rounded-full text-sm font-medium bg-primary text-white" data-category="all">All</button>
+      <button class="faq-filter cat-pill px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-dark/70 hover:bg-gray-200" data-category="general">General</button>
+      <button class="faq-filter cat-pill px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-dark/70 hover:bg-gray-200" data-category="coaching">Coaching</button>
+      <button class="faq-filter cat-pill px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-dark/70 hover:bg-gray-200" data-category="courses">Courses</button>
+      <button class="faq-filter cat-pill px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-dark/70 hover:bg-gray-200" data-category="events">Events</button>
+      <button class="faq-filter cat-pill px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-dark/70 hover:bg-gray-200" data-category="payment">Payment</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ ACCORDION -->
+<section class="pb-20">
+  <div class="max-w-3xl mx-auto px-4 space-y-4">
+
+    <!-- GENERAL -->
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="general">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">What is PRC Pakistan?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">PRC Pakistan (Parenting &amp; Relationship Coaching Pakistan) is a professional coaching organization dedicated to strengthening families through expert coaching, workshops, and educational programs. We serve parents, couples, educators, and organizations across Pakistan.</p>
+      </div>
+    </div>
+
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="general">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">Who can benefit from your services?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">Our services are designed for anyone involved in family life — parents of all ages, couples (married or dating), educators, school administrators, corporate HR teams, and anyone seeking to improve their family relationships.</p>
+      </div>
+    </div>
+
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="general">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">Do you offer services in Urdu?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">Yes! All our coaching sessions, workshops, and courses are available in both English and Urdu to serve families across Pakistan.</p>
+      </div>
+    </div>
+
+    <!-- COACHING -->
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="coaching">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">How do I book a coaching session?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">You can book a session through our Contact page, via WhatsApp at +92 321 234 5678, or by emailing hello@prcpakistan.org. We'll schedule a free 15-minute discovery call to understand your needs.</p>
+      </div>
+    </div>
+
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="coaching">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">Are sessions confidential?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">Absolutely. All coaching sessions are 100% confidential. We follow strict professional ethics and never share client information without explicit consent.</p>
+      </div>
+    </div>
+
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="coaching">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">Do you offer online coaching?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">Yes, we offer both in-person sessions (Karachi, Lahore, Islamabad) and online sessions via Zoom/Google Meet for clients across Pakistan and internationally.</p>
+      </div>
+    </div>
+
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="coaching">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">How long does coaching typically take?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">This varies by individual needs. Some clients see results in 4-6 sessions, while others prefer ongoing monthly support. We'll recommend a plan during your discovery call.</p>
+      </div>
+    </div>
+
+    <!-- COURSES -->
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="courses">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">What's the difference between courses and workshops?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">Courses are structured multi-week programs with a set curriculum, assignments, and certification. Workshops are shorter, focused sessions on specific topics, typically lasting 2-3 hours.</p>
+      </div>
+    </div>
+
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="courses">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">Do I get a certificate after completing a course?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">Yes! All our courses come with a PRC Pakistan certificate of completion. Corporate training programs include additional professional development credits.</p>
+      </div>
+    </div>
+
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="courses">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">Can I access course materials after completion?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">Yes, you get lifetime access to all course materials including videos, worksheets, and resources.</p>
+      </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="events">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">How do I register for a workshop?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">Click 'Register Now' on any workshop card in our Events page, or contact us directly. Early registration is recommended as spots are limited.</p>
+      </div>
+    </div>
+
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="events">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">What is your cancellation policy?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">Full refund up to 7 days before the event. 50% refund within 7 days. You can transfer your spot to someone else at any time.</p>
+      </div>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="payment">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">What payment methods do you accept?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">We accept bank transfer, JazzCash, EasyPaisa, and credit/debit cards. For corporate bookings, we offer invoice-based payment.</p>
+      </div>
+    </div>
+
+    <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden" data-category="payment">
+      <div class="faq-question flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition">
+        <span class="font-semibold text-dark pr-4">Do you offer installment plans?</span>
+        <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0"></i>
+      </div>
+      <div class="faq-answer">
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed">Yes, for courses above PKR 15,000, we offer 2-3 installment plans. Contact us for details.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STILL HAVE QUESTIONS -->
+<section class="pb-20">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="bg-accent rounded-2xl p-8 text-center">
+      <h2 class="font-display text-2xl md:text-3xl text-dark mb-3">Still Have Questions?</h2>
+      <p class="text-gray-600 mb-6">Can't find what you're looking for? Our team is happy to help.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://wa.me/923212345678" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-600 transition">
+          <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp Us
+        </a>
+        <a href="mailto:hello@prcpakistan.org" class="inline-flex items-center gap-2 border-2 border-dark/20 text-dark px-6 py-3 rounded-full font-semibold hover:border-primary hover:text-primary transition">
+          <i data-lucide="mail" class="w-5 h-5"></i> Email Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM SECTION -->
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <h2 class="font-display text-3xl md:text-4xl text-dark mb-3">Or Send Us a Message</h2>
+      <p class="text-gray-600 max-w-xl mx-auto">Fill out the form below and we'll get back to you within 24 hours.</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12">
+
+      <!-- Form -->
+      <div class="bg-white rounded-2xl p-8 border border-gray-100">
+        <form class="space-y-5">
+          <div>
+            <label class="block text-sm font-medium text-dark mb-1">Name</label>
+            <input type="text" placeholder="Your full name" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary transition">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-dark mb-1">Email</label>
+            <input type="email" placeholder="you@example.com" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary transition">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-dark mb-1">Subject</label>
+            <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary transition text-gray-600">
+              <option value="">Select a subject</option>
+              <option value="general">General Inquiry</option>
+              <option value="coaching">Coaching</option>
+              <option value="courses">Courses</option>
+              <option value="events">Events</option>
+              <option value="partnership">Partnership</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-dark mb-1">Message</label>
+            <textarea rows="5" placeholder="How can we help you?" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary transition resize-none"></textarea>
+          </div>
+          <button type="submit" class="bg-primary text-white px-8 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition">Send Message</button>
+        </form>
+      </div>
+
+      <!-- Contact Info Card -->
+      <div class="bg-white rounded-2xl p-8 border border-gray-100 h-fit">
+        <h3 class="font-display text-2xl text-dark mb-6">Get in Touch</h3>
+        <div class="space-y-5">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+              <i data-lucide="phone" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <p class="font-semibold text-dark text-sm">Phone</p>
+              <p class="text-gray-600 text-sm">+92 321 234 5678</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+              <i data-lucide="mail" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <p class="font-semibold text-dark text-sm">Email</p>
+              <p class="text-gray-600 text-sm">hello@prcpakistan.org</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+              <i data-lucide="clock" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <p class="font-semibold text-dark text-sm">Office Hours</p>
+              <p class="text-gray-600 text-sm">Mon - Sat: 9:00 AM - 6:00 PM</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+              <i data-lucide="map-pin" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <p class="font-semibold text-dark text-sm">Location</p>
+              <p class="text-gray-600 text-sm">Karachi, Pakistan</p>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-100 mt-6 pt-6">
+          <p class="font-semibold text-dark text-sm mb-3">Follow Us</p>
+          <div class="flex gap-3">
+            <a href="#" class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white text-primary transition">
+              <i data-lucide="facebook" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white text-primary transition">
+              <i data-lucide="instagram" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white text-primary transition">
+              <i data-lucide="youtube" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white text-primary transition">
+              <i data-lucide="linkedin" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+
+      <div>
+        <h4 class="font-display text-xl mb-3">PRC Pakistan</h4>
+        <p class="text-white/60 text-sm leading-relaxed">Empowering families across Pakistan with expert parenting and relationship coaching.</p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2 text-sm text-white/60">
+          <li><a href="./about.html" class="hover:text-white transition">About Us</a></li>
+          <li><a href="./services.html" class="hover:text-white transition">Services</a></li>
+          <li><a href="./learning-hub.html" class="hover:text-white transition">Learning Hub</a></li>
+          <li><a href="./courses.html" class="hover:text-white transition">Courses</a></li>
+          <li><a href="./events.html" class="hover:text-white transition">Events</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-4">Services</h4>
+        <ul class="space-y-2 text-sm text-white/60">
+          <li><a href="./services.html" class="hover:text-white transition">Parenting Coaching</a></li>
+          <li><a href="./services.html" class="hover:text-white transition">Relationship Coaching</a></li>
+          <li><a href="./services.html" class="hover:text-white transition">Marriage Guidance</a></li>
+          <li><a href="./services.html" class="hover:text-white transition">Teen Parenting</a></li>
+          <li><a href="./services.html" class="hover:text-white transition">School Programs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-4">Contact</h4>
+        <ul class="space-y-2 text-sm text-white/60">
+          <li class="flex items-start gap-2"><i data-lucide="map-pin" class="w-4 h-4 mt-0.5 shrink-0"></i> Karachi, Pakistan</li>
+          <li class="flex items-start gap-2"><i data-lucide="mail" class="w-4 h-4 mt-0.5 shrink-0"></i> hello@prcpakistan.org</li>
+          <li class="flex items-start gap-2"><i data-lucide="phone" class="w-4 h-4 mt-0.5 shrink-0"></i> +92 321 234 5678</li>
+          <li class="flex items-start gap-2"><i data-lucide="clock" class="w-4 h-4 mt-0.5 shrink-0"></i> Mon-Sat: 9AM - 6PM</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="border-t border-white/10 pt-6 text-center">
+      <p class="text-sm text-white/40">&copy; 2026 PRC Pakistan. All rights reserved.</p>
+      <p class="text-xs text-dark/40 mt-4">Designed by <a href="https://modigital.vercel.app" target="_blank" rel="noopener">MO Digital</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').classList.toggle('nav-scrolled', window.scrollY > 50);
+});
+// Mobile menu
+document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-question').addEventListener('click', () => {
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-answer').classList.remove('open');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.classList.add('open');
+    }
+  });
+});
+// FAQ category filter
+document.querySelectorAll('.faq-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.faq-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.category;
+    document.querySelectorAll('.faq-item').forEach(item => {
+      if (cat === 'all' || item.dataset.category === cat) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+// FAQ search
+document.getElementById('faq-search')?.addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase();
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const text = item.textContent.toLowerCase();
+    item.style.display = text.includes(query) ? '' : 'none';
+  });
+});
+lucide.createIcons();
+</script>
+
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/923212345678?text=Hi%20PRC%20Pakistan!%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="whatsapp-float bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- CHATBOT WIDGET -->
+<div id="chatbot-widget" class="fixed bottom-24 right-6 z-50">
+  <button id="chatbot-toggle" class="bg-primary hover:bg-primary/90 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  </button>
+  <div id="chatbot-box" class="hidden absolute bottom-16 right-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
+    <div class="bg-primary text-white p-4">
+      <p class="font-semibold">PRC Pakistan Assistant</p>
+      <p class="text-xs text-white/80">How can we help you today?</p>
+    </div>
+    <div id="chatbot-messages" class="p-4 h-64 overflow-y-auto space-y-3">
+      <div class="bg-accent rounded-xl p-3 text-sm">Hi! I'm here to help. What can I assist you with?</div>
+      <div id="chatbot-options" class="space-y-2">
+        <button onclick="chatSelect('struggling')" class="w-full text-left bg-primary/10 hover:bg-primary/20 rounded-xl p-3 text-sm text-dark transition">I'm struggling with parenting/relationships</button>
+        <button onclick="chatSelect('book')" class="w-full text-left bg-secondary/10 hover:bg-secondary/20 rounded-xl p-3 text-sm text-dark transition">I want to book a session</button>
+        <button onclick="chatSelect('course')" class="w-full text-left bg-primary/10 hover:bg-primary/20 rounded-xl p-3 text-sm text-dark transition">Question about a course</button>
+        <button onclick="chatSelect('bug')" class="w-full text-left bg-red-50 hover:bg-red-100 rounded-xl p-3 text-sm text-dark transition">Report a bug or issue</button>
+      </div>
+    </div>
+    <div id="chatbot-input-area" class="hidden border-t p-3">
+      <div class="flex gap-2">
+        <input id="chatbot-input" type="text" placeholder="Type your message..." class="flex-1 border rounded-full px-4 py-2 text-sm outline-none focus:border-primary">
+        <button onclick="chatSend()" class="bg-primary text-white rounded-full px-4 py-2 text-sm">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var chatState='', chatDetails='', chatStep=0;
+  var msgs=document.getElementById('chatbot-messages');
+  var inputArea=document.getElementById('chatbot-input-area');
+  var chatInput=document.getElementById('chatbot-input');
+
+  document.getElementById('chatbot-toggle').addEventListener('click',function(){
+    document.getElementById('chatbot-box').classList.toggle('hidden');
+  });
+
+  function addMsg(text,isUser){
+    var d=document.createElement('div');
+    d.className=isUser?'bg-primary text-white rounded-xl p-3 text-sm ml-8 text-right':'bg-accent rounded-xl p-3 text-sm mr-8';
+    d.textContent=text;
+    msgs.appendChild(d);
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+
+  function addBtns(btns){
+    var d=document.createElement('div');
+    d.id='chatbot-dynamic-btns';
+    d.className='space-y-2';
+    btns.forEach(function(b){
+      var btn=document.createElement('button');
+      btn.className='w-full text-left bg-primary/10 hover:bg-primary/20 rounded-xl p-3 text-sm text-dark transition';
+      btn.textContent=b.label;
+      btn.onclick=function(){d.remove();b.action();};
+      d.appendChild(btn);
+    });
+    msgs.appendChild(d);
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+
+  function showInput(){inputArea.classList.remove('hidden');chatInput.focus();}
+
+  window.chatSelect=function(type){
+    var opts=document.getElementById('chatbot-options');
+    if(opts)opts.remove();
+    var dyn=document.getElementById('chatbot-dynamic-btns');
+    if(dyn)dyn.remove();
+
+    if(type==='struggling'){
+      addMsg("I'm struggling with parenting/relationships",true);
+      chatState='struggling';
+      setTimeout(function(){
+        addMsg("I'm sorry to hear that. You're not alone - we're here to help. What area do you need support with?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Parenting challenges',action:function(){chatDetails='Parenting';afterStruggle();}},
+            {label:'Marriage/relationship issues',action:function(){chatDetails='Relationship';afterStruggle();}},
+            {label:'Teenage child behavior',action:function(){chatDetails='Teen Parenting';afterStruggle();}},
+            {label:'General family wellness',action:function(){chatDetails='Family Wellness';afterStruggle();}}
+          ]);
+        },300);
+      },500);
+    } else if(type==='book'){
+      addMsg("I want to book a session",true);
+      chatState='book';
+      setTimeout(function(){
+        addMsg("Great choice! What type of session are you looking for?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Parenting Coaching',action:function(){chatDetails='Parenting Coaching';afterBook();}},
+            {label:'Relationship Coaching',action:function(){chatDetails='Relationship Coaching';afterBook();}},
+            {label:'Marriage Guidance',action:function(){chatDetails='Marriage Guidance';afterBook();}},
+            {label:'Teen Parenting',action:function(){chatDetails='Teen Parenting';afterBook();}},
+            {label:'Free discovery call (15 min)',action:function(){chatDetails='Free Discovery Call';afterBook();}}
+          ]);
+        },300);
+      },500);
+    } else if(type==='course'){
+      addMsg("I have a question about a course",true);
+      chatState='course';
+      setTimeout(function(){
+        addMsg("Which course are you interested in?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Positive Parenting Mastery',action:function(){chatDetails='Positive Parenting Mastery';afterCourse();}},
+            {label:'Relationship Reset',action:function(){chatDetails='Relationship Reset';afterCourse();}},
+            {label:'Teen Years Survival Guide',action:function(){chatDetails='Teen Years Survival Guide';afterCourse();}},
+            {label:'Marriage Enrichment Program',action:function(){chatDetails='Marriage Enrichment Program';afterCourse();}},
+            {label:'Other/General question',action:function(){chatDetails='General Course Inquiry';afterCourse();}}
+          ]);
+        },300);
+      },500);
+    } else if(type==='bug'){
+      addMsg("I'd like to report a bug",true);
+      chatState='bug';
+      chatStep=0;
+      setTimeout(function(){
+        addMsg("Thanks for letting us know! Which page are you on?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Home',action:function(){chatDetails='Page: Home';bugStep2();}},
+            {label:'About',action:function(){chatDetails='Page: About';bugStep2();}},
+            {label:'Services',action:function(){chatDetails='Page: Services';bugStep2();}},
+            {label:'Learning Hub',action:function(){chatDetails='Page: Learning Hub';bugStep2();}},
+            {label:'Courses',action:function(){chatDetails='Page: Courses';bugStep2();}},
+            {label:'Events',action:function(){chatDetails='Page: Events';bugStep2();}},
+            {label:'Resources',action:function(){chatDetails='Page: Resources';bugStep2();}},
+            {label:'Media',action:function(){chatDetails='Page: Media';bugStep2();}},
+            {label:'FAQ',action:function(){chatDetails='Page: FAQ';bugStep2();}},
+            {label:'Contact',action:function(){chatDetails='Page: Contact';bugStep2();}}
+          ]);
+        },300);
+      },500);
+    }
+  };
+
+  function afterStruggle(){
+    addMsg("I need help with: "+chatDetails,true);
+    setTimeout(function(){
+      addMsg("Thank you for sharing. I understand this can be difficult. Let me connect you with one of our coaches who specializes in "+chatDetails+". Please describe your situation briefly, and we'll arrange a session.",false);
+      setTimeout(function(){addMsg("You can also book directly or message us on WhatsApp:",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Book a session now',action:function(){window.location.href='./contact.html';}},
+            {label:'Chat on WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi%20PRC%20Pakistan!%20I%20need%20help%20with%20'+encodeURIComponent(chatDetails)+'.%20Can%20you%20please%20assist%20me?','_blank');}}
+          ]);
+        },300);
+      },500);
+    },500);
+  }
+
+  function afterBook(){
+    addMsg("I'm interested in: "+chatDetails,true);
+    setTimeout(function(){
+      addMsg("Excellent! We'd love to help you with "+chatDetails+". Please provide your name and preferred time, and we'll set up your session. Or message us directly on WhatsApp:",false);
+      setTimeout(function(){
+        addBtns([
+          {label:'Go to booking form',action:function(){window.location.href='./contact.html';}},
+          {label:'Book via WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi!%20I%20would%20like%20to%20book%20a%20'+encodeURIComponent(chatDetails)+'%20session.%20Please%20let%20me%20know%20available%20slots.','_blank');}}
+        ]);
+      },300);
+    },500);
+  }
+
+  function afterCourse(){
+    addMsg("My question is about: "+chatDetails,true);
+    setTimeout(function(){
+      addMsg("Great! For detailed information about "+chatDetails+", including curriculum, pricing, and enrollment, please visit our Courses page or message us on WhatsApp:",false);
+      setTimeout(function(){
+        addBtns([
+          {label:'View course details',action:function(){window.location.href='./courses.html';}},
+          {label:'Ask on WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi!%20I%20have%20a%20question%20about%20the%20'+encodeURIComponent(chatDetails)+'%20course.','_blank');}}
+        ]);
+      },300);
+    },500);
+  }
+
+  function bugStep2(){
+    addMsg(chatDetails,true);
+    setTimeout(function(){
+      addMsg("Got it. Can you briefly describe the issue you're experiencing? Type below:",false);
+      setTimeout(function(){showInput();},300);
+    },500);
+  }
+
+  window.chatSend=function(){
+    var val=chatInput.value.trim();
+    if(!val)return;
+    chatInput.value='';
+    inputArea.classList.add('hidden');
+    addMsg(val,true);
+
+    if(chatState==='bug'){
+      setTimeout(function(){
+        addMsg("Thank you for the details! We'll fix this ASAP. Please send this report via WhatsApp so our team gets it instantly:",false);
+        var fullMsg='Bug Report\n'+chatDetails+'\nIssue: '+val;
+        var waUrl='https://wa.me/923212345678?text='+encodeURIComponent(fullMsg);
+        setTimeout(function(){
+          addBtns([
+            {label:'Send report on WhatsApp',action:function(){window.open(waUrl,'_blank');}},
+            {label:'Done, thanks!',action:function(){addMsg("We appreciate your feedback! Our team will look into this.","");}}
+          ]);
+        },300);
+      },500);
+    }
+  };
+
+  if(chatInput){
+    chatInput.addEventListener('keypress',function(e){
+      if(e.key==='Enter')window.chatSend();
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

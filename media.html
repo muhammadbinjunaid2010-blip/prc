@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media - PRC Pakistan</title>
+<link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#5B8DEF',secondary:'#8DAA91',accent:'#F6F2EA',dark:'#2F2F2F'}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="./style.css" rel="stylesheet">
+<meta name="description" content="Watch our videos, listen to podcasts, and read testimonials from families we've helped.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://prcpakistan.vercel.app/media.html">
+<meta property="og:title" content="Media - PRC Pakistan">
+<meta property="og:description" content="Watch our videos, listen to podcasts, and read testimonials from families we've helped.">
+<meta property="og:image" content="https://prcpakistan.vercel.app/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Media - PRC Pakistan">
+<meta name="twitter:description" content="Watch our videos, listen to podcasts, and read testimonials from families we've helped.">
+<meta name="twitter:image" content="https://prcpakistan.vercel.app/images/og-image.png">
+</head>
+<body class="font-sans text-dark">
+
+<!-- NAV -->
+<nav id="navbar" class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <a href="./index.html"><img src="./images/logo.png" alt="PRC Pakistan" class="h-10"></a>
+      <div class="hidden lg:flex items-center gap-6">
+        <a href="./index.html" class="text-sm font-medium hover:text-primary transition-colors">Home</a>
+        <a href="./about.html" class="text-sm font-medium hover:text-primary transition-colors">About</a>
+        <a href="./services.html" class="text-sm font-medium hover:text-primary transition-colors">Services</a>
+        <a href="./learning-hub.html" class="text-sm font-medium hover:text-primary transition-colors">Learning Hub</a>
+        <a href="./courses.html" class="text-sm font-medium hover:text-primary transition-colors">Courses</a>
+        <a href="./events.html" class="text-sm font-medium hover:text-primary transition-colors">Events</a>
+        <a href="./resources.html" class="text-sm font-medium hover:text-primary transition-colors">Resources</a>
+        <a href="./media.html" class="text-sm font-medium text-primary transition-colors">Media</a>
+        <a href="./faq.html" class="text-sm font-medium hover:text-primary transition-colors">FAQ</a>
+        <a href="./contact.html" class="text-sm font-medium hover:text-primary transition-colors">Contact</a>
+      </div>
+      <div class="hidden lg:block">
+        <a href="./contact.html" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors">
+          Get Started
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+      <button id="mobile-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="lg:hidden hidden bg-white border-t">
+    <div class="px-4 py-4 space-y-1">
+      <a href="./index.html" class="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-accent transition-colors">Home</a>
+      <a href="./about.html" class="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-accent transition-colors">About</a>
+      <a href="./services.html" class="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-accent transition-colors">Services</a>
+      <a href="./learning-hub.html" class="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-accent transition-colors">Learning Hub</a>
+      <a href="./courses.html" class="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-accent transition-colors">Courses</a>
+      <a href="./events.html" class="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-accent transition-colors">Events</a>
+      <a href="./resources.html" class="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-accent transition-colors">Resources</a>
+      <a href="./media.html" class="block px-3 py-2 text-sm font-medium text-primary rounded-lg bg-accent">Media</a>
+      <a href="./faq.html" class="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-accent transition-colors">FAQ</a>
+      <a href="./contact.html" class="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-accent transition-colors">Contact</a>
+      <div class="pt-2">
+        <a href="./contact.html" class="block text-center bg-primary text-white px-5 py-2.5 rounded-full text-sm font-medium">Get Started</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="pt-24 pb-16 bg-white text-center">
+  <div class="max-w-3xl mx-auto px-4">
+    <h1 class="font-display text-4xl md:text-5xl text-dark mb-4">Media &amp; Testimonials</h1>
+    <p class="text-gray-600 text-lg">Watch our stories, hear from families we've helped, and explore our media presence.</p>
+  </div>
+</section>
+
+<!-- SECTION TABS -->
+<section class="pb-8">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-center gap-3">
+      <button id="tab-media" class="tab-btn active px-6 py-2.5 rounded-full text-sm font-medium bg-primary text-white transition-all" onclick="switchTab('media')">Media</button>
+      <button id="tab-testimonials" class="tab-btn px-6 py-2.5 rounded-full text-sm font-medium bg-gray-100 text-dark hover:bg-gray-200 transition-all" onclick="switchTab('testimonials')">Testimonials</button>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== MEDIA SECTION ======================== -->
+<div id="media-section">
+
+  <!-- YOUTUBE VIDEOS -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="font-display text-3xl text-dark text-center mb-10">Featured Videos</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Video 1 -->
+        <div class="rounded-2xl overflow-hidden border bg-white card-hover">
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="block relative bg-dark/10 h-56 flex items-center justify-center">
+            <img src="./pexels-photo-7938023.jpg" alt="Video thumbnail" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/30"></div>
+            <div class="relative z-10 w-14 h-14 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
+              <i data-lucide="play" class="w-6 h-6 text-primary ml-1"></i>
+            </div>
+          </a>
+          <div class="p-5">
+            <h3 class="font-bold text-dark text-lg mb-1">How to Talk So Teens Will Listen</h3>
+            <div class="flex items-center gap-4 text-sm text-gray-500">
+              <span class="flex items-center gap-1"><i data-lucide="eye" class="w-4 h-4"></i>12,450 views</span>
+              <span>Jul 10, 2026</span>
+            </div>
+          </div>
+        </div>
+        <!-- Video 2 -->
+        <div class="rounded-2xl overflow-hidden border bg-white card-hover">
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="block relative bg-dark/10 h-56 flex items-center justify-center">
+            <img src="./pexels-photo-9207532.jpg" alt="Video thumbnail" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/30"></div>
+            <div class="relative z-10 w-14 h-14 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
+              <i data-lucide="play" class="w-6 h-6 text-primary ml-1"></i>
+            </div>
+          </a>
+          <div class="p-5">
+            <h3 class="font-bold text-dark text-lg mb-1">5 Signs Your Marriage Needs Help</h3>
+            <div class="flex items-center gap-4 text-sm text-gray-500">
+              <span class="flex items-center gap-1"><i data-lucide="eye" class="w-4 h-4"></i>8,230 views</span>
+              <span>Jun 28, 2026</span>
+            </div>
+          </div>
+        </div>
+        <!-- Video 3 -->
+        <div class="rounded-2xl overflow-hidden border bg-white card-hover">
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="block relative bg-dark/10 h-56 flex items-center justify-center">
+            <img src="./pexels-photo-8423069.jpg" alt="Video thumbnail" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/30"></div>
+            <div class="relative z-10 w-14 h-14 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
+              <i data-lucide="play" class="w-6 h-6 text-primary ml-1"></i>
+            </div>
+          </a>
+          <div class="p-5">
+            <h3 class="font-bold text-dark text-lg mb-1">Positive Discipline Workshop Highlights</h3>
+            <div class="flex items-center gap-4 text-sm text-gray-500">
+              <span class="flex items-center gap-1"><i data-lucide="eye" class="w-4 h-4"></i>5,670 views</span>
+              <span>Jun 15, 2026</span>
+            </div>
+          </div>
+        </div>
+        <!-- Video 4 -->
+        <div class="rounded-2xl overflow-hidden border bg-white card-hover">
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="block relative bg-dark/10 h-56 flex items-center justify-center">
+            <img src="./pexels-photo-4098357.jpg" alt="Video thumbnail" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/30"></div>
+            <div class="relative z-10 w-14 h-14 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
+              <i data-lucide="play" class="w-6 h-6 text-primary ml-1"></i>
+            </div>
+          </a>
+          <div class="p-5">
+            <h3 class="font-bold text-dark text-lg mb-1">Islamic Parenting in Modern Times</h3>
+            <div class="flex items-center gap-4 text-sm text-gray-500">
+              <span class="flex items-center gap-1"><i data-lucide="eye" class="w-4 h-4"></i>15,890 views</span>
+              <span>May 30, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PODCAST & TV -->
+  <section class="py-12 bg-accent">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Podcast -->
+        <div class="bg-white rounded-2xl p-6 border">
+          <h2 class="font-display text-2xl text-dark mb-6 flex items-center gap-2">
+            <i data-lucide="headphones" class="w-6 h-6 text-primary"></i>
+            Podcast Appearances
+          </h2>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-accent/50">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="headphones" class="w-5 h-5 text-primary"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-dark">The Family Hour</h4>
+                <p class="text-sm text-gray-600">Episode: "Building Resilient Families"</p>
+                <p class="text-xs text-gray-400 mt-1">Jul 5, 2026</p>
+              </div>
+              <a href="#" class="text-sm font-medium text-primary hover:underline flex-shrink-0 mt-1">Listen</a>
+            </div>
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-accent/50">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="headphones" class="w-5 h-5 text-primary"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-dark">Parenting Today PK</h4>
+                <p class="text-sm text-gray-600">Episode: "Digital Wellness for Kids"</p>
+                <p class="text-xs text-gray-400 mt-1">Jun 20, 2026</p>
+              </div>
+              <a href="#" class="text-sm font-medium text-primary hover:underline flex-shrink-0 mt-1">Listen</a>
+            </div>
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-accent/50">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="headphones" class="w-5 h-5 text-primary"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-dark">Marriage Matters</h4>
+                <p class="text-sm text-gray-600">Episode: "Communication Breakthroughs"</p>
+                <p class="text-xs text-gray-400 mt-1">May 15, 2026</p>
+              </div>
+              <a href="#" class="text-sm font-medium text-primary hover:underline flex-shrink-0 mt-1">Listen</a>
+            </div>
+          </div>
+        </div>
+        <!-- TV & Radio -->
+        <div class="bg-white rounded-2xl p-6 border">
+          <h2 class="font-display text-2xl text-dark mb-6 flex items-center gap-2">
+            <i data-lucide="tv" class="w-6 h-6 text-primary"></i>
+            TV &amp; Radio
+          </h2>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-accent/50">
+              <div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="tv" class="w-5 h-5 text-secondary"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-dark">Geo TV</h4>
+                <p class="text-sm text-gray-600">"Good Morning Pakistan"</p>
+                <p class="text-xs text-gray-400 mt-1">Jul 12, 2026</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-accent/50">
+              <div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="tv" class="w-5 h-5 text-secondary"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-dark">ARY Digital</h4>
+                <p class="text-sm text-gray-600">"Morning Show"</p>
+                <p class="text-xs text-gray-400 mt-1">Jun 25, 2026</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-accent/50">
+              <div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="radio" class="w-5 h-5 text-secondary"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-dark">FM 101</h4>
+                <p class="text-sm text-gray-600">"Family Focus" weekly segment</p>
+                <p class="text-xs text-gray-400 mt-1">Recurring</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="font-display text-3xl text-dark text-center mb-10">In Action</h2>
+      <div class="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
+        <div class="rounded-xl overflow-hidden relative group break-inside-avoid">
+          <img src="./pexels-photo-7938023.jpg" alt="Workshop session" class="w-full object-cover">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100">
+            <span class="text-white text-sm font-medium">Parenting Workshop</span>
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden relative group break-inside-avoid">
+          <img src="./pexels-photo-9207532.jpg" alt="Couple coaching" class="w-full object-cover">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100">
+            <span class="text-white text-sm font-medium">Couple Coaching</span>
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden relative group break-inside-avoid">
+          <img src="./pexels-photo-8423069.jpg" alt="Team meeting" class="w-full object-cover">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100">
+            <span class="text-white text-sm font-medium">Team Strategy Session</span>
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden relative group break-inside-avoid">
+          <img src="./pexels-photo-4098357.jpg" alt="School program" class="w-full object-cover">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100">
+            <span class="text-white text-sm font-medium">School Program Launch</span>
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden relative group break-inside-avoid">
+          <img src="./pexels-photo-7938023.jpg" alt="Community event" class="w-full object-cover">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100">
+            <span class="text-white text-sm font-medium">Community Event</span>
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden relative group break-inside-avoid">
+          <img src="./pexels-photo-9207532.jpg" alt="Training day" class="w-full object-cover">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100">
+            <span class="text-white text-sm font-medium">Training Day</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- END MEDIA SECTION -->
+
+<!-- ======================== TESTIMONIALS SECTION ======================== -->
+<div id="testimonials-section" class="hidden">
+
+  <!-- TESTIMONIAL FILTERS -->
+  <section class="pb-8">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-3">
+        <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-primary text-white transition-all" onclick="filterTestimonials('all', this)">All</button>
+        <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-dark hover:bg-gray-200 transition-all" onclick="filterTestimonials('parents', this)">Parents</button>
+        <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-dark hover:bg-gray-200 transition-all" onclick="filterTestimonials('couples', this)">Couples</button>
+        <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-dark hover:bg-gray-200 transition-all" onclick="filterTestimonials('teachers', this)">Teachers</button>
+        <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-dark hover:bg-gray-200 transition-all" onclick="filterTestimonials('schools', this)">Schools</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS GRID -->
+  <section class="pb-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card bg-white border rounded-2xl p-6 card-hover" data-category="parents">
+          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <i data-lucide="quote" class="w-5 h-5 text-primary"></i>
+          </div>
+          <p class="text-gray-600 italic mb-6">"PRC Pakistan helped us reconnect as a couple. The coaching sessions were transformative and deeply respectful of our values."</p>
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="font-bold text-dark">Ayesha &amp; Farhan</p>
+              <p class="text-sm text-gray-500">Karachi</p>
+            </div>
+            <span class="text-xs font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">Relationship Coaching</span>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card bg-white border rounded-2xl p-6 card-hover" data-category="parents">
+          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <i data-lucide="quote" class="w-5 h-5 text-primary"></i>
+          </div>
+          <p class="text-gray-600 italic mb-6">"As a single mother, I felt lost. The parenting workshops gave me practical tools and a supportive community."</p>
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="font-bold text-dark">Sana M.</p>
+              <p class="text-sm text-gray-500">Lahore</p>
+            </div>
+            <span class="text-xs font-medium bg-secondary/10 text-secondary px-3 py-1 rounded-full">Parenting Workshop</span>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card bg-white border rounded-2xl p-6 card-hover" data-category="schools">
+          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <i data-lucide="quote" class="w-5 h-5 text-primary"></i>
+          </div>
+          <p class="text-gray-600 italic mb-6">"The school program transformed how our teachers interact with students and parents. Highly recommended."</p>
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="font-bold text-dark">Principal Rashid</p>
+              <p class="text-sm text-gray-500">Islamabad</p>
+            </div>
+            <span class="text-xs font-medium bg-dark/10 text-dark px-3 py-1 rounded-full">School Program</span>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card bg-white border rounded-2xl p-6 card-hover" data-category="couples">
+          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <i data-lucide="quote" class="w-5 h-5 text-primary"></i>
+          </div>
+          <p class="text-gray-600 italic mb-6">"After 10 years of marriage, we thought we had lost our spark. The Marriage Enrichment Program brought us back together."</p>
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="font-bold text-dark">Imran &amp; Fatima</p>
+              <p class="text-sm text-gray-500">Rawalpindi</p>
+            </div>
+            <span class="text-xs font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">Marriage Guidance</span>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="testimonial-card bg-white border rounded-2xl p-6 card-hover" data-category="parents">
+          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <i data-lucide="quote" class="w-5 h-5 text-primary"></i>
+          </div>
+          <p class="text-gray-600 italic mb-6">"My teenage daughter and I were constantly fighting. The Teen Parenting course gave us a common language to communicate."</p>
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-gray-300"></i>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="font-bold text-dark">Nadia K.</p>
+              <p class="text-sm text-gray-500">Peshawar</p>
+            </div>
+            <span class="text-xs font-medium bg-secondary/10 text-secondary px-3 py-1 rounded-full">Teen Parenting</span>
+          </div>
+        </div>
+
+        <!-- Testimonial 6 -->
+        <div class="testimonial-card bg-white border rounded-2xl p-6 card-hover" data-category="teachers">
+          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <i data-lucide="quote" class="w-5 h-5 text-primary"></i>
+          </div>
+          <p class="text-gray-600 italic mb-6">"The Educator's Toolkit course is a must for every school in Pakistan. It completely changed our approach to student wellbeing."</p>
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="font-bold text-dark">Sarah Ahmed</p>
+              <p class="text-sm text-gray-500">Lahore</p>
+            </div>
+            <span class="text-xs font-medium bg-dark/10 text-dark px-3 py-1 rounded-full">School Program</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="py-16 bg-accent">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="font-display text-3xl text-dark mb-10">Families trust PRC Pakistan</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div>
+          <p class="text-3xl md:text-4xl font-bold text-primary">2,500+</p>
+          <p class="text-gray-600 mt-1">Happy Families</p>
+        </div>
+        <div>
+          <p class="text-3xl md:text-4xl font-bold text-primary">4.9/5</p>
+          <p class="text-gray-600 mt-1">Average Rating</p>
+        </div>
+        <div>
+          <p class="text-3xl md:text-4xl font-bold text-primary">500+</p>
+          <p class="text-gray-600 mt-1">Workshops Completed</p>
+        </div>
+        <div>
+          <p class="text-3xl md:text-4xl font-bold text-primary">98%</p>
+          <p class="text-gray-600 mt-1">Would Recommend</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="font-display text-3xl text-dark mb-4">Share Your Story</h2>
+      <p class="text-gray-600 text-lg mb-8">We'd love to hear how PRC Pakistan has helped your family.</p>
+      <a href="./contact.html" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors">
+        Submit Your Testimonial
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </section>
+
+</div>
+<!-- END TESTIMONIALS SECTION -->
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-2xl font-bold text-primary">PRC</span>
+          <span class="text-sm font-medium">Pakistan</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed">Empowering families through coaching, education, and community support across Pakistan.</p>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4">Quick Links</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="./about.html" class="hover:text-primary transition-colors">About Us</a></li>
+          <li><a href="./services.html" class="hover:text-primary transition-colors">Services</a></li>
+          <li><a href="./courses.html" class="hover:text-primary transition-colors">Courses</a></li>
+          <li><a href="./events.html" class="hover:text-primary transition-colors">Events</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4">Resources</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="./learning-hub.html" class="hover:text-primary transition-colors">Learning Hub</a></li>
+          <li><a href="./resources.html" class="hover:text-primary transition-colors">Resources</a></li>
+          <li><a href="./media.html" class="hover:text-primary transition-colors">Media</a></li>
+          <li><a href="./faq.html" class="hover:text-primary transition-colors">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4">Get in Touch</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 flex-shrink-0"></i> Karachi, Pakistan</li>
+          <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 flex-shrink-0"></i> hello@prcpakistan.org</li>
+          <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 flex-shrink-0"></i> +92 321 234 5678</li>
+          <li class="flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 flex-shrink-0"></i> Mon-Sat: 9AM - 6PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-gray-400">&copy; 2026 PRC Pakistan. All rights reserved.</p>
+      <p class="text-xs text-dark/40 mt-4">Designed by <a href="https://modigital.vercel.app" target="_blank" rel="noopener">MO Digital</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Tab switching
+function switchTab(tab) {
+  const mediaSection = document.getElementById('media-section');
+  const testimonialsSection = document.getElementById('testimonials-section');
+  const tabMedia = document.getElementById('tab-media');
+  const tabTestimonials = document.getElementById('tab-testimonials');
+
+  if (tab === 'media') {
+    mediaSection.classList.remove('hidden');
+    testimonialsSection.classList.add('hidden');
+    tabMedia.className = 'tab-btn px-6 py-2.5 rounded-full text-sm font-medium bg-primary text-white transition-all';
+    tabTestimonials.className = 'tab-btn px-6 py-2.5 rounded-full text-sm font-medium bg-gray-100 text-dark hover:bg-gray-200 transition-all';
+  } else {
+    mediaSection.classList.add('hidden');
+    testimonialsSection.classList.remove('hidden');
+    tabMedia.className = 'tab-btn px-6 py-2.5 rounded-full text-sm font-medium bg-gray-100 text-dark hover:bg-gray-200 transition-all';
+    tabTestimonials.className = 'tab-btn px-6 py-2.5 rounded-full text-sm font-medium bg-primary text-white transition-all';
+  }
+}
+
+// Testimonial filter
+function filterTestimonials(category, btn) {
+  const cards = document.querySelectorAll('.testimonial-card');
+  cards.forEach(card => {
+    if (category === 'all' || card.dataset.category === category) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.className = 'filter-btn px-5 py-2 rounded-full text-sm font-medium bg-gray-100 text-dark hover:bg-gray-200 transition-all';
+  });
+  btn.className = 'filter-btn px-5 py-2 rounded-full text-sm font-medium bg-primary text-white transition-all';
+}
+
+// Mobile menu
+document.getElementById('mobile-toggle').addEventListener('click', function() {
+  const menu = document.getElementById('mobile-menu');
+  menu.classList.toggle('hidden');
+});
+
+// Nav scroll effect
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 10) {
+    nav.classList.add('shadow-md');
+  } else {
+    nav.classList.remove('shadow-md');
+  }
+});
+
+lucide.createIcons();
+</script>
+
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/923212345678?text=Hi%20PRC%20Pakistan!%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="whatsapp-float bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- CHATBOT WIDGET -->
+<div id="chatbot-widget" class="fixed bottom-24 right-6 z-50">
+  <button id="chatbot-toggle" class="bg-primary hover:bg-primary/90 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  </button>
+  <div id="chatbot-box" class="hidden absolute bottom-16 right-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
+    <div class="bg-primary text-white p-4">
+      <p class="font-semibold">PRC Pakistan Assistant</p>
+      <p class="text-xs text-white/80">How can we help you today?</p>
+    </div>
+    <div id="chatbot-messages" class="p-4 h-64 overflow-y-auto space-y-3">
+      <div class="bg-accent rounded-xl p-3 text-sm">Hi! I'm here to help. What can I assist you with?</div>
+      <div id="chatbot-options" class="space-y-2">
+        <button onclick="chatSelect('struggling')" class="w-full text-left bg-primary/10 hover:bg-primary/20 rounded-xl p-3 text-sm text-dark transition">I'm struggling with parenting/relationships</button>
+        <button onclick="chatSelect('book')" class="w-full text-left bg-secondary/10 hover:bg-secondary/20 rounded-xl p-3 text-sm text-dark transition">I want to book a session</button>
+        <button onclick="chatSelect('course')" class="w-full text-left bg-primary/10 hover:bg-primary/20 rounded-xl p-3 text-sm text-dark transition">Question about a course</button>
+        <button onclick="chatSelect('bug')" class="w-full text-left bg-red-50 hover:bg-red-100 rounded-xl p-3 text-sm text-dark transition">Report a bug or issue</button>
+      </div>
+    </div>
+    <div id="chatbot-input-area" class="hidden border-t p-3">
+      <div class="flex gap-2">
+        <input id="chatbot-input" type="text" placeholder="Type your message..." class="flex-1 border rounded-full px-4 py-2 text-sm outline-none focus:border-primary">
+        <button onclick="chatSend()" class="bg-primary text-white rounded-full px-4 py-2 text-sm">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var chatState='', chatDetails='', chatStep=0;
+  var msgs=document.getElementById('chatbot-messages');
+  var inputArea=document.getElementById('chatbot-input-area');
+  var chatInput=document.getElementById('chatbot-input');
+
+  document.getElementById('chatbot-toggle').addEventListener('click',function(){
+    document.getElementById('chatbot-box').classList.toggle('hidden');
+  });
+
+  function addMsg(text,isUser){
+    var d=document.createElement('div');
+    d.className=isUser?'bg-primary text-white rounded-xl p-3 text-sm ml-8 text-right':'bg-accent rounded-xl p-3 text-sm mr-8';
+    d.textContent=text;
+    msgs.appendChild(d);
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+
+  function addBtns(btns){
+    var d=document.createElement('div');
+    d.id='chatbot-dynamic-btns';
+    d.className='space-y-2';
+    btns.forEach(function(b){
+      var btn=document.createElement('button');
+      btn.className='w-full text-left bg-primary/10 hover:bg-primary/20 rounded-xl p-3 text-sm text-dark transition';
+      btn.textContent=b.label;
+      btn.onclick=function(){d.remove();b.action();};
+      d.appendChild(btn);
+    });
+    msgs.appendChild(d);
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+
+  function showInput(){inputArea.classList.remove('hidden');chatInput.focus();}
+
+  window.chatSelect=function(type){
+    var opts=document.getElementById('chatbot-options');
+    if(opts)opts.remove();
+    var dyn=document.getElementById('chatbot-dynamic-btns');
+    if(dyn)dyn.remove();
+
+    if(type==='struggling'){
+      addMsg("I'm struggling with parenting/relationships",true);
+      chatState='struggling';
+      setTimeout(function(){
+        addMsg("I'm sorry to hear that. You're not alone - we're here to help. What area do you need support with?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Parenting challenges',action:function(){chatDetails='Parenting';afterStruggle();}},
+            {label:'Marriage/relationship issues',action:function(){chatDetails='Relationship';afterStruggle();}},
+            {label:'Teenage child behavior',action:function(){chatDetails='Teen Parenting';afterStruggle();}},
+            {label:'General family wellness',action:function(){chatDetails='Family Wellness';afterStruggle();}}
+          ]);
+        },300);
+      },500);
+    } else if(type==='book'){
+      addMsg("I want to book a session",true);
+      chatState='book';
+      setTimeout(function(){
+        addMsg("Great choice! What type of session are you looking for?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Parenting Coaching',action:function(){chatDetails='Parenting Coaching';afterBook();}},
+            {label:'Relationship Coaching',action:function(){chatDetails='Relationship Coaching';afterBook();}},
+            {label:'Marriage Guidance',action:function(){chatDetails='Marriage Guidance';afterBook();}},
+            {label:'Teen Parenting',action:function(){chatDetails='Teen Parenting';afterBook();}},
+            {label:'Free discovery call (15 min)',action:function(){chatDetails='Free Discovery Call';afterBook();}}
+          ]);
+        },300);
+      },500);
+    } else if(type==='course'){
+      addMsg("I have a question about a course",true);
+      chatState='course';
+      setTimeout(function(){
+        addMsg("Which course are you interested in?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Positive Parenting Mastery',action:function(){chatDetails='Positive Parenting Mastery';afterCourse();}},
+            {label:'Relationship Reset',action:function(){chatDetails='Relationship Reset';afterCourse();}},
+            {label:'Teen Years Survival Guide',action:function(){chatDetails='Teen Years Survival Guide';afterCourse();}},
+            {label:'Marriage Enrichment Program',action:function(){chatDetails='Marriage Enrichment Program';afterCourse();}},
+            {label:'Other/General question',action:function(){chatDetails='General Course Inquiry';afterCourse();}}
+          ]);
+        },300);
+      },500);
+    } else if(type==='bug'){
+      addMsg("I'd like to report a bug",true);
+      chatState='bug';
+      chatStep=0;
+      setTimeout(function(){
+        addMsg("Thanks for letting us know! Which page are you on?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Home',action:function(){chatDetails='Page: Home';bugStep2();}},
+            {label:'About',action:function(){chatDetails='Page: About';bugStep2();}},
+            {label:'Services',action:function(){chatDetails='Page: Services';bugStep2();}},
+            {label:'Learning Hub',action:function(){chatDetails='Page: Learning Hub';bugStep2();}},
+            {label:'Courses',action:function(){chatDetails='Page: Courses';bugStep2();}},
+            {label:'Events',action:function(){chatDetails='Page: Events';bugStep2();}},
+            {label:'Resources',action:function(){chatDetails='Page: Resources';bugStep2();}},
+            {label:'Media',action:function(){chatDetails='Page: Media';bugStep2();}},
+            {label:'FAQ',action:function(){chatDetails='Page: FAQ';bugStep2();}},
+            {label:'Contact',action:function(){chatDetails='Page: Contact';bugStep2();}}
+          ]);
+        },300);
+      },500);
+    }
+  };
+
+  function afterStruggle(){
+    addMsg("I need help with: "+chatDetails,true);
+    setTimeout(function(){
+      addMsg("Thank you for sharing. I understand this can be difficult. Let me connect you with one of our coaches who specializes in "+chatDetails+". Please describe your situation briefly, and we'll arrange a session.",false);
+      setTimeout(function(){addMsg("You can also book directly or message us on WhatsApp:",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Book a session now',action:function(){window.location.href='./contact.html';}},
+            {label:'Chat on WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi%20PRC%20Pakistan!%20I%20need%20help%20with%20'+encodeURIComponent(chatDetails)+'.%20Can%20you%20please%20assist%20me?','_blank');}}
+          ]);
+        },300);
+      },500);
+    },500);
+  }
+
+  function afterBook(){
+    addMsg("I'm interested in: "+chatDetails,true);
+    setTimeout(function(){
+      addMsg("Excellent! We'd love to help you with "+chatDetails+". Please provide your name and preferred time, and we'll set up your session. Or message us directly on WhatsApp:",false);
+      setTimeout(function(){
+        addBtns([
+          {label:'Go to booking form',action:function(){window.location.href='./contact.html';}},
+          {label:'Book via WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi!%20I%20would%20like%20to%20book%20a%20'+encodeURIComponent(chatDetails)+'%20session.%20Please%20let%20me%20know%20available%20slots.','_blank');}}
+        ]);
+      },300);
+    },500);
+  }
+
+  function afterCourse(){
+    addMsg("My question is about: "+chatDetails,true);
+    setTimeout(function(){
+      addMsg("Great! For detailed information about "+chatDetails+", including curriculum, pricing, and enrollment, please visit our Courses page or message us on WhatsApp:",false);
+      setTimeout(function(){
+        addBtns([
+          {label:'View course details',action:function(){window.location.href='./courses.html';}},
+          {label:'Ask on WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi!%20I%20have%20a%20question%20about%20the%20'+encodeURIComponent(chatDetails)+'%20course.','_blank');}}
+        ]);
+      },300);
+    },500);
+  }
+
+  function bugStep2(){
+    addMsg(chatDetails,true);
+    setTimeout(function(){
+      addMsg("Got it. Can you briefly describe the issue you're experiencing? Type below:",false);
+      setTimeout(function(){showInput();},300);
+    },500);
+  }
+
+  window.chatSend=function(){
+    var val=chatInput.value.trim();
+    if(!val)return;
+    chatInput.value='';
+    inputArea.classList.add('hidden');
+    addMsg(val,true);
+
+    if(chatState==='bug'){
+      setTimeout(function(){
+        addMsg("Thank you for the details! We'll fix this ASAP. Please send this report via WhatsApp so our team gets it instantly:",false);
+        var fullMsg='Bug Report\n'+chatDetails+'\nIssue: '+val;
+        var waUrl='https://wa.me/923212345678?text='+encodeURIComponent(fullMsg);
+        setTimeout(function(){
+          addBtns([
+            {label:'Send report on WhatsApp',action:function(){window.open(waUrl,'_blank');}},
+            {label:'Done, thanks!',action:function(){addMsg("We appreciate your feedback! Our team will look into this.","");}}
+          ]);
+        },300);
+      },500);
+    }
+  };
+
+  if(chatInput){
+    chatInput.addEventListener('keypress',function(e){
+      if(e.key==='Enter')window.chatSend();
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

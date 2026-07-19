@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources - PRC Pakistan</title>
+<link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#5B8DEF',secondary:'#8DAA91',accent:'#F6F2EA',dark:'#2F2F2F'}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="./style.css" rel="stylesheet">
+<meta name="description" content="Download free parenting guides, checklists, e-books, and worksheets.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://prcpakistan.vercel.app/resources.html">
+<meta property="og:title" content="Free Resources - PRC Pakistan">
+<meta property="og:description" content="Download free parenting guides, checklists, e-books, and worksheets.">
+<meta property="og:image" content="https://prcpakistan.vercel.app/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Resources - PRC Pakistan">
+<meta name="twitter:description" content="Download free parenting guides, checklists, e-books, and worksheets.">
+<meta name="twitter:image" content="https://prcpakistan.vercel.app/images/og-image.png">
+</head>
+<body class="font-sans text-dark bg-accent">
+<style>
+  .modal-overlay { background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+  #mobile-menu { transition: transform 0.3s ease, opacity 0.3s ease; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+
+<!-- ===== NAV ===== -->
+<nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <!-- Logo -->
+      <a href="./index.html"><img src="./images/logo.png" alt="PRC Pakistan" class="h-10"></a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium">
+        <a href="./index.html" class="text-dark/70 hover:text-primary transition-colors">Home</a>
+        <a href="./about.html" class="text-dark/70 hover:text-primary transition-colors">About</a>
+        <a href="./services.html" class="text-dark/70 hover:text-primary transition-colors">Services</a>
+        <a href="./learning-hub.html" class="text-dark/70 hover:text-primary transition-colors">Learning Hub</a>
+        <a href="./courses.html" class="text-dark/70 hover:text-primary transition-colors">Courses</a>
+        <a href="./events.html" class="text-dark/70 hover:text-primary transition-colors">Events</a>
+        <a href="./resources.html" class="text-primary font-semibold">Resources</a>
+        <a href="./media.html" class="text-dark/70 hover:text-primary transition-colors">Media</a>
+        <a href="./faq.html" class="text-dark/70 hover:text-primary transition-colors">FAQ</a>
+        <a href="./contact.html" class="text-dark/70 hover:text-primary transition-colors">Contact</a>
+      </div>
+
+      <!-- CTA + Mobile Toggle -->
+      <div class="flex items-center gap-3">
+        <a href="./contact.html" class="hidden lg:inline-flex bg-primary text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-primary/90 transition-colors">Get Started</a>
+        <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-accent transition-colors" aria-label="Toggle menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="lg:hidden max-h-0 overflow-hidden opacity-0 transition-all duration-300 bg-white border-t">
+    <div class="px-4 py-4 space-y-2 text-sm font-medium">
+      <a href="./index.html" class="block py-2 text-dark/70 hover:text-primary">Home</a>
+      <a href="./about.html" class="block py-2 text-dark/70 hover:text-primary">About</a>
+      <a href="./services.html" class="block py-2 text-dark/70 hover:text-primary">Services</a>
+      <a href="./learning-hub.html" class="block py-2 text-dark/70 hover:text-primary">Learning Hub</a>
+      <a href="./courses.html" class="block py-2 text-dark/70 hover:text-primary">Courses</a>
+      <a href="./events.html" class="block py-2 text-dark/70 hover:text-primary">Events</a>
+      <a href="./resources.html" class="block py-2 text-primary font-semibold">Resources</a>
+      <a href="./media.html" class="block py-2 text-dark/70 hover:text-primary">Media</a>
+      <a href="./faq.html" class="block py-2 text-dark/70 hover:text-primary">FAQ</a>
+      <a href="./contact.html" class="block py-2 text-dark/70 hover:text-primary">Contact</a>
+      <a href="./contact.html" class="block mt-3 text-center bg-primary text-white font-semibold px-5 py-3 rounded-full">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="pt-24 pb-16 text-center px-4">
+  <div class="max-w-3xl mx-auto">
+    <h1 class="font-display text-4xl md:text-5xl text-dark mb-4">Free Resources</h1>
+    <p class="text-dark/60 text-lg max-w-xl mx-auto">Download free guides, checklists, and tools to strengthen your family.</p>
+  </div>
+</section>
+
+<!-- ===== RESOURCE TYPE FILTERS ===== -->
+<section class="px-4 mb-8">
+  <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-3">
+    <button class="filter-pill active px-6 py-2.5 rounded-full text-sm font-medium bg-accent text-dark/70 hover:bg-primary/10" data-filter="all">All</button>
+    <button class="filter-pill px-6 py-2.5 rounded-full text-sm font-medium bg-accent text-dark/70 hover:bg-primary/10" data-filter="parenting-guides">Parenting Guides</button>
+    <button class="filter-pill px-6 py-2.5 rounded-full text-sm font-medium bg-accent text-dark/70 hover:bg-primary/10" data-filter="checklists">Checklists</button>
+    <button class="filter-pill px-6 py-2.5 rounded-full text-sm font-medium bg-accent text-dark/70 hover:bg-primary/10" data-filter="ebooks">E-Books</button>
+    <button class="filter-pill px-6 py-2.5 rounded-full text-sm font-medium bg-accent text-dark/70 hover:bg-primary/10" data-filter="worksheets">Worksheets</button>
+  </div>
+</section>
+
+<!-- ===== LEAD MAGNET BANNER ===== -->
+<section class="px-4 mb-12">
+  <div class="max-w-5xl mx-auto bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 md:p-12 text-center">
+    <h2 class="font-display text-2xl md:text-3xl text-dark mb-3">Get Our Free Parenting Starter Kit</h2>
+    <p class="text-dark/60 max-w-xl mx-auto mb-6">A collection of 5 essential guides, checklists, and worksheets — delivered to your inbox.</p>
+    <form id="lead-magnet-form" class="max-w-lg mx-auto space-y-3">
+      <input type="text" placeholder="Your Name" required class="w-full px-5 py-3 rounded-full border border-dark/10 bg-white focus:outline-none focus:border-primary text-sm">
+      <input type="email" placeholder="Email Address" required class="w-full px-5 py-3 rounded-full border border-dark/10 bg-white focus:outline-none focus:border-primary text-sm">
+      <input type="tel" placeholder="WhatsApp (optional)" class="w-full px-5 py-3 rounded-full border border-dark/10 bg-white focus:outline-none focus:border-primary text-sm">
+      <button type="submit" class="bg-primary text-white font-semibold px-8 py-3 rounded-full hover:bg-primary/90 transition-colors text-sm">Send Me the Kit</button>
+    </form>
+    <p class="text-dark/40 text-xs mt-3">We respect your privacy. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- ===== RESOURCES GRID ===== -->
+<section class="px-4 pb-16">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="resources-grid">
+
+    <!-- Resource 1 - Positive Discipline Guide -->
+    <div class="resource-card rounded-2xl border border-dark/10 overflow-hidden bg-white card-hover" data-category="parenting-guides">
+      <div class="p-6">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+            <i data-lucide="book-open" class="w-6 h-6 text-primary"></i>
+          </div>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-700">PDF Guide</span>
+        </div>
+        <h3 class="font-display text-xl text-dark mb-2">Positive Discipline Guide</h3>
+        <p class="text-dark/60 text-sm mb-4">A 25-page guide to disciplining with love and respect.</p>
+        <div class="flex items-center gap-1.5 text-dark/40 text-xs mb-4">
+          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+          <span>25 pages</span>
+        </div>
+        <button class="download-btn w-full bg-accent text-dark font-medium py-2.5 rounded-full hover:bg-primary/10 transition-colors text-sm" data-resource="Positive Discipline Guide">Download</button>
+      </div>
+    </div>
+
+    <!-- Resource 2 - Daily Routine Checklist -->
+    <div class="resource-card rounded-2xl border border-dark/10 overflow-hidden bg-white card-hover" data-category="checklists">
+      <div class="p-6">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center">
+            <i data-lucide="check-square" class="w-6 h-6 text-secondary"></i>
+          </div>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-100 text-blue-700">Checklist</span>
+        </div>
+        <h3 class="font-display text-xl text-dark mb-2">Daily Routine Checklist for Families</h3>
+        <p class="text-dark/60 text-sm mb-4">Printable daily routine template for the whole family.</p>
+        <div class="flex items-center gap-1.5 text-dark/40 text-xs mb-4">
+          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+          <span>2 pages</span>
+        </div>
+        <button class="download-btn w-full bg-accent text-dark font-medium py-2.5 rounded-full hover:bg-primary/10 transition-colors text-sm" data-resource="Daily Routine Checklist for Families">Download</button>
+      </div>
+    </div>
+
+    <!-- Resource 3 - Understanding Your Child's Mind -->
+    <div class="resource-card rounded-2xl border border-dark/10 overflow-hidden bg-white card-hover" data-category="ebooks">
+      <div class="p-6">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+            <i data-lucide="book" class="w-6 h-6 text-primary"></i>
+          </div>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-purple-100 text-purple-700">E-Book</span>
+        </div>
+        <h3 class="font-display text-xl text-dark mb-2">Understanding Your Child's Mind</h3>
+        <p class="text-dark/60 text-sm mb-4">Comprehensive guide to child psychology for Pakistani parents.</p>
+        <div class="flex items-center gap-1.5 text-dark/40 text-xs mb-4">
+          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+          <span>60 pages</span>
+        </div>
+        <button class="download-btn w-full bg-accent text-dark font-medium py-2.5 rounded-full hover:bg-primary/10 transition-colors text-sm" data-resource="Understanding Your Child's Mind">Download</button>
+      </div>
+    </div>
+
+    <!-- Resource 4 - Marriage Communication Worksheet -->
+    <div class="resource-card rounded-2xl border border-dark/10 overflow-hidden bg-white card-hover" data-category="worksheets">
+      <div class="p-6">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center">
+            <i data-lucide="pen-tool" class="w-6 h-6 text-secondary"></i>
+          </div>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-orange-100 text-orange-700">Worksheet</span>
+        </div>
+        <h3 class="font-display text-xl text-dark mb-2">Marriage Communication Worksheet</h3>
+        <p class="text-dark/60 text-sm mb-4">Interactive exercises to improve couple communication.</p>
+        <div class="flex items-center gap-1.5 text-dark/40 text-xs mb-4">
+          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+          <span>8 pages</span>
+        </div>
+        <button class="download-btn w-full bg-accent text-dark font-medium py-2.5 rounded-full hover:bg-primary/10 transition-colors text-sm" data-resource="Marriage Communication Worksheet">Download</button>
+      </div>
+    </div>
+
+    <!-- Resource 5 - Teen Mental Health Toolkit -->
+    <div class="resource-card rounded-2xl border border-dark/10 overflow-hidden bg-white card-hover" data-category="ebooks">
+      <div class="p-6">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+            <i data-lucide="heart" class="w-6 h-6 text-primary"></i>
+          </div>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-purple-100 text-purple-700">E-Book</span>
+        </div>
+        <h3 class="font-display text-xl text-dark mb-2">Teen Mental Health Toolkit</h3>
+        <p class="text-dark/60 text-sm mb-4">Recognizing and supporting your teen's mental health needs.</p>
+        <div class="flex items-center gap-1.5 text-dark/40 text-xs mb-4">
+          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+          <span>45 pages</span>
+        </div>
+        <button class="download-btn w-full bg-accent text-dark font-medium py-2.5 rounded-full hover:bg-primary/10 transition-colors text-sm" data-resource="Teen Mental Health Toolkit">Download</button>
+      </div>
+    </div>
+
+    <!-- Resource 6 - Family Meeting Agenda Template -->
+    <div class="resource-card rounded-2xl border border-dark/10 overflow-hidden bg-white card-hover" data-category="checklists">
+      <div class="p-6">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center">
+            <i data-lucide="clipboard-list" class="w-6 h-6 text-secondary"></i>
+          </div>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-teal-100 text-teal-700">Template</span>
+        </div>
+        <h3 class="font-display text-xl text-dark mb-2">Family Meeting Agenda Template</h3>
+        <p class="text-dark/60 text-sm mb-4">Structured agenda for productive family meetings.</p>
+        <div class="flex items-center gap-1.5 text-dark/40 text-xs mb-4">
+          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+          <span>3 pages</span>
+        </div>
+        <button class="download-btn w-full bg-accent text-dark font-medium py-2.5 rounded-full hover:bg-primary/10 transition-colors text-sm" data-resource="Family Meeting Agenda Template">Download</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== DOWNLOAD MODAL ===== -->
+<div id="download-modal" class="fixed inset-0 z-[60] hidden items-center justify-center modal-overlay">
+  <div class="bg-white rounded-2xl max-w-md w-full mx-4 p-8 relative">
+    <button id="modal-close" class="absolute top-4 right-4 p-1 rounded-full hover:bg-accent transition-colors">
+      <i data-lucide="x" class="w-5 h-5 text-dark/60"></i>
+    </button>
+    <div id="modal-form-view">
+      <h3 id="modal-title" class="font-display text-2xl text-dark mb-6">Download Resource</h3>
+      <form id="download-form" class="space-y-4">
+        <input type="hidden" id="modal-resource-name">
+        <div>
+          <label class="block text-sm font-medium text-dark/70 mb-1">Full Name <span class="text-red-500">*</span></label>
+          <input type="text" id="modal-name" required class="w-full px-4 py-3 rounded-xl border border-dark/10 bg-accent/50 focus:outline-none focus:border-primary text-sm">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-dark/70 mb-1">Email <span class="text-red-500">*</span></label>
+          <input type="email" id="modal-email" required class="w-full px-4 py-3 rounded-xl border border-dark/10 bg-accent/50 focus:outline-none focus:border-primary text-sm">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-dark/70 mb-1">WhatsApp <span class="text-dark/30 text-xs">(optional)</span></label>
+          <input type="tel" id="modal-whatsapp" class="w-full px-4 py-3 rounded-xl border border-dark/10 bg-accent/50 focus:outline-none focus:border-primary text-sm">
+        </div>
+        <button type="submit" class="w-full bg-primary text-white font-semibold py-3 rounded-full hover:bg-primary/90 transition-colors">Download Now</button>
+        <p class="text-center">
+          <button type="button" id="modal-skip" class="text-sm text-dark/40 hover:text-dark/70 transition-colors">No thanks, skip</button>
+        </p>
+      </form>
+    </div>
+    <div id="modal-success-view" class="hidden text-center py-6">
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="check-circle" class="w-8 h-8 text-green-600"></i>
+      </div>
+      <h3 class="font-display text-2xl text-dark mb-2">Download Started!</h3>
+      <p class="text-dark/60 text-sm">Check your email! The download link has been sent.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== POPULAR DOWNLOADS ===== -->
+<section class="px-4 pb-16">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="font-display text-3xl text-dark mb-8">Most Downloaded Resources</h2>
+    <div class="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+      <div class="flex-shrink-0 w-72 rounded-2xl border border-dark/10 bg-white p-6 card-hover">
+        <div class="flex items-center gap-2 text-primary mb-2">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span class="text-sm font-semibold">2,340 downloads</span>
+        </div>
+        <h3 class="font-display text-lg text-dark">Positive Discipline Guide</h3>
+      </div>
+      <div class="flex-shrink-0 w-72 rounded-2xl border border-dark/10 bg-white p-6 card-hover">
+        <div class="flex items-center gap-2 text-secondary mb-2">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span class="text-sm font-semibold">1,890 downloads</span>
+        </div>
+        <h3 class="font-display text-lg text-dark">Daily Routine Checklist</h3>
+      </div>
+      <div class="flex-shrink-0 w-72 rounded-2xl border border-dark/10 bg-white p-6 card-hover">
+        <div class="flex items-center gap-2 text-primary mb-2">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span class="text-sm font-semibold">1,560 downloads</span>
+        </div>
+        <h3 class="font-display text-lg text-dark">Understanding Your Child's Mind</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-dark text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div>
+        <span class="text-2xl font-bold font-display text-primary">PRC</span>
+        <p class="text-white/50 text-sm mt-2">Strengthening Pakistani families through professional relationship counseling.</p>
+      </div>
+      <div>
+        <h4 class="font-display text-lg mb-3">Quick Links</h4>
+        <ul class="space-y-2 text-sm text-white/50">
+          <li><a href="./about.html" class="hover:text-primary transition-colors">About</a></li>
+          <li><a href="./services.html" class="hover:text-primary transition-colors">Services</a></li>
+          <li><a href="./resources.html" class="hover:text-primary transition-colors">Resources</a></li>
+          <li><a href="./contact.html" class="hover:text-primary transition-colors">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-display text-lg mb-3">Support</h4>
+        <ul class="space-y-2 text-sm text-white/50">
+          <li><a href="./faq.html" class="hover:text-primary transition-colors">FAQ</a></li>
+          <li><a href="./contact.html" class="hover:text-primary transition-colors">Get Help</a></li>
+          <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-display text-lg mb-3">Contact</h4>
+        <ul class="space-y-2 text-sm text-white/50">
+          <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 flex-shrink-0"></i> Karachi, Pakistan</li>
+          <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 flex-shrink-0"></i> hello@prcpakistan.org</li>
+          <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 flex-shrink-0"></i> +92 321 234 5678</li>
+          <li class="flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 flex-shrink-0"></i> Mon-Sat: 9AM - 6PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10 mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-white/40">&copy; 2026 PRC Pakistan. All rights reserved.</p>
+      <p class="text-xs text-dark/40 mt-4">Designed by <a href="https://modigital.vercel.app" target="_blank" rel="noopener">MO Digital</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) {
+    navbar.classList.add('shadow-md');
+  } else {
+    navbar.classList.remove('shadow-md');
+  }
+});
+
+// Mobile menu
+const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+let menuOpen = false;
+menuToggle.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  if (menuOpen) {
+    mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+    mobileMenu.style.opacity = '1';
+  } else {
+    mobileMenu.style.maxHeight = '0';
+    mobileMenu.style.opacity = '0';
+  }
+});
+
+// Resource filter
+const filterBtns = document.querySelectorAll('.filter-pill');
+const resourceCards = document.querySelectorAll('.resource-card');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    resourceCards.forEach(card => {
+      if (filter === 'all' || card.dataset.category === filter) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+// Download modal
+const modal = document.getElementById('download-modal');
+const modalFormView = document.getElementById('modal-form-view');
+const modalSuccessView = document.getElementById('modal-success-view');
+const modalTitle = document.getElementById('modal-title');
+const modalResourceName = document.getElementById('modal-resource-name');
+const modalClose = document.getElementById('modal-close');
+const modalSkip = document.getElementById('modal-skip');
+const downloadForm = document.getElementById('download-form');
+
+document.querySelectorAll('.download-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const name = btn.dataset.resource;
+    modalTitle.textContent = 'Download ' + name;
+    modalResourceName.value = name;
+    modalFormView.classList.remove('hidden');
+    modalSuccessView.classList.add('hidden');
+    document.getElementById('modal-name').value = '';
+    document.getElementById('modal-email').value = '';
+    document.getElementById('modal-whatsapp').value = '';
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  });
+});
+
+function closeModal() {
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+}
+
+modalClose.addEventListener('click', closeModal);
+modalSkip.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) closeModal();
+});
+
+var resourceContents = {
+  'Positive Discipline Guide': 'PRC Pakistan - Positive Discipline Guide\n\nThis is a sample document. The full PDF will be available soon.\n\nVisit prcpakistan.org for more resources.',
+  'Daily Routine Checklist for Families': 'PRC Pakistan - Daily Routine Checklist for Families\n\nThis is a sample document. The full PDF will be available soon.\n\nVisit prcpakistan.org for more resources.',
+  'Understanding Your Child\'s Mind': 'PRC Pakistan - Understanding Your Child\'s Mind\n\nThis is a sample document. The full PDF will be available soon.\n\nVisit prcpakistan.org for more resources.',
+  'Marriage Communication Worksheet': 'PRC Pakistan - Marriage Communication Worksheet\n\nThis is a sample document. The full PDF will be available soon.\n\nVisit prcpakistan.org for more resources.',
+  'Teen Mental Health Toolkit': 'PRC Pakistan - Teen Mental Health Toolkit\n\nThis is a sample document. The full PDF will be available soon.\n\nVisit prcpakistan.org for more resources.',
+  'Family Meeting Agenda Template': 'PRC Pakistan - Family Meeting Agenda Template\n\nThis is a sample document. The full PDF will be available soon.\n\nVisit prcpakistan.org for more resources.'
+};
+
+function downloadResource(name, content) {
+  var blob = new Blob([content], {type: 'text/plain'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = name + '.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+downloadForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  var resourceName = modalResourceName.value;
+  downloadResource(resourceName, resourceContents[resourceName] || 'PRC Pakistan - ' + resourceName + '\n\nThis is a sample document. The full PDF will be available soon.\n\nVisit prcpakistan.org for more resources.');
+  modalFormView.classList.add('hidden');
+  modalSuccessView.classList.remove('hidden');
+  setTimeout(closeModal, 3000);
+});
+
+// Lead magnet form
+document.getElementById('lead-magnet-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('Thank you! Check your email for the Parenting Starter Kit.');
+  e.target.reset();
+});
+
+// Lucide icons
+lucide.createIcons();
+</script>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/923212345678?text=Hi%20PRC%20Pakistan!%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="whatsapp-float bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- CHATBOT WIDGET -->
+<div id="chatbot-widget" class="fixed bottom-24 right-6 z-50">
+  <button id="chatbot-toggle" class="bg-primary hover:bg-primary/90 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  </button>
+  <div id="chatbot-box" class="hidden absolute bottom-16 right-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
+    <div class="bg-primary text-white p-4">
+      <p class="font-semibold">PRC Pakistan Assistant</p>
+      <p class="text-xs text-white/80">How can we help you today?</p>
+    </div>
+    <div id="chatbot-messages" class="p-4 h-64 overflow-y-auto space-y-3">
+      <div class="bg-accent rounded-xl p-3 text-sm">Hi! I'm here to help. What can I assist you with?</div>
+      <div id="chatbot-options" class="space-y-2">
+        <button onclick="chatSelect('struggling')" class="w-full text-left bg-primary/10 hover:bg-primary/20 rounded-xl p-3 text-sm text-dark transition">I'm struggling with parenting/relationships</button>
+        <button onclick="chatSelect('book')" class="w-full text-left bg-secondary/10 hover:bg-secondary/20 rounded-xl p-3 text-sm text-dark transition">I want to book a session</button>
+        <button onclick="chatSelect('course')" class="w-full text-left bg-primary/10 hover:bg-primary/20 rounded-xl p-3 text-sm text-dark transition">Question about a course</button>
+        <button onclick="chatSelect('bug')" class="w-full text-left bg-red-50 hover:bg-red-100 rounded-xl p-3 text-sm text-dark transition">Report a bug or issue</button>
+      </div>
+    </div>
+    <div id="chatbot-input-area" class="hidden border-t p-3">
+      <div class="flex gap-2">
+        <input id="chatbot-input" type="text" placeholder="Type your message..." class="flex-1 border rounded-full px-4 py-2 text-sm outline-none focus:border-primary">
+        <button onclick="chatSend()" class="bg-primary text-white rounded-full px-4 py-2 text-sm">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var chatState='', chatDetails='', chatStep=0;
+  var msgs=document.getElementById('chatbot-messages');
+  var inputArea=document.getElementById('chatbot-input-area');
+  var chatInput=document.getElementById('chatbot-input');
+
+  document.getElementById('chatbot-toggle').addEventListener('click',function(){
+    document.getElementById('chatbot-box').classList.toggle('hidden');
+  });
+
+  function addMsg(text,isUser){
+    var d=document.createElement('div');
+    d.className=isUser?'bg-primary text-white rounded-xl p-3 text-sm ml-8 text-right':'bg-accent rounded-xl p-3 text-sm mr-8';
+    d.textContent=text;
+    msgs.appendChild(d);
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+
+  function addBtns(btns){
+    var d=document.createElement('div');
+    d.id='chatbot-dynamic-btns';
+    d.className='space-y-2';
+    btns.forEach(function(b){
+      var btn=document.createElement('button');
+      btn.className='w-full text-left bg-primary/10 hover:bg-primary/20 rounded-xl p-3 text-sm text-dark transition';
+      btn.textContent=b.label;
+      btn.onclick=function(){d.remove();b.action();};
+      d.appendChild(btn);
+    });
+    msgs.appendChild(d);
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+
+  function showInput(){inputArea.classList.remove('hidden');chatInput.focus();}
+
+  window.chatSelect=function(type){
+    var opts=document.getElementById('chatbot-options');
+    if(opts)opts.remove();
+    var dyn=document.getElementById('chatbot-dynamic-btns');
+    if(dyn)dyn.remove();
+
+    if(type==='struggling'){
+      addMsg("I'm struggling with parenting/relationships",true);
+      chatState='struggling';
+      setTimeout(function(){
+        addMsg("I'm sorry to hear that. You're not alone - we're here to help. What area do you need support with?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Parenting challenges',action:function(){chatDetails='Parenting';afterStruggle();}},
+            {label:'Marriage/relationship issues',action:function(){chatDetails='Relationship';afterStruggle();}},
+            {label:'Teenage child behavior',action:function(){chatDetails='Teen Parenting';afterStruggle();}},
+            {label:'General family wellness',action:function(){chatDetails='Family Wellness';afterStruggle();}}
+          ]);
+        },300);
+      },500);
+    } else if(type==='book'){
+      addMsg("I want to book a session",true);
+      chatState='book';
+      setTimeout(function(){
+        addMsg("Great choice! What type of session are you looking for?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Parenting Coaching',action:function(){chatDetails='Parenting Coaching';afterBook();}},
+            {label:'Relationship Coaching',action:function(){chatDetails='Relationship Coaching';afterBook();}},
+            {label:'Marriage Guidance',action:function(){chatDetails='Marriage Guidance';afterBook();}},
+            {label:'Teen Parenting',action:function(){chatDetails='Teen Parenting';afterBook();}},
+            {label:'Free discovery call (15 min)',action:function(){chatDetails='Free Discovery Call';afterBook();}}
+          ]);
+        },300);
+      },500);
+    } else if(type==='course'){
+      addMsg("I have a question about a course",true);
+      chatState='course';
+      setTimeout(function(){
+        addMsg("Which course are you interested in?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Positive Parenting Mastery',action:function(){chatDetails='Positive Parenting Mastery';afterCourse();}},
+            {label:'Relationship Reset',action:function(){chatDetails='Relationship Reset';afterCourse();}},
+            {label:'Teen Years Survival Guide',action:function(){chatDetails='Teen Years Survival Guide';afterCourse();}},
+            {label:'Marriage Enrichment Program',action:function(){chatDetails='Marriage Enrichment Program';afterCourse();}},
+            {label:'Other/General question',action:function(){chatDetails='General Course Inquiry';afterCourse();}}
+          ]);
+        },300);
+      },500);
+    } else if(type==='bug'){
+      addMsg("I'd like to report a bug",true);
+      chatState='bug';
+      chatStep=0;
+      setTimeout(function(){
+        addMsg("Thanks for letting us know! Which page are you on?",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Home',action:function(){chatDetails='Page: Home';bugStep2();}},
+            {label:'About',action:function(){chatDetails='Page: About';bugStep2();}},
+            {label:'Services',action:function(){chatDetails='Page: Services';bugStep2();}},
+            {label:'Learning Hub',action:function(){chatDetails='Page: Learning Hub';bugStep2();}},
+            {label:'Courses',action:function(){chatDetails='Page: Courses';bugStep2();}},
+            {label:'Events',action:function(){chatDetails='Page: Events';bugStep2();}},
+            {label:'Resources',action:function(){chatDetails='Page: Resources';bugStep2();}},
+            {label:'Media',action:function(){chatDetails='Page: Media';bugStep2();}},
+            {label:'FAQ',action:function(){chatDetails='Page: FAQ';bugStep2();}},
+            {label:'Contact',action:function(){chatDetails='Page: Contact';bugStep2();}}
+          ]);
+        },300);
+      },500);
+    }
+  };
+
+  function afterStruggle(){
+    addMsg("I need help with: "+chatDetails,true);
+    setTimeout(function(){
+      addMsg("Thank you for sharing. I understand this can be difficult. Let me connect you with one of our coaches who specializes in "+chatDetails+". Please describe your situation briefly, and we'll arrange a session.",false);
+      setTimeout(function(){addMsg("You can also book directly or message us on WhatsApp:",false);
+        setTimeout(function(){
+          addBtns([
+            {label:'Book a session now',action:function(){window.location.href='./contact.html';}},
+            {label:'Chat on WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi%20PRC%20Pakistan!%20I%20need%20help%20with%20'+encodeURIComponent(chatDetails)+'.%20Can%20you%20please%20assist%20me?','_blank');}}
+          ]);
+        },300);
+      },500);
+    },500);
+  }
+
+  function afterBook(){
+    addMsg("I'm interested in: "+chatDetails,true);
+    setTimeout(function(){
+      addMsg("Excellent! We'd love to help you with "+chatDetails+". Please provide your name and preferred time, and we'll set up your session. Or message us directly on WhatsApp:",false);
+      setTimeout(function(){
+        addBtns([
+          {label:'Go to booking form',action:function(){window.location.href='./contact.html';}},
+          {label:'Book via WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi!%20I%20would%20like%20to%20book%20a%20'+encodeURIComponent(chatDetails)+'%20session.%20Please%20let%20me%20know%20available%20slots.','_blank');}}
+        ]);
+      },300);
+    },500);
+  }
+
+  function afterCourse(){
+    addMsg("My question is about: "+chatDetails,true);
+    setTimeout(function(){
+      addMsg("Great! For detailed information about "+chatDetails+", including curriculum, pricing, and enrollment, please visit our Courses page or message us on WhatsApp:",false);
+      setTimeout(function(){
+        addBtns([
+          {label:'View course details',action:function(){window.location.href='./courses.html';}},
+          {label:'Ask on WhatsApp',action:function(){window.open('https://wa.me/923212345678?text=Hi!%20I%20have%20a%20question%20about%20the%20'+encodeURIComponent(chatDetails)+'%20course.','_blank');}}
+        ]);
+      },300);
+    },500);
+  }
+
+  function bugStep2(){
+    addMsg(chatDetails,true);
+    setTimeout(function(){
+      addMsg("Got it. Can you briefly describe the issue you're experiencing? Type below:",false);
+      setTimeout(function(){showInput();},300);
+    },500);
+  }
+
+  window.chatSend=function(){
+    var val=chatInput.value.trim();
+    if(!val)return;
+    chatInput.value='';
+    inputArea.classList.add('hidden');
+    addMsg(val,true);
+
+    if(chatState==='bug'){
+      setTimeout(function(){
+        addMsg("Thank you for the details! We'll fix this ASAP. Please send this report via WhatsApp so our team gets it instantly:",false);
+        var fullMsg='Bug Report\n'+chatDetails+'\nIssue: '+val;
+        var waUrl='https://wa.me/923212345678?text='+encodeURIComponent(fullMsg);
+        setTimeout(function(){
+          addBtns([
+            {label:'Send report on WhatsApp',action:function(){window.open(waUrl,'_blank');}},
+            {label:'Done, thanks!',action:function(){addMsg("We appreciate your feedback! Our team will look into this.","");}}
+          ]);
+        },300);
+      },500);
+    }
+  };
+
+  if(chatInput){
+    chatInput.addEventListener('keypress',function(e){
+      if(e.key==='Enter')window.chatSend();
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

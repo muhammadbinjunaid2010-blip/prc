@@ -1,0 +1,48 @@
+/* PRC Pakistan - Custom Styles */
+body { font-family: 'DM Sans', sans-serif; }
+.font-display { font-family: 'Playfair Display', serif; }
+
+/* Smooth scrolling */
+html { scroll-behavior: smooth; }
+
+/* Nav */
+.nav-scrolled { background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+/* Cards */
+.card-hover { transition: transform 0.2s, box-shadow 0.2s; }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+
+/* Category pills */
+.cat-pill { transition: background 0.2s, color 0.2s; }
+.cat-pill.active, .cat-pill:hover { background: #5B8DEF; color: white; }
+
+/* Testimonial slider */
+.testimonial-slide { display: none; }
+.testimonial-slide.active { display: block; }
+
+/* FAQ accordion */
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-answer.open { max-height: 500px; }
+.faq-icon { transition: transform 0.3s; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+/* Filter buttons */
+.filter-btn.active { background: #5B8DEF; color: white; }
+
+/* Progress bar */
+.progress-bar { transition: width 0.5s ease; }
+
+/* WhatsApp float */
+.whatsapp-float { position: fixed; bottom: 24px; right: 24px; z-index: 50; }
+
+/* Share buttons */
+.share-btn { transition: opacity 0.2s; }
+.share-btn:hover { opacity: 0.8; }
+
+/* Calendar */
+.cal-day { min-height: 80px; }
+.cal-day.has-event { border-left: 3px solid #5B8DEF; }
+
+/* Mobile menu */
+.mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
+.mobile-menu.open { transform: translateX(0); }
