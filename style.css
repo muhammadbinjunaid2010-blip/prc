@@ -22,11 +22,10 @@ html { scroll-behavior: smooth; }
 .testimonial-slide { display: none; }
 .testimonial-slide.active { display: block; }
 
-/* FAQ accordion */
-.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-.faq-answer.open { max-height: 500px; }
-.faq-icon { transition: transform 0.3s; }
-.faq-item.open .faq-icon { transform: rotate(45deg); }
+/* Contact form segmented toggle */
+.seg-btn { border: 1px solid #e5e7eb; background: #fff; color: #2F2F2F; }
+.seg-btn:hover { border-color: #5B8DEF; }
+.seg-btn.active { background: #5B8DEF; border-color: #5B8DEF; color: #fff; }
 
 /* Filter buttons */
 .filter-btn.active { background: #5B8DEF; color: white; }

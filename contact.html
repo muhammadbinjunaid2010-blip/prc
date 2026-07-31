@@ -10,15 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest"></script>
 <link href="./style.css" rel="stylesheet">
-<meta name="description" content="Get in touch with PRC Pakistan. Book a session, ask a question, or schedule a free discovery call.">
+<meta name="description" content="Get in touch with PRC Pakistan. Book a session, register for a course, invite PRC for a workshop, or send a message.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://prcpakistan.vercel.app/contact.html">
 <meta property="og:title" content="Contact - PRC Pakistan">
-<meta property="og:description" content="Get in touch with PRC Pakistan. Book a session, ask a question, or schedule a free discovery call.">
+<meta property="og:description" content="Get in touch with PRC Pakistan. Book a session, register for a course, invite PRC for a workshop, or send a message.">
 <meta property="og:image" content="https://prcpakistan.vercel.app/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact - PRC Pakistan">
-<meta name="twitter:description" content="Get in touch with PRC Pakistan. Book a session, ask a question, or schedule a free discovery call.">
+<meta name="twitter:description" content="Get in touch with PRC Pakistan. Book a session, register for a course, invite PRC for a workshop, or send a message.">
 <meta name="twitter:image" content="https://prcpakistan.vercel.app/images/og-image.png">
 </head>
 <body class="font-sans text-dark bg-white">
@@ -36,7 +36,7 @@
         <a href="./media.html" class="text-sm font-medium transition-colors text-dark/70 hover:text-primary">Media</a>
         <a href="./contact.html" class="text-sm font-medium transition-colors text-primary font-semibold">Contact</a>
       </div>
-      <a href="./contact.html" class="hidden lg:inline-flex bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition" id="nav-cta">Book a Session</a>
+      <a href="./contact.html?topic=book-session" class="hidden lg:inline-flex bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition" id="nav-cta">Book a Session</a>
       <button class="lg:hidden p-2" id="menuToggle" aria-label="Open menu">
         <i data-lucide="menu" class="w-6 h-6"></i>
       </button>
@@ -58,7 +58,7 @@
       <a href="./media.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Media</a>
       <a href="./contact.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Contact</a>
     </nav>
-    <a href="./contact.html" class="bg-primary text-white px-12 py-3 rounded-full text-lg font-semibold hover:bg-primary/90 transition">Book a Session</a>
+    <a href="./contact.html?topic=book-session" class="bg-primary text-white px-12 py-3 rounded-full text-lg font-semibold hover:bg-primary/90 transition">Book a Session</a>
     <div class="absolute bottom-10 flex flex-col items-center gap-4">
       <div class="flex items-center gap-5">
         <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-dark/40 hover:text-primary transition"><i data-lucide="facebook" class="w-5 h-5"></i></a>
@@ -78,7 +78,203 @@
 <section class="pt-24 pb-16 bg-accent">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <h1 class="font-display text-4xl md:text-5xl text-dark mb-4">Get in Touch</h1>
-    <p class="text-lg text-gray-600 max-w-2xl mx-auto">We'd love to hear from you. Reach out to book a session or ask a question.</p>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">We'd love to hear from you. Reach out to book a session, register for a course, or just ask a question.</p>
+  </div>
+</section>
+
+<!-- Contact Form (Main) -->
+<section class="py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-3 gap-12">
+      <!-- Left: Contact Form -->
+      <div class="lg:col-span-2">
+        <h2 class="font-display text-2xl text-dark mb-2">Send us a Message</h2>
+        <p class="text-gray-600 text-sm mb-8">Tell us why you're reaching out and we'll point you to the right person.</p>
+
+        <form id="contact-form" class="space-y-6">
+          <input type="hidden" name="access_key" value="5f43d33b-3cf6-4fa4-9d46-ea85eddec8dc">
+          <input type="hidden" name="subject" id="form-subject" value="New Contact Form Submission">
+
+          <!-- 1. Purpose -->
+          <div>
+            <label for="topic" class="block text-sm font-medium text-dark mb-2">What is this about? <span class="text-red-500">*</span></label>
+            <select id="topic" name="topic" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
+              <option value="" disabled selected>Select a reason</option>
+              <option value="book-session">Book a Session</option>
+              <option value="discovery-call">Book a Discovery Call</option>
+              <option value="course">Register for a Course</option>
+              <option value="workshop">Invite PRC for a Workshop</option>
+              <option value="talent">Use Your Talent for PRC</option>
+              <option value="bug">Report a Bug</option>
+              <option value="info">General Info / Other</option>
+            </select>
+          </div>
+
+          <!-- Conditional: Register for a Course -->
+          <div id="field-course" class="hidden">
+            <label for="course" class="block text-sm font-medium text-dark mb-2">Select a course <span class="text-red-500">*</span></label>
+            <select id="course" name="course" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
+              <option value="" disabled selected>Select a course</option>
+              <option>Anger Management</option>
+              <option>14 August Azadi (Free)</option>
+              <option>Positive Parenting Intensive (Aug 5-7)</option>
+              <option>Communication in Marriage (Aug 18)</option>
+              <option>Family Wellness Seminar (Aug 25)</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <!-- Conditional: Use Your Talent for PRC -->
+          <div id="field-talent" class="hidden">
+            <label for="talent" class="block text-sm font-medium text-dark mb-2">What service or talent can you offer? <span class="text-red-500">*</span></label>
+            <input type="text" id="talent" name="talent" placeholder="e.g. social media, content writing, video editing, event help..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
+          </div>
+
+          <!-- Conditional: Report a Bug -->
+          <div id="field-bug" class="hidden">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="bug_page" class="block text-sm font-medium text-dark mb-2">Which page? <span class="text-red-500">*</span></label>
+                <select id="bug_page" name="bug_page" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
+                  <option value="" disabled selected>Select a page</option>
+                  <option>Home</option>
+                  <option>About</option>
+                  <option>Services</option>
+                  <option>Learning Hub</option>
+                  <option>Media</option>
+                  <option>Contact</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="bug_section" class="block text-sm font-medium text-dark mb-2">Which section? <span class="text-red-500">*</span></label>
+                <input type="text" id="bug_section" name="bug_section" placeholder="e.g. course cards, footer, contact form..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
+              </div>
+            </div>
+          </div>
+
+          <!-- Conditional: Invite PRC for a Workshop -->
+          <div id="field-workshop" class="hidden">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="workshop_place" class="block text-sm font-medium text-dark mb-2">Place / City <span class="text-red-500">*</span></label>
+                <input type="text" id="workshop_place" name="workshop_place" placeholder="e.g. Lahore, school, community hall..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
+              </div>
+              <div>
+                <label for="workshop_age" class="block text-sm font-medium text-dark mb-2">Age group <span class="text-red-500">*</span></label>
+                <input type="text" id="workshop_age" name="workshop_age" placeholder="e.g. parents, teens, 6-12 years..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
+              </div>
+            </div>
+          </div>
+
+          <!-- Conditional: Book a Session -->
+          <div id="field-session" class="hidden">
+            <label for="service" class="block text-sm font-medium text-dark mb-2">Select a service or other <span class="text-red-500">*</span></label>
+            <select id="service" name="service" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
+              <option value="" disabled selected>Select a service</option>
+              <option>Couple Counseling</option>
+              <option>Anger Management</option>
+              <option>Emotional Health Counseling</option>
+              <option>Mental Health Counseling</option>
+              <option>Parenting Guidance</option>
+              <option>Relationship Coaching</option>
+              <option>Teen Parenting</option>
+              <option>Marriage Guidance</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <!-- 2. Name or company -->
+          <div>
+            <label for="name" class="block text-sm font-medium text-dark mb-2">Your name or company name <span class="text-red-500">*</span></label>
+            <input type="text" id="name" name="name" required placeholder="Enter your full name or company name" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
+          </div>
+
+          <!-- 3. Official contact -->
+          <div>
+            <label class="block text-sm font-medium text-dark mb-2">How should we contact you? <span class="text-red-500">*</span></label>
+            <div class="flex gap-2 mb-3" id="contact-mode-toggle">
+              <button type="button" id="contact-btn-phone" class="seg-btn active px-6 py-2.5 rounded-full text-sm font-medium transition-colors">Phone</button>
+              <button type="button" id="contact-btn-email" class="seg-btn px-6 py-2.5 rounded-full text-sm font-medium transition-colors">Email</button>
+            </div>
+            <input type="tel" id="contact-input" name="phone" required placeholder="+92 3XX XXX XXXX" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
+          </div>
+
+          <!-- 4. Message -->
+          <div>
+            <label for="message" id="message-label" class="block text-sm font-medium text-dark mb-2">Message <span class="text-gray-400 font-normal">(optional)</span></label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us more about how we can help..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm resize-none"></textarea>
+          </div>
+
+          <button type="submit" id="form-submit-btn" class="w-full sm:w-auto bg-primary text-white px-10 py-3.5 rounded-full text-sm font-semibold hover:bg-primary/90 transition-colors">Send Message</button>
+        </form>
+
+        <!-- Success Message -->
+        <div id="form-success" class="hidden bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="check-circle" class="w-8 h-8 text-green-500"></i>
+          </div>
+          <h3 class="font-semibold text-dark text-lg mb-2">Thank you!</h3>
+          <p class="text-gray-600 text-sm">Your message has been sent. We'll get back to you shortly.</p>
+        </div>
+      </div>
+
+      <!-- Right: Info Cards -->
+      <div class="lg:col-span-1 space-y-6">
+        <!-- Availability -->
+        <div class="bg-accent rounded-2xl p-6">
+          <h3 class="font-semibold text-dark mb-4 flex items-center gap-2">
+            <i data-lucide="clock" class="w-5 h-5 text-primary"></i>
+            Session Availability
+          </h3>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between">
+              <span class="text-gray-600">Monday - Friday</span>
+              <span class="font-medium text-dark">9:00 AM - 6:00 PM PKT</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Saturday</span>
+              <span class="font-medium text-dark">10:00 AM - 2:00 PM PKT</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Sunday</span>
+              <span class="font-medium text-dark">By appointment</span>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-200">Online sessions available worldwide — flexible scheduling</p>
+        </div>
+
+        <!-- Book an Appointment -->
+        <div class="bg-accent rounded-2xl p-6">
+          <h3 class="font-semibold text-dark mb-2 flex items-center gap-2">
+            <i data-lucide="calendar" class="w-5 h-5 text-primary"></i>
+            Book an Appointment
+          </h3>
+          <p class="text-sm text-gray-600 mb-1">Schedule a free 15-minute discovery call</p>
+          <p class="text-sm text-gray-600 mb-4">Choose a time that works for you</p>
+          <form id="appointment-form" class="space-y-3">
+            <div>
+              <label class="block text-xs font-medium text-dark mb-1">Select Date</label>
+              <input type="date" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-dark mb-1">Select Time</label>
+              <select class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm text-gray-600 bg-white">
+                <option>9:00 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>12:00 PM</option>
+                <option>2:00 PM</option>
+                <option>3:00 PM</option>
+                <option>4:00 PM</option>
+                <option>5:00 PM</option>
+              </select>
+            </div>
+            <button type="submit" class="w-full bg-secondary text-white py-3 rounded-full font-medium hover:bg-secondary/90 transition-colors text-sm">Book Call</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -129,278 +325,6 @@
         <h3 class="font-semibold text-dark mb-1">Online Worldwide</h3>
         <p class="text-gray-600 text-sm mb-3">Serving clients globally</p>
         <a href="https://wa.me/923328274000" class="text-primary text-sm font-medium hover:underline">Book Online</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Main Content -->
-<section class="py-16">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid lg:grid-cols-3 gap-12">
-      <!-- Left: Contact Form -->
-      <div class="lg:col-span-2">
-        <h2 class="font-display text-2xl text-dark mb-6">Get in Touch</h2>
-
-        <!-- Step indicators -->
-        <div class="flex items-center gap-2 mb-8" id="step-indicators">
-          <div class="step-dot active w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center">1</div>
-          <div class="h-0.5 w-8 bg-gray-200 step-line"></div>
-          <div class="step-dot w-8 h-8 rounded-full bg-gray-200 text-gray-500 text-xs font-bold flex items-center justify-center">2</div>
-          <div class="h-0.5 w-8 bg-gray-200 step-line"></div>
-          <div class="step-dot w-8 h-8 rounded-full bg-gray-200 text-gray-500 text-xs font-bold flex items-center justify-center">3</div>
-        </div>
-
-        <form id="smart-form" class="space-y-5">
-          <input type="hidden" name="access_key" value="5f43d33b-3cf6-4fa4-9d46-ea85eddec8dc">
-          <input type="hidden" name="subject" id="form-subject" value="New Contact Form Submission">
-
-          <!-- Step 1: What are you here for? -->
-          <div id="step-1" class="step active">
-            <p class="text-sm font-medium text-dark mb-4">What brings you here?</p>
-            <div class="grid grid-cols-2 gap-3" id="purpose-options">
-              <button type="button" class="purpose-btn text-left px-4 py-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-colors text-sm" data-value="Couple Counseling">Couple Counseling</button>
-              <button type="button" class="purpose-btn text-left px-4 py-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-colors text-sm" data-value="Anger Management">Anger Management</button>
-              <button type="button" class="purpose-btn text-left px-4 py-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-colors text-sm" data-value="Emotional Health Counseling">Emotional Health Counseling</button>
-              <button type="button" class="purpose-btn text-left px-4 py-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-colors text-sm" data-value="Mental Health Counseling">Mental Health Counseling</button>
-              <button type="button" class="purpose-btn text-left px-4 py-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-colors text-sm" data-value="Parenting">Parenting</button>
-              <button type="button" class="purpose-btn text-left px-4 py-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-colors text-sm" data-value="Relationship Coaching">Relationship Coaching</button>
-              <button type="button" class="purpose-btn text-left px-4 py-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-colors text-sm" data-value="Teen Parenting">Teen Parenting</button>
-              <button type="button" class="purpose-btn text-left px-4 py-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-colors text-sm" data-value="Marriage Guidance">Marriage Guidance</button>
-              <button type="button" class="purpose-btn text-left px-4 py-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-colors text-sm col-span-2" data-value="Course / Program Inquiry">Course / Program Inquiry</button>
-              <button type="button" class="purpose-btn text-left px-4 py-3 rounded-xl border border-gray-200 hover:border-primary hover:bg-primary/5 transition-colors text-sm col-span-2" data-value="Other">Something Else</button>
-            </div>
-            <input type="hidden" name="purpose" id="form-purpose">
-          </div>
-
-          <!-- Step 2: Name + Phone -->
-          <div id="step-2" class="step hidden">
-            <p class="text-sm font-medium text-dark mb-4">How can we reach you?</p>
-            <div class="space-y-4">
-              <div>
-                <label class="block text-sm font-medium text-dark mb-1.5">Your Name <span class="text-red-500">*</span></label>
-                <input type="text" name="name" required placeholder="Enter your full name" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-dark mb-1.5">Phone / WhatsApp <span class="text-red-500">*</span></label>
-                <input type="tel" name="phone" required placeholder="+92 3XX XXX XXXX" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
-              </div>
-            </div>
-            <div class="flex gap-3 mt-5">
-              <button type="button" id="back-to-1" class="px-6 py-3 rounded-full border border-gray-300 text-sm font-medium hover:border-primary transition-colors">Back</button>
-              <button type="button" id="go-to-3" class="flex-1 bg-primary text-white py-3 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors">Continue</button>
-            </div>
-          </div>
-
-          <!-- Step 3: Extra info (optional) -->
-          <div id="step-3" class="step hidden">
-            <p class="text-sm font-medium text-dark mb-4">Anything else? <span class="text-gray-400 font-normal">(optional)</span></p>
-            <div>
-              <textarea name="message" rows="4" placeholder="Tell us more about how we can help..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm resize-none"></textarea>
-            </div>
-            <div class="flex gap-3 mt-5">
-              <button type="button" id="back-to-2" class="px-6 py-3 rounded-full border border-gray-300 text-sm font-medium hover:border-primary transition-colors">Back</button>
-              <button type="submit" id="form-submit-btn" class="flex-1 bg-primary text-white py-3 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors">Send</button>
-            </div>
-          </div>
-        </form>
-
-        <!-- Success Message -->
-        <div id="form-success" class="hidden bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
-          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i data-lucide="check-circle" class="w-8 h-8 text-green-500"></i>
-          </div>
-          <h3 class="font-semibold text-dark text-lg mb-2">Thank you!</h3>
-          <p class="text-gray-600 text-sm">Your message has been sent. We'll get back to you shortly.</p>
-        </div>
-      </div>
-
-      <!-- Right: Info Cards -->
-      <div class="lg:col-span-1 space-y-6">
-        <!-- Availability -->
-        <div class="bg-accent rounded-2xl p-6">
-          <h3 class="font-semibold text-dark mb-4 flex items-center gap-2">
-            <i data-lucide="clock" class="w-5 h-5 text-primary"></i>
-            Session Availability
-          </h3>
-          <div class="space-y-3 text-sm">
-            <div class="flex justify-between">
-              <span class="text-gray-600">Monday - Friday</span>
-              <span class="font-medium text-dark">9:00 AM - 6:00 PM PKT</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-gray-600">Saturday</span>
-              <span class="font-medium text-dark">10:00 AM - 2:00 PM PKT</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-gray-600">Sunday</span>
-              <span class="font-medium text-dark">By appointment</span>
-            </div>
-          </div>
-          <p class="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-200">Online sessions available worldwide Ã¢â‚¬â€ flexible scheduling</p>
-        </div>
-
-        <!-- Book an Appointment -->
-        <div class="bg-accent rounded-2xl p-6">
-          <h3 class="font-semibold text-dark mb-2 flex items-center gap-2">
-            <i data-lucide="calendar" class="w-5 h-5 text-primary"></i>
-            Book an Appointment
-          </h3>
-          <p class="text-sm text-gray-600 mb-1">Schedule a free 15-minute discovery call</p>
-          <p class="text-sm text-gray-600 mb-4">Choose a time that works for you</p>
-          <form id="appointment-form" class="space-y-3">
-            <div>
-              <label class="block text-xs font-medium text-dark mb-1">Select Date</label>
-              <input type="date" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
-            </div>
-            <div>
-              <label class="block text-xs font-medium text-dark mb-1">Select Time</label>
-              <select class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm text-gray-600 bg-white">
-                <option>9:00 AM</option>
-                <option>10:00 AM</option>
-                <option>11:00 AM</option>
-                <option>12:00 PM</option>
-                <option>2:00 PM</option>
-                <option>3:00 PM</option>
-                <option>4:00 PM</option>
-                <option>5:00 PM</option>
-              </select>
-            </div>
-            <button type="submit" class="w-full bg-secondary text-white py-3 rounded-full font-medium hover:bg-secondary/90 transition-colors text-sm">Book Call</button>
-          </form>
-        </div>
-
-        <!-- Quick Connect -->
-        <div class="bg-accent rounded-2xl p-6">
-          <h3 class="font-semibold text-dark mb-4 flex items-center gap-2">
-            <i data-lucide="zap" class="w-5 h-5 text-primary"></i>
-            Quick Connect
-          </h3>
-          <a href="https://wa.me/923328274000" class="block w-full bg-green-500 text-white text-center py-3 rounded-full font-medium hover:bg-green-600 transition-colors text-sm mb-2">
-            <i data-lucide="message-circle" class="w-4 h-4 inline-block mr-1.5 -mt-0.5"></i>
-            WhatsApp
-          </a>
-          <p class="text-xs text-gray-500 text-center mb-4">Chat with us instantly on WhatsApp</p>
-          <a href="https://t.me/prcpakistan" class="block w-full border border-gray-300 text-dark text-center py-3 rounded-full font-medium hover:bg-gray-50 transition-colors text-sm">
-            <i data-lucide="send" class="w-4 h-4 inline-block mr-1.5 -mt-0.5"></i>
-            Telegram
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ SECTION -->
-<section class="py-16 bg-white">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="font-display text-3xl text-dark text-center mb-4">Frequently Asked Questions</h2>
-    <p class="text-dark/60 text-center mb-10">Quick answers to common questions.</p>
-    <div class="space-y-3">
-      <div class="faq-item border border-gray-200 rounded-xl overflow-hidden">
-        <button class="faq-question w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
-          <span class="font-medium text-dark text-sm sm:text-base pr-4">What services does PRC Pakistan offer?</span>
-          <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0 transition-transform duration-300"></i>
-        </button>
-        <div class="faq-answer px-4 sm:px-5" style="max-height:0; overflow:hidden; transition: max-height 0.3s ease;">
-          <p class="text-dark/60 text-sm pb-4 sm:pb-5 leading-relaxed">We offer Couple Counseling, Anger Management, Emotional Health Counseling, Mental Health Counseling, Parenting Guidance, Relationship Coaching, Teen Parenting, Marriage Guidance, and more. All services are available online worldwide.</p>
-        </div>
-      </div>
-      <div class="faq-item border border-gray-200 rounded-xl overflow-hidden">
-        <button class="faq-question w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
-          <span class="font-medium text-dark text-sm sm:text-base pr-4">How do I book a session?</span>
-          <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0 transition-transform duration-300"></i>
-        </button>
-        <div class="faq-answer px-4 sm:px-5" style="max-height:0; overflow:hidden; transition: max-height 0.3s ease;">
-          <p class="text-dark/60 text-sm pb-4 sm:pb-5 leading-relaxed">You can book via WhatsApp at +92 332 827 4000, email us at tech.prc.pk@gmail.com, or fill out the contact form above. We'll respond within 24 hours.</p>
-        </div>
-      </div>
-      <div class="faq-item border border-gray-200 rounded-xl overflow-hidden">
-        <button class="faq-question w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
-          <span class="font-medium text-dark text-sm sm:text-base pr-4">What are your session fees?</span>
-          <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0 transition-transform duration-300"></i>
-        </button>
-        <div class="faq-answer px-4 sm:px-5" style="max-height:0; overflow:hidden; transition: max-height 0.3s ease;">
-          <p class="text-dark/60 text-sm pb-4 sm:pb-5 leading-relaxed">Session fees vary by service type. Contact us via WhatsApp or email for detailed pricing. We offer single sessions, packages, and customized programs.</p>
-        </div>
-      </div>
-      <div class="faq-item border border-gray-200 rounded-xl overflow-hidden">
-        <button class="faq-question w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
-          <span class="font-medium text-dark text-sm sm:text-base pr-4">Are sessions online or in-person?</span>
-          <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0 transition-transform duration-300"></i>
-        </button>
-        <div class="faq-answer px-4 sm:px-5" style="max-height:0; overflow:hidden; transition: max-height 0.3s ease;">
-          <p class="text-dark/60 text-sm pb-4 sm:pb-5 leading-relaxed">All sessions are conducted online via Zoom or WhatsApp, allowing us to serve clients worldwide from the comfort of your home.</p>
-        </div>
-      </div>
-      <div class="faq-item border border-gray-200 rounded-xl overflow-hidden">
-        <button class="faq-question w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
-          <span class="font-medium text-dark text-sm sm:text-base pr-4">Do you offer free discovery calls?</span>
-          <i data-lucide="plus" class="faq-icon w-5 h-5 text-primary shrink-0 transition-transform duration-300"></i>
-        </button>
-        <div class="faq-answer px-4 sm:px-5" style="max-height:0; overflow:hidden; transition: max-height 0.3s ease;">
-          <p class="text-dark/60 text-sm pb-4 sm:pb-5 leading-relaxed">Yes, we offer a free 15-minute discovery call to understand your needs and recommend the right service for you. Contact us to schedule yours.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script>
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  const answer = item.querySelector('.faq-answer');
-  const icon = btn.querySelector('.faq-icon');
-  const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '';
-  document.querySelectorAll('.faq-answer').forEach(a => { a.style.maxHeight = '0'; });
-  document.querySelectorAll('.faq-icon').forEach(i => { i.style.transform = 'rotate(0deg)'; });
-  if (!isOpen) {
-    answer.style.maxHeight = answer.scrollHeight + 'px';
-    icon.style.transform = 'rotate(45deg)';
-  }
-}
-</script>
-
-<!-- Global Reach -->
-<section class="bg-gray-100 py-12">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="font-display text-2xl text-dark text-center mb-8">Serving Clients Worldwide</h2>
-    <div class="bg-white rounded-2xl p-12 flex flex-col items-center justify-center shadow-sm">
-      <i data-lucide="globe" class="w-16 h-16 text-primary mb-4"></i>
-      <p class="text-gray-600 text-lg font-medium mb-2">Online Coaching Ã¢â‚¬â€ Anywhere in the World</p>
-      <p class="text-gray-500 text-sm">Connect with our experts from the comfort of your home via Zoom, WhatsApp, or phone.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Trust Signals -->
-<section class="bg-accent py-12">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="font-display text-2xl text-dark text-center mb-8">Why Families Trust PRC Pakistan</h2>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="text-center">
-        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-          <i data-lucide="lock" class="w-6 h-6 text-primary"></i>
-        </div>
-        <p class="font-semibold text-dark text-sm">100% Confidential</p>
-      </div>
-      <div class="text-center">
-        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-          <i data-lucide="clock" class="w-6 h-6 text-primary"></i>
-        </div>
-        <p class="font-semibold text-dark text-sm">24hr Response Time</p>
-      </div>
-      <div class="text-center">
-        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-          <i data-lucide="phone" class="w-6 h-6 text-primary"></i>
-        </div>
-        <p class="font-semibold text-dark text-sm">Free Discovery Call</p>
-      </div>
-      <div class="text-center">
-        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-          <i data-lucide="star" class="w-6 h-6 text-primary"></i>
-        </div>
-        <p class="font-semibold text-dark text-sm">5-Star Rated</p>
       </div>
     </div>
   </div>
@@ -492,96 +416,96 @@ if (mobileMenu) {
     link.addEventListener('click', closeMobileMenu);
   });
 }
-// Multi-step smart form
+// Contact form logic
 (function(){
-  const form = document.getElementById('smart-form');
+  const form = document.getElementById('contact-form');
   if (!form) return;
 
-  let selectedPurpose = '';
-  const step1 = document.getElementById('step-1');
-  const step2 = document.getElementById('step-2');
-  const step3 = document.getElementById('step-3');
-  const dots = document.querySelectorAll('.step-dot');
-  const lines = document.querySelectorAll('.step-line');
-  const purposeInput = document.getElementById('form-purpose');
-  const purposeBtns = document.querySelectorAll('.purpose-btn');
-  const backTo1 = document.getElementById('back-to-1');
-  const goTo3 = document.getElementById('go-to-3');
-  const backTo2 = document.getElementById('back-to-2');
-  const submitBtn = document.getElementById('form-submit-btn');
+  const topic = document.getElementById('topic');
+  const message = document.getElementById('message');
+  const messageLabel = document.getElementById('message-label');
+  const subject = document.getElementById('form-subject');
 
-  function showStep(n) {
-    [step1, step2, step3].forEach((el, i) => {
-      if (!el) return;
-      el.classList.toggle('hidden', i + 1 !== n);
-      el.classList.toggle('active', i + 1 === n);
-    });
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('bg-primary', i + 1 <= n);
-      dot.classList.toggle('text-white', i + 1 <= n);
-      dot.classList.toggle('bg-gray-200', i + 1 > n);
-      dot.classList.toggle('text-gray-500', i + 1 > n);
-    });
-    lines.forEach((line, i) => {
-      line.classList.toggle('bg-primary', i + 1 < n);
-      line.classList.toggle('bg-gray-200', i + 1 >= n);
+  const fields = {
+    course: document.getElementById('field-course'),
+    talent: document.getElementById('field-talent'),
+    bug: document.getElementById('field-bug'),
+    workshop: document.getElementById('field-workshop'),
+    session: document.getElementById('field-session')
+  };
+  const showForTopic = { course: ['course'], talent: ['talent'], bug: ['bug'], workshop: ['workshop'], session: ['session'] };
+
+  function applyTopic(val) {
+    Object.values(fields).forEach(el => el.classList.add('hidden'));
+    if (showForTopic[val]) {
+      showForTopic[val].forEach(key => fields[key].classList.remove('hidden'));
+    }
+    if (val === 'bug') {
+      message.required = true;
+      messageLabel.innerHTML = 'Describe the issue <span class="text-red-500">*</span>';
+    } else {
+      message.required = false;
+      messageLabel.innerHTML = 'Message <span class="text-gray-400 font-normal">(optional)</span>';
+    }
+  }
+
+  if (topic) {
+    topic.addEventListener('change', () => {
+      applyTopic(topic.value);
+      subject.value = topic.selectedOptions[0] && topic.value ? 'New inquiry: ' + topic.selectedOptions[0].textContent.trim() : 'New Contact Form Submission';
     });
   }
 
-  purposeBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      purposeBtns.forEach(b => {
-        b.classList.remove('border-primary', 'bg-primary/5', 'font-semibold');
-        b.classList.add('border-gray-200');
-      });
-      this.classList.remove('border-gray-200');
-      this.classList.add('border-primary', 'bg-primary/5', 'font-semibold');
-      selectedPurpose = this.dataset.value;
-      purposeInput.value = selectedPurpose;
-      document.getElementById('form-subject').value = 'New inquiry: ' + selectedPurpose;
-      setTimeout(() => showStep(2), 300);
-    });
-  });
+  // Phone / Email toggle
+  const btnPhone = document.getElementById('contact-btn-phone');
+  const btnEmail = document.getElementById('contact-btn-email');
+  const contactInput = document.getElementById('contact-input');
 
-  backTo1.addEventListener('click', () => showStep(1));
-  goTo3.addEventListener('click', () => {
-    const name = form.querySelector('[name="name"]').value.trim();
-    const phone = form.querySelector('[name="phone"]').value.trim();
-    if (!name || !phone) {
-      alert('Please fill in your name and phone number.');
-      return;
-    }
-    showStep(3);
-  });
-  backTo2.addEventListener('click', () => showStep(2));
+  function setContactMode(mode) {
+    const isPhone = mode === 'phone';
+    btnPhone.classList.toggle('active', isPhone);
+    btnEmail.classList.toggle('active', !isPhone);
+    contactInput.type = isPhone ? 'tel' : 'email';
+    contactInput.placeholder = isPhone ? '+92 3XX XXX XXXX' : 'you@example.com';
+    contactInput.name = isPhone ? 'phone' : 'email';
+  }
+  if (btnPhone) btnPhone.addEventListener('click', () => setContactMode('phone'));
+  if (btnEmail) btnEmail.addEventListener('click', () => setContactMode('email'));
 
+  // Prefill from URL (e.g. ?topic=course&course=Anger%20Management)
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('topic') && topic) topic.value = params.get('topic');
+  if (params.get('course')) form.querySelector('[name="course"]').value = params.get('course');
+  if (params.get('service')) form.querySelector('[name="service"]').value = params.get('service');
+  if (params.get('page')) form.querySelector('[name="bug_page"]').value = params.get('page');
+  if (params.get('name')) form.querySelector('[name="name"]').value = params.get('name');
+  if (topic && topic.value) {
+    applyTopic(topic.value);
+    subject.value = 'New inquiry: ' + topic.selectedOptions[0].textContent.trim();
+  }
+
+  // Submit to Web3Forms
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    const og = submitBtn.textContent;
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
-
-    const fd = new FormData(form);
-    fd.set('access_key', '5f43d33b-3cf6-4fa4-9d46-ea85eddec8dc');
-    if (selectedPurpose) fd.set('subject', 'New inquiry: ' + selectedPurpose);
-
+    const btn = document.getElementById('form-submit-btn');
+    const og = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
     try {
-      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
-      const data = await res.json();
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
       if (res.ok) {
         form.classList.add('hidden');
-        document.getElementById('step-indicators').classList.add('hidden');
         document.getElementById('form-success').classList.remove('hidden');
         lucide.createIcons();
       } else {
+        const data = await res.json();
         alert('Error: ' + (data.message || 'Something went wrong.'));
       }
     } catch {
       alert('Something went wrong. Please try again.');
     } finally {
-      submitBtn.textContent = og;
-      submitBtn.disabled = false;
+      btn.textContent = og;
+      btn.disabled = false;
     }
   });
 })();

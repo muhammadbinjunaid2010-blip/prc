@@ -36,7 +36,7 @@
           <a href="./media.html" class="text-dark/70 hover:text-primary text-sm font-medium transition-colors">Media</a>
           <a href="./contact.html" class="text-dark/70 hover:text-primary text-sm font-medium transition-colors">Contact</a>
         </div>
-        <a href="./contact.html" class="hidden lg:inline-flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition-colors">
+        <a href="./contact.html?topic=book-session" class="hidden lg:inline-flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition-colors">
           Get Started
         </a>
         <button class="lg:hidden p-2" id="menuToggle" aria-label="Open menu">
@@ -53,7 +53,7 @@
         <a href="./learning-hub.html" class="block text-primary text-sm font-semibold py-2">Learning Hub</a>
         <a href="./media.html" class="block text-dark/70 hover:text-primary text-sm font-medium py-2">Media</a>
         <a href="./contact.html" class="block text-dark/70 hover:text-primary text-sm font-medium py-2">Contact</a>
-        <a href="./contact.html" class="block bg-primary text-white text-center px-5 py-3 rounded-full text-sm font-semibold mt-3">Get Started</a>
+        <a href="./contact.html?topic=book-session" class="block bg-primary text-white text-center px-5 py-3 rounded-full text-sm font-semibold mt-3">Get Started</a>
       </div>
     </div>
   </nav>
@@ -75,13 +75,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
         <button class="cat-pill active rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="all">All</button>
-        <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="parenting">Parenting</button>
         <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="relationships">Marriage</button>
-        <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="psychology">Child Psychology</button>
-        <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="islamic">Islamic Parenting</button>
-        <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="teenagers">Teenagers</button>
-        <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="all">Communication</button>
-        <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="all">Emotional Intelligence</button>
+        <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="environment">Environment</button>
       </div>
     </div>
   </section>
@@ -89,20 +84,19 @@
   <!-- FEATURED ARTICLE -->
   <section class="py-10 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <a href="./blog-accept-our-daughters.html" class="block">
       <div class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover grid md:grid-cols-2 gap-0">
         <div class="overflow-hidden">
           <div class="w-full h-64 md:h-full bg-primary/10 flex items-center justify-center"><i data-lucide="book-open" class="w-16 h-16 text-primary/40"></i></div>
         </div>
         <div class="p-6 md:p-8 flex flex-col justify-center">
-          <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full w-fit mb-4">Parenting</span>
-          <h2 class="font-display text-2xl md:text-3xl text-dark mb-3 leading-tight">The Complete Guide to Positive Parenting in Pakistani Families</h2>
-          <p class="text-dark/60 text-sm mb-4 leading-relaxed">A comprehensive guide covering discipline, communication, and emotional development strategies tailored for Pakistani families navigating modern challenges.</p>
+          <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full w-fit mb-4">Family</span>
+          <h2 class="font-display text-2xl md:text-3xl text-dark mb-3 leading-tight">Let's Accept Our Daughters</h2>
+          <p class="text-dark/60 text-sm mb-4 leading-relaxed">After divorce, a daughter in our society is treated like a criminal. Accepting our daughters — without conditions and without judgment — is the love they truly need.</p>
           <div class="flex items-center gap-3 text-xs text-dark/50 mb-5">
-            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 8 min read</span>
-            <span>Ã‚Â·</span>
-            <span>Dr. Amina Khalid</span>
-            <span>Ã‚Â·</span>
-            <span>July 15, 2026</span>
+            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 3 min read</span>
+            <span>·</span>
+            <span>Munira Ahmed</span>
           </div>
           <div class="flex items-center gap-3">
             <span class="text-xs text-dark/40 font-medium">Share:</span>
@@ -112,6 +106,7 @@
           </div>
         </div>
       </div>
+      </a>
     </div>
   </section>
 
@@ -120,21 +115,19 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <a href="./blog-5-daily-habits.html" class="block"><!-- Article 1 -->
-<article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="parenting">
+        <a href="./blog-accept-our-daughters.html" class="block"><!-- Article 1 -->
+<article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
               <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="heart" class="w-10 h-10 text-primary/30"></i></div>
            </div>
            <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Parenting</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">5 Daily Habits That Strengthen Your Bond</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Simple daily practices that can transform your relationship with your children and create lasting emotional connections.</p>
+             <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Let's Accept Our Daughters</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">After divorce, a daughter in our society is treated like a criminal. Accepting our daughters — without conditions — is the love they truly need.</p>
              <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
-               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">5 min read</span>
-               <span>Ã‚Â·</span>
-               <span>Fatima Noor</span>
-               <span>Ã‚Â·</span>
-               <span>July 10, 2026</span>
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
+               <span>·</span>
+               <span>Munira Ahmed</span>
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
@@ -145,46 +138,19 @@
            </div>
          </article></a>
 
-        <a href="./blog-role-of-fathers.html" class="block"><!-- Article 2 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="parenting">
-           <div class="overflow-hidden">
-              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="users" class="w-10 h-10 text-primary/30"></i></div>
-          </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
-            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">The Role of Fathers in Emotional Development</h3>
-            <p class="text-dark/60 text-sm line-clamp-2 mb-4">Discover why a father's active involvement is crucial for building emotionally resilient and confident children.</p>
-            <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
-              <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">7 min read</span>
-              <span>Ã‚Â·</span>
-              <span>Dr. Hassan Ali</span>
-              <span>Ã‚Â·</span>
-              <span>July 8, 2026</span>
-            </div>
-            <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-              <span class="text-xs text-dark/40">Share:</span>
-              <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-dark/40 hover:text-blue-600 transition-colors"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></a>
-              
-              <a href="#" class="text-dark/40 hover:text-green-500 transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></a>
-            </div>
-          </div>
-        </article></a>
-
-        <a href="./blog-rebuilding-trust.html" class="block"><!-- Article 3 -->
+        <a href="./blog-discord.html" class="block"><!-- Article 2 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="link" class="w-10 h-10 text-primary/30"></i></div>
+              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="message-circle" class="w-10 h-10 text-primary/30"></i></div>
           </div>
           <div class="p-5 flex-1 flex flex-col">
             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
-            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Rebuilding Trust After Conflict</h3>
-            <p class="text-dark/60 text-sm line-clamp-2 mb-4">Practical steps couples can take to repair and strengthen their relationship after disagreements and misunderstandings.</p>
+            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Discord: The Right to Differ</h3>
+            <p class="text-dark/60 text-sm line-clamp-2 mb-4">Difference of opinion is not enmity. Here is why every relationship needs room for mistakes and disagreement.</p>
             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
-              <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">6 min read</span>
-              <span>Ã‚Â·</span>
-              <span>Nadia Siddiqui</span>
-              <span>Ã‚Â·</span>
-              <span>July 5, 2026</span>
+              <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
+              <span>·</span>
+              <span>Munira Ahmed</span>
             </div>
             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
               <span class="text-xs text-dark/40">Share:</span>
@@ -195,21 +161,19 @@
           </div>
         </article></a>
 
-        <a href="./blog-islamic-parenting.html" class="block"><!-- Article 4 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="islamic">
+        <a href="./blog-inheritance.html" class="block"><!-- Article 3 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="star" class="w-10 h-10 text-primary/30"></i></div>
+              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="scale" class="w-10 h-10 text-primary/30"></i></div>
           </div>
           <div class="p-5 flex-1 flex flex-col">
-            <span class="inline-block bg-amber-100 text-amber-600 text-xs font-semibold px-3 py-1 rounded-full mb-3">Islamic Parenting</span>
-            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Islamic Parenting: Raising Grateful Children</h3>
-            <p class="text-dark/60 text-sm line-clamp-2 mb-4">Teaching children the value of gratitude through Islamic principles, daily duas, and leading by example in everyday life.</p>
+            <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Marriage</span>
+            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Inheritance: A Wife's Right</h3>
+            <p class="text-dark/60 text-sm line-clamp-2 mb-4">A husband has no legal or religious right over his wife's inheritance. It is her right, not anyone's favour.</p>
             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
-              <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">9 min read</span>
-              <span>Ã‚Â·</span>
-              <span>Dr. Amina Khalid</span>
-              <span>Ã‚Â·</span>
-              <span>June 30, 2026</span>
+              <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
+              <span>·</span>
+              <span>Munira Ahmed</span>
             </div>
             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
               <span class="text-xs text-dark/40">Share:</span>
@@ -220,46 +184,19 @@
           </div>
         </article></a>
 
-        <a href="./blog-screen-time.html" class="block"><!-- Article 5 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="teenagers">
+        <a href="./blog-plastic-pollution.html" class="block"><!-- Article 4 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="environment">
            <div class="overflow-hidden">
-              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="smartphone" class="w-10 h-10 text-primary/30"></i></div>
+              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="recycle" class="w-10 h-10 text-primary/30"></i></div>
           </div>
           <div class="p-5 flex-1 flex flex-col">
-            <span class="inline-block bg-purple-100 text-purple-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Teenagers</span>
-            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Managing Screen Time: A Parent's Guide</h3>
-            <p class="text-dark/60 text-sm line-clamp-2 mb-4">Healthy boundaries for screen usage that respect your teen's independence while protecting their wellbeing.</p>
+            <span class="inline-block bg-amber-100 text-amber-600 text-xs font-semibold px-3 py-1 rounded-full mb-3">Environment</span>
+            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Plastic Pollution</h3>
+            <p class="text-dark/60 text-sm line-clamp-2 mb-4">Plastic waste is choking our seas, rivers and lands and harming wildlife. Can we reduce our plastic use for the sake of our environment?</p>
             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
-              <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">4 min read</span>
-              <span>Ã‚Â·</span>
-              <span>Fatima Noor</span>
-              <span>Ã‚Â·</span>
-              <span>June 25, 2026</span>
-            </div>
-            <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-              <span class="text-xs text-dark/40">Share:</span>
-              <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-dark/40 hover:text-blue-600 transition-colors"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></a>
-              
-              <a href="#" class="text-dark/40 hover:text-green-500 transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></a>
-            </div>
-          </div>
-        </article></a>
-
-        <a href="./blog-emotional-needs.html" class="block"><!-- Article 6 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="psychology">
-           <div class="overflow-hidden">
-              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="smile" class="w-10 h-10 text-primary/30"></i></div>
-          </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <span class="inline-block bg-pink-100 text-pink-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Child Psychology</span>
-            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Understanding Your Child's Emotional Needs</h3>
-            <p class="text-dark/60 text-sm line-clamp-2 mb-4">A deep dive into what children really need emotionally and how parents can create a safe space for expression.</p>
-            <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
-              <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">6 min read</span>
-              <span>Ã‚Â·</span>
-              <span>Dr. Hassan Ali</span>
-              <span>Ã‚Â·</span>
-              <span>June 20, 2026</span>
+              <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
+              <span>·</span>
+              <span>Munira Ahmed</span>
             </div>
             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
               <span class="text-xs text-dark/40">Share:</span>
