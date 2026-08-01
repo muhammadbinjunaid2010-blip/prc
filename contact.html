@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact - PRC Pakistan</title>
-<link rel="icon" type="image/x-icon" href="./images/favicon.png">
+<link rel="icon" type="image/x-icon" href="./images/assets/favicon.png">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#5B8DEF',secondary:'#8DAA91',accent:'#F6F2EA',dark:'#2F2F2F'}}}}</script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -15,11 +15,11 @@
 <meta property="og:url" content="https://prcpakistan.vercel.app/contact.html">
 <meta property="og:title" content="Contact - PRC Pakistan">
 <meta property="og:description" content="Get in touch with PRC Pakistan. Book a session, register for a course, invite PRC for a workshop, or send a message.">
-<meta property="og:image" content="https://prcpakistan.vercel.app/images/og-image.png">
+<meta property="og:image" content="https://prcpakistan.vercel.app/images/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact - PRC Pakistan">
 <meta name="twitter:description" content="Get in touch with PRC Pakistan. Book a session, register for a course, invite PRC for a workshop, or send a message.">
-<meta name="twitter:image" content="https://prcpakistan.vercel.app/images/og-image.png">
+<meta name="twitter:image" content="https://prcpakistan.vercel.app/images/assets/og-image.png">
 </head>
 <body class="font-sans text-dark bg-white">
 
@@ -27,7 +27,7 @@
 <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 lg:h-20">
-      <a href="./index.html"><img src="./images/logo.png" alt="PRC Pakistan" class="h-10"></a>
+      <a href="./index.html"><img src="./images/assets/logo.png" alt="PRC Pakistan" class="h-10"></a>
       <div class="hidden lg:flex items-center gap-6" id="nav-links">
         <a href="./index.html" class="text-sm font-medium transition-colors text-dark/70 hover:text-primary">Home</a>
         <a href="./about.html" class="text-sm font-medium transition-colors text-dark/70 hover:text-primary">About</a>
@@ -255,11 +255,11 @@
           <form id="appointment-form" class="space-y-3">
             <div>
               <label class="block text-xs font-medium text-dark mb-1">Select Date</label>
-              <input type="date" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
+              <input type="date" id="appt-date" name="appt_date" required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
             </div>
             <div>
               <label class="block text-xs font-medium text-dark mb-1">Select Time</label>
-              <select class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm text-gray-600 bg-white">
+              <select id="appt-time" name="appt_time" required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm text-gray-600 bg-white">
                 <option>9:00 AM</option>
                 <option>10:00 AM</option>
                 <option>11:00 AM</option>
@@ -335,7 +335,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
       <div>
-        <img src="./images/logo.png" alt="PRC Pakistan" class="h-16 mb-4 brightness-0 invert drop-shadow-[0_0_10px_rgba(255,255,255,0.25)]">
+        <img src="./images/assets/logo.png" alt="PRC Pakistan" class="h-16 mb-4 brightness-0 invert drop-shadow-[0_0_10px_rgba(255,255,255,0.25)]">
         <p class="text-white/60 text-sm leading-relaxed mb-4">Empowering families across Pakistan with expert parenting and relationship coaching.</p>
         <div class="flex items-center gap-3">
           <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-white/40 hover:text-primary transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
@@ -509,6 +509,19 @@ if (mobileMenu) {
     }
   });
 })();
+
+// Book an Appointment -> WhatsApp
+const apptForm = document.getElementById('appointment-form');
+if (apptForm) {
+  apptForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const date = document.getElementById('appt-date').value;
+    const time = document.getElementById('appt-time').value;
+    const text = 'Hi PRC Pakistan! I would like to book a free 15-minute discovery call.\n\nDate: ' + date + '\nTime: ' + time;
+    window.open('https://wa.me/923328274000?text=' + encodeURIComponent(text), '_blank');
+  });
+}
+
 lucide.createIcons();
 </script>
 

@@ -14,6 +14,19 @@ html { scroll-behavior: smooth; }
 .card-hover { transition: transform 0.2s, box-shadow 0.2s; }
 .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
 
+/* Article grid - defensive reset: forces clean auto-placement, no offset gaps.
+   Column counts come from Tailwind (grid-cols-*) on the same element. */
+.article-grid {
+  display: grid;
+  align-items: stretch;
+}
+.article-grid > * {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  margin-top: 0 !important;
+  min-width: 0;
+}
+
 /* Category pills */
 .cat-pill { transition: background 0.2s, color 0.2s; }
 .cat-pill.active, .cat-pill:hover { background: #5B8DEF; color: white; }

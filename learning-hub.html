@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning Hub - PRC Pakistan</title>
-  <link rel="icon" type="image/x-icon" href="./images/favicon.png">
+  <link rel="icon" type="image/x-icon" href="./images/assets/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{primary:'#5B8DEF',secondary:'#8DAA91',accent:'#F6F2EA',dark:'#2F2F2F'}}}}</script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -15,11 +15,11 @@
 <meta property="og:url" content="https://prcpakistan.vercel.app/learning-hub.html">
 <meta property="og:title" content="Learning Hub - PRC Pakistan">
 <meta property="og:description" content="Expert articles and resources on parenting, marriage, child psychology, and family wellness.">
-<meta property="og:image" content="https://prcpakistan.vercel.app/images/og-image.png">
+<meta property="og:image" content="https://prcpakistan.vercel.app/images/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Learning Hub - PRC Pakistan">
 <meta name="twitter:description" content="Expert articles and resources on parenting, marriage, child psychology, and family wellness.">
-<meta name="twitter:image" content="https://prcpakistan.vercel.app/images/og-image.png">
+<meta name="twitter:image" content="https://prcpakistan.vercel.app/images/assets/og-image.png">
 </head>
 <body class="font-sans text-dark bg-white">
 
@@ -27,7 +27,7 @@
   <nav class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 transition-all duration-300" id="navbar">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <a href="./index.html"><img src="./images/logo.png" alt="PRC Pakistan" class="h-10"></a>
+        <a href="./index.html"><img src="./images/assets/logo.png" alt="PRC Pakistan" class="h-10"></a>
         <div class="hidden lg:flex items-center gap-6">
           <a href="./index.html" class="text-dark/70 hover:text-primary text-sm font-medium transition-colors">Home</a>
           <a href="./about.html" class="text-dark/70 hover:text-primary text-sm font-medium transition-colors">About</a>
@@ -77,6 +77,10 @@
         <button class="cat-pill active rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="all">All</button>
         <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="relationships">Marriage</button>
         <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="environment">Environment</button>
+        <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="self-growth">Self-Growth</button>
+        <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="communication">Communication</button>
+        <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="society">Society</button>
+        <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="emotional-health">Emotional Health</button>
       </div>
     </div>
   </section>
@@ -87,7 +91,7 @@
       <a href="./blog-accept-our-daughters.html" class="block">
       <div class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover grid md:grid-cols-2 gap-0">
         <div class="overflow-hidden">
-          <div class="w-full h-64 md:h-full bg-primary/10 flex items-center justify-center"><i data-lucide="book-open" class="w-16 h-16 text-primary/40"></i></div>
+          <img src="./images/other/accept-our-daughter.jpg" alt="Accepting our daughters" class="w-full h-64 md:h-full object-cover">
         </div>
         <div class="p-6 md:p-8 flex flex-col justify-center">
           <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full w-fit mb-4">Family</span>
@@ -100,9 +104,9 @@
           </div>
           <div class="flex items-center gap-3">
             <span class="text-xs text-dark/40 font-medium">Share:</span>
-            <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-dark/40 hover:text-blue-600 transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
-            <a href="#" class="text-dark/40 hover:text-sky-500 transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
-            <a href="#" class="text-dark/40 hover:text-green-500 transition-colors"><i data-lucide="message-circle" class="w-4 h-4"></i></a>
+            <span class="text-dark/40"><i data-lucide="facebook" class="w-4 h-4"></i></span>
+            <span class="text-dark/40"><i data-lucide="twitter" class="w-4 h-4"></i></span>
+            <span class="text-dark/40"><i data-lucide="message-circle" class="w-4 h-4"></i></span>
           </div>
         </div>
       </div>
@@ -113,12 +117,12 @@
   <!-- ARTICLES GRID -->
   <section class="py-12 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="article-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <a href="./blog-accept-our-daughters.html" class="block"><!-- Article 1 -->
 <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="heart" class="w-10 h-10 text-primary/30"></i></div>
+              <img src="./images/other/accept-our-daughter.jpg" alt="Accepting our daughters" class="w-full h-48 object-cover">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
@@ -131,9 +135,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-dark/40 hover:text-blue-600 transition-colors"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></a>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
                
-               <a href="#" class="text-dark/40 hover:text-green-500 transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></a>
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
              </div>
            </div>
          </article></a>
@@ -141,7 +145,7 @@
         <a href="./blog-discord.html" class="block"><!-- Article 2 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="message-circle" class="w-10 h-10 text-primary/30"></i></div>
+              <img src="./images/other/difference of opinion.jpg" alt="Difference of opinion" class="w-full h-48 object-cover">
           </div>
           <div class="p-5 flex-1 flex flex-col">
             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
@@ -154,9 +158,9 @@
             </div>
             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
               <span class="text-xs text-dark/40">Share:</span>
-              <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-dark/40 hover:text-blue-600 transition-colors"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></a>
+              <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
               
-              <a href="#" class="text-dark/40 hover:text-green-500 transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></a>
+              <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
             </div>
           </div>
         </article></a>
@@ -164,7 +168,7 @@
         <a href="./blog-inheritance.html" class="block"><!-- Article 3 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="scale" class="w-10 h-10 text-primary/30"></i></div>
+              <img src="./images/other/inheritance.jpg" alt="Happy couple" class="w-full h-48 object-cover">
           </div>
           <div class="p-5 flex-1 flex flex-col">
             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Marriage</span>
@@ -177,9 +181,9 @@
             </div>
             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
               <span class="text-xs text-dark/40">Share:</span>
-              <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-dark/40 hover:text-blue-600 transition-colors"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></a>
+              <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
               
-              <a href="#" class="text-dark/40 hover:text-green-500 transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></a>
+              <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
             </div>
           </div>
         </article></a>
@@ -187,7 +191,7 @@
         <a href="./blog-plastic-pollution.html" class="block"><!-- Article 4 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="environment">
            <div class="overflow-hidden">
-              <div class="w-full h-48 bg-primary/5 flex items-center justify-center"><i data-lucide="recycle" class="w-10 h-10 text-primary/30"></i></div>
+              <img src="./images/other/plastic-pollution.jpg" alt="Plastic pollution" class="w-full h-48 object-cover">
           </div>
           <div class="p-5 flex-1 flex flex-col">
             <span class="inline-block bg-amber-100 text-amber-600 text-xs font-semibold px-3 py-1 rounded-full mb-3">Environment</span>
@@ -198,18 +202,294 @@
               <span>·</span>
               <span>Munira Ahmed</span>
             </div>
-            <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-              <span class="text-xs text-dark/40">Share:</span>
-              <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-dark/40 hover:text-blue-600 transition-colors"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></a>
-              
-              <a href="#" class="text-dark/40 hover:text-green-500 transition-colors"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></a>
-            </div>
-          </div>
-        </article></a>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
 
-      </div>
-    </div>
-  </section>
+        <a href="./blog-being-controlled.html" class="block"><!-- Article 5 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+           <div class="overflow-hidden">
+              <img src="./images/other/controlled.jpg" alt="Emotional control" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Are You Being Controlled?</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Sometimes love, service and sacrifice are used as a way of control. Purify your heart and do everything only for the sake of Allah.</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
+               <span>·</span>
+               <span>Munira Ahmed</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
+
+        <a href="./blog-making-everyone-happy.html" class="block"><!-- Article 6 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+           <div class="overflow-hidden">
+              <img src="./images/other/juggling.jpg" alt="Choosing yourself" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Making Everyone Happy</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">It is almost impossible that everyone stays happy with us while we do what we want. Choose yourself within your values and boundaries.</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
+               <span>·</span>
+               <span>Munira Ahmed</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
+
+        <a href="./blog-no-secrets.html" class="block"><!-- Article 7 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+           <div class="overflow-hidden">
+              <img src="./images/other/parent s pulling child to thier sides from both sides.jpg" alt="No secrets" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-secondary/10 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">No Secrets</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Children have a right to know their father and the important facts of their life. Let's not hide the truth — let there be no secrets.</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
+               <span>·</span>
+               <span>Munira Ahmed</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+          </article></a>
+
+        <a href="./blog-assertiveness.html" class="block"><!-- Article 8 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="emotional-health">
+           <div class="overflow-hidden">
+              <img src="./images/other/calm women.jpg" alt="Assertiveness" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Emotional Health</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Assertiveness</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Being firm yet gentle — state facts, feelings and needs clearly without blame or judgement, listen to be heard, and repeat yourself until you are.</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
+               <span>·</span>
+               <span>Munira Ahmed</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
+
+        <a href="./blog-other-side-of-the-picture.html" class="block"><!-- Article 9 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+           <div class="overflow-hidden">
+              <img src="./images/other/trauma illusration.jpg" alt="Other side of the picture" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Other Side of the Picture</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Women complain that men don't talk or give time. But what do we bring for a man's peace of mind? Do taunts win love — or poison it?</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
+               <span>·</span>
+               <span>Munira Ahmed</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
+
+        <a href="./blog-hidden-sins.html" class="block"><!-- Article 10 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
+           <div class="overflow-hidden">
+              <img src="./images/other/locked door.jpg" alt="Hidden sins" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Hidden Sins</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Job holders and business people must be careful with amanat. Company items, work time, data and contracts — hidden sins that we overlook.</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
+               <span>·</span>
+               <span>Munira Ahmed</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
+
+        <a href="./blog-kintsugi.html" class="block"><!-- Article 11 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
+           <div class="overflow-hidden">
+              <img src="./images/other/bowl.jpg" alt="Kintsugi" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Kintsugi</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">The Japanese art of repairing broken pottery with gold. Trials don't reduce our worth — join the broken parts with love.</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
+               <span>·</span>
+               <span>Mariam Khan</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
+
+        <a href="./blog-values.html" class="block"><!-- Article 12 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
+           <div class="overflow-hidden">
+              <img src="./images/other/compass.jpg" alt="Values" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Values</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Our choices are based on our values. Accepting others' choices doesn't mean adopting them — and it is never about better or lesser.</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
+               <span>·</span>
+               <span>Mariam Khan</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
+
+        <a href="./blog-domino-effect.html" class="block"><!-- Article 13 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="society">
+           <div class="overflow-hidden">
+              <img src="./images/other/chain reaction.jpg" alt="Domino effect" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Society</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Domino Effect</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Today's painful events are the result of a domino effect triggered generations ago. Stop the chain — starting with yourself.</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
+               <span>·</span>
+               <span>Mariam Khan</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
+
+        <a href="./blog-goodness.html" class="block"><!-- Article 14 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
+           <div class="overflow-hidden">
+              <img src="./images/other/helping.jpeg" alt="Goodness" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Goodness</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Don't turn yourself into stone while teaching someone a lesson. Keep your goodness — find the people who deserve it.</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
+               <span>·</span>
+               <span>Mariam Khan</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
+
+        <a href="./blog-good-listener.html" class="block"><!-- Article 15 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="communication">
+           <div class="overflow-hidden">
+              <img src="./images/other/listner.png" alt="Good listener" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-secondary/10 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Communication</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">The Good Listener</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Don't compete with others' suffering. Eye contact, no phone, no interrupting, listening to understand — practice with your children.</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
+               <span>·</span>
+               <span>Mariam Khan</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
+
+        <a href="./blog-hard-times.html" class="block"><!-- Article 16 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+           <div class="overflow-hidden">
+              <img src="./images/other/family in strom.jpg" alt="Hard times" class="w-full h-48 object-cover">
+           </div>
+           <div class="p-5 flex-1 flex flex-col">
+             <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
+             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Hard Times</h3>
+             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Children are never taught to handle hard times. Indulged children, people-pleasers and passive-aggressive parents — what the child learns.</p>
+             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">5 min read</span>
+               <span>·</span>
+               <span>Mariam Khan</span>
+             </div>
+             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+               <span class="text-xs text-dark/40">Share:</span>
+               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               
+               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+             </div>
+           </div>
+         </article></a>
+
+       </div>
+     </div>
+   </section>
 
   <!-- NEWSLETTER CTA -->
   <section class="py-12 bg-white">
@@ -237,7 +517,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div>
-          <img src="./images/logo.png" alt="PRC Pakistan" class="h-14 mb-4 brightness-0 invert">
+          <img src="./images/assets/logo.png" alt="PRC Pakistan" class="h-14 mb-4 brightness-0 invert">
           <p class="text-white/60 text-sm leading-relaxed mb-4">Building stronger families through education, support, and community engagement across Pakistan.</p>
           <div class="flex items-center gap-3">
             <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-white/40 hover:text-primary transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
