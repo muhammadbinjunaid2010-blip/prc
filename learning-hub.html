@@ -5,21 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning Hub - PRC Pakistan</title>
   <link rel="icon" type="image/x-icon" href="./images/assets/favicon.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={theme:{extend:{colors:{primary:'#5B8DEF',secondary:'#8DAA91',accent:'#F6F2EA',dark:'#2F2F2F'}}}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link href="./style.css" rel="stylesheet">
+  <link href="./tailwind.css" rel="stylesheet">
 <meta name="description" content="Expert articles and resources on parenting, marriage, child psychology, and family wellness.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://prcpakistan.vercel.app/learning-hub.html">
 <meta property="og:title" content="Learning Hub - PRC Pakistan">
 <meta property="og:description" content="Expert articles and resources on parenting, marriage, child psychology, and family wellness.">
-<meta property="og:image" content="https://prcpakistan.vercel.app/images/assets/og-image.png">
+<meta property="og:image" content="https://prcpakistan.vercel.app/images/assets/og-image.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Learning Hub - PRC Pakistan">
 <meta name="twitter:description" content="Expert articles and resources on parenting, marriage, child psychology, and family wellness.">
-<meta name="twitter:image" content="https://prcpakistan.vercel.app/images/assets/og-image.png">
+<meta name="twitter:image" content="https://prcpakistan.vercel.app/images/assets/og-image.webp">
 </head>
 <body class="font-sans text-dark bg-white">
 
@@ -27,7 +26,7 @@
   <nav class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 transition-all duration-300" id="navbar">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <a href="./index.html"><img src="./images/assets/logo.png" alt="PRC Pakistan" class="h-10"></a>
+        <a href="./index.html"><img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-10" width="500" height="500"></a>
         <div class="hidden lg:flex items-center gap-6">
           <a href="./index.html" class="text-dark/70 hover:text-primary text-sm font-medium transition-colors">Home</a>
           <a href="./about.html" class="text-dark/70 hover:text-primary text-sm font-medium transition-colors">About</a>
@@ -40,7 +39,7 @@
           Get Started
         </a>
         <button class="lg:hidden p-2" id="menuToggle" aria-label="Open menu">
-          <i data-lucide="menu" class="w-6 h-6"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
         </button>
       </div>
     </div>
@@ -64,7 +63,7 @@
       <h1 class="font-display text-4xl md:text-5xl text-dark mb-4">Learning Hub</h1>
       <p class="text-dark/60 text-lg mb-8 max-w-2xl mx-auto">Expert articles, guides, and resources to help you build a stronger family.</p>
       <div class="relative max-w-xl mx-auto">
-        <i data-lucide="search" class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-dark/40"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-dark/40" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
         <input type="text" id="hub-search" placeholder="Search articles..." class="w-full rounded-full border border-gray-200 pl-12 pr-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition" oninput="filterHubArticles()">
       </div>
     </div>
@@ -91,22 +90,22 @@
       <a href="./blog-accept-our-daughters.html" class="block">
       <div class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover grid md:grid-cols-2 gap-0">
         <div class="overflow-hidden">
-          <img src="./images/other/accept-our-daughter.jpg" alt="Accepting our daughters" class="w-full h-64 md:h-full object-cover">
+          <img src="images/other/accept-our-daughter.webp" alt="Accepting our daughters" class="w-full h-64 md:h-full object-cover" loading="lazy" width="678" height="452">
         </div>
         <div class="p-6 md:p-8 flex flex-col justify-center">
           <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full w-fit mb-4">Family</span>
           <h2 class="font-display text-2xl md:text-3xl text-dark mb-3 leading-tight">Let's Accept Our Daughters</h2>
           <p class="text-dark/60 text-sm mb-4 leading-relaxed">After divorce, a daughter in our society is treated like a criminal. Accepting our daughters — without conditions and without judgment — is the love they truly need.</p>
           <div class="flex items-center gap-3 text-xs text-dark/50 mb-5">
-            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 3 min read</span>
+            <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min read</span>
             <span>·</span>
             <span>Munira Ahmed</span>
           </div>
           <div class="flex items-center gap-3">
             <span class="text-xs text-dark/40 font-medium">Share:</span>
-            <span class="text-dark/40"><i data-lucide="facebook" class="w-4 h-4"></i></span>
-            <span class="text-dark/40"><i data-lucide="twitter" class="w-4 h-4"></i></span>
-            <span class="text-dark/40"><i data-lucide="message-circle" class="w-4 h-4"></i></span>
+            <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
+            <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></span>
+            <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
           </div>
         </div>
       </div>
@@ -122,7 +121,7 @@
         <a href="./blog-accept-our-daughters.html" class="block"><!-- Article 1 -->
 <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <img src="./images/other/accept-our-daughter.jpg" alt="Accepting our daughters" class="w-full h-48 object-cover">
+              <img src="images/other/accept-our-daughter.webp" alt="Accepting our daughters" class="w-full h-48 object-cover" loading="lazy" width="678" height="452">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
@@ -135,9 +134,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -145,7 +144,7 @@
         <a href="./blog-discord.html" class="block"><!-- Article 2 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <img src="./images/other/difference of opinion.jpg" alt="Difference of opinion" class="w-full h-48 object-cover">
+              <img src="images/other/difference of opinion.webp" alt="Difference of opinion" class="w-full h-48 object-cover" loading="lazy" width="490" height="403">
           </div>
           <div class="p-5 flex-1 flex flex-col">
             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
@@ -158,9 +157,9 @@
             </div>
             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
               <span class="text-xs text-dark/40">Share:</span>
-              <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+              <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
               
-              <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+              <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
             </div>
           </div>
         </article></a>
@@ -168,7 +167,7 @@
         <a href="./blog-inheritance.html" class="block"><!-- Article 3 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <img src="./images/other/inheritance.jpg" alt="Happy couple" class="w-full h-48 object-cover">
+              <img src="images/other/inheritance.webp" alt="Happy couple" class="w-full h-48 object-cover" loading="lazy" width="612" height="344">
           </div>
           <div class="p-5 flex-1 flex flex-col">
             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Marriage</span>
@@ -181,9 +180,9 @@
             </div>
             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
               <span class="text-xs text-dark/40">Share:</span>
-              <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+              <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
               
-              <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+              <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
             </div>
           </div>
         </article></a>
@@ -191,7 +190,7 @@
         <a href="./blog-plastic-pollution.html" class="block"><!-- Article 4 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="environment">
            <div class="overflow-hidden">
-              <img src="./images/other/plastic-pollution.jpg" alt="Plastic pollution" class="w-full h-48 object-cover">
+              <img src="images/other/plastic-pollution.webp" alt="Plastic pollution" class="w-full h-48 object-cover" loading="lazy" width="547" height="365">
           </div>
           <div class="p-5 flex-1 flex flex-col">
             <span class="inline-block bg-amber-100 text-amber-600 text-xs font-semibold px-3 py-1 rounded-full mb-3">Environment</span>
@@ -204,9 +203,9 @@
             </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -214,7 +213,7 @@
         <a href="./blog-being-controlled.html" class="block"><!-- Article 5 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <img src="./images/other/controlled.jpg" alt="Emotional control" class="w-full h-48 object-cover">
+              <img src="images/other/controlled.webp" alt="Emotional control" class="w-full h-48 object-cover" loading="lazy" width="612" height="408">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
@@ -227,9 +226,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -237,7 +236,7 @@
         <a href="./blog-making-everyone-happy.html" class="block"><!-- Article 6 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <img src="./images/other/juggling.jpg" alt="Choosing yourself" class="w-full h-48 object-cover">
+              <img src="images/other/juggling.webp" alt="Choosing yourself" class="w-full h-48 object-cover" loading="lazy" width="698" height="400">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
@@ -250,9 +249,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -260,7 +259,7 @@
         <a href="./blog-no-secrets.html" class="block"><!-- Article 7 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <img src="./images/other/parent s pulling child to thier sides from both sides.jpg" alt="No secrets" class="w-full h-48 object-cover">
+              <img src="images/other/parent s pulling child to thier sides from both sides.webp" alt="No secrets" class="w-full h-48 object-cover" loading="lazy" width="612" height="408">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-secondary/10 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
@@ -273,9 +272,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
           </article></a>
@@ -283,7 +282,7 @@
         <a href="./blog-assertiveness.html" class="block"><!-- Article 8 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="emotional-health">
            <div class="overflow-hidden">
-              <img src="./images/other/calm women.jpg" alt="Assertiveness" class="w-full h-48 object-cover">
+              <img src="images/other/calm women.webp" alt="Assertiveness" class="w-full h-48 object-cover" loading="lazy" width="390" height="512">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Emotional Health</span>
@@ -296,9 +295,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -306,7 +305,7 @@
         <a href="./blog-other-side-of-the-picture.html" class="block"><!-- Article 9 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <img src="./images/other/trauma illusration.jpg" alt="Other side of the picture" class="w-full h-48 object-cover">
+              <img src="images/other/trauma illusration.webp" alt="Other side of the picture" class="w-full h-48 object-cover" loading="lazy" width="490" height="612">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
@@ -319,9 +318,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -329,7 +328,7 @@
         <a href="./blog-hidden-sins.html" class="block"><!-- Article 10 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
            <div class="overflow-hidden">
-              <img src="./images/other/locked door.jpg" alt="Hidden sins" class="w-full h-48 object-cover">
+              <img src="images/other/locked door.webp" alt="Hidden sins" class="w-full h-48 object-cover" loading="lazy" width="447" height="447">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
@@ -342,9 +341,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -352,7 +351,7 @@
         <a href="./blog-kintsugi.html" class="block"><!-- Article 11 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
            <div class="overflow-hidden">
-              <img src="./images/other/bowl.jpg" alt="Kintsugi" class="w-full h-48 object-cover">
+              <img src="images/other/bowl.webp" alt="Kintsugi" class="w-full h-48 object-cover" loading="lazy" width="1600" height="1200">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
@@ -365,9 +364,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -375,7 +374,7 @@
         <a href="./blog-values.html" class="block"><!-- Article 12 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
            <div class="overflow-hidden">
-              <img src="./images/other/compass.jpg" alt="Values" class="w-full h-48 object-cover">
+              <img src="images/other/compass.webp" alt="Values" class="w-full h-48 object-cover" loading="lazy" width="547" height="365">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
@@ -388,9 +387,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -398,7 +397,7 @@
         <a href="./blog-domino-effect.html" class="block"><!-- Article 13 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="society">
            <div class="overflow-hidden">
-              <img src="./images/other/chain reaction.jpg" alt="Domino effect" class="w-full h-48 object-cover">
+              <img src="images/other/chain reaction.webp" alt="Domino effect" class="w-full h-48 object-cover" loading="lazy" width="1200" height="675">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Society</span>
@@ -411,9 +410,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -421,7 +420,7 @@
         <a href="./blog-goodness.html" class="block"><!-- Article 14 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
            <div class="overflow-hidden">
-              <img src="./images/other/helping.jpeg" alt="Goodness" class="w-full h-48 object-cover">
+              <img src="images/other/helping.webp" alt="Goodness" class="w-full h-48 object-cover" loading="lazy" width="1600" height="1062">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
@@ -434,9 +433,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -444,7 +443,7 @@
         <a href="./blog-good-listener.html" class="block"><!-- Article 15 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="communication">
            <div class="overflow-hidden">
-              <img src="./images/other/listner.png" alt="Good listener" class="w-full h-48 object-cover">
+              <img src="images/other/listner.webp" alt="Good listener" class="w-full h-48 object-cover" loading="lazy" width="678" height="452">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-secondary/10 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Communication</span>
@@ -457,9 +456,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -467,7 +466,7 @@
         <a href="./blog-hard-times.html" class="block"><!-- Article 16 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <img src="./images/other/family in strom.jpg" alt="Hard times" class="w-full h-48 object-cover">
+              <img src="images/other/family in strom.webp" alt="Hard times" class="w-full h-48 object-cover" loading="lazy" width="260" height="280">
            </div>
            <div class="p-5 flex-1 flex flex-col">
              <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
@@ -480,9 +479,9 @@
              </div>
              <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
                <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
-               <span class="text-dark/40"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
              </div>
            </div>
          </article></a>
@@ -517,13 +516,13 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div>
-          <img src="./images/assets/logo.png" alt="PRC Pakistan" class="h-14 mb-4 brightness-0 invert">
+          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-14 mb-4 brightness-0 invert" loading="lazy" width="500" height="500">
           <p class="text-white/60 text-sm leading-relaxed mb-4">Building stronger families through education, support, and community engagement across Pakistan.</p>
           <div class="flex items-center gap-3">
-            <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-white/40 hover:text-primary transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+            <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-white/40 hover:text-primary transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
             
             
-            <a href="https://www.youtube.com/@prc_pakistan" class="text-white/40 hover:text-primary transition-colors"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+            <a href="https://www.youtube.com/@prc_pakistan" class="text-white/40 hover:text-primary transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
           </div>
         </div>
         <div>
@@ -543,10 +542,10 @@
         <div>
           <h5 class="font-semibold text-sm uppercase tracking-wider mb-4">Contact</h5>
           <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-white/60 text-sm"><i data-lucide="globe" class="w-4 h-4 flex-shrink-0"></i> Online Worldwide</li>
-            <li class="flex items-center gap-2 text-white/60 text-sm"><i data-lucide="mail" class="w-4 h-4 flex-shrink-0"></i> tech.prc.pk@gmail.com</li>
-            <li class="flex items-center gap-2 text-white/60 text-sm"><i data-lucide="phone" class="w-4 h-4 flex-shrink-0"></i> +92 332 827 4000</li>
-            <li class="flex items-center gap-2 text-white/60 text-sm"><i data-lucide="clock" class="w-4 h-4 flex-shrink-0"></i> Mon-Sat: 9AM - 6PM</li>
+            <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" x2="22" y1="12" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> Online Worldwide</li>
+            <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg> tech.prc.pk@gmail.com</li>
+            <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> +92 332 827 4000</li>
+            <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Mon-Sat: 9AM - 6PM</li>
           </ul>
         </div>
       </div>
@@ -597,9 +596,7 @@
       });
     });
 
-    // Lucide icons
-    lucide.createIcons();
-  </script>
+    // Lucide icons</script>
 
 
 <!-- WHATSAPP FLOAT -->

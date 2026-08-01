@@ -1,0 +1,14 @@
+{
+  "name": "prc-pakistan",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PRC Pakistan static website",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./tailwind.css --minify"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.4.0",
+    "sharp": "^0.35.3",
+    "tailwindcss": "^3.4.17"
+  }
+}
