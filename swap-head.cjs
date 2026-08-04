@@ -15,10 +15,16 @@ for (const file of files) {
   html = html.replace(/\s*<script src="https:\/\/cdn\.tailwindcss\.com"><\/script>/, '');
   html = html.replace(/\s*<script>tailwind\.config=\{.*?<\/script>/, '');
 
-  html = html.replace(
-    new RegExp(`(\\s*)<link href="${fontLink.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}" rel="stylesheet">`),
-    (match, ws) => `${ws}${preconnects.replace(/\n\s*$/, '')}${ws}<link href="${fontLink}" rel="stylesheet">`
-  );
+  // Remove any existing preconnects and font link
+  html = html.replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\s*/g, '');
+  html = html.replace(/\s*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\s*/g, '');
+  html = html.replace(new RegExp(`\\s*<link href="${fontLink.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}" rel="stylesheet">\\s*`), '');
+
+  // Add preconnects + font link before </head> or after meta tags
+  const headEnd = html.indexOf('</head>');
+  if (headEnd > -1) {
+    html = html.slice(0, headEnd) + preconnects + '  <link href="' + fontLink + '" rel="stylesheet">\n' + html.slice(headEnd);
+  }
 
   html = html.replace(/<link href="\.\/style\.css" rel="stylesheet">/, '<link href="./tailwind.css" rel="stylesheet">');
   html = html.replace(/<link rel="stylesheet" href="\.\/style\.css">/, '<link rel="stylesheet" href="./tailwind.css">');
