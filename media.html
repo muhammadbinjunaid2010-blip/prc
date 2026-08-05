@@ -292,7 +292,7 @@
             </div>
           </div>
           <div class="absolute -left-20 top-16 hidden md:block bg-white rounded-2xl px-4 py-3 shadow-xl animate-floaty" style="animation-delay:.8s">
-            <p class="font-display text-2xl text-primary font-bold">9+</p>
+            <p class="font-display text-2xl text-primary font-bold">15+</p>
             <p class="text-xs text-dark/50">Years of Service</p>
           </div>
           <div class="absolute -right-16 bottom-16 hidden md:block bg-white rounded-2xl px-4 py-3 shadow-xl animate-floaty" style="animation-delay:1.6s">
@@ -825,8 +825,15 @@ function switchTab(tab) {
     tabMedia.className = 'tab-btn px-6 py-2.5 rounded-full text-sm font-medium bg-gray-100 text-dark hover:bg-gray-200 transition-all';
     tabTestimonials.className = 'tab-btn px-6 py-2.5 rounded-full text-sm font-medium bg-primary text-white transition-all';
   }
+  if (window.history && history.replaceState) history.replaceState(null, '', '#' + tab);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// Deep-link support: media.html#testimonials opens the Testimonials tab directly
+(function () {
+  var hash = window.location.hash.replace('#', '');
+  if (hash === 'testimonials' || hash === 'media') switchTab(hash);
+})();
 
 // Testimonials - reveal WhatsApp bubbles on scroll (run first so a failure below can never hide them)
 const waMsgs = document.querySelectorAll('#testimonials-section .wa-msg');

@@ -125,6 +125,11 @@ html { scroll-behavior: smooth; }
   .map-node-label { display: none; }
 }
 
+/* Contact form wizard — step transition */
+@keyframes stepIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.form-step { animation: stepIn .35s ease; }
+@media (prefers-reduced-motion: reduce) { .form-step { animation: none; } }
+
 /* Scroll reveal + hero animations */
 @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.08); } }
 .hero-zoom { animation: kenburns 18s ease-in-out infinite alternate; }

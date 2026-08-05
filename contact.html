@@ -84,86 +84,63 @@
         <h2 class="font-display text-2xl text-dark mb-2">Send us a Message</h2>
         <p class="text-gray-600 text-sm mb-8">Tell us why you're reaching out and we'll point you to the right person.</p>
 
-        <form id="contact-form" class="space-y-6">
+        <form id="contact-form" class="border-2 border-gray-200 rounded-3xl bg-white p-6 md:p-10 shadow-sm relative">
           <input type="hidden" name="access_key" value="5f43d33b-3cf6-4fa4-9d46-ea85eddec8dc">
           <input type="hidden" name="subject" id="form-subject" value="New Contact Form Submission">
+          <input type="hidden" name="topic" id="form-topic" value="">
 
-          <!-- 1. Purpose -->
-          <div>
-            <label for="topic" class="block text-sm font-medium text-dark mb-2">What is this about? <span class="text-red-500">*</span></label>
-            <select id="topic" name="topic" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
-              <option value="" disabled selected>Select a reason</option>
-              <option value="book-session">Book a Session</option>
-              <option value="discovery-call">Book a Discovery Call</option>
-              <option value="course">Register for a Course</option>
-              <option value="workshop">Invite PRC for a Workshop</option>
-              <option value="talent">Use Your Talent for PRC</option>
-              <option value="bug">Report a Bug</option>
-              <option value="info">General Info / Other</option>
-            </select>
-          </div>
-
-          <!-- Conditional: Register for a Course -->
-          <div id="field-course" class="hidden">
-            <label for="course" class="block text-sm font-medium text-dark mb-2">Select a course <span class="text-red-500">*</span></label>
-            <select id="course" name="course" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
-              <option value="" disabled selected>Select a course</option>
-              <option>Anger Management</option>
-              <option>14 August Azadi (Free)</option>
-              <option>Positive Parenting Intensive (Aug 5-7)</option>
-              <option>Communication in Marriage (Aug 18)</option>
-              <option>Family Wellness Seminar (Aug 25)</option>
-              <option>Other</option>
-            </select>
-          </div>
-
-          <!-- Conditional: Use Your Talent for PRC -->
-          <div id="field-talent" class="hidden">
-            <label for="talent" class="block text-sm font-medium text-dark mb-2">What service or talent can you offer? <span class="text-red-500">*</span></label>
-            <input type="text" id="talent" name="talent" placeholder="e.g. social media, content writing, video editing, event help..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
-          </div>
-
-          <!-- Conditional: Report a Bug -->
-          <div id="field-bug" class="hidden">
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label for="bug_page" class="block text-sm font-medium text-dark mb-2">Which page? <span class="text-red-500">*</span></label>
-                <select id="bug_page" name="bug_page" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
-                  <option value="" disabled selected>Select a page</option>
-                  <option>Home</option>
-                  <option>About</option>
-                  <option>Services</option>
-                  <option>Learning Hub</option>
-                  <option>Media</option>
-                  <option>Contact</option>
-                  <option>Other</option>
-                </select>
-              </div>
-              <div>
-                <label for="bug_section" class="block text-sm font-medium text-dark mb-2">Which section? <span class="text-red-500">*</span></label>
-                <input type="text" id="bug_section" name="bug_section" placeholder="e.g. course cards, footer, contact form..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
-              </div>
+          <!-- Progress -->
+          <div class="mb-8">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-xs font-semibold text-dark/50 uppercase tracking-wider" id="step-count">Step 1 of 4</p>
+              <p class="text-xs text-dark/40" id="step-title">What is this about?</p>
+            </div>
+            <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full transition-all duration-300" id="progress-bar" style="width:12%"></div>
             </div>
           </div>
 
-          <!-- Conditional: Invite PRC for a Workshop -->
-          <div id="field-workshop" class="hidden">
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label for="workshop_place" class="block text-sm font-medium text-dark mb-2">Place / City <span class="text-red-500">*</span></label>
-                <input type="text" id="workshop_place" name="workshop_place" placeholder="e.g. Lahore, school, community hall..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
-              </div>
-              <div>
-                <label for="workshop_age" class="block text-sm font-medium text-dark mb-2">Age group <span class="text-red-500">*</span></label>
-                <input type="text" id="workshop_age" name="workshop_age" placeholder="e.g. parents, teens, 6-12 years..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
-              </div>
+          <!-- 1. REASON -->
+          <div class="form-step" data-key="reason">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">What is this about?</h3>
+            <p class="text-gray-500 text-sm mb-6">Pick the closest match — we'll ask a couple of quick follow-ups.</p>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <button type="button" class="reason-option text-left rounded-2xl border-2 border-gray-200 hover:border-primary p-4 transition-all flex items-start gap-3" data-reason="book-session">
+                <span class="text-2xl" aria-hidden="true">🗓️</span>
+                <span><span class="block font-semibold text-dark text-sm">Book a Session</span><span class="block text-xs text-gray-500 mt-0.5">1-on-1 coaching &amp; counselling</span></span>
+              </button>
+              <button type="button" class="reason-option text-left rounded-2xl border-2 border-gray-200 hover:border-primary p-4 transition-all flex items-start gap-3" data-reason="discovery-call">
+                <span class="text-2xl" aria-hidden="true">📞</span>
+                <span><span class="block font-semibold text-dark text-sm">Book a Discovery Call</span><span class="block text-xs text-gray-500 mt-0.5">Free 15-min call to explore how we can help</span></span>
+              </button>
+              <button type="button" class="reason-option text-left rounded-2xl border-2 border-gray-200 hover:border-primary p-4 transition-all flex items-start gap-3" data-reason="course">
+                <span class="text-2xl" aria-hidden="true">📚</span>
+                <span><span class="block font-semibold text-dark text-sm">Register for a Course</span><span class="block text-xs text-gray-500 mt-0.5">Anger management, parenting, marriage...</span></span>
+              </button>
+              <button type="button" class="reason-option text-left rounded-2xl border-2 border-gray-200 hover:border-primary p-4 transition-all flex items-start gap-3" data-reason="workshop">
+                <span class="text-2xl" aria-hidden="true">🏫</span>
+                <span><span class="block font-semibold text-dark text-sm">Invite PRC for a Workshop</span><span class="block text-xs text-gray-500 mt-0.5">A session for your school, office or community</span></span>
+              </button>
+              <button type="button" class="reason-option text-left rounded-2xl border-2 border-gray-200 hover:border-primary p-4 transition-all flex items-start gap-3" data-reason="talent">
+                <span class="text-2xl" aria-hidden="true">✨</span>
+                <span><span class="block font-semibold text-dark text-sm">Use Your Talent for PRC</span><span class="block text-xs text-gray-500 mt-0.5">Volunteer or collaborate with our team</span></span>
+              </button>
+              <button type="button" class="reason-option text-left rounded-2xl border-2 border-gray-200 hover:border-primary p-4 transition-all flex items-start gap-3" data-reason="bug">
+                <span class="text-2xl" aria-hidden="true">🛠️</span>
+                <span><span class="block font-semibold text-dark text-sm">Report a Bug</span><span class="block text-xs text-gray-500 mt-0.5">Something broken on the website</span></span>
+              </button>
+              <button type="button" class="reason-option text-left rounded-2xl border-2 border-gray-200 hover:border-primary p-4 transition-all flex items-start gap-3 sm:col-span-2 sm:max-w-md" data-reason="info">
+                <span class="text-2xl" aria-hidden="true">💬</span>
+                <span><span class="block font-semibold text-dark text-sm">General Info / Other</span><span class="block text-xs text-gray-500 mt-0.5">A question, feedback, or anything else</span></span>
+              </button>
             </div>
           </div>
 
-          <!-- Conditional: Book a Session -->
-          <div id="field-session" class="hidden">
-            <label for="service" class="block text-sm font-medium text-dark mb-2">Select a service or other <span class="text-red-500">*</span></label>
-            <select id="service" name="service" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
+          <!-- 2. SMART FOLLOW-UPS (shown based on reason) -->
+          <div class="form-step q-step hidden" data-key="service">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">Which service are you interested in?</h3>
+            <p class="text-gray-500 text-sm mb-6">Pick the closest match.</p>
+            <select id="service" name="service" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
               <option value="" disabled selected>Select a service</option>
               <option>Couple Counseling</option>
               <option>Anger Management</option>
@@ -177,30 +154,127 @@
             </select>
           </div>
 
-          <!-- 2. Name or company -->
-          <div>
-            <label for="name" class="block text-sm font-medium text-dark mb-2">Your name or company name <span class="text-red-500">*</span></label>
-            <input type="text" id="name" name="name" required placeholder="Enter your full name or company name" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
+          <div class="form-step q-step hidden" data-key="session_help">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">What is the main thing you would like help with?</h3>
+            <p class="text-gray-500 text-sm mb-6">A few words is enough — e.g. constant arguments, parenting my teen, feeling anxious.</p>
+            <input type="text" name="session_help" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="e.g. constant arguments, parenting my teen, anxiety...">
           </div>
 
-          <!-- 3. Official contact -->
-          <div>
-            <label class="block text-sm font-medium text-dark mb-2">How should we contact you? <span class="text-red-500">*</span></label>
+          <div class="form-step q-step hidden" data-key="facing">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">What are you currently facing?</h3>
+            <p class="text-gray-500 text-sm mb-6">We'll match you with the right person — nothing sensitive needed here.</p>
+            <input type="text" name="facing" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="e.g. parenting stress, marriage conflict, low mood, a difficult decision...">
+          </div>
+
+          <div class="form-step q-step hidden" data-key="call_time">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">When is a good time for a quick call?</h3>
+            <p class="text-gray-500 text-sm mb-6">Optional — we'll confirm by phone or email anyway.</p>
+            <select name="call_time" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
+              <option value="" disabled selected>Pick a time</option>
+              <option>Morning (9 AM - 12 PM)</option>
+              <option>Afternoon (12 PM - 4 PM)</option>
+              <option>Evening (4 PM - 7 PM)</option>
+              <option>Weekend</option>
+            </select>
+          </div>
+
+          <div class="form-step q-step hidden" data-key="course">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">Which course would you like to register for?</h3>
+            <p class="text-gray-500 text-sm mb-6">Tap your course to lock it in.</p>
+            <select id="course" name="course" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
+              <option value="" disabled selected>Select a course</option>
+              <option>Anger Management</option>
+              <option>14 August Azadi (Free)</option>
+              <option>Positive Parenting Intensive (Aug 5-7)</option>
+              <option>Communication in Marriage (Aug 18)</option>
+              <option>Family Wellness Seminar (Aug 25)</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-step q-step hidden" data-key="workshop_place">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">Where would the workshop be held?</h3>
+            <p class="text-gray-500 text-sm mb-6">City, school, office or community hall.</p>
+            <input type="text" name="workshop_place" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="e.g. Lahore, a school, community hall...">
+          </div>
+
+          <div class="form-step q-step hidden" data-key="workshop_age">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">Who is the workshop for?</h3>
+            <p class="text-gray-500 text-sm mb-6">So we can plan the right session.</p>
+            <input type="text" name="workshop_age" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="e.g. parents, teens, children 6-12 years...">
+          </div>
+
+          <div class="form-step q-step hidden" data-key="talent">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">What can you help PRC with?</h3>
+            <p class="text-gray-500 text-sm mb-6">Any skill counts — we'd love to hear it.</p>
+            <input type="text" id="talent" name="talent" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="e.g. social media, content writing, video editing, event help...">
+          </div>
+
+          <div class="form-step q-step hidden" data-key="talent_experience">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">How much experience do you have?</h3>
+            <p class="text-gray-500 text-sm mb-6">Optional — a rough idea is perfect.</p>
+            <input type="text" name="talent_experience" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="e.g. 2 years of content writing, ran a school event...">
+          </div>
+
+          <div class="form-step q-step hidden" data-key="talent_time">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">How much time can you give each week?</h3>
+            <p class="text-gray-500 text-sm mb-6">Optional — even an hour helps.</p>
+            <input type="text" name="talent_time" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="e.g. 3-4 hours on weekends...">
+          </div>
+
+          <div class="form-step q-step hidden" data-key="bug_page">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">Which page has the problem?</h3>
+            <p class="text-gray-500 text-sm mb-6">Help us find it fast.</p>
+            <select id="bug_page" name="bug_page" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
+              <option value="" disabled selected>Select a page</option>
+              <option>Home</option>
+              <option>About</option>
+              <option>Services</option>
+              <option>Learning Hub</option>
+              <option>Media</option>
+              <option>Contact</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <!-- 3. NAME -->
+          <div class="form-step q-step hidden" data-key="name">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">What is your name?</h3>
+            <p class="text-gray-500 text-sm mb-6">Your name or company name.</p>
+            <input type="text" id="name" name="name" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="Enter your full name or company name">
+          </div>
+
+          <!-- 4. CONTACT -->
+          <div class="form-step q-step hidden" data-key="contact">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1">How should we reach you?</h3>
+            <p class="text-gray-500 text-sm mb-6">We'll only use this to get back to you.</p>
             <div class="flex gap-2 mb-3" id="contact-mode-toggle">
               <button type="button" id="contact-btn-phone" class="seg-btn active px-6 py-2.5 rounded-full text-sm font-medium transition-colors">Phone</button>
               <button type="button" id="contact-btn-email" class="seg-btn px-6 py-2.5 rounded-full text-sm font-medium transition-colors">Email</button>
             </div>
-            <input type="tel" id="contact-input" name="phone" required placeholder="+92 3XX XXX XXXX" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm">
+            <input type="tel" id="contact-input" name="phone" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm" placeholder="+92 3XX XXX XXXX">
           </div>
 
-          <!-- 4. Message -->
-          <div>
-            <label for="message" id="message-label" class="block text-sm font-medium text-dark mb-2">Message <span class="text-gray-400 font-normal">(optional)</span></label>
-            <textarea id="message" name="message" rows="4" placeholder="Tell us more about how we can help..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm resize-none"></textarea>
+          <!-- 5. MESSAGE -->
+          <div class="form-step q-step hidden" data-key="message">
+            <h3 class="font-display text-xl md:text-2xl text-dark mb-1" id="message-label">Anything else you'd like to add?</h3>
+            <p class="text-gray-500 text-sm mb-6" id="message-hint">Optional — the more we know, the better we can help.</p>
+            <textarea id="message" name="message" rows="4" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm resize-none" placeholder="Tell us more..."></textarea>
           </div>
 
-          <button type="submit" id="form-submit-btn" class="w-full sm:w-auto bg-primary text-white px-10 py-3.5 rounded-full text-sm font-semibold hover:bg-primary/90 transition-colors">Send Message</button>
+          <!-- NAV -->
+          <div class="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
+            <button type="button" id="prev-btn" class="hidden items-center gap-1.5 text-sm font-medium text-dark/50 hover:text-primary transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+              Back
+            </button>
+            <button type="button" id="next-btn" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-full text-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+              Next
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </button>
+          </div>
         </form>
+
 
         <!-- Success Message -->
         <div id="form-success" class="hidden bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
@@ -416,51 +490,172 @@ if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
 if (menuClose) menuClose.addEventListener('click', closeMobileMenu);
 if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
 if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMobileMenu); });
-// Contact form logic
+// Contact form — one question at a time
 (function(){
   const form = document.getElementById('contact-form');
   if (!form) return;
 
-  const topic = document.getElementById('topic');
-  const message = document.getElementById('message');
-  const messageLabel = document.getElementById('message-label');
-  const subject = document.getElementById('form-subject');
-
-  const fields = {
-    course: document.getElementById('field-course'),
-    talent: document.getElementById('field-talent'),
-    bug: document.getElementById('field-bug'),
-    workshop: document.getElementById('field-workshop'),
-    session: document.getElementById('field-session')
+  // Smart follow-up questions per reason (the "plan what to ask" logic)
+  const REASON_FLOW = {
+    'book-session': ['service', 'session_help'],
+    'discovery-call': ['facing', 'call_time'],
+    'course': ['course'],
+    'workshop': ['workshop_place', 'workshop_age'],
+    'talent': ['talent', 'talent_experience', 'talent_time'],
+    'bug': ['bug_page'],
+    'info': []
   };
-  const showForTopic = { course: ['course'], talent: ['talent'], bug: ['bug'], workshop: ['workshop'], session: ['session'] };
+  const REQUIRED = {
+    service: true, session_help: false, facing: true, call_time: false,
+    course: true, workshop_place: true, workshop_age: true,
+    talent: true, talent_experience: false, talent_time: false,
+    bug_page: true, name: true, contact: true, message: false,
+    phone: true, email: true
+  };
+  // [label, hint, required] for the final message question per reason
+  const MSG_CFG = {
+    bug: ['Describe the issue', 'What happened and where? The more detail, the better.', true],
+    info: ['How can we help?', 'Tell us your question or message.', true],
+    other: ['Anything else you would like to add?', 'Optional — the more we know, the better we can help.', false]
+  };
 
-  function applyTopic(val) {
-    Object.values(fields).forEach(el => el.classList.add('hidden'));
-    if (showForTopic[val]) {
-      showForTopic[val].forEach(key => fields[key].classList.remove('hidden'));
-    }
-    if (val === 'bug') {
-      message.required = true;
-      messageLabel.innerHTML = 'Describe the issue <span class="text-red-500">*</span>';
-    } else {
-      message.required = false;
-      messageLabel.innerHTML = 'Message <span class="text-gray-400 font-normal">(optional)</span>';
-    }
+  const steps = Array.from(form.querySelectorAll('.form-step'));
+  const stepByKey = {};
+  steps.forEach(s => { stepByKey[s.dataset.key] = s; });
+  const reasonBtns = Array.from(form.querySelectorAll('.reason-option'));
+  const nextBtn = document.getElementById('next-btn');
+  const prevBtn = document.getElementById('prev-btn');
+  const subject = document.getElementById('form-subject');
+  const formTopic = document.getElementById('form-topic');
+  const stepCount = document.getElementById('step-count');
+  const stepTitle = document.getElementById('step-title');
+  const progressBar = document.getElementById('progress-bar');
+  const messageEl = document.getElementById('message');
+  const messageLabel = document.getElementById('message-label');
+  const messageHint = document.getElementById('message-hint');
+
+  let reason = null;
+  let queue = ['reason'];
+  let current = 0;
+  let submitting = false;
+
+  function buildQueue() {
+    queue = ['reason'].concat(REASON_FLOW[reason] || []).concat(['name', 'contact', 'message']);
   }
 
-  if (topic) {
-    topic.addEventListener('change', () => {
-      applyTopic(topic.value);
-      subject.value = topic.selectedOptions[0] && topic.value ? 'New inquiry: ' + topic.selectedOptions[0].textContent.trim() : 'New Contact Form Submission';
+  function render() {
+    steps.forEach(s => s.classList.add('hidden'));
+    const key = queue[current];
+    const step = stepByKey[key];
+    step.classList.remove('hidden');
+
+    // required flags for this step
+    step.querySelectorAll('.q-input').forEach(el => {
+      const req = !!REQUIRED[el.name];
+      el.required = req;
+      if (!req) el.classList.remove('border-red-400');
     });
+
+    // message step label/hint/required
+    if (key === 'message') {
+      const cfg = reason === 'bug' ? MSG_CFG.bug : (reason === 'info' ? MSG_CFG.info : MSG_CFG.other);
+      messageLabel.textContent = cfg[0];
+      messageHint.textContent = cfg[1];
+      messageEl.required = cfg[2];
+      messageEl.placeholder = cfg[2] ? 'Describe the issue...' : 'Tell us more...';
+    }
+
+    const isLast = current === queue.length - 1;
+    nextBtn.textContent = isLast ? 'Send Message' : 'Next';
+
+    prevBtn.classList.toggle('hidden', current === 0);
+    prevBtn.classList.toggle('inline-flex', current !== 0);
+
+    stepCount.textContent = 'Step ' + (current + 1) + ' of ' + queue.length;
+    const h = step.querySelector('h3');
+    const labelText = h ? h.textContent.trim() : '';
+    stepTitle.textContent = labelText;
+    step.querySelectorAll('.q-input').forEach(el => { if (labelText) el.setAttribute('aria-label', labelText); });
+    progressBar.style.width = Math.round(((current + 1) / queue.length) * 100) + '%';
+
+    refreshNextState();
   }
+
+  function refreshNextState() {
+    if (queue[current] === 'reason') { nextBtn.disabled = !reason; return; }
+    const step = stepByKey[queue[current]];
+    let invalid = false;
+    step.querySelectorAll('.q-input').forEach(el => {
+      if (el.required && !el.value.trim()) invalid = true;
+    });
+    nextBtn.disabled = invalid;
+  }
+
+  function validateCurrent() {
+    const step = stepByKey[queue[current]];
+    let ok = true;
+    step.querySelectorAll('.q-input').forEach(el => {
+      const bad = el.required && !el.value.trim();
+      el.classList.toggle('border-red-400', bad);
+      if (bad) ok = false;
+    });
+    return ok;
+  }
+
+  function selectReason(val) {
+    reason = val;
+    reasonBtns.forEach(b => {
+      const on = b.dataset.reason === val;
+      b.classList.toggle('border-primary', on);
+      b.classList.toggle('bg-primary/5', on);
+      b.classList.toggle('border-gray-200', !on);
+    });
+    const labelEl = reasonBtns.find(b => b.dataset.reason === val).querySelector('.font-semibold');
+    subject.value = 'New inquiry: ' + labelEl.textContent.trim();
+    if (formTopic) formTopic.value = val;
+    // clear follow-up fields from any previously chosen reason so no stale answers submit
+    form.querySelectorAll('.q-input').forEach(el => {
+      if (['service','session_help','facing','call_time','course','workshop_place','workshop_age','talent','talent_experience','talent_time','bug_page'].indexOf(el.name) !== -1) {
+        el.value = '';
+        el.classList.remove('border-red-400');
+      }
+    });
+    buildQueue();
+    current = 1;
+    render();
+  }
+
+  reasonBtns.forEach(b => b.addEventListener('click', () => selectReason(b.dataset.reason)));
+
+  nextBtn.addEventListener('click', () => {
+    if (submitting) return;
+    if (!validateCurrent()) return;
+    if (current === queue.length - 1) {
+      submitContactForm();
+    } else {
+      current++;
+      render();
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (current > 0) { current--; render(); }
+  });
+
+  // Enter advances to the next question
+  form.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && e.target.classList && e.target.classList.contains('q-input') && e.target.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+      if (!nextBtn.disabled) nextBtn.click();
+    }
+  });
+  form.addEventListener('input', refreshNextState);
+  form.addEventListener('change', refreshNextState);
 
   // Phone / Email toggle
   const btnPhone = document.getElementById('contact-btn-phone');
   const btnEmail = document.getElementById('contact-btn-email');
   const contactInput = document.getElementById('contact-input');
-
   function setContactMode(mode) {
     const isPhone = mode === 'phone';
     btnPhone.classList.toggle('active', isPhone);
@@ -468,26 +663,30 @@ if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(function(link) { link.a
     contactInput.type = isPhone ? 'tel' : 'email';
     contactInput.placeholder = isPhone ? '+92 3XX XXX XXXX' : 'you@example.com';
     contactInput.name = isPhone ? 'phone' : 'email';
+    refreshNextState();
   }
   if (btnPhone) btnPhone.addEventListener('click', () => setContactMode('phone'));
   if (btnEmail) btnEmail.addEventListener('click', () => setContactMode('email'));
 
-  // Prefill from URL (e.g. ?topic=course&course=Anger%20Management)
+  // Prefill from URL (?topic=book-session&course=...)
   const params = new URLSearchParams(window.location.search);
-  if (params.get('topic') && topic) topic.value = params.get('topic');
+  const preTopic = params.get('topic');
+  if (preTopic && REASON_FLOW[preTopic]) {
+    selectReason(preTopic);
+  } else {
+    render();
+  }
   if (params.get('course')) form.querySelector('[name="course"]').value = params.get('course');
   if (params.get('service')) form.querySelector('[name="service"]').value = params.get('service');
   if (params.get('page')) form.querySelector('[name="bug_page"]').value = params.get('page');
   if (params.get('name')) form.querySelector('[name="name"]').value = params.get('name');
-  if (topic && topic.value) {
-    applyTopic(topic.value);
-    subject.value = 'New inquiry: ' + topic.selectedOptions[0].textContent.trim();
-  }
+  refreshNextState(); // prefilled values don't fire events; re-enable Next if now valid
 
-  // Submit to Web3Forms
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = document.getElementById('form-submit-btn');
+  // Submit to Web3Forms (all fields across steps submit together)
+  async function submitContactForm() {
+    if (submitting) return;
+    submitting = true;
+    const btn = nextBtn;
     const og = btn.textContent;
     btn.textContent = 'Sending...';
     btn.disabled = true;
@@ -495,7 +694,9 @@ if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(function(link) { link.a
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
       if (res.ok) {
         form.classList.add('hidden');
-        document.getElementById('form-success').classList.remove('hidden');} else {
+        document.getElementById('form-success').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
         const data = await res.json();
         alert('Error: ' + (data.message || 'Something went wrong.'));
       }
@@ -504,9 +705,13 @@ if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(function(link) { link.a
     } finally {
       btn.textContent = og;
       btn.disabled = false;
+      submitting = false;
     }
-  });
+  }
+
+  form.addEventListener('submit', e => e.preventDefault());
 })();
+
 
 // Book an Appointment -> WhatsApp
 const apptForm = document.getElementById('appointment-form');
