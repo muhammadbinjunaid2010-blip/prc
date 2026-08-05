@@ -4,7 +4,7 @@ const path = require('path');
 
 const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.avif': 'image/avif' };
 
-const pages = ['index.html', 'about.html', 'services.html', 'media.html', 'learning-hub.html', 'contact.html', 'tailwind.css', 'blog-kintsugi.html', 'images/assets/og-image.webp'];
+const pages = ['index.html', 'about.html', 'services.html', 'media.html', 'learning-hub.html', 'contact.html', 'tailwind.css', 'blog-kintsugi.html', 'blog-caregivers.html', 'images/assets/og-image.webp'];
 
 const server = http.createServer((req, res) => {
   const url = decodeURIComponent(req.url.split('?')[0]);

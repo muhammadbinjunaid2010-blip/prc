@@ -22,39 +22,50 @@
 <body class="font-sans text-dark bg-white">
 
   <!-- NAV -->
-  <nav class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 transition-all duration-300" id="navbar">
+  <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <a href="./index.html"><img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-10" width="500" height="500"></a>
-        <div class="hidden lg:flex items-center gap-6">
-          <a href="./index.html" class="text-dark/70 hover:text-primary text-sm font-medium transition-colors">Home</a>
-          <a href="./about.html" class="text-dark/70 hover:text-primary text-sm font-medium transition-colors">About</a>
-          <a href="./services.html" class="text-dark/70 hover:text-primary text-sm font-medium transition-colors">Services</a>
-          <a href="./learning-hub.html" class="text-primary text-sm font-semibold border-b-2 border-primary pb-0.5">Learning Hub</a>
-          <a href="./media.html" class="text-dark/70 hover:text-primary text-sm font-medium transition-colors">Media</a>
-          <a href="./contact.html" class="text-dark/70 hover:text-primary text-sm font-medium transition-colors">Contact</a>
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <a href="./index.html"><img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-10 w-auto"></a>
+        <div class="hidden lg:flex items-center gap-6" id="nav-links">
+          <a href="./index.html" class="text-sm font-medium transition-colors text-dark/70 hover:text-primary">Home</a>
+          <a href="./about.html" class="text-sm font-medium transition-colors text-dark/70 hover:text-primary">About</a>
+          <a href="./services.html" class="text-sm font-medium transition-colors text-dark/70 hover:text-primary">Services</a>
+          <a href="./learning-hub.html" class="text-sm font-medium transition-colors text-primary font-semibold">Learning Hub</a>
+          <a href="./media.html" class="text-sm font-medium transition-colors text-dark/70 hover:text-primary">Media</a>
+          <a href="./contact.html" class="text-sm font-medium transition-colors text-dark/70 hover:text-primary">Contact</a>
         </div>
-        <a href="./contact.html?topic=book-session" class="hidden lg:inline-flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition-colors">
-          Get Started
-        </a>
-        <button class="lg:hidden p-2" id="menuToggle" aria-label="Open menu">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
-        </button>
-      </div>
-    </div>
-    <!-- Mobile Menu -->
-    <div class="lg:hidden hidden bg-white border-t" id="mobileMenu">
-      <div class="px-4 py-4 space-y-3">
-        <a href="./index.html" class="block text-dark/70 hover:text-primary text-sm font-medium py-2">Home</a>
-        <a href="./about.html" class="block text-dark/70 hover:text-primary text-sm font-medium py-2">About</a>
-        <a href="./services.html" class="block text-dark/70 hover:text-primary text-sm font-medium py-2">Services</a>
-        <a href="./learning-hub.html" class="block text-primary text-sm font-semibold py-2">Learning Hub</a>
-        <a href="./media.html" class="block text-dark/70 hover:text-primary text-sm font-medium py-2">Media</a>
-        <a href="./contact.html" class="block text-dark/70 hover:text-primary text-sm font-medium py-2">Contact</a>
-        <a href="./contact.html?topic=book-session" class="block bg-primary text-white text-center px-5 py-3 rounded-full text-sm font-semibold mt-3">Get Started</a>
+        <a href="./contact.html?topic=book-session" class="hidden lg:inline-flex bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition" id="nav-cta">Book a Session</a>
+        <button class="lg:hidden p-2" id="menuToggle" aria-label="Toggle menu">
+        <svg id="menuIconOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+        <svg id="menuIconClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 hidden" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
       </div>
     </div>
   </nav>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobileOverlay" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden mobile-menu-overlay"></div>
+
+<!-- Mobile Menu - Slide in from right -->
+<div id="mobileMenu" class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white z-50 transform translate-x-full transition-transform duration-300 lg:hidden shadow-2xl">
+  <div class="flex flex-col h-full px-6 py-6">
+    <div class="flex items-center justify-between mb-6">
+      <a href="./index.html"><img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-8 w-auto"></a>
+      <button id="menuClose" class="p-2" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-0.5 flex-1">
+      <a href="./index.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Home</a>
+      <a href="./about.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">About</a>
+      <a href="./services.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Services</a>
+      <a href="./learning-hub.html" class="text-base font-medium text-primary bg-primary/5 rounded-lg px-4 py-3 transition">Learning Hub</a>
+      <a href="./media.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Media</a>
+      <a href="./contact.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Contact</a>
+    </nav>
+    <a href="./contact.html?topic=book-session" class="bg-primary text-white text-center py-3 rounded-full font-semibold hover:bg-primary/90 transition mt-auto">Book a Session</a>
+  </div>
+</div>
 
   <!-- PAGE HERO -->
   <section class="pt-24 pb-8 bg-white">
@@ -96,7 +107,7 @@
           <h2 class="font-display text-2xl md:text-3xl text-dark mb-3 leading-tight">Let's Accept Our Daughters</h2>
           <p class="text-dark/60 text-sm mb-4 leading-relaxed">After divorce, a daughter in our society is treated like a criminal. Accepting our daughters — without conditions and without judgment — is the love they truly need.</p>
           <div class="flex items-center gap-3 text-xs text-dark/50 mb-5">
-            <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3 min read</span>
+            <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 5 min read</span>
             <span>·</span>
             <span>Munira Ahmed</span>
           </div>
@@ -117,29 +128,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="article-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <a href="./blog-accept-our-daughters.html" class="block"><!-- Article 1 -->
-<article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
-           <div class="overflow-hidden">
-              <img src="images/other/accept-our-daughter.webp" alt="Accepting our daughters" class="w-full h-48 object-cover" loading="lazy" width="678" height="452">
-           </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Let's Accept Our Daughters</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">After divorce, a daughter in our society is treated like a criminal. Accepting our daughters — without conditions — is the love they truly need.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
-               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
-               <span>·</span>
-               <span>Munira Ahmed</span>
-             </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
-               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
-               
-               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
-             </div>
-           </div>
-         </article></a>
-
+        
         <a href="./blog-discord.html" class="block"><!-- Article 2 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
@@ -170,7 +159,7 @@
           </div>
           <div class="p-5 flex-1 flex flex-col">
             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Marriage</span>
-            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Inheritance: A Wife's Right</h3>
+            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Inheritance</h3>
             <p class="text-dark/60 text-sm line-clamp-2 mb-4">A husband has no legal or religious right over his wife's inheritance. It is her right, not anyone's favour.</p>
             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
@@ -485,28 +474,56 @@
            </div>
          </article></a>
 
+
+        <a href="./blog-caregivers.html" class="block"><!-- Article 17 -->
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+           <div class="overflow-hidden">
+              <img src="images/other/trust.webp" alt="Two kinds of caregivers" class="w-full h-48 object-cover" loading="lazy" width="552" height="362">
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
+            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug" dir="rtl" lang="ur">دو طرح کے خدمت گار</h3>
+            <p class="text-dark/60 text-sm line-clamp-2 mb-4">Two kinds of caregivers exist — those who genuinely want your wellbeing, and those who serve to control. Which one surrounds you?</p>
+            <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+              <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
+              <span>·</span>
+              <span>Munira Ahmed</span>
+            </div>
+            <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
+              <span class="text-xs text-dark/40">Share:</span>
+              <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
+              
+              <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
+            </div>
+          </div>
+        </article></a>
+
        </div>
      </div>
    </section>
 
-  <!-- NEWSLETTER CTA -->
+  <!-- WHATSAPP COMMUNITY CTA -->
   <section class="py-12 bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       <div class="bg-accent rounded-2xl p-8 text-center">
-        <h2 class="font-display text-2xl md:text-3xl text-dark mb-3">Stay Updated</h2>
-        <p class="text-dark/60 text-sm mb-6 max-w-lg mx-auto">Get the latest parenting tips and articles delivered to your inbox.</p>
-        <form class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
-          <input type="email" placeholder="Enter your email" class="w-full sm:flex-1 rounded-full border border-gray-200 px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition bg-white">
-          <button type="submit" class="w-full sm:w-auto bg-primary text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-primary/90 transition-colors">Subscribe</button>
-        </form>
+        <h2 class="font-display text-2xl md:text-3xl text-dark mb-3">Join Our WhatsApp Community</h2>
+        <p class="text-dark/60 text-sm mb-6 max-w-lg mx-auto">Get the latest parenting tips, articles and updates delivered straight to your WhatsApp.</p>
+        <a href="https://chat.whatsapp.com/K3smDsKrzqfGnM4vkQlS7E?s=sh&p=i&ilr=4&amv=0" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-7 py-3 rounded-full text-sm font-semibold transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Join WhatsApp Group
+        </a>
+        <p class="text-dark/40 text-xs mt-3">Community updates, tips and reminders — no spam.</p>
       </div>
     </div>
   </section>
 
   <!-- LOAD MORE -->
-  <section class="py-8 bg-white">
+  <section class="py-8 bg-white" id="loadMoreWrap">
     <div class="text-center">
-      <button class="border border-gray-200 rounded-full px-8 py-3 text-sm font-medium text-dark hover:border-primary hover:text-primary transition-colors">Load More Articles</button>
+      <button id="loadMoreBtn" class="inline-flex items-center gap-2 border border-gray-200 rounded-full px-8 py-3 text-sm font-medium text-dark hover:border-primary hover:text-primary transition-colors">
+        <span id="loadMoreLabel">Load More Articles</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+      </button>
     </div>
   </section>
 
@@ -515,7 +532,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div>
-          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-14 mb-4 brightness-0 invert" loading="lazy" width="500" height="500">
+          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-14 w-auto mb-4 brightness-0 invert" loading="lazy">
           <p class="text-white/60 text-sm leading-relaxed mb-4">Building stronger families through education, support, and community engagement across Pakistan.</p>
           <div class="flex items-center gap-3">
             <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-white/40 hover:text-primary transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
@@ -558,32 +575,91 @@
   <!-- SCRIPTS -->
   <script>
     // Nav scroll
+    let lastScroll = 0;
+    const nav = document.getElementById('main-nav');
+    const navLinks = document.getElementById('nav-links');
     window.addEventListener('scroll', () => {
-      const nav = document.getElementById('navbar');
-      if (window.scrollY > 10) {
-        nav.classList.add('shadow-md');
+      const currentScroll = window.scrollY;
+      if (currentScroll > 50) { nav.classList.add('nav-scrolled'); } else { nav.classList.remove('nav-scrolled'); }
+      if (currentScroll > 150 && currentScroll > lastScroll) { navLinks.classList.add('hidden-links'); } else if (currentScroll < lastScroll || currentScroll < 50) { navLinks.classList.remove('hidden-links'); }
+      lastScroll = currentScroll;
+    });
+
+    // Mobile menu - slide in from right
+    const menuToggle = document.getElementById('menuToggle');
+    const menuClose = document.getElementById('menuClose');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    let menuOpen = false;
+    function toggleMenu() {
+      menuOpen = !menuOpen;
+      const iconOpen = document.getElementById('menuIconOpen');
+      const iconClose = document.getElementById('menuIconClose');
+      if (iconOpen) iconOpen.classList.toggle('hidden', menuOpen);
+      if (iconClose) iconClose.classList.toggle('hidden', !menuOpen);
+      if (menuOpen) {
+        mobileMenu.classList.remove('translate-x-full');
+        mobileMenu.classList.add('translate-x-0');
+        mobileOverlay.classList.remove('hidden');
+        setTimeout(() => mobileOverlay.classList.add('active'), 10);
+        document.body.style.overflow = 'hidden';
       } else {
-        nav.classList.remove('shadow-md');
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenu.classList.add('translate-x-full');
+        mobileOverlay.classList.remove('active');
+        setTimeout(() => mobileOverlay.classList.add('hidden'), 300);
+        document.body.style.overflow = '';
       }
-    });
+    }
+    function closeMobileMenu() { if (menuOpen) toggleMenu(); }
+    if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
+    if (menuClose) menuClose.addEventListener('click', closeMobileMenu);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
+    if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMobileMenu); });
 
-    // Mobile menu toggle
-    document.getElementById('menuToggle').addEventListener('click', () => {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('hidden');
-    });
+    // Category filter, search + Load More
+    const allArticleCards = Array.from(document.querySelectorAll('.article-grid article[data-category]'));
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const loadMoreWrap = document.getElementById('loadMoreWrap');
+    const LOAD_STEP = 6;
+    let visibleCount = LOAD_STEP;
 
-    // Category filter and search
     function filterHubArticles() {
       const query = document.getElementById('hub-search').value.toLowerCase().trim();
       const activePill = document.querySelector('.cat-pill.active');
       const cat = activePill ? activePill.dataset.category : 'all';
-      const articles = document.querySelectorAll('.grid article[data-category]');
-      articles.forEach(a => {
-        const matchCat = cat === 'all' || a.dataset.category === cat;
-        const text = a.textContent.toLowerCase();
+      const filtering = cat !== 'all' || !!query;
+
+      allArticleCards.forEach((article, i) => {
+        const card = article.closest('a') || article;
+        const matchCat = cat === 'all' || article.dataset.category === cat;
+        const text = article.textContent.toLowerCase();
         const matchSearch = !query || text.includes(query);
-        a.style.display = (matchCat && matchSearch) ? '' : 'none';
+        const show = matchCat && matchSearch;
+        // When filtering, show every match; otherwise paginate (6 per page).
+        card.style.display = (show && (filtering || i < visibleCount)) ? '' : 'none';
+      });
+
+      // Load more button state
+      if (loadMoreBtn && loadMoreWrap) {
+        if (filtering) {
+          loadMoreWrap.style.display = 'none';
+        } else {
+          loadMoreWrap.style.display = '';
+          const loadMoreLabel = document.getElementById('loadMoreLabel');
+          if (loadMoreLabel) loadMoreLabel.textContent = visibleCount >= allArticleCards.length ? 'Show Less' : 'Load More Articles';
+        }
+      }
+    }
+
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+        if (visibleCount >= allArticleCards.length) {
+          visibleCount = LOAD_STEP;
+        } else {
+          visibleCount = Math.min(visibleCount + LOAD_STEP, allArticleCards.length);
+        }
+        filterHubArticles();
       });
     }
 
@@ -595,6 +671,8 @@
       });
     });
 
+    filterHubArticles();
+
     // Lucide icons</script>
 
 
@@ -603,5 +681,30 @@
   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+
+<script>
+// Scroll reveal animations
+(function(){
+  if (window.__prcReveal) return; window.__prcReveal = true;
+  var els = document.querySelectorAll('section');
+  if (!els.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) {
+        en.target.style.opacity = '1';
+        en.target.style.transform = 'translateY(0)';
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el){
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    io.observe(el);
+  });
+})();
+</script>
 </body>
 </html>

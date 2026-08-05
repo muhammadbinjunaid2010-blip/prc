@@ -26,7 +26,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
         <a href="./index.html">
-          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-10" width="500" height="500">
+          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-10 w-auto">
         </a>
         <div class="hidden lg:flex items-center gap-6" id="nav-links">
           <a href="./index.html" class="text-sm font-medium transition-colors text-dark/70 hover:text-primary">Home</a>
@@ -37,42 +37,37 @@
           <a href="./contact.html" class="text-sm font-medium transition-colors text-dark/70 hover:text-primary">Contact</a>
         </div>
         <a href="./contact.html?topic=book-session" class="hidden lg:inline-flex bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition" id="nav-cta">Book a Session</a>
-        <button class="lg:hidden p-2" id="menuToggle" aria-label="Open menu">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
-        </button>
+        <button class="lg:hidden p-2" id="menuToggle" aria-label="Toggle menu">
+        <svg id="menuIconOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+        <svg id="menuIconClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 hidden" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
       </div>
     </div>
   </nav>
 
-  <!-- Mobile Menu - Full Screen -->
-  <div id="mobileMenu" class="fixed inset-0 bg-white z-40 hidden lg:hidden">
-    <div class="flex flex-col items-center justify-center h-full px-6">
-      <button class="absolute top-6 right-6 p-2" id="menuClose" aria-label="Close menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+  <!-- Mobile Menu Overlay -->
+<div id="mobileOverlay" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden mobile-menu-overlay"></div>
+
+<!-- Mobile Menu - Slide in from right -->
+<div id="mobileMenu" class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white z-50 transform translate-x-full transition-transform duration-300 lg:hidden shadow-2xl">
+  <div class="flex flex-col h-full px-6 py-6">
+    <div class="flex items-center justify-between mb-6">
+      <a href="./index.html"><img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-8 w-auto"></a>
+      <button id="menuClose" class="p-2" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
       </button>
-      <nav class="flex flex-col items-center gap-8 text-center mb-10">
-        <a href="./index.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Home</a>
-        <a href="./about.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">About</a>
-        <a href="./services.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Services</a>
-        <a href="./learning-hub.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Learning Hub</a>
-        <a href="./media.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Media</a>
-        <a href="./contact.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Contact</a>
-      </nav>
-      <a href="./contact.html?topic=book-session" class="bg-primary text-white px-12 py-3 rounded-full text-lg font-semibold hover:bg-primary/90 transition">Book a Session</a>
-      <div class="absolute bottom-10 flex flex-col items-center gap-4">
-        <div class="flex items-center gap-5">
-          <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-dark/40 hover:text-primary transition"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-          
-          
-          <a href="https://www.youtube.com/@prc_pakistan" class="text-dark/40 hover:text-primary transition"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
-        </div>
-        <div class="flex items-center gap-4 text-xs text-dark/40">
-          <a href="mailto:tech.prc.pk@gmail.com" class="flex items-center gap-1 hover:text-primary transition"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg> tech.prc.pk@gmail.com</a>
-          <a href="tel:+923328274000" class="flex items-center gap-1 hover:text-primary transition"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> +92 332 827 4000</a>
-        </div>
-      </div>
     </div>
+    <nav class="flex flex-col gap-0.5 flex-1">
+      <a href="./index.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Home</a>
+      <a href="./about.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">About</a>
+      <a href="./services.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Services</a>
+      <a href="./learning-hub.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Learning Hub</a>
+      <a href="./media.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Media</a>
+      <a href="./contact.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Contact</a>
+    </nav>
+    <a href="./contact.html?topic=book-session" class="bg-primary text-white text-center py-3 rounded-full font-semibold hover:bg-primary/90 transition mt-auto">Book a Session</a>
   </div>
+</div>
 
   <!-- ARTICLE -->
   <article class="pt-24 pb-16">
@@ -158,7 +153,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div>
-          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-16 mb-4 brightness-0 invert drop-shadow-[0_0_10px_rgba(255,255,255,0.25)]" loading="lazy" width="500" height="500">
+          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-16 w-auto mb-4 brightness-0 invert drop-shadow-[0_0_10px_rgba(255,255,255,0.25)]" loading="lazy">
           <p class="text-white/60 text-sm leading-relaxed mb-4">Empowering families across Pakistan with expert parenting and relationship coaching.</p>
           <div class="flex items-center gap-3">
             <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-white/40 hover:text-primary transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
@@ -219,29 +214,61 @@
     const menuToggle = document.getElementById('menuToggle');
     const menuClose = document.getElementById('menuClose');
     const mobileMenu = document.getElementById('mobileMenu');
-    function closeMobileMenu() {
-      mobileMenu.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-    if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.remove('hidden');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    let menuOpen = false;
+    function toggleMenu() {
+      menuOpen = !menuOpen;
+      const iconOpen = document.getElementById('menuIconOpen');
+      const iconClose = document.getElementById('menuIconClose');
+      if (iconOpen) iconOpen.classList.toggle('hidden', menuOpen);
+      if (iconClose) iconClose.classList.toggle('hidden', !menuOpen);
+      if (menuOpen) {
+        mobileMenu.classList.remove('translate-x-full');
+        mobileMenu.classList.add('translate-x-0');
+        if (mobileOverlay) { mobileOverlay.classList.remove('hidden'); setTimeout(() => mobileOverlay.classList.add('active'), 10); }
         document.body.style.overflow = 'hidden';
-      });
+      } else {
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenu.classList.add('translate-x-full');
+        if (mobileOverlay) { mobileOverlay.classList.remove('active'); setTimeout(() => mobileOverlay.classList.add('hidden'), 300); }
+        document.body.style.overflow = '';
+      }
     }
-    if (menuClose) {
-      menuClose.addEventListener('click', closeMobileMenu);
-    }
-    if (mobileMenu) {
-      mobileMenu.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', closeMobileMenu);
-      });
-    }</script>
+    function closeMobileMenu() { if (menuOpen) toggleMenu(); }
+    if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
+    if (menuClose) menuClose.addEventListener('click', closeMobileMenu);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
+    if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMobileMenu); });</script>
 
 <!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/923328274000?text=Hi%20PRC%20Pakistan!%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="whatsapp-float bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110">
   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+
+<script>
+// Scroll reveal animations
+(function(){
+  if (window.__prcReveal) return; window.__prcReveal = true;
+  var els = document.querySelectorAll('section');
+  if (!els.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) {
+        en.target.style.opacity = '1';
+        en.target.style.transform = 'translateY(0)';
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el){
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    io.observe(el);
+  });
+})();
+</script>
 </body>
 </html>

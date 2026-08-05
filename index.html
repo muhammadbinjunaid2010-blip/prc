@@ -18,6 +18,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s ease-out both; }
+    .animate-fadeIn { animation: fadeIn 0.7s ease-out both; }
+    .animate-slideInRight { animation: slideInRight 0.7s ease-out both; }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+    .mobile-menu-overlay { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .mobile-menu-overlay.active { opacity: 1; pointer-events: auto; }
+  </style>
 </head>
 <body class="font-sans text-dark antialiased">
 
@@ -26,7 +41,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
         <a href="./index.html">
-          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-10" width="500" height="500">
+          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-10 w-auto">
         </a>
         <div class="hidden lg:flex items-center gap-6" id="nav-links">
           <a href="./index.html" class="text-sm font-medium transition-colors text-primary font-semibold">Home</a>
@@ -37,52 +52,61 @@
           <a href="./contact.html" class="text-sm font-medium transition-colors text-dark/70 hover:text-primary">Contact</a>
         </div>
         <a href="./contact.html?topic=book-session" class="hidden lg:inline-flex bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition" id="nav-cta">Book a Session</a>
-        <button class="lg:hidden p-2" id="menuToggle" aria-label="Open menu">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
-        </button>
+        <button class="lg:hidden p-2" id="menuToggle" aria-label="Toggle menu">
+        <svg id="menuIconOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+        <svg id="menuIconClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 hidden" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
       </div>
     </div>
   </nav>
 
-  <!-- Mobile Menu - Full Screen -->
-  <div id="mobileMenu" class="fixed inset-0 bg-white z-40 hidden lg:hidden">
-    <div class="flex flex-col items-center justify-center h-full px-6">
-      <button class="absolute top-6 right-6 p-2" id="menuClose" aria-label="Close menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
-      </button>
-      <nav class="flex flex-col items-center gap-8 text-center mb-10">
-        <a href="./index.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Home</a>
-        <a href="./about.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">About</a>
-        <a href="./services.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Services</a>
-        <a href="./learning-hub.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Learning Hub</a>
-        <a href="./media.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Media</a>
-        <a href="./contact.html" class="text-3xl font-medium text-dark/80 hover:text-primary transition">Contact</a>
-      </nav>
-      <a href="./contact.html?topic=book-session" class="bg-primary text-white px-12 py-3 rounded-full text-lg font-semibold hover:bg-primary/90 transition">Book a Session</a>
-      <div class="absolute bottom-10 flex flex-col items-center gap-4">
-        <div class="flex items-center gap-5">
-          <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-dark/40 hover:text-primary transition"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-          
-          
-          <a href="https://www.youtube.com/@prc_pakistan" class="text-dark/40 hover:text-primary transition"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
-        </div>
-        <div class="flex items-center gap-4 text-xs text-dark/40">
-          <a href="mailto:tech.prc.pk@gmail.com" class="flex items-center gap-1 hover:text-primary transition"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg> tech.prc.pk@gmail.com</a>
-          <a href="tel:+923328274000" class="flex items-center gap-1 hover:text-primary transition"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> +92 332 827 4000</a>
-        </div>
+  <!-- Mobile Menu Overlay -->
+  <div id="mobileOverlay" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden mobile-menu-overlay"></div>
+
+  <!-- Mobile Menu - Slide in from right -->
+  <div id="mobileMenu" class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white z-50 transform translate-x-full transition-transform duration-300 lg:hidden shadow-2xl">
+    <div class="flex flex-col h-full px-6 py-6">
+      <div class="flex items-center justify-between mb-6">
+        <a href="./index.html"><img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-8 w-auto"></a>
+        <button id="menuClose" class="p-2" aria-label="Close menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
       </div>
+      <nav class="flex flex-col gap-0.5 flex-1">
+        <a href="./index.html" class="text-base font-medium text-primary bg-primary/5 rounded-lg px-4 py-3 transition">Home</a>
+        <a href="./about.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">About</a>
+        <a href="./services.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Services</a>
+        <a href="./learning-hub.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Learning Hub</a>
+        <a href="./media.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Media</a>
+        <a href="./contact.html" class="text-base font-medium text-dark/70 hover:text-primary hover:bg-primary/5 rounded-lg px-4 py-3 transition">Contact</a>
+      </nav>
+      <a href="./contact.html?topic=book-session" class="bg-primary text-white text-center py-3 rounded-full font-semibold hover:bg-primary/90 transition mt-auto">Book a Session</a>
     </div>
   </div>
 
   <!-- HERO -->
-  <section class="relative min-h-[700px] flex items-center bg-gradient-to-br from-primary/10 to-secondary/10">
-    <div class="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-white/30"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+  <section class="relative min-h-[600px] lg:min-h-[700px] flex items-center overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="images/other/happpy family.webp" alt="Happy family" class="w-full h-full object-cover hero-zoom">
+      <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/70 to-white/5"></div>
+    </div>
+    <div class="hidden lg:flex absolute bottom-12 right-10 z-10 items-center gap-3 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-4 shadow-lg animate-fadeInUp delay-500">
+      <div class="flex -space-x-2">
+        <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center border-2 border-white font-semibold text-xs">M</div>
+        <div class="w-10 h-10 rounded-full bg-secondary/20 text-secondary flex items-center justify-center border-2 border-white font-semibold text-xs">A</div>
+        <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center border-2 border-white font-semibold text-xs">Y</div>
+      </div>
+      <div>
+        <p class="font-bold text-dark text-sm leading-tight">1000+ Families Helped</p>
+        <p class="text-xs text-dark/50">Trusted coaching &amp; counseling since 2012</p>
+      </div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
       <div class="max-w-2xl">
-        <span class="inline-block bg-primary/10 text-primary rounded-full px-4 py-1 text-sm font-medium mb-6">Pakistan's #1 Family Coaching Platform</span>
-        <h1 class="font-display text-4xl md:text-6xl leading-tight mb-6">Building Strong Families Through Better Parenting &amp; Relationships</h1>
-        <p class="text-lg text-dark/70 mb-8">Helping parents, couples, and educators build stronger families through expert coaching, counseling, and workshops.</p>
-        <div class="flex flex-wrap gap-4">
+        <span class="inline-block bg-primary/10 text-primary rounded-full px-4 py-1 text-sm font-medium mb-6 animate-fadeInUp">Pakistan's #1 Family Coaching Platform</span>
+        <h1 class="font-display text-4xl md:text-6xl leading-tight mb-6 animate-fadeInUp delay-100">Building Strong Families Through Better Parenting &amp; Relationships</h1>
+        <p class="text-lg text-dark/70 mb-8 animate-fadeInUp delay-200">Helping parents, couples, and educators build stronger families through expert coaching, counseling, and workshops.</p>
+        <div class="flex flex-wrap gap-4 animate-fadeInUp delay-300">
           <a href="./contact.html?topic=book-session" class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-primary/90 transition">Book a Session</a>
           <a href="./services.html" class="border-2 border-secondary text-secondary px-8 py-3 rounded-full font-semibold hover:bg-secondary hover:text-white transition">Explore Services</a>
         </div>
@@ -94,20 +118,20 @@
   <section class="bg-accent py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-        <div>
-          <div class="font-display text-4xl text-primary">1000+</div>
+        <div class="animate-fadeInUp">
+          <div class="font-display text-4xl text-primary stat-counter" data-count="1000" data-suffix="+">0</div>
           <div class="text-sm text-dark/60 mt-1">Families Helped</div>
         </div>
-        <div>
-          <div class="font-display text-4xl text-primary">100+</div>
+        <div class="animate-fadeInUp delay-100">
+          <div class="font-display text-4xl text-primary stat-counter" data-count="100" data-suffix="+">0</div>
           <div class="text-sm text-dark/60 mt-1">Workshops Conducted</div>
         </div>
-        <div>
-          <div class="font-display text-4xl text-primary">15+</div>
+        <div class="animate-fadeInUp delay-200">
+          <div class="font-display text-4xl text-primary stat-counter" data-count="15" data-suffix="+">0</div>
           <div class="text-sm text-dark/60 mt-1">Years of Experience</div>
         </div>
-        <div>
-          <div class="font-display text-4xl text-primary">1000+</div>
+        <div class="animate-fadeInUp delay-300">
+          <div class="font-display text-4xl text-primary stat-counter" data-count="1000" data-suffix="+">0</div>
           <div class="text-sm text-dark/60 mt-1">Community Members</div>
         </div>
       </div>
@@ -118,65 +142,47 @@
   <section class="py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-14">
-        <h2 class="font-display text-3xl md:text-4xl mb-3">Our Services</h2>
-        <p class="text-dark/60 max-w-xl mx-auto">Comprehensive coaching and guidance for every stage of family life.</p>
+        <h2 class="font-display text-3xl md:text-4xl mb-3 animate-fadeInUp">Our Services</h2>
+        <p class="text-dark/60 max-w-xl mx-auto animate-fadeInUp delay-100">Comprehensive coaching and guidance for every stage of family life.</p>
       </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <div class="rounded-2xl border border-gray-100 bg-white card-hover overflow-hidden">
-          <img src="images/services/parenting.webp" alt="Parenting Coaching" class="w-full h-44 object-cover" loading="lazy" width="1080" height="1080">
-          <div class="p-6">
-            <h3 class="font-semibold text-lg mb-2">Parenting Coaching</h3>
-            <p class="text-dark/60 text-sm mb-4">Build confidence and practical skills for raising happy, resilient children.</p>
-            <a href="./services.html" class="text-primary text-sm font-medium hover:underline">Learn More →</a>
-          </div>
+        <div class="rounded-2xl border border-gray-100 bg-white card-hover p-6 animate-fadeInUp delay-100">
+          <h3 class="font-semibold text-lg mb-2">Parenting Coaching</h3>
+          <p class="text-dark/60 text-sm">Build confidence and practical skills for raising happy, resilient children.</p>
         </div>
 
-        <div class="rounded-2xl border border-gray-100 bg-white card-hover overflow-hidden">
-          <img src="images/services/relationship.webp" alt="Relationship Coaching" class="w-full h-44 object-cover" loading="lazy" width="1080" height="1080">
-          <div class="p-6">
-            <h3 class="font-semibold text-lg mb-2">Relationship Coaching</h3>
-            <p class="text-dark/60 text-sm mb-4">Strengthen your connections with partners, children, and family members.</p>
-            <a href="./services.html" class="text-primary text-sm font-medium hover:underline">Learn More →</a>
-          </div>
+        <div class="rounded-2xl border border-gray-100 bg-white card-hover p-6 animate-fadeInUp delay-200">
+          <h3 class="font-semibold text-lg mb-2">Relationship Coaching</h3>
+          <p class="text-dark/60 text-sm">Strengthen connection with your life partner, children, parents, in-laws, team members and colleagues.</p>
         </div>
 
-        <div class="rounded-2xl border border-gray-100 bg-white card-hover overflow-hidden">
-          <img src="images/services/marrige-guidence.webp" alt="Marriage Guidance" class="w-full h-44 object-cover" loading="lazy" width="1600" height="1067">
-          <div class="p-6">
-            <h3 class="font-semibold text-lg mb-2">Marriage Guidance</h3>
-            <p class="text-dark/60 text-sm mb-4">Navigate challenges and rebuild intimacy with expert marriage counselling.</p>
-            <a href="./services.html" class="text-primary text-sm font-medium hover:underline">Learn More →</a>
-          </div>
+        <div class="rounded-2xl border border-gray-100 bg-white card-hover p-6 animate-fadeInUp delay-300">
+          <h3 class="font-semibold text-lg mb-2">Marriage Guidance</h3>
+          <p class="text-dark/60 text-sm">Navigate challenges and rebuild intimacy with expert marriage counselling.</p>
         </div>
 
-        <div class="rounded-2xl border border-gray-100 bg-white card-hover overflow-hidden">
-          <img src="images/services/teen-parenting.webp" alt="Teen Parenting" class="w-full h-44 object-cover" loading="lazy" width="1280" height="853">
-          <div class="p-6">
-            <h3 class="font-semibold text-lg mb-2">Teen Parenting</h3>
-            <p class="text-dark/60 text-sm mb-4">Understand adolescent needs and guide teens through critical growth years.</p>
-            <a href="./services.html" class="text-primary text-sm font-medium hover:underline">Learn More →</a>
-          </div>
+        <div class="rounded-2xl border border-gray-100 bg-white card-hover p-6 animate-fadeInUp delay-200">
+          <h3 class="font-semibold text-lg mb-2">Teen Parenting</h3>
+          <p class="text-dark/60 text-sm">Understand adolescent needs and guide teens through critical growth years.</p>
         </div>
 
-        <div class="rounded-2xl border border-gray-100 bg-white card-hover overflow-hidden">
-          <img src="images/event-highlights/workshop4.webp" alt="School Programs" class="w-full h-44 object-cover" loading="lazy" width="443" height="590">
-          <div class="p-6">
-            <h3 class="font-semibold text-lg mb-2">School Programs</h3>
-            <p class="text-dark/60 text-sm mb-4">Tailored workshops for schools to support students, parents, and educators.</p>
-            <a href="./services.html" class="text-primary text-sm font-medium hover:underline">Learn More →</a>
-          </div>
+        <div class="rounded-2xl border border-gray-100 bg-white card-hover p-6 animate-fadeInUp delay-300">
+          <h3 class="font-semibold text-lg mb-2">School Programs</h3>
+          <p class="text-dark/60 text-sm">Tailored workshops for schools to support students, parents, and educators.</p>
         </div>
 
-        <div class="rounded-2xl border border-gray-100 bg-white card-hover overflow-hidden">
-          <img src="images/event-highlights/workshop 6.webp" alt="Corporate Family Wellness" class="w-full h-44 object-cover" loading="lazy" width="332" height="590">
-          <div class="p-6">
-            <h3 class="font-semibold text-lg mb-2">Corporate Family Wellness</h3>
-            <p class="text-dark/60 text-sm mb-4">Programs that help employees balance work and family life for better wellbeing.</p>
-            <a href="./services.html" class="text-primary text-sm font-medium hover:underline">Learn More →</a>
-          </div>
+        <div class="rounded-2xl border border-gray-100 bg-white card-hover p-6 animate-fadeInUp delay-400">
+          <h3 class="font-semibold text-lg mb-2">Corporate Family Wellness</h3>
+          <p class="text-dark/60 text-sm">Programs that help employees balance work and family life for better wellbeing.</p>
         </div>
 
+      </div>
+      <div class="text-center mt-10 animate-fadeInUp">
+        <a href="./services.html" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-primary/90 transition">
+          Learn More About Our Services
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -188,77 +194,56 @@
         <h2 class="font-display text-3xl md:text-4xl mb-3">Why Choose PRC</h2>
         <p class="text-dark/60 max-w-xl mx-auto">What makes our approach different.</p>
       </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
         <div class="text-center">
           <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-primary" aria-hidden="true"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
           </div>
-          <h3 class="font-semibold text-lg mb-2">Experienced Coaches</h3>
-          <p class="text-dark/60 text-sm">Certified professionals with over a decade of hands-on family coaching experience.</p>
+          <h3 class="font-semibold text-base lg:text-lg mb-2">Experienced Coaches</h3>
+          <p class="text-dark/60 text-xs lg:text-sm">Certified coaches with 10+ years of experience.</p>
         </div>
         <div class="text-center">
           <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-primary" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
           </div>
-          <h3 class="font-semibold text-lg mb-2">Evidence-Based Methods</h3>
-          <p class="text-dark/60 text-sm">Programs grounded in the latest research on child development and family psychology.</p>
+          <h3 class="font-semibold text-base lg:text-lg mb-2">Evidence-Based Methods</h3>
+          <p class="text-dark/60 text-xs lg:text-sm">Programs grounded in the latest family psychology research.</p>
         </div>
         <div class="text-center">
           <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-primary" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg>
           </div>
-          <h3 class="font-semibold text-lg mb-2">Cultural &amp; Family Values</h3>
-          <p class="text-dark/60 text-sm">Approaches that honour Pakistani culture, traditions, and family structures.</p>
+          <h3 class="font-semibold text-base lg:text-lg mb-2">Cultural &amp; Family Values</h3>
+          <p class="text-dark/60 text-xs lg:text-sm">Approaches rooted in Pakistani culture and family values.</p>
         </div>
         <div class="text-center">
           <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-primary" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
           </div>
-          <h3 class="font-semibold text-lg mb-2">Personalized Support</h3>
-          <p class="text-dark/60 text-sm">Customised coaching plans tailored to your unique family situation and goals.</p>
+          <h3 class="font-semibold text-base lg:text-lg mb-2">Personalized Support</h3>
+          <p class="text-dark/60 text-xs lg:text-sm">Customised plans tailored to your family's unique needs.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- UPCOMING WORKSHOPS -->
+  <!-- COURSES & PROGRAMS -->
   <section class="py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-14">
         <h2 class="font-display text-3xl md:text-4xl mb-3">Courses & Programs</h2>
         <p class="text-dark/60 max-w-xl mx-auto">Structured learning paths to transform your family relationships.</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid gap-8 max-w-xl mx-auto">
 
         <div class="relative rounded-2xl border border-gray-100 bg-white card-hover overflow-hidden">
-          <div class="absolute top-3 right-3 z-10 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full">Upcoming</div>
-          <img src="images/course/motivition course.webp" alt="Motivation Masterclass" class="w-full h-48 object-cover" loading="lazy" width="1080" height="1081">
-          <div class="p-6">
-            <h3 class="font-semibold text-lg mb-2">Motivation Masterclass</h3>
-            <p class="text-dark/60 text-sm mb-6">Build lasting motivation, overcome procrastination, and master goal-setting strategies.</p>
-            <a href="https://wa.me/923328274000?text=Hi!%20I'm%20interested%20in%20the%20Motivation%20Masterclass.%20Please%20share%20details." class="inline-block bg-primary text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition">Register Interest</a>
-          </div>
-        </div>
-
-        <div class="relative rounded-2xl border border-gray-100 bg-white card-hover overflow-hidden">
-          <div class="absolute top-3 right-3 z-10 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">Free</div>
+          <div class="absolute top-3 right-3 z-10 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">Free for Women in Need</div>
           <img src="images/course/independance day free session.webp" alt="Independence Day Free Session" class="w-full h-48 object-cover" loading="lazy" width="509" height="720">
           <div class="p-6">
-            <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold rounded-full px-3 py-1 mb-3">14 August · Free for all</span>
+            <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold rounded-full px-3 py-1 mb-3">14 August · Free for financially constrained women</span>
             <h3 class="font-semibold text-lg mb-2">Independence Day Free Session</h3>
-            <p class="text-dark/60 text-sm mb-6">Family bonding, parenting with purpose, and building resilient homes — free for everyone.</p>
+            <p class="text-dark/60 text-sm mb-6">Family bonding, parenting with purpose, and building resilient homes — free for financially constrained women.</p>
             <a href="https://wa.me/923328274000?text=Hi!%20I'd%20like%20to%20join%20the%20Independence%20Day%20free%20session%20on%20August%2014." class="inline-block bg-primary text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition">Register Free</a>
-          </div>
-        </div>
-
-        <div class="relative rounded-2xl border border-gray-100 bg-white card-hover overflow-hidden">
-          <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">Recurring</div>
-          <img src="images/course/askprc.webp" alt="Ask PRC" class="w-full h-48 object-cover" loading="lazy" width="526" height="936">
-          <div class="p-6">
-            <span class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold rounded-full px-3 py-1 mb-3">Every Thursday · 8:00 PM PKT</span>
-            <h3 class="font-semibold text-lg mb-2">Ask PRC</h3>
-            <p class="text-dark/60 text-sm mb-6">Weekly open Q&amp;A — ask anything and get expert guidance from our coaching team.</p>
-            <a href="https://wa.me/923328274000?text=Hi!%20I'd%20like%20to%20join%20Ask%20PRC." class="inline-block bg-primary text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition">Join This Week</a>
           </div>
         </div>
 
@@ -273,16 +258,40 @@
 
       <div class="relative min-h-[200px]">
         <div class="testimonial-slide" style="display:block">
-          <blockquote class="text-xl md:text-2xl italic text-dark/80 mb-6">"Munira, I was sitting looking at the sunrise today and a realization dawned on me — how far I have come. The transformation was so subtle and gradual that it didn't get registered before today. I am all gratitude to Allah that He connected me to you."</blockquote>
+          <blockquote class="text-lg md:text-xl italic text-dark/80 mb-6">"Munira, I was sitting looking at the sunrise today and a realization dawned on me — how far I have come. The transformation was so subtle and gradual that it didn't get registered before today. I am all gratitude to Allah that He connected me to you."</blockquote>
           <p class="text-dark/60 font-medium">— Professor &amp; Mother of 3, Islamabad</p>
         </div>
         <div class="testimonial-slide" style="display:none">
-          <blockquote class="text-xl md:text-2xl italic text-dark/80 mb-6">"PRC has been a ray of light in the dark moments of my life. Madam Munira took me out of this crucial period by guiding me to what is right, lessening my fears, acknowledging my own values, helping me handle difficult people and teaching me positive communication. I now feel lighter, happier, braver and confident."</blockquote>
+          <blockquote class="text-lg md:text-xl italic text-dark/80 mb-6">"PRC has been a ray of light in the dark moments of my life. Madam Munira took me out of this crucial period by guiding me to what is right, lessening my fears, acknowledging my own values, helping me handle difficult people and teaching me positive communication."</blockquote>
           <p class="text-dark/60 font-medium">— Client, Mansehra</p>
         </div>
         <div class="testimonial-slide" style="display:none">
-          <blockquote class="text-xl md:text-2xl italic text-dark/80 mb-6">"The best thing about PRC is they don't judge you. I've talked about things which I never even thought of talking to myself. PRC is definitely a life changing institute and it walks the talk."</blockquote>
+          <blockquote class="text-lg md:text-xl italic text-dark/80 mb-6">"The best thing about PRC is they don't judge you. I've talked about things which I never even thought of talking to myself. PRC is definitely a life changing institute and it walks the talk."</blockquote>
           <p class="text-dark/60 font-medium">— Client, Lahore</p>
+        </div>
+        <div class="testimonial-slide" style="display:none">
+          <blockquote class="text-lg md:text-xl italic text-dark/80 mb-6">"His observation is improving, masha Allah. He tries to explain the object too. Art camp has become our family time — everyone of our family sits and starts painting of their own choice. My husband said, 'I've grabbed the brush after almost 30 years!'"</blockquote>
+          <p class="text-dark/60 font-medium">— Nabila Sarfraz, Lahore</p>
+        </div>
+        <div class="testimonial-slide" style="display:none">
+          <blockquote class="text-lg md:text-xl italic text-dark/80 mb-6">"I wasn't very much clear about how the art workshop will go on WhatsApp. But I took the step because I wanted my daughter to polish her natural talent. It has improved her confidence to experiment. Overall it was well organised, well conducted and easy to follow."</blockquote>
+          <p class="text-dark/60 font-medium">— Siddra Rehan</p>
+        </div>
+        <div class="testimonial-slide" style="display:none">
+          <blockquote class="text-lg md:text-xl italic text-dark/80 mb-6">"Munira you're the person who helped me to see the clarity of so many things and gave me the confidence which nobody knows. For me you have a special place in my heart. Stay always blessed."</blockquote>
+          <p class="text-dark/60 font-medium">— Client, Middle East</p>
+        </div>
+        <div class="testimonial-slide" style="display:none">
+          <blockquote class="text-lg md:text-xl italic text-dark/80 mb-6">"I am a mom, a wife and a daughter who gets angry on small matters and wants everything perfect. Then I got a chance to meet Munira appi in a workshop and she clicked my heart. She calmly listened to me and guided me on how to overcome this bad habit and make my home a loving place. Alhamdulillah now I feel better and know what to do when I feel bad, angry and down."</blockquote>
+          <p class="text-dark/60 font-medium">— Client</p>
+        </div>
+        <div class="testimonial-slide" style="display:none">
+          <blockquote class="text-lg md:text-xl italic text-dark/80 mb-6">"During my sessions we discussed a range of topics from homeschooling, parenting and how to be a good listener. She was extremely insightful and helpful. She patiently heard and understood my concerns and addressed them one by one. She helped me declutter my mind and connect to what I actually felt deep down in my heart was important for me and my family. Alhamdulillah I have been homeschooling for 6 months now and my relationship with my children could not have been better and happier."</blockquote>
+          <p class="text-dark/60 font-medium">— Professor &amp; Mother of Two</p>
+        </div>
+        <div class="testimonial-slide" style="display:none">
+          <blockquote class="text-lg md:text-xl italic text-dark/80 mb-6">"Sometimes I really feel blessed because of you, because of PRC. Alhamdulillah, I have seen a lot of changes in me regarding my behavior towards children. Handling them with patience, prioritizing them over other things, keeping myself calm and many things. PRC has made me realize that love and affection are more important for children. I cannot change myself completely but I am working on it."</blockquote>
+          <p class="text-dark/60 font-medium">— Client, Mother of Two</p>
         </div>
       </div>
 
@@ -293,6 +302,109 @@
         <button id="next-btn" class="w-10 h-10 rounded-full border border-dark/20 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
         </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES - WHATSAPP STYLE -->
+  <section class="py-20 bg-dark relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.04] text-6xl select-none" aria-hidden="true">
+      <span class="absolute top-10 left-10">💬</span><span class="absolute top-32 right-16">🕊️</span><span class="absolute bottom-16 left-1/4">❤️</span><span class="absolute top-1/2 right-1/3">💫</span><span class="absolute bottom-10 right-10">🌷</span>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="inline-block bg-white/10 text-white/70 text-xs font-semibold rounded-full px-4 py-1.5 mb-4">Stories</span>
+        <h2 class="font-display text-3xl md:text-4xl text-white mb-3">Real Stories. Real Change.</h2>
+        <p class="text-white/50 max-w-xl mx-auto">Short messages from families who reached out to PRC — just like a WhatsApp chat.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Phone chat mockup -->
+        <div class="relative w-72 mx-auto animate-floaty">
+          <div class="rounded-[2.5rem] border-[10px] border-[#1f2c33] bg-[#0b141a] shadow-2xl overflow-hidden">
+            <div class="bg-[#202c33] px-4 py-3 flex items-center gap-3">
+              <div class="wa-avatar" style="background:linear-gradient(135deg,#075e54,#128c7e)">P</div>
+              <div class="flex-1 min-w-0">
+                <p class="text-white text-sm font-semibold leading-tight">PRC Pakistan</p>
+                <p class="text-[11px] text-white/50">online</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-white/40" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+            </div>
+            <div class="px-3 py-4 min-h-[330px] relative">
+              <div class="flex justify-center mb-4"><span class="text-[11px] font-semibold text-white/60 bg-[#202c33] px-3 py-1 rounded-full">TODAY</span></div>
+              <div class="flex justify-end mb-2 wa-msg">
+                <div class="max-w-[85%] bg-[#005c4b] rounded-2xl rounded-tr-md px-3.5 py-2.5">
+                  <p class="text-white text-sm leading-relaxed">I don't cry every day anymore.</p>
+                  <p class="text-[10px] text-white/50 text-right mt-1">8:41 PM <span class="text-[#53bdeb] font-semibold">✓✓</span></p>
+                </div>
+              </div>
+              <div class="flex justify-end mb-2 wa-msg">
+                <div class="max-w-[85%] bg-[#005c4b] rounded-2xl rounded-tr-md px-3.5 py-2.5">
+                  <p class="text-white text-sm leading-relaxed">Before depression controlled me... I control it.</p>
+                  <p class="text-[10px] text-white/50 text-right mt-1">8:42 PM <span class="text-[#53bdeb] font-semibold">✓✓</span></p>
+                </div>
+              </div>
+              <p class="text-right text-[11px] text-[#53bdeb] font-semibold mt-1 pr-1">Seen ✓✓</p>
+              <div class="flex justify-start mb-2 wa-msg">
+                <div class="max-w-[85%] bg-[#202c33] rounded-2xl rounded-tl-md px-3.5 py-2.5">
+                  <p class="text-white text-sm leading-relaxed">We're so proud of you. 🤍</p>
+                  <p class="text-[10px] text-white/40 text-right mt-1">8:43 PM</p>
+                </div>
+              </div>
+              <div class="flex justify-start mb-2 wa-msg">
+                <div class="max-w-[85%] bg-[#202c33] rounded-2xl rounded-tl-md px-3.5 py-2.5 flex items-center gap-1.5">
+                  <span class="wa-typing-dot"></span><span class="wa-typing-dot"></span><span class="wa-typing-dot"></span>
+                </div>
+              </div>
+            </div>
+            <div class="bg-[#202c33] px-3 py-2 flex items-center gap-2">
+              <div class="flex-1 bg-[#0b141a] rounded-full px-4 py-2 text-[11px] text-white/40">Message</div>
+              <div class="w-8 h-8 rounded-full bg-[#005c4b] flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-white" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+              </div>
+            </div>
+          </div>
+          <p class="text-center text-white/40 text-xs mt-4">Mother of Two · Karachi</p>
+        </div>
+
+        <!-- Story bubbles -->
+        <div class="space-y-6">
+          <p class="text-white/60 text-sm font-medium mb-2 flex items-center gap-2"><span class="inline-block w-6 h-px bg-white/20"></span>Messages that made our day</p>
+          <div class="flex items-start gap-3 wa-msg">
+            <div class="wa-avatar">N</div>
+            <div class="flex-1 min-w-0">
+              <div class="bg-[#202c33] rounded-2xl rounded-tl-md px-4 py-3 max-w-[92%]">
+                <p class="text-white text-sm leading-relaxed">"My relationship with my children has never been better."</p>
+                <p class="text-[10px] text-white/40 text-right mt-1">9:42 AM <span class="text-[#53bdeb] font-semibold">✓✓</span></p>
+              </div>
+              <p class="text-[11px] text-white/40 mt-1.5">Professor · Mother of Two</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 wa-msg">
+            <div class="wa-avatar" style="background:linear-gradient(135deg,#e67e22,#f1c40f)">A</div>
+            <div class="flex-1 min-w-0">
+              <div class="bg-[#202c33] rounded-2xl rounded-tl-md px-4 py-3 max-w-[92%]">
+                <p class="text-white text-sm leading-relaxed">"Now I stay calm. I stopped shouting. I listen. I hug. I understand."</p>
+                <p class="text-[10px] text-white/40 text-right mt-1">11:15 AM <span class="text-[#53bdeb] font-semibold">✓✓</span></p>
+              </div>
+              <p class="text-[11px] text-white/40 mt-1.5">Mom of Three</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 wa-msg">
+            <div class="wa-avatar" style="background:linear-gradient(135deg,#c2185b,#8d4de8)">M</div>
+            <div class="flex-1 min-w-0">
+              <div class="bg-[#202c33] rounded-2xl rounded-tl-md px-4 py-3 max-w-[92%]">
+                <p class="text-white text-sm leading-relaxed">"Boundary setting changed my life. I finally accepted myself."</p>
+                <p class="text-[10px] text-white/40 text-right mt-1">3:08 PM <span class="text-[#53bdeb] font-semibold">✓✓</span></p>
+              </div>
+              <p class="text-[11px] text-white/40 mt-1.5">Mom of 3 · Karachi</p>
+            </div>
+          </div>
+          <a href="./media.html" class="inline-flex items-center gap-2 mt-2 text-primary hover:text-white transition-colors font-medium text-sm group">
+            Read more real stories
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -361,12 +473,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div>
-          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-14 mb-4 brightness-0 invert" loading="lazy" width="500" height="500">
+          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-14 w-auto mb-4 brightness-0 invert" loading="lazy">
           <p class="text-white/60 text-sm leading-relaxed mb-4">Empowering families across Pakistan with expert parenting and relationship coaching.</p>
           <div class="flex items-center gap-3">
             <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-white/40 hover:text-primary transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-            
-            
             <a href="https://www.youtube.com/@prc_pakistan" class="text-white/40 hover:text-primary transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
           </div>
         </div>
@@ -382,7 +492,7 @@
           <ul class="space-y-2">
             <li><a href="./learning-hub.html" class="text-white/60 hover:text-white text-sm transition-colors">Learning Hub</a></li>
             <li><a href="./media.html" class="text-white/60 hover:text-white text-sm transition-colors">Media</a></li>
-            </ul>
+          </ul>
         </div>
         <div>
           <h5 class="font-semibold text-sm uppercase tracking-wider mb-4">Contact</h5>
@@ -402,68 +512,142 @@
   </footer>
 
   <script>
-    // Nav scroll - hide links on scroll down, show on scroll up
+    // Nav scroll
     let lastScroll = 0;
     const nav = document.getElementById('main-nav');
     const navLinks = document.getElementById('nav-links');
     window.addEventListener('scroll', () => {
       const currentScroll = window.scrollY;
-      if (currentScroll > 50) {
-        nav.classList.add('nav-scrolled');
-      } else {
-        nav.classList.remove('nav-scrolled');
-      }
-      if (currentScroll > 150 && currentScroll > lastScroll) {
-        navLinks.classList.add('hidden-links');
-      } else if (currentScroll < lastScroll || currentScroll < 50) {
-        navLinks.classList.remove('hidden-links');
-      }
+      if (currentScroll > 50) { nav.classList.add('nav-scrolled'); } else { nav.classList.remove('nav-scrolled'); }
+      if (currentScroll > 150 && currentScroll > lastScroll) { navLinks.classList.add('hidden-links'); } else if (currentScroll < lastScroll || currentScroll < 50) { navLinks.classList.remove('hidden-links'); }
       lastScroll = currentScroll;
     });
-    // Mobile menu - full screen
+
+    // Mobile menu - slide in from right
     const menuToggle = document.getElementById('menuToggle');
     const menuClose = document.getElementById('menuClose');
     const mobileMenu = document.getElementById('mobileMenu');
-    function closeMobileMenu() {
-      mobileMenu.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-    if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.remove('hidden');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    let menuOpen = false;
+
+    function toggleMenu() {
+      menuOpen = !menuOpen;
+      const iconOpen = document.getElementById('menuIconOpen');
+      const iconClose = document.getElementById('menuIconClose');
+      if (iconOpen) iconOpen.classList.toggle('hidden', menuOpen);
+      if (iconClose) iconClose.classList.toggle('hidden', !menuOpen);
+      if (menuOpen) {
+        mobileMenu.classList.remove('translate-x-full');
+        mobileMenu.classList.add('translate-x-0');
+        mobileOverlay.classList.remove('hidden');
+        setTimeout(() => mobileOverlay.classList.add('active'), 10);
         document.body.style.overflow = 'hidden';
-      });
+      } else {
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenu.classList.add('translate-x-full');
+        mobileOverlay.classList.remove('active');
+        setTimeout(() => mobileOverlay.classList.add('hidden'), 300);
+        document.body.style.overflow = '';
+      }
     }
-    if (menuClose) {
-      menuClose.addEventListener('click', closeMobileMenu);
+
+    function closeMobileMenu() {
+      if (menuOpen) toggleMenu();
     }
-    if (mobileMenu) {
-      mobileMenu.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', closeMobileMenu);
-      });
-    }
+
+    if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
+    if (menuClose) menuClose.addEventListener('click', closeMobileMenu);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
+    if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMobileMenu); });
+
     // Testimonial slider
     let current = 0;
     const slides = document.querySelectorAll('.testimonial-slide');
-    function showSlide(i) {
-      slides.forEach(s => s.style.display = 'none');
-      slides[i].style.display = 'block';
-    }
-    document.getElementById('prev-btn').addEventListener('click', () => {
-      current = (current - 1 + slides.length) % slides.length;
-      showSlide(current);
-    });
-    document.getElementById('next-btn').addEventListener('click', () => {
-      current = (current + 1) % slides.length;
-      showSlide(current);
-    });</script>
+    function showSlide(i) { slides.forEach(s => s.style.display = 'none'); slides[i].style.display = 'block'; }
+    document.getElementById('prev-btn').addEventListener('click', () => { current = (current - 1 + slides.length) % slides.length; showSlide(current); });
+    document.getElementById('next-btn').addEventListener('click', () => { current = (current + 1) % slides.length; showSlide(current); });
 
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.animate-on-scroll').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; observer.observe(el); });
+
+    // Animated counters
+    const counters = document.querySelectorAll('.stat-counter');
+    if (counters.length && 'IntersectionObserver' in window && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      const cio = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if (!en.isIntersecting) return;
+          const el = en.target;
+          const target = parseInt(el.dataset.count, 10);
+          const suffix = el.dataset.suffix || '';
+          const duration = 1400;
+          const start = performance.now();
+          function tick(now) {
+            const p = Math.min((now - start) / duration, 1);
+            el.textContent = Math.floor(p * target).toLocaleString('en-US') + suffix;
+            if (p < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+          cio.unobserve(el);
+        });
+      }, { threshold: 0.4 });
+      counters.forEach(c => cio.observe(c));
+    } else {
+      counters.forEach(c => { c.textContent = parseInt(c.dataset.count, 10).toLocaleString('en-US') + (c.dataset.suffix || ''); });
+    }
+
+  </script>
+
+<script>
+// Stories - WhatsApp bubble reveal (isolated so earlier page errors can't hide content)
+(function(){
+  var msgs = document.querySelectorAll('.wa-msg');
+  if (!msgs.length) return;
+  if (!('IntersectionObserver' in window) || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    msgs.forEach(function(el){ el.classList.add('wa-in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) { en.target.classList.add('wa-in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.15 });
+  msgs.forEach(function(el){ io.observe(el); });
+})();
+</script>
 
 <!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/923328274000?text=Hi%20PRC%20Pakistan!%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="whatsapp-float bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110">
+<a href="https://wa.me/923328274000?text=Hi%20PRC%20Pakistan!%20I'd%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="whatsapp-float bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110">
   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 
+
+<script>
+// Scroll reveal animations
+(function(){
+  if (window.__prcReveal) return; window.__prcReveal = true;
+  var els = document.querySelectorAll('section');
+  if (!els.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) {
+        en.target.style.opacity = '1';
+        en.target.style.transform = 'translateY(0)';
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el){
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    io.observe(el);
+  });
+})();
+</script>
 </body>
 </html>

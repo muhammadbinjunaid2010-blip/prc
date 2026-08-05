@@ -60,3 +60,8 @@ html { scroll-behavior: smooth; }
 /* Mobile menu */
 .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
 .mobile-menu.open { transform: translateX(0); }
+
+/* Scroll reveal + hero animations */
+@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.08); } }
+.hero-zoom { animation: kenburns 18s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) { .hero-zoom { animation: none; } }
