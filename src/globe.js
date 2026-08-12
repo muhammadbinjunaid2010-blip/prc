@@ -209,8 +209,6 @@ export function initGlobeMount(container) {
     if (best >= 0 && bestAng < 0.16) {
       setActive(best);
       container.dispatchEvent(new CustomEvent("globe:country", { detail: { country: COUNTRY_INDEX[best] } }));
-    } else if (window.__PRCDEBUG) {
-      window.__PRCDEBUG.push({ x: e.clientX, y: e.clientY, best: best >= 0 ? COUNTRY_INDEX[best] : "none", ang: bestAng, phi: phi, theta: theta });
     }
   };
 
