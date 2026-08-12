@@ -4,9 +4,12 @@
   "private": true,
   "description": "PRC Pakistan static website",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/input.css -o ./tailwind.css --minify"
+    "build:css": "tailwindcss -i ./src/input.css -o ./tailwind.css --minify",
+    "build:js": "esbuild ./src/globe.js --bundle --minify --format=iife --global-name=PRCGlobe --outfile=./globe.min.js"
   },
   "devDependencies": {
+    "cobe": "^0.6.4",
+    "esbuild": "^0.28.2",
     "puppeteer-core": "^25.4.0",
     "sharp": "^0.35.3",
     "tailwindcss": "^3.4.17"
