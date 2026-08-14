@@ -2,90 +2,107 @@
 
 > **Prepared by:** mo digital
 > **For:** PRC Pakistan
-> **Status:** Prototype · Version 1.4.0
-> The website is live — and alongside it, we designed a companion **app** so PRC Pakistan lives on families' home screens, not just in their browser bookmarks.
+> **Version:** First version of this proposal · App prototype v1.5.0
+> **Date:** August 2026
 
 ---
 
-## 1. The one-line pitch
+## 1. What this is
 
-The PRC Pakistan App is an **installable, offline-capable, English ⇄ Urdu mobile app** that puts PRC's articles, self-assessments, resources and one-tap support on every family's phone — no Play Store, no App Store, no account, no data collection.
+An **app for PRC Pakistan** that installs on any phone — Android or iPhone — straight from your own website. It opens like a native app, works **offline**, and is available in **English and Urdu**. No Play Store, no App Store, no accounts, no data collection.
 
-## 2. Why an app?
+## 2. How it is hosted & how families get it
 
-- The website is broad; the app is **focused**. One thumb-reachable surface for the three things families ask for most: **read, check, connect**.
-- It installs to the home screen like a native app and **works offline** (service worker caches the shell).
-- It speaks the user's language: **full English ⇄ Urdu switching with RTL layout**.
-- It is **private by design**: assessments run entirely on-device. No sign-up, no cloud sync, nothing is sent to us.
+- **Hosted on your website** — the app runs from the same hosting that serves `prcpakistan.com` (Vercel). **No extra hosting cost**, no new server.
+- **Download is free** — families download it from your website with **no charge, no sign-up, no account**.
+- It installs to the phone's **home screen with the PRC logo** and opens like a normal app.
+- **Updates are automatic** — when we improve the app, every installed phone updates itself on next open. No update button, no app-store review.
 
-## 3. Current prototype — what the app already does
+## 3. How to download the app
 
-| Area | Detail |
-|---|---|
-| **Home** | Time-based greeting (**morning / afternoon / night**), large "What would you like to learn today?" prompt, 2×2 quick actions (Read / Self-Assess / Book / Services), live stats, **Continue learning** card (resumes your last article), **Daily learning streak** (7 dots for the week), tip of the day, featured article, WhatsApp community card |
-| **Articles** | 17 articles with category + language filters and search; opens in a **clean, distraction-free reader** — website navigation, menus and footer are stripped instantly and can never appear |
-| **Saved & Liked** | **Bookmark an exact line** of any article (saved with its quote, reopens at that line) and **like e-books** — all collected in a Saved & Liked library, one tap from the top bar |
-| **Self-assessments** | 3 quizzes (Listening, Parenting Stress, Relationship Connection) with sliders, writing questions, a speedometer score /100, retake, and **"Recommended reading" — each result suggests related articles** so the score leads somewhere |
-| **Resources** | Free e-books (Kids Story, Palestine: Land of Prophets) in an embedded reader, with like/heart |
-| **Accessibility** | **Text size (A− / A+)**, **high-contrast mode**, **reader settings** (font, line spacing, reader text size) and **Listen — read articles aloud** with the device voice |
-| **Services** | Full service list with one-tap booking via WhatsApp |
-| **About** | Mission, vision, why-PRC points, **Meet Our Team** accordion |
-| **More** | Helplines & emergency numbers, Ask a Question, language toggle, dark mode, install app, socials — with a single credit line: *Developed by mo digital · Version 1.4.0* |
-| **Notifications** | In-app notification sheet — including a **daily streak motivator** ("Day 3 — keep going!" / "Your streak is at risk — read today") |
-| **PWA** | Installable from **any page of the site** (manifest + service worker on every page), offline app shell, correct app icon on Android/iOS |
+1. Open **prcpakistan.com** on your phone.
+2. Tap **"App"** in the website footer — or the install prompt that appears on the page.
+3. **Android / Chrome:** tap the browser menu → **"Add to Home screen"** → **Install**.
+4. **iPhone / Safari:** tap the **Share** button → **"Add to Home Screen"**.
+5. The PRC app icon appears on the home screen — done. It opens full-screen like a real app.
 
-## 4. What changed in this round (v1.4.0)
+> 🖼️ **Image 1 — How to download the app** *(step-by-step screenshot)*
+>
+> 🖼️ **Image 2 — "App downloaded" notification** *(Chrome install confirmation)*
 
-1. **Removed the footer from all app screens** — the app now ends cleanly at the tab bar; the only credit line lives in the More tab.
-2. **Article reader hardened** — site navigation, menus and footers are stripped the instant the page parses (no flash, even on slow networks), so reading is truly distraction-free.
-3. **Home is now a "what next?" screen** — large greeting + *"What would you like to learn today?"*, plus a **Continue learning** card that picks up the last article.
-4. **Daily learning streak** — 7 dots for the week + streak counter + in-app motivation notification.
-5. **Quizzes now recommend resources** — every result suggests 3 related articles matched to the topic (personalised follow-up after each assessment).
-6. **Quiz copy** changed from "3 min read" to **"It only takes 3 min"** (lower commitment, higher completion).
-7. **Home quick actions** redesigned into a clear **2-column grid**.
-8. **Whole-site installability** — the app can now be installed from the homepage, About, blogs, anywhere — not just the app page.
-9. **Bookmark an exact line + like resources** — save a quote from any article and reopen it at that exact line; heart your favourite e-books; everything lives in a Saved & Liked library.
-10. **Accessibility built in** — text size (A− / A+), high-contrast mode, reader comfort settings (font, spacing, size) and **Listen** (read articles aloud).
-11. **Time-aware greetings** — good morning / good afternoon / a warm night greeting.
+## 4. What the app includes
 
-## 5. Proposed next — quick wins (days)
+Every feature below has a screenshot attached.
 
-1. **Bookmark / Save for later** with a Saved tab (localStorage).
-2. **Reading progress + auto-resume** in the reader (built on the new Continue card).
-3. **Share article** button in the reader (Web Share API → WhatsApp / Facebook).
-4. **"Talk to a coach" quick-call** — one tap opens WhatsApp with the team number.
-5. **Structured mini-courses** — e.g. a "5-Day Listening Challenge": one short lesson per day, tied to the streak.
+### 🏠 Home page
+Time-based greeting (*Good morning / Good afternoon*), a large **"What would you like to learn today?"** prompt, quick actions (**Read Articles / Self-Assessment / Book a Session / Our Services**), **Continue learning** (picks up your last article), **daily learning streak** (7 dots for the week), **Parent Dashboard** card, tip of the day, featured article and the WhatsApp community.
 
-## 6. Accessibility menu — built in now, plus next ideas
+> 🖼️ **Image 3 — Home page**
 
-**Already in the prototype:** language switching, dark mode, **text size (A− / A+)**, **high-contrast mode**, **reader comfort** (font, line spacing, reader text size) and **Listen — read articles aloud**.
+### 📄 Article page
+All 17 articles with **category + language filters and search**. Each article opens in a **clean, calm reader** — only the article, no menus, no navigation, no website footer. Urdu and English both supported.
 
-Proposed next:
-1. **Reduce motion toggle** — a manual switch to turn off animations/transitions (today it follows the system setting).
-2. **Screen-reader announcements** (`aria-live`) for quiz results and notifications.
-3. **Voice-navigation labels** for the tab bar.
-4. **Larger touch targets (≥ 44px)** on every tab-bar and list item.
-5. **Noto Nastaliq for all Urdu body copy** — consistent Urdu typography everywhere.
+> 🖼️ **Image 4 — Article page**
 
-## 7. Learning features — built in now, plus next ideas
+### ✅ Self-assessments (quizzes)
+3 quizzes — **Listening, Parenting Stress, Relationship Connection** — with easy sliders, a **score out of 100 ("You scored ___")**, retake, and **recommended reading** matched to your result.
 
-**Already in the prototype:** Continue learning (auto-resume), daily learning streak, **bookmark an exact line** in an article, **like resources**, and **personalised recommendations after each assessment**.
+> 🖼️ **Image 5 — Quiz result ("You scored ___")**
 
-Proposed next:
-1. **Reading progress bar** in the reader — see how far you are in each article.
-2. **Share article** button in the reader (Web Share API → WhatsApp / Facebook).
-3. **Structured mini-courses** — e.g. a "5-Day Listening Challenge": one short lesson per day, tied to the streak.
-4. **Weekly goals & reminders** — set a goal (e.g. 3 articles/week); in-app reminders + streak keep it alive.
-5. **Progress dashboard & badges** — streaks, articles read, assessments completed — a private "your growth" view.
+### 📚 Resources
+Free e-books (Kids Story, Palestine: Land of Prophets) with an in-app reader and a like/heart button.
 
-## 8. Out of scope (by design, v1)
+> 🖼️ **Image 6 — Resources page**
 
-- No accounts, no cloud sync, no data collection — privacy is a selling point.
-- No native iOS/Android stores in v1 — PWA install covers the audience and updates are instant.
-- No in-app payments — bookings flow to WhatsApp/contact as today.
+### 🔖 Saved & Liked
+**Bookmark any line** of an article (it reopens at that exact line) and **like e-books** — everything collects in one Saved & Liked library.
 
-## 9. Why now
+> 🖼️ **Image 7 — Saved & Liked**
 
-The website is already trusted by thousands of families. The app is the natural next step: **the same content, in a calmer, phone-first wrapper, reachable in one tap from the home screen — and installable from the site today.**
+### 👨‍👩‍👧 Parent Dashboard
+**Add children** (name + age), set a **behaviour goal** (e.g. "only eats his favourite food"), pick a **parenting tip**, and **track it for one week** with daily dots — then mark **"It worked!" / "Not yet"**. A small, private progress history for every child.
 
-*Prototype is ready to review. Feedback welcome.*
+> 🖼️ **Image 8 — Parent Dashboard**
+
+### ♿ Accessibility menu
+**Text size (A− / A+)**, **high-contrast mode**, **reader settings** (font, line spacing, text size) and **Listen** — the app reads articles aloud in English or Urdu.
+
+> 🖼️ **Image 9 — Accessibility menu**
+
+### ⚙️ More page
+Helplines, Ask a Question, language switch, dark mode, install the app, social links — and the single credit line *Developed by mo digital*.
+
+> 🖼️ **Image 10 — More page**
+
+### 🆘 Helpline page
+Emergency numbers and support contacts, one tap to call or message.
+
+> 🖼️ **Image 11 — Helpline page**
+
+### 📱 App icon
+The PRC logo as the app icon on the home screen — exactly how it looks once installed.
+
+> 🖼️ **Image 12 — App icon on home screen**
+
+## 5. What it will cost
+
+- **Hosting:** free — served from the website's existing hosting (Vercel). No extra monthly cost.
+- **Download:** free for families — no charge to users, no App Store/Play Store fees (there is no store).
+- **Development:** in addition to the website development cost, the app is a **small one-time fee of approximately PKR 7,000 – 10,000** *(final amount to be confirmed)*.
+- No recurring charges, no hidden costs.
+
+## 6. Features we can include later
+
+1. **PRC Events Calendar** — workshops, courses and live sessions with dates, booking, and "remind me" notifications.
+2. **Fillable worksheets** — interactive in-app forms families can fill on their phone and share with their coach.
+3. **Daily tips by category** — parenting / communication / nutrition tips delivered daily (in-app + push notification).
+4. **Nutrition dashboard** — picky-eating log, new-food tracker, and 7-day tip trials.
+5. **Real push notifications** — streak reminders and new-content alerts (via Vercel web push — no extra server).
+6. **Reading progress bar + share article** — see how far you are, share any article to WhatsApp/Facebook.
+7. **Weekly goals & badges** — e.g. "3 articles this week" with progress rewards.
+
+## 7. Why now
+
+The website is already trusted by thousands of families. The app puts PRC **in their pocket** — installed on the home screen, working offline, speaking their language, and free to get. The prototype is ready for review.
+
+*Feedback welcome — happy to walk through the prototype live.*

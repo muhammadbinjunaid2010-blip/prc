@@ -1,5 +1,5 @@
 /* PRC Pakistan app service worker — cache app shell for fast, reliable loading */
-const CACHE = 'prc-app-v2';
+const CACHE = 'prc-app-v3';
 const APP_SHELL = [
   './',
   './app.html',
@@ -34,16 +34,15 @@ self.addEventListener('fetch', (e) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  // App shell: cache-first for instant load
+  // App shell: network-first so the app always runs the LATEST code when
+  // online (stale cache-first shells caused users to keep seeing old versions);
+  // cached copy is the offline fallback.
   if (url.origin === location.origin && (url.pathname.endsWith('/app.html') || url.pathname.endsWith('/') || url.pathname.endsWith('/tailwind.css'))) {
     e.respondWith(
-      caches.match(req).then((hit) => {
-        const fetchPromise = fetch(req).then((res) => {
-          if (res.ok) { const clone = res.clone(); caches.open(CACHE).then((c) => c.put(req, clone)); }
-          return res;
-        }).catch(() => hit);
-        return hit || fetchPromise;
-      })
+      fetch(req).then((res) => {
+        if (res.ok) { const clone = res.clone(); caches.open(CACHE).then((c) => c.put(req, clone)); }
+        return res;
+      }).catch(() => caches.match(req))
     );
     return;
   }

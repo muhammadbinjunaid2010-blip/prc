@@ -113,8 +113,8 @@
   body.dark .reader-opt { background: #1F2429; border-color: #333B42; color: rgba(232,228,218,.8); }
   body.dark .reader-opt.active { border-color: #5B8DEF; background: rgba(91,141,239,.15); color: #fff; }
 
-  /* ---- Like resource button ---- */
-  .like-res { transition: all .18s ease; -webkit-tap-highlight-color: transparent; }
+  /* ---- Like resource button (instant color feedback) ---- */
+  .like-res { -webkit-tap-highlight-color: transparent; }
   .like-res.liked { background: #fee2e2; border-color: #fca5a5; color: #ef4444; }
   .like-res.liked svg { fill: #ef4444; }
 
@@ -256,6 +256,7 @@
 
       <div id="home-continue" class="mt-3"></div>
       <div id="home-streak" class="mt-3"></div>
+      <div id="home-parents" class="mt-3"></div>
 
       <div class="grid grid-cols-3 gap-2.5 mt-3">
         <div class="rounded-xl bg-[#F6F2EA] p-3 text-center">
@@ -613,6 +614,11 @@
           <span class="flex-1 text-sm font-semibold text-dark" data-i18n="more.saved">Saved &amp; Liked</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
         </button>
+        <button type="button" class="open-parents flex items-center gap-3 p-4 w-full text-left">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-secondary" style="background:rgba(141,170,145,.2);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+          <span class="flex-1 text-sm font-semibold text-dark" data-i18n="more.parents">Parent Dashboard</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </button>
       </div>
 
       <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-6 mb-2.5" data-i18n="more.accessibility">Accessibility & Language</p>
@@ -676,7 +682,7 @@
         <a href="https://instagram.com/prc_pakistan" target="_blank" rel="noopener" class="w-10 h-10 rounded-full flex items-center justify-center border border-[#ece7db] text-dark/60"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
         <a href="https://www.youtube.com/@prc_pakistan" target="_blank" rel="noopener" class="w-10 h-10 rounded-full flex items-center justify-center border border-[#ece7db] text-dark/60"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
       </div>
-      <p class="text-[10px] text-dark/35 mt-6 text-center">Developed by <a href="https://modigital.vercel.app" target="_blank" rel="noopener" class="font-semibold text-dark/50">mo digital</a> · Version 1.4.0 (Prototype)</p>
+      <p class="text-[10px] text-dark/35 mt-6 text-center">Developed by <a href="https://modigital.vercel.app" target="_blank" rel="noopener" class="font-semibold text-dark/50">mo digital</a> · Version 1.5.0 (Prototype)</p>
     </section>
 
     <!-- SAVED & LIKED -->
@@ -684,6 +690,13 @@
       <p class="screen-title" data-i18n="saved.title">Saved &amp; Liked</p>
       <p class="text-xs text-dark/50 mt-1" data-i18n="saved.empty" id="saved-empty-hint"></p>
       <div id="saved-list" class="mt-4 flex flex-col gap-3"></div>
+    </section>
+
+    <!-- PARENT DASHBOARD -->
+    <section class="screen" id="screen-parents">
+      <p class="screen-title" data-i18n="parents.title">Parent Dashboard</p>
+      <p class="text-xs text-dark/50 mt-1" data-i18n="parents.sub">Add your children, set a behaviour goal, and track the tip for a week.</p>
+      <div id="parents-list" class="mt-4 flex flex-col gap-3"></div>
     </section>
   </main>
 
@@ -757,6 +770,38 @@
         <button type="button" id="reader-size-plus" class="w-10 h-10 rounded-full border border-[#ece7db] flex items-center justify-center font-bold text-dark/70" aria-label="Increase reader text size">A+</button>
       </div>
       <button type="button" id="reader-settings-close" class="mt-6 w-full bg-primary text-white py-3 rounded-full text-sm font-semibold" data-i18n="reader.done">Done</button>
+    </div>
+  </div>
+
+  <!-- ADD CHILD -->
+  <div id="child-sheet" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/50">
+    <div class="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl">
+      <p class="font-display text-lg font-bold text-dark" data-i18n="parents.addChild">Add child</p>
+      <label class="block text-xs font-bold uppercase tracking-wider text-dark/40 mt-5 mb-2" for="child-name" data-i18n="parents.childName">Child's name</label>
+      <input type="text" id="child-name" class="q-text" placeholder="e.g. Ahmed">
+      <label class="block text-xs font-bold uppercase tracking-wider text-dark/40 mt-4 mb-2" for="child-age" data-i18n="parents.childAge">Age</label>
+      <select id="child-age" class="q-text"></select>
+      <div class="flex gap-2.5 mt-6">
+        <button type="button" id="child-sheet-cancel" class="flex-1 border border-[#e5e7eb] text-dark/70 text-xs font-bold rounded-full px-4 py-3 bg-white" data-i18n="saved.remove">Cancel</button>
+        <button type="button" id="child-sheet-save" class="flex-1 bg-primary text-white text-xs font-bold rounded-full px-4 py-3" data-i18n="parents.addChild">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD GOAL -->
+  <div id="goal-sheet" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/50">
+    <div class="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl">
+      <p class="font-display text-lg font-bold text-dark" data-i18n="parents.addGoal">Add a behaviour goal</p>
+      <p class="text-xs text-dark/50 mt-1" id="goal-sheet-child"></p>
+      <label class="block text-xs font-bold uppercase tracking-wider text-dark/40 mt-5 mb-2" for="goal-issue" data-i18n="parents.issue">What behaviour would you like to work on?</label>
+      <textarea id="goal-issue" class="q-text" rows="2" placeholder="e.g. only eats his favourite food"></textarea>
+      <label class="block text-xs font-bold uppercase tracking-wider text-dark/40 mt-4 mb-2" data-i18n="parents.tip">Try this tip</label>
+      <select id="goal-tip" class="q-text"></select>
+      <p class="text-[11px] text-dark/50 mt-3 leading-relaxed" data-i18n="parents.weekTrial">Try this tip for one week — mark each day you follow it, then see if it worked.</p>
+      <div class="flex gap-2.5 mt-6">
+        <button type="button" id="goal-sheet-cancel" class="flex-1 border border-[#e5e7eb] text-dark/70 text-xs font-bold rounded-full px-4 py-3 bg-white" data-i18n="saved.remove">Cancel</button>
+        <button type="button" id="goal-sheet-save" class="flex-1 bg-primary text-white text-xs font-bold rounded-full px-4 py-3" data-i18n="parents.startGoal">Start goal</button>
+      </div>
     </div>
   </div>
 
@@ -869,23 +914,23 @@
 <script>
 /* ================= DATA ================= */
 var ARTICLES = [
-  { href: 'blog-accept-our-daughters.html', img: 'images/other/accept-our-daughter.webp', cat: 'Family', title: "Let's Accept Our Daughters", desc: "After divorce, a daughter in our society is treated like a criminal. Accepting our daughters — without conditions and without judgment — is the love they truly need.", readMin: 5, ur: false },
-  { href: 'blog-discord.html', img: 'images/other/difference of opinion.webp', cat: 'Relationships', title: 'Discord: The Right to Differ', desc: 'Difference of opinion is not enmity. Here is why every relationship needs room for mistakes and disagreement.', readMin: 3, ur: true },
-  { href: 'blog-inheritance.html', img: 'images/other/inheritance.webp', cat: 'Marriage', title: 'Inheritance', desc: "A husband has no legal or religious right over his wife's inheritance. It is her right, not anyone's favour.", readMin: 3, ur: true },
-  { href: 'blog-plastic-pollution.html', img: 'images/other/plastic-pollution.webp', cat: 'Environment', title: 'Plastic Pollution', desc: 'Plastic waste is choking our seas, rivers and lands and harming wildlife. Can we reduce our plastic use for the sake of our environment?', readMin: 3, ur: true },
-  { href: 'blog-being-controlled.html', img: 'images/other/controlled.webp', cat: 'Relationships', title: 'Are You Being Controlled?', desc: 'Sometimes love, service and sacrifice are used as a way of control. Purify your heart and do everything only for the sake of Allah.', readMin: 2, ur: true },
-  { href: 'blog-making-everyone-happy.html', img: 'images/other/juggling.webp', cat: 'Relationships', title: 'Making Everyone Happy', desc: 'It is almost impossible that everyone stays happy with us while we do what we want. Choose yourself within your values and boundaries.', readMin: 2, ur: true },
-  { href: 'blog-no-secrets.html', img: 'images/other/parent s pulling child to thier sides from both sides.webp', cat: 'Family', title: 'No Secrets', desc: "Children have a right to know their father and the important facts of their life. Let's not hide the truth — let there be no secrets.", readMin: 3, ur: false },
-  { href: 'blog-assertiveness.html', img: 'images/other/calm women.webp', cat: 'Emotional Health', title: 'Assertiveness', desc: 'Being firm yet gentle — state facts, feelings and needs clearly without blame or judgement, listen to be heard, and repeat yourself until you are.', readMin: 3, ur: false },
-  { href: 'blog-other-side-of-the-picture.html', img: 'images/other/trauma illusration.webp', cat: 'Relationships', title: 'Other Side of the Picture', desc: "Women complain that men don't talk or give time. But what do we bring for a man's peace of mind? Do taunts win love — or poison it?", readMin: 3, ur: true },
-  { href: 'blog-hidden-sins.html', img: 'images/other/locked door.webp', cat: 'Self-Growth', title: 'Hidden Sins', desc: 'Job holders and business people must be careful with amanat. Company items, work time, data and contracts — hidden sins that we overlook.', readMin: 2, ur: true },
-  { href: 'blog-kintsugi.html', img: 'images/other/bowl.webp', cat: 'Self-Growth', title: 'Kintsugi', desc: "The Japanese art of repairing broken pottery with gold. Trials don't reduce our worth — join the broken parts with love.", readMin: 2, ur: true },
-  { href: 'blog-values.html', img: 'images/other/compass.webp', cat: 'Self-Growth', title: 'Values', desc: "Our choices are based on our values. Accepting others' choices doesn't mean adopting them — and it is never about better or lesser.", readMin: 2, ur: true },
-  { href: 'blog-domino-effect.html', img: 'images/other/chain reaction.webp', cat: 'Society', title: 'Domino Effect', desc: "Today's painful events are the result of a domino effect triggered generations ago. Stop the chain — starting with yourself.", readMin: 3, ur: true },
-  { href: 'blog-goodness.html', img: 'images/other/helping.webp', cat: 'Self-Growth', title: 'Goodness', desc: "Don't turn yourself into stone while teaching someone a lesson. Keep your goodness — find the people who deserve it.", readMin: 2, ur: true },
-  { href: 'blog-good-listener.html', img: 'images/other/listner.webp', cat: 'Communication', title: 'The Good Listener', desc: "Don't compete with others' suffering. Eye contact, no phone, no interrupting, listening to understand — practice with your children.", readMin: 2, ur: true },
-  { href: 'blog-hard-times.html', img: 'images/other/family in strom.webp', cat: 'Family', title: 'Hard Times', desc: 'Children are never taught to handle hard times. Indulged children, people-pleasers and passive-aggressive parents — what the child learns.', readMin: 5, ur: true },
-  { href: 'blog-caregivers.html', img: 'images/other/trust.webp', cat: 'Relationships', title: 'Two Kinds of Caregivers', titleUr: 'دو طرح کے خدمت گار', desc: "Two kinds of caregivers exist — those who genuinely want your wellbeing, and those who serve to control. Which one surrounds you?", readMin: 3, ur: true }
+  { href: 'app-articles/blog-accept-our-daughters.html', img: 'images/other/accept-our-daughter.webp', cat: 'Family', title: "Let's Accept Our Daughters", desc: "After divorce, a daughter in our society is treated like a criminal. Accepting our daughters — without conditions and without judgment — is the love they truly need.", readMin: 5, ur: false },
+  { href: 'app-articles/blog-discord.html', img: 'images/other/difference of opinion.webp', cat: 'Relationships', title: 'Discord: The Right to Differ', desc: 'Difference of opinion is not enmity. Here is why every relationship needs room for mistakes and disagreement.', readMin: 3, ur: true },
+  { href: 'app-articles/blog-inheritance.html', img: 'images/other/inheritance.webp', cat: 'Marriage', title: 'Inheritance', desc: "A husband has no legal or religious right over his wife's inheritance. It is her right, not anyone's favour.", readMin: 3, ur: true },
+  { href: 'app-articles/blog-plastic-pollution.html', img: 'images/other/plastic-pollution.webp', cat: 'Environment', title: 'Plastic Pollution', desc: 'Plastic waste is choking our seas, rivers and lands and harming wildlife. Can we reduce our plastic use for the sake of our environment?', readMin: 3, ur: true },
+  { href: 'app-articles/blog-being-controlled.html', img: 'images/other/controlled.webp', cat: 'Relationships', title: 'Are You Being Controlled?', desc: 'Sometimes love, service and sacrifice are used as a way of control. Purify your heart and do everything only for the sake of Allah.', readMin: 2, ur: true },
+  { href: 'app-articles/blog-making-everyone-happy.html', img: 'images/other/juggling.webp', cat: 'Relationships', title: 'Making Everyone Happy', desc: 'It is almost impossible that everyone stays happy with us while we do what we want. Choose yourself within your values and boundaries.', readMin: 2, ur: true },
+  { href: 'app-articles/blog-no-secrets.html', img: 'images/other/parent s pulling child to thier sides from both sides.webp', cat: 'Family', title: 'No Secrets', desc: "Children have a right to know their father and the important facts of their life. Let's not hide the truth — let there be no secrets.", readMin: 3, ur: false },
+  { href: 'app-articles/blog-assertiveness.html', img: 'images/other/calm women.webp', cat: 'Emotional Health', title: 'Assertiveness', desc: 'Being firm yet gentle — state facts, feelings and needs clearly without blame or judgement, listen to be heard, and repeat yourself until you are.', readMin: 3, ur: false },
+  { href: 'app-articles/blog-other-side-of-the-picture.html', img: 'images/other/trauma illusration.webp', cat: 'Relationships', title: 'Other Side of the Picture', desc: "Women complain that men don't talk or give time. But what do we bring for a man's peace of mind? Do taunts win love — or poison it?", readMin: 3, ur: true },
+  { href: 'app-articles/blog-hidden-sins.html', img: 'images/other/locked door.webp', cat: 'Self-Growth', title: 'Hidden Sins', desc: 'Job holders and business people must be careful with amanat. Company items, work time, data and contracts — hidden sins that we overlook.', readMin: 2, ur: true },
+  { href: 'app-articles/blog-kintsugi.html', img: 'images/other/bowl.webp', cat: 'Self-Growth', title: 'Kintsugi', desc: "The Japanese art of repairing broken pottery with gold. Trials don't reduce our worth — join the broken parts with love.", readMin: 2, ur: true },
+  { href: 'app-articles/blog-values.html', img: 'images/other/compass.webp', cat: 'Self-Growth', title: 'Values', desc: "Our choices are based on our values. Accepting others' choices doesn't mean adopting them — and it is never about better or lesser.", readMin: 2, ur: true },
+  { href: 'app-articles/blog-domino-effect.html', img: 'images/other/chain reaction.webp', cat: 'Society', title: 'Domino Effect', desc: "Today's painful events are the result of a domino effect triggered generations ago. Stop the chain — starting with yourself.", readMin: 3, ur: true },
+  { href: 'app-articles/blog-goodness.html', img: 'images/other/helping.webp', cat: 'Self-Growth', title: 'Goodness', desc: "Don't turn yourself into stone while teaching someone a lesson. Keep your goodness — find the people who deserve it.", readMin: 2, ur: true },
+  { href: 'app-articles/blog-good-listener.html', img: 'images/other/listner.webp', cat: 'Communication', title: 'The Good Listener', desc: "Don't compete with others' suffering. Eye contact, no phone, no interrupting, listening to understand — practice with your children.", readMin: 2, ur: true },
+  { href: 'app-articles/blog-hard-times.html', img: 'images/other/family in strom.webp', cat: 'Family', title: 'Hard Times', desc: 'Children are never taught to handle hard times. Indulged children, people-pleasers and passive-aggressive parents — what the child learns.', readMin: 5, ur: true },
+  { href: 'app-articles/blog-caregivers.html', img: 'images/other/trust.webp', cat: 'Relationships', title: 'Two Kinds of Caregivers', titleUr: 'دو طرح کے خدمت گار', desc: "Two kinds of caregivers exist — those who genuinely want your wellbeing, and those who serve to control. Which one surrounds you?", readMin: 3, ur: true }
 ];
 var CATS = ['All', 'Family', 'Relationships', 'Marriage', 'Emotional Health', 'Communication', 'Self-Growth', 'Society', 'Environment'];
 
@@ -972,9 +1017,9 @@ var BANDS = [
   { max: 80, label: 'Time to Reach Out', labelUr: 'مدد کا وقت', color: '#ef4444', bg: 'rgba(239,68,68,.12)', title: 'You deserve support — not just effort.', titleUr: 'آپ صرف کوشش نہیں، مدد کے مستحق ہیں۔', desc: 'The score is high because you are carrying a lot. Please know this is common, and professional support genuinely helps.', descUr: 'اسکور زیادہ ہے کیونکہ آپ بہت کچھ اٹھا رہے ہیں۔ جان لیں کہ یہ عام بات ہے، اور پیشہ ورانہ مدد واقعی کارگر ثابت ہوتی ہے۔', suggested: 'Speaking to a coach is the strongest step you can take.', suggestedUr: 'کسی کوچ سے بات کرنا سب سے مضبوط قدم ہے جو آپ اٹھا سکتے ہیں۔' }
 ];
 var QUIZ_RECS = {
-  listening: ['blog-good-listener.html', 'blog-assertiveness.html', 'blog-discord.html'],
-  parenting: ['blog-hard-times.html', 'blog-caregivers.html', 'blog-goodness.html'],
-  relationship: ['blog-other-side-of-the-picture.html', 'blog-being-controlled.html', 'blog-inheritance.html']
+  listening: ['app-articles/blog-good-listener.html', 'app-articles/blog-assertiveness.html', 'app-articles/blog-discord.html'],
+  parenting: ['app-articles/blog-hard-times.html', 'app-articles/blog-caregivers.html', 'app-articles/blog-goodness.html'],
+  relationship: ['app-articles/blog-other-side-of-the-picture.html', 'app-articles/blog-being-controlled.html', 'app-articles/blog-inheritance.html']
 };
 
 /* ================= I18N ================= */
@@ -1022,6 +1067,17 @@ var I18N = {
     'reader.size': 'Text size', 'reader.done': 'Done',
     'saved.title': 'Saved & Liked', 'saved.empty': 'Nothing saved yet — bookmark a line in an article or like a resource and it will appear here.',
     'saved.lines': 'Bookmarked lines', 'saved.resources': 'Liked resources', 'saved.remove': 'Remove', 'saved.open': 'Open',
+    'more.parents': 'Parent Dashboard',
+    'parents.title': 'Parent Dashboard', 'parents.sub': 'Add your children, set a behaviour goal, and track the tip for a week.',
+    'parents.addChild': 'Add child', 'parents.childName': "Child's name", 'parents.childAge': 'Age',
+    'parents.addGoal': 'Add a behaviour goal', 'parents.issue': 'What behaviour would you like to work on?',
+    'parents.tip': 'Try this tip', 'parents.startGoal': 'Start goal', 'parents.today': 'Mark today',
+    'parents.weekTrial': 'Try this tip for one week — mark each day you follow it, then see if it worked.',
+    'parents.progress': '{a}/7 days marked — keep going.', 'parents.goalDone': 'Trial week complete — did it work?',
+    'parents.worked': 'It worked!', 'parents.notYet': 'Not yet', 'parents.goalsEmpty': 'No active goal — add one to start tracking.',
+    'parents.empty': 'No children yet — add your first child to start tracking behaviour goals.',
+    'parents.childSummary': '{age} yrs · {done} goals · {worked} worked',
+    'parents.homeSub': '{a} child · {b} active goal',
     'viewer.listen': 'Listen', 'viewer.stop': 'Stop', 'viewer.bookmark': 'Bookmark this line', 'viewer.bookmarked': 'Line bookmarked', 'viewer.savedTo': 'Saved to your library',
     'notif.title': 'Notifications', 'notif.articles': '14 Urdu articles now available in the Learning Hub', 'notif.wa': 'Join our WhatsApp community for daily parenting tips', 'notif.books': 'Free e-books — Kids Story & Palestine: Land of Prophets',
     'notif.streakOn': 'Day {n} of your learning streak — keep going!', 'notif.streakOff': 'Your learning streak is at risk — read one article today.',
@@ -1072,6 +1128,17 @@ var I18N = {
     'reader.size': 'متن کا سائز', 'reader.done': 'ختم',
     'saved.title': 'محفوظ اور پسندیدہ', 'saved.empty': 'ابھی کچھ محفوظ نہیں — کسی مضمون میں سطر محفوظ کریں یا وسائل کو پسند کریں، یہ یہاں ظاہر ہو گا۔',
     'saved.lines': 'محفوظ کردہ سطریں', 'saved.resources': 'پسندیدہ وسائل', 'saved.remove': 'ہٹائیں', 'saved.open': 'کھولیں',
+    'more.parents': 'والدین کا ڈیش بورڈ',
+    'parents.title': 'والدین کا ڈیش بورڈ', 'parents.sub': 'اپنے بچوں کو شامل کریں، رویے کا ہدف بنائیں، اور ایک ہفتے تک ٹپ پر عمل کریں۔',
+    'parents.addChild': 'بچہ شامل کریں', 'parents.childName': 'بچے کا نام', 'parents.childAge': 'عمر',
+    'parents.addGoal': 'رویے کا ہدف بنائیں', 'parents.issue': 'کس رویے پر کام کرنا چاہتے ہیں؟',
+    'parents.tip': 'یہ ٹپ آزمائیں', 'parents.startGoal': 'ہدف شروع کریں', 'parents.today': 'آج نشان لگائیں',
+    'parents.weekTrial': 'اس ٹپ کو ایک ہفتے آزمائیں — جس دن عمل کریں اسے نشان زد کریں، پھر دیکھیں کہ کام ہوا یا نہیں۔',
+    'parents.progress': '{a}/7 دن نشان زد — جاری رکھیں۔', 'parents.goalDone': 'ہفتہ مکمل — کیا کام ہوا؟',
+    'parents.worked': 'کام ہو گیا!', 'parents.notYet': 'ابھی نہیں', 'parents.goalsEmpty': 'کوئی فعال ہدف نہیں — شروع کرنے کے لیے ایک بنائیں۔',
+    'parents.empty': 'ابھی کوئی بچہ شامل نہیں — رویے کے اہداف ٹریک کرنے کے لیے پہلا بچہ شامل کریں۔',
+    'parents.childSummary': '{age} سال · {done} اہداف · {worked} کامیاب',
+    'parents.homeSub': '{a} بچے · {b} فعال اہداف',
     'viewer.listen': 'سنیں', 'viewer.stop': 'روکیں', 'viewer.bookmark': 'اس سطر کو محفوظ کریں', 'viewer.bookmarked': 'سطر محفوظ ہو گئی', 'viewer.savedTo': 'آپ کی لائبریری میں محفوظ',
     'notif.title': 'اطلاعات', 'notif.articles': 'لرننگ ہب میں اب 14 اردو مضامین دستیاب ہیں', 'notif.wa': 'روزانہ پیرنٹنگ ٹپس کے لیے ہماری واٹس ایپ کمیونٹی میں شامل ہوں', 'notif.books': 'مفت کتابیں — بچوں کی کہانی اور فلسطین: انبیاء کی سرزمین',
     'notif.streakOn': 'آپ کے سیکھنے کا سلسلہ {n} دن کا ہے — جاری رکھیں!', 'notif.streakOff': 'آپ کا سیکھنے کا سلسلہ خطرے میں ہے — آج ایک مضمون پڑھیں۔',
@@ -1115,7 +1182,7 @@ function showTab(tab) {
   });
   $('app-content').scrollTop = 0;
   if (tab === 'articles') renderArticles();
-  if (tab === 'home') { renderFeatured(); renderTip(); }
+  if (tab === 'home') { renderFeatured(); renderTip(); renderContinue(); renderStreak(); renderHomeParents(); }
   if (tab === 'resources') renderQuizList();
   if (tab === 'services') renderServices();
   if (tab === 'help') renderHelp();
@@ -1219,7 +1286,7 @@ $('article-search').addEventListener('input', function () { searchQ = this.value
 
 /* ================= HOME FEATURED ================= */
 function renderFeatured() {
-  var a = ARTICLES.find(function (x) { return x.href === 'blog-good-listener.html'; });
+  var a = ARTICLES.find(function (x) { return x.href === 'app-articles/blog-good-listener.html'; });
   if (!a) return;
   var title = lang === 'ur' && a.titleUr ? a.titleUr : a.title;
   $('home-featured').innerHTML =
@@ -1923,13 +1990,23 @@ $('viewer-listen').addEventListener('click', function () {
   if (!doc) return;
   var text = ((doc.querySelector('article') || doc.body).innerText || '').replace(/\s+/g, ' ').trim().slice(0, 6000);
   if (!text) return;
+  // Chrome loads voices lazily — if none are ready yet, still try; the engine
+  // picks a default. On devices with no TTS at all, tell the user.
+  var voices = ('getVoices' in speechSynthesis) ? speechSynthesis.getVoices() : [];
+  if (!voices.length) {
+    try { speechSynthesis.getVoices(); } catch (e) {}
+  }
   var u = new SpeechSynthesisUtterance(text);
   u.lang = lang === 'ur' ? 'ur-PK' : 'en-US';
   u.rate = 0.95;
   u.onend = u.onerror = function () { reading = false; updateListenBtn(); };
-  speechSynthesis.cancel();
-  speechSynthesis.speak(u);
-  reading = true;
+  try {
+    speechSynthesis.cancel();
+    speechSynthesis.speak(u);
+    reading = true;
+  } catch (e) {
+    toast(t('viewer.stop')); // no usable TTS — brief notice instead
+  }
   updateListenBtn();
 });
 
@@ -1951,8 +2028,8 @@ $('viewer-bookmark').addEventListener('click', function () {
     if (d < bestTop) { bestTop = d; best = n; bestIdx = i; }
   });
   var src = $('viewer-frame').getAttribute('src') || '';
-  var href = (src.match(/blog-[^?&]+/) || [''])[0];
-  if (!href) { toast(t('viewer.savedTo')); return; }
+  if (src.indexOf('blog-') === -1) { toast(t('viewer.savedTo')); return; }
+  var href = src.replace(/^\.\//, '').split('?')[0];
   var list = getBookmarks();
   if (list.some(function (b) { return b.href === href && b.lineIndex === bestIdx; })) { toast(t('viewer.savedTo')); return; }
   list.unshift({ href: href, lineIndex: bestIdx, lineText: (best.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 160), at: Date.now() });
@@ -2075,6 +2152,206 @@ function renderSaved() {
   });
 }
 
+/* ================= PARENT DASHBOARD ================= */
+var CHILD_COLORS = ['rgba(91,141,239,.12)', 'rgba(141,170,145,.2)', 'rgba(251,146,60,.15)', 'rgba(239,68,68,.12)', 'rgba(139,92,246,.12)'];
+var TIP_BANK = [
+  { cat: 'parenting', en: 'Praise the effort, not just the result — it builds resilience.', ur: 'صرف نتیجہ نہیں، کوشش کی تعریف کریں — اس سے برداشت پیدا ہوتی ہے۔' },
+  { cat: 'parenting', en: 'A calm "no" carries more weight than a shouted one.', ur: 'پرسکون "نہیں" چیخے ہوئے "نہیں" سے زیادہ اثر رکھتی ہے۔' },
+  { cat: 'parenting', en: 'Let children make small decisions — it builds confidence.', ur: 'بچوں کو چھوٹے فیصلے کرنے دیں — اس سے اعتماد بڑھتا ہے۔' },
+  { cat: 'parenting', en: 'Fixed family time, even 15 minutes a day, creates belonging.', ur: 'روزانہ 15 منٹ کا مقررہ خاندانی وقت بھی اپنائیت پیدا کرتا ہے۔' },
+  { cat: 'parenting', en: 'Consistency beats intensity — small daily habits shape children more than rare grand gestures.', ur: 'مستقل مزاجی شدت سے بہتر ہے — چھوٹی روزانہ عادات بچوں کو کبھی کبھار کی بڑی حرکتوں سے زیادہ ڈھالتی ہیں۔' },
+  { cat: 'parenting', en: 'Sleep is a parenting tool: an overtired child is an overwhelmed child.', ur: 'نیند والدین کا ہتھیار ہے: زیادہ تھکا ہوا بچہ زیادہ پریشان بچہ ہوتا ہے۔' },
+  { cat: 'communication', en: 'Put your phone down when your child talks to you. Presence beats presents.', ur: 'جب بچہ آپ سے بات کرے تو فون رکھ دیں۔ موجودگی، تحفوں سے زیادہ اہم ہے۔' },
+  { cat: 'communication', en: 'Listen twice as much as you speak — children open up when they feel heard.', ur: 'جتنا بولتے ہیں اس سے دگنا سنیں — بچے تب کھلتے ہیں جب وہ محسوس کریں کہ ان کی بات سنی جا رہی ہے۔' },
+  { cat: 'communication', en: 'Apologize to your children when you are wrong — it teaches them humility.', ur: 'جب آپ غلط ہوں تو بچوں سے معافی مانگیں — اس سے انہیں عاجزی سیکھنے کو ملتی ہے۔' },
+  { cat: 'nutrition', en: 'Serve the same healthy meal for everyone and put one new food beside a favourite — no short-order cooking.', ur: 'سب کے لیے ایک جیسا صحت مند کھانا رکھیں اور پسندیدہ کھانے کے ساتھ ایک نئی چیز پیش کریں۔' },
+  { cat: 'nutrition', en: 'Let your child choose between two healthy options — a sense of choice reduces food battles.', ur: 'بچے کو دو صحت مند آپشنز میں سے انتخاب کرنے دیں — انتخاب کا احساس کھانے کی لڑائیاں کم کرتا ہے۔' },
+  { cat: 'self-growth', en: 'Breathe before you react. Anger said out loud cannot be unsaid.', ur: 'ردعمل سے پہلے ایک سانس لیں۔ غصے میں کہی گئی بات واپس نہیں آتی۔' }
+];
+function getChildren() { try { return JSON.parse(localStorage.getItem('prc_app_children') || '[]'); } catch (e) { return []; } }
+function saveChildren(list) { try { localStorage.setItem('prc_app_children', JSON.stringify(list)); } catch (e) {} }
+function getGoals() { try { return JSON.parse(localStorage.getItem('prc_app_goals') || '[]'); } catch (e) { return []; } }
+function saveGoals(list) { try { localStorage.setItem('prc_app_goals', JSON.stringify(list)); } catch (e) {} }
+function getGoalDays() { try { return JSON.parse(localStorage.getItem('prc_app_goal_days') || '{}'); } catch (e) { return {}; } }
+function saveGoalDays(m) { try { localStorage.setItem('prc_app_goal_days', JSON.stringify(m)); } catch (e) {} }
+function dkey(d) { return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+function openParents() { renderParents(); showTab('parents'); }
+document.querySelectorAll('.open-parents').forEach(function (b) { b.addEventListener('click', openParents); });
+
+// child age options
+(function () {
+  var sel = $('child-age');
+  if (sel) { for (var i = 1; i <= 18; i++) sel.innerHTML += '<option value="' + i + '">' + i + ' yrs</option>'; }
+})();
+var editingGoalChild = null;
+function openAddChild() {
+  $('child-name').value = '';
+  $('child-age').value = '5';
+  $('child-sheet').classList.remove('hidden');
+}
+function openAddGoal(childId) {
+  editingGoalChild = childId;
+  var c = getChildren().find(function (x) { return x.id === childId; });
+  $('goal-sheet-child').textContent = c ? c.name : '';
+  $('goal-issue').value = '';
+  var sel = $('goal-tip');
+  sel.innerHTML = TIP_BANK.map(function (t, i) {
+    return '<option value="' + i + '">' + (lang === 'ur' ? t.ur : t.en) + '</option>';
+  }).join('');
+  $('goal-sheet').classList.remove('hidden');
+}
+$('child-sheet-cancel').addEventListener('click', function () { $('child-sheet').classList.add('hidden'); });
+$('child-sheet-save').addEventListener('click', function () {
+  var name = $('child-name').value.trim();
+  if (!name) { $('child-name').focus(); return; }
+  var list = getChildren();
+  list.push({ id: 'c' + Date.now(), name: name, age: $('child-age').value, color: CHILD_COLORS[list.length % CHILD_COLORS.length] });
+  saveChildren(list);
+  $('child-sheet').classList.add('hidden');
+  renderParents();
+  renderHomeParents();
+});
+$('goal-sheet-cancel').addEventListener('click', function () { $('goal-sheet').classList.add('hidden'); });
+$('goal-sheet-save').addEventListener('click', function () {
+  var issue = $('goal-issue').value.trim();
+  if (!issue) { $('goal-issue').focus(); return; }
+  var tip = TIP_BANK[parseInt($('goal-tip').value, 10)] || TIP_BANK[0];
+  var list = getGoals();
+  list.push({ id: 'g' + Date.now(), childId: editingGoalChild, issue: issue, tip: tip, start: dkey(new Date()), done: false, worked: null });
+  saveGoals(list);
+  $('goal-sheet').classList.add('hidden');
+  renderParents();
+  renderHomeParents();
+});
+function markGoalDay(goalId) {
+  var m = getGoalDays();
+  var k = dkey(new Date());
+  m[goalId] = m[goalId] || {};
+  if (m[goalId][k]) delete m[goalId][k]; else m[goalId][k] = true;
+  saveGoalDays(m);
+  renderParents();
+  renderHomeParents();
+}
+function resolveGoal(goalId, worked) {
+  var list = getGoals();
+  var g = list.find(function (x) { return x.id === goalId; });
+  if (g) { g.done = true; g.worked = worked; }
+  saveGoals(list);
+  renderParents();
+  renderHomeParents();
+}
+function goalTrialInfo(g) {
+  var p = g.start.split('-');
+  var start = new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10));
+  var m = getGoalDays()[g.id] || {};
+  var today = dkey(new Date());
+  var dots = [], marked = 0;
+  for (var i = 0; i < 7; i++) {
+    var d = new Date(start); d.setDate(start.getDate() + i);
+    var k = dkey(d);
+    if (m[k]) marked++;
+    dots.push({ key: k, done: !!m[k], isToday: k === today, future: k > today });
+  }
+  var end = new Date(start); end.setDate(start.getDate() + 6);
+  return { dots: dots, ended: dkey(new Date()) > dkey(end), marked: marked };
+}
+function goalCard(g) {
+  var ur = lang === 'ur';
+  var info = goalTrialInfo(g);
+  var tipText = ur && g.tip.ur ? g.tip.ur : g.tip.en;
+  return '<div class="rounded-xl border border-[#f0ede6] bg-[#FBF9F4] p-3.5 mt-3">' +
+    '<div class="flex items-start gap-2.5">' +
+    '<span class="w-9 h-9 rounded-full flex items-center justify-center text-lg flex-shrink-0" style="background:rgba(91,141,239,.12);">🎯</span>' +
+    '<div class="min-w-0 flex-1">' +
+    '<p class="text-[13px] font-bold text-dark leading-snug">' + g.issue + '</p>' +
+    '<p class="text-[11px] text-dark/55 leading-relaxed mt-1">💡 ' + tipText + '</p>' +
+    '</div></div>' +
+    '<div class="flex items-center justify-between mt-3">' +
+    info.dots.map(function (d) {
+      return '<span style="width:10px;height:10px;border-radius:9999px;background:' + (d.done ? '#5B8DEF' : (d.future ? '#E5DFD2' : '#C7C1B0')) + ';' + (d.isToday ? 'box-shadow:0 0 0 3px rgba(91,141,239,.25);' : '') + '"></span>';
+    }).join('') +
+    '</div>' +
+    '<p class="text-[10px] text-dark/45 mt-2">' + (info.ended ? t('parents.goalDone') : t('parents.progress').replace('{a}', info.marked)) + '</p>' +
+    (info.ended
+      ? '<div class="flex gap-2 mt-3">' +
+        '<button type="button" class="resolve-yes flex-1 bg-green-500 text-white text-xs font-bold rounded-full px-4 py-2.5" data-goal="' + g.id + '">✓ ' + t('parents.worked') + '</button>' +
+        '<button type="button" class="resolve-no flex-1 border border-[#e5e7eb] text-dark/60 text-xs font-bold rounded-full px-4 py-2.5 bg-white" data-goal="' + g.id + '">' + t('parents.notYet') + '</button>' +
+        '</div>'
+      : '<button type="button" class="mark-day mt-3 w-full bg-primary text-white text-xs font-bold rounded-full px-4 py-2.5" data-goal="' + g.id + '">✓ ' + t('parents.today') + '</button>')
+    + '</div>';
+}
+function renderParents() {
+  var box = $('parents-list');
+  if (!box) return;
+  var ur = lang === 'ur';
+  var children = getChildren();
+  var goals = getGoals();
+  if (!children.length) {
+    box.innerHTML = '<div class="rounded-2xl border border-[#f0ede6] bg-white p-6 text-center">' +
+      '<p class="text-2xl">👨‍👩‍👧</p>' +
+      '<p class="text-[13px] text-dark/60 leading-relaxed mt-2">' + t('parents.empty') + '</p>' +
+      '<button type="button" id="parents-add-first" class="mt-4 bg-primary text-white text-xs font-bold rounded-full px-6 py-3">' + t('parents.addChild') + '</button></div>';
+    var b = $('parents-add-first');
+    if (b) b.addEventListener('click', openAddChild);
+    return;
+  }
+  box.innerHTML = '<button type="button" id="parents-add-child" class="flex items-center justify-center gap-2 border-2 border-dashed border-[#e5e7eb] text-primary text-sm font-bold rounded-2xl py-3.5 w-full">＋ ' + t('parents.addChild') + '</button>' +
+    children.map(function (c) {
+      var cGoals = goals.filter(function (g) { return g.childId === c.id; });
+      var active = cGoals.find(function (g) { return !g.done; });
+      var done = cGoals.filter(function (g) { return g.done; });
+      var workedCount = done.filter(function (g) { return g.worked; }).length;
+      var html = '<div class="rounded-2xl border border-[#f0ede6] bg-white p-4">' +
+        '<div class="flex items-center gap-3">' +
+        '<span class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0" style="background:' + c.color + '">' + c.name.charAt(0).toUpperCase() + '</span>' +
+        '<div class="flex-1 min-w-0">' +
+        '<p class="text-sm font-bold text-dark leading-snug">' + c.name + '</p>' +
+        '<p class="text-[11px] text-dark/50 mt-0.5">' + t('parents.childSummary').replace('{age}', c.age).replace('{done}', done.length).replace('{worked}', workedCount) + '</p>' +
+        '</div>' +
+        (active ? '' : '<button type="button" class="add-goal bg-primary text-white text-xs font-bold rounded-full px-4 py-2 flex-shrink-0" data-child="' + c.id + '">' + t('parents.addGoal') + '</button>') +
+        '</div>' +
+        (active ? goalCard(active) : '<div class="rounded-xl bg-[#F6F2EA] p-3 mt-3 text-center text-[12px] text-dark/55">' + t('parents.goalsEmpty') + '</div>') +
+        (done.length ? '<div class="mt-3 flex flex-wrap gap-2">' + done.map(function (g) {
+          return '<span class="text-[10px] font-bold rounded-full px-3 py-1.5 ' + (g.worked ? 'bg-[#f0fbf1] text-green-600' : 'bg-[#F6F2EA] text-dark/50') + '">' + (g.worked ? '✓ ' : '') + g.issue.slice(0, 30) + '</span>';
+        }).join('') + '</div>' : '') +
+        '</div>';
+      return html;
+    }).join('');
+  var addBtn = $('parents-add-child');
+  if (addBtn) addBtn.addEventListener('click', openAddChild);
+  box.querySelectorAll('.add-goal').forEach(function (b) {
+    b.addEventListener('click', function () { openAddGoal(b.dataset.child); });
+  });
+  box.querySelectorAll('.mark-day').forEach(function (b) {
+    b.addEventListener('click', function () { markGoalDay(b.dataset.goal); });
+  });
+  box.querySelectorAll('.resolve-yes').forEach(function (b) {
+    b.addEventListener('click', function () { resolveGoal(b.dataset.goal, true); });
+  });
+  box.querySelectorAll('.resolve-no').forEach(function (b) {
+    b.addEventListener('click', function () { resolveGoal(b.dataset.goal, false); });
+  });
+}
+function renderHomeParents() {
+  var box = $('home-parents');
+  if (!box) return;
+  var children = getChildren();
+  var active = getGoals().filter(function (g) { return !g.done; }).length;
+  var sub = children.length
+    ? t('parents.homeSub').replace('{a}', children.length).replace('{b}', active)
+    : t('parents.addChild');
+  box.innerHTML = '<button type="button" id="home-parents-btn" class="flex items-center gap-3 rounded-2xl border border-[#f0ede6] bg-white p-4 w-full text-left" style="box-shadow:0 2px 8px rgba(47,47,47,.05);">' +
+    '<span class="w-11 h-11 rounded-xl flex items-center justify-center text-lg flex-shrink-0" style="background:rgba(141,170,145,.2);">👨‍👩‍👧</span>' +
+    '<span class="flex-1 min-w-0">' +
+    '<span class="block text-sm font-bold text-dark">' + t('parents.title') + '</span>' +
+    '<span class="block text-[11px] text-dark/50 mt-0.5">' + sub + '</span>' +
+    '</span>' +
+    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/30 flex-shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>' +
+    '</button>';
+  var b = $('home-parents-btn');
+  if (b) b.addEventListener('click', openParents);
+}
+
 /* ================= I18N ================= */
 function t(key) { return (I18N[lang] && I18N[lang][key]) || I18N.en[key] || key; }
 function applyLang() {
@@ -2095,7 +2372,7 @@ function applyLang() {
   renderLangChips();
   renderChips();
   renderArticles();
-  if (activeTab === 'home') { renderGreeting(); renderFeatured(); renderTip(); renderContinue(); renderStreak(); }
+  if (activeTab === 'home') { renderGreeting(); renderFeatured(); renderTip(); renderContinue(); renderStreak(); renderHomeParents(); }
   if (activeTab === 'resources') renderQuizList();
   if (activeTab === 'help') renderHelp();
 }
@@ -2121,6 +2398,7 @@ document.querySelectorAll('.lang-toggle button').forEach(function (b) {
   renderQuizList();
   renderContinue();
   renderStreak();
+  renderHomeParents();
   applyLang();
   var params = new URLSearchParams(window.location.search);
   if (params.get('quiz')) { openQuiz(params.get('quiz')); return; }
