@@ -1,0 +1,21 @@
+# PRC Pakistan
+
+> PRC Pakistan (Parenting & Relationship Coaching) helps families across Pakistan and worldwide build stronger relationships through coaching, counselling, education and community support. Services include parenting coaching, relationship coaching, marriage guidance, teen parenting, school programs and corporate family wellness.
+
+## Key pages
+
+- [Home](https://prcpakistan.com/): Overview of services, testimonials and latest articles.
+- [About](https://prcpakistan.com/about.html): Mission, vision, team and why PRC Pakistan.
+- [Services](https://prcpakistan.com/services.html): Couple counselling, anger management, emotional health counselling, mental health counselling, parenting, relationship coaching, teen parenting and marriage guidance.
+- [Learning Hub](https://prcpakistan.com/learning-hub.html): Library of practical articles on parenting, relationships, marriage, emotional health, communication, self-growth, society and environment (filterable by English or Urdu), plus quick self-assessment quizzes.
+- [Media](https://prcpakistan.com/media.html): Video talks, real family stories, testimonials and free e-books (Kids Story E-book, Palestine — The Land of Prophets).
+- [Resource Viewer](https://prcpakistan.com/resource-viewer.html): Read the free e-books online with zoom, share and feedback.
+- [App](https://prcpakistan.com/app.html): Mobile app experience with an article hub, Urdu/English switching and self-assessment quizzes.
+- [Privacy Policy](https://prcpakistan.com/privacy-policy.html): How PRC Pakistan handles personal information and confidentiality.
+- [Contact](https://prcpakistan.com/contact.html): Book a session, join a workshop, volunteer or send a message.
+
+## Optional
+
+- WhatsApp: +92 332 827 4000
+- Email: tech.prc.pk@gmail.com
+- Community: WhatsApp group for parenting tips and updates (link available on the Learning Hub page).

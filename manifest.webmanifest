@@ -1,0 +1,17 @@
+{
+  "id": "./app.html",
+  "name": "PRC Pakistan — Better Parenting. Stronger Families.",
+  "short_name": "PRC Pakistan",
+  "description": "Read articles, take self-assessments and book sessions with PRC Pakistan.",
+  "start_url": "./app.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F6F2EA",
+  "theme_color": "#5B8DEF",
+  "icons": [
+    { "src": "./images/assets/logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./images/assets/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./images/assets/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

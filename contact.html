@@ -4,17 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact - PRC Pakistan</title>
-<link rel="icon" type="image/x-icon" href="./images/assets/logo.webp"><link href="./tailwind.css" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="./images/assets/logo.webp">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./images/assets/logo-192.png"><link href="./tailwind.css" rel="stylesheet">
 <meta name="description" content="Get in touch with PRC Pakistan. Book a session, register for a course, invite PRC for a workshop, or send a message.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://prcpakistan.vercel.app/contact.html">
+<meta property="og:url" content="https://prcpakistan.com/contact.html">
 <meta property="og:title" content="Contact - PRC Pakistan">
 <meta property="og:description" content="Get in touch with PRC Pakistan. Book a session, register for a course, invite PRC for a workshop, or send a message.">
-<meta property="og:image" content="https://prcpakistan.vercel.app/images/assets/og-image.webp">
+<meta property="og:image" content="https://prcpakistan.com/images/assets/og-image.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact - PRC Pakistan">
 <meta name="twitter:description" content="Get in touch with PRC Pakistan. Book a session, register for a course, invite PRC for a workshop, or send a message.">
-<meta name="twitter:image" content="https://prcpakistan.vercel.app/images/assets/og-image.webp">
+<meta name="twitter:image" content="https://prcpakistan.com/images/assets/og-image.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -80,7 +82,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-3 gap-12">
       <!-- Left: Contact Form -->
-      <div class="lg:col-span-2">
+      <div class="lg:col-span-3">
         <h2 class="font-display text-2xl text-dark mb-2">Send us a Message</h2>
         <p class="text-gray-600 text-sm mb-8">Tell us why you're reaching out and we'll point you to the right person.</p>
 
@@ -183,12 +185,7 @@
             <p class="text-gray-500 text-sm mb-6">Tap your course to lock it in.</p>
             <select id="course" name="course" class="q-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
               <option value="" disabled selected>Select a course</option>
-              <option>Anger Management</option>
-              <option>14 August Azadi (Free)</option>
-              <option>Positive Parenting Intensive (Aug 5-7)</option>
-              <option>Communication in Marriage (Aug 18)</option>
-              <option>Family Wellness Seminar (Aug 25)</option>
-              <option>Other</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 
@@ -285,62 +282,6 @@
           <p class="text-gray-600 text-sm">Your message has been sent. We'll get back to you shortly.</p>
         </div>
       </div>
-
-      <!-- Right: Info Cards -->
-      <div class="lg:col-span-1 grid grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6 items-start">
-        <!-- Availability -->
-        <div class="bg-accent rounded-2xl p-4 sm:p-6">
-          <h3 class="font-semibold text-dark mb-4 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            Session Availability
-          </h3>
-          <div class="space-y-2 sm:space-y-3 text-[11px] sm:text-sm">
-            <div class="flex justify-between">
-              <span class="text-gray-600">Monday - Friday</span>
-              <span class="font-medium text-dark">9:00 AM - 6:00 PM PKT</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-gray-600">Saturday</span>
-              <span class="font-medium text-dark">10:00 AM - 2:00 PM PKT</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-gray-600">Sunday</span>
-              <span class="font-medium text-dark">By appointment</span>
-            </div>
-          </div>
-          <p class="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-200">Online sessions available worldwide — flexible scheduling</p>
-        </div>
-
-        <!-- Book an Appointment -->
-        <div class="bg-accent rounded-2xl p-4 sm:p-6">
-          <h3 class="font-semibold text-dark mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-primary" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
-            Book an Appointment
-          </h3>
-          <p class="text-xs sm:text-sm text-gray-600 mb-1">Schedule a free 15-minute discovery call</p>
-          <p class="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">Choose a time that works for you</p>
-          <form id="appointment-form" class="space-y-2.5 sm:space-y-3">
-            <div>
-              <label class="block text-xs font-medium text-dark mb-1">Select Date</label>
-              <input type="date" id="appt-date" name="appt_date" required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm bg-white">
-            </div>
-            <div>
-              <label class="block text-xs font-medium text-dark mb-1">Select Time</label>
-              <select id="appt-time" name="appt_time" required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-sm text-gray-600 bg-white">
-                <option>9:00 AM</option>
-                <option>10:00 AM</option>
-                <option>11:00 AM</option>
-                <option>12:00 PM</option>
-                <option>2:00 PM</option>
-                <option>3:00 PM</option>
-                <option>4:00 PM</option>
-                <option>5:00 PM</option>
-              </select>
-            </div>
-            <button type="submit" class="w-full bg-secondary text-white py-3 rounded-full font-medium hover:bg-secondary/90 transition-colors text-sm">Book Call</button>
-          </form>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -398,49 +339,29 @@
 </section>
 
 <!-- Footer -->
-<footer class="bg-dark text-white pt-16 pb-8">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-      <div>
-        <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-16 w-auto mb-4 brightness-0 invert drop-shadow-[0_0_10px_rgba(255,255,255,0.25)]" loading="lazy">
-        <p class="text-white/60 text-sm leading-relaxed mb-4">Empowering families across Pakistan with expert parenting and relationship coaching.</p>
-        <div class="flex items-center gap-3">
-          <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-white/40 hover:text-primary transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-          
-          
-          <a href="https://www.youtube.com/@prc_pakistan" class="text-white/40 hover:text-primary transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
-        </div>
-      </div>
-      <div>
-        <h5 class="font-semibold text-sm uppercase tracking-wider mb-4">Quick Links</h5>
-        <ul class="space-y-2">
-          <li><a href="./about.html" class="text-white/60 hover:text-white text-sm transition-colors">About Us</a></li>
-          <li><a href="./services.html" class="text-white/60 hover:text-white text-sm transition-colors">Services</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5 class="font-semibold text-sm uppercase tracking-wider mb-4">Resources</h5>
-        <ul class="space-y-2">
-          <li><a href="./learning-hub.html" class="text-white/60 hover:text-white text-sm transition-colors">Learning Hub</a></li>
-          <li><a href="./media.html" class="text-white/60 hover:text-white text-sm transition-colors">Media</a></li>
-          </ul>
-      </div>
-      <div>
-        <h5 class="font-semibold text-sm uppercase tracking-wider mb-4">Contact</h5>
-        <ul class="space-y-2">
-          <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" x2="22" y1="12" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> Online Worldwide</li>
-          <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg> tech.prc.pk@gmail.com</li>
-          <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> +92 332 827 4000</li>
-          <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Mon-Sat: 9AM - 6PM</li>
-        </ul>
-      </div>
+<footer class="bg-dark text-white pt-20 pb-10">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-14 w-auto mx-auto mb-6 brightness-0 invert" loading="lazy">
+    <p class="text-white/60 text-sm leading-relaxed max-w-md mx-auto mb-8">Empowering families across Pakistan with expert parenting and relationship coaching.</p>
+    <div class="flex items-center justify-center gap-4 mb-12">
+      <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+      <a href="https://instagram.com/prc_pakistan" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+      <a href="https://www.youtube.com/@prc_pakistan" target="_blank" rel="noopener" aria-label="YouTube" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
     </div>
-    <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="border-t border-white/10 pt-8">
       <p class="text-white/40 text-sm">&copy; 2026 PRC Pakistan. All rights reserved.</p>
-      <p class="text-xs text-white/40">Developed by <a href="https://modigital.vercel.app" target="_blank" rel="noopener" class="hover:text-white transition-colors">mo digital</a></p>
+      <div class="mt-3 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-2 flex-wrap text-xs text-white/40">
+        <a href="./app.html" data-install-app class="hover:text-white transition-colors">App</a>
+        <span aria-hidden="true" class="hidden sm:inline text-white/20">·</span>
+        <a href="./privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+        <span aria-hidden="true" class="hidden sm:inline text-white/20">·</span>
+        <span>Developed by <a href="https://modigital.vercel.app" target="_blank" rel="noopener" class="hover:text-white transition-colors">mo digital</a></span>
+      </div>
     </div>
   </div>
 </footer>
+
+<script src="./course-cms.js" defer></script>
 
 <script>
 // Nav scroll - hide links on scroll down, show on scroll up
@@ -711,19 +632,7 @@ if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(function(link) { link.a
 
   form.addEventListener('submit', e => e.preventDefault());
 })();
-
-
-// Book an Appointment -> WhatsApp
-const apptForm = document.getElementById('appointment-form');
-if (apptForm) {
-  apptForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const date = document.getElementById('appt-date').value;
-    const time = document.getElementById('appt-time').value;
-    const text = 'Hi PRC Pakistan! I would like to book a free 15-minute discovery call.\n\nDate: ' + date + '\nTime: ' + time;
-    window.open('https://wa.me/923328274000?text=' + encodeURIComponent(text), '_blank');
-  });
-}</script>
+</script>
 
 <!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/923328274000?text=Hi%20PRC%20Pakistan!%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="whatsapp-float bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110">
@@ -755,5 +664,6 @@ if (apptForm) {
   });
 })();
 </script>
+  <script src="./app-install.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PRC Pakistan App</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/x-icon" href="./images/assets/logo.webp">
+<link rel="apple-touch-icon" href="./images/assets/logo-192.png">
+<meta name="theme-color" content="#5B8DEF">
+<meta name="description" content="PRC Pakistan App — read articles, take self-assessments and book sessions from your phone.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link href="./tailwind.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  html, body { height: 100%; }
+  body { background: #E8E4DA; }
+  .app-shell { max-width: 480px; margin: 0 auto; height: 100dvh; height: 100vh; display: flex; flex-direction: column; background: #fff; position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(47,47,47,.12); }
+  @media (min-width: 640px) { .app-shell { margin: 1.5rem auto; height: calc(100dvh - 3rem); border-radius: 1.75rem; overflow: hidden; } }
+
+  .app-topbar { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .75rem 1rem; background: #fff; border-bottom: 1px solid #f0ede6; z-index: 10; direction: ltr; }
+  .lang-toggle { display: inline-flex; align-items: center; background: #F6F2EA; border: 1px solid #ece7db; border-radius: 9999px; padding: 2px; }
+  .lang-toggle button { font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 9999px; color: rgba(47,47,47,.55); transition: all .2s ease; cursor: pointer; }
+  .lang-toggle button.active { background: #5B8DEF; color: #fff; box-shadow: 0 2px 6px rgba(91,141,239,.35); }
+  .app-content { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+  .screen { display: none; padding: 1.25rem 1rem 2rem; }
+  .screen.active { display: block; animation: screenIn .28s ease both; }
+  @keyframes screenIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  .app-tabbar { display: flex; background: #fff; border-top: 1px solid #f0ede6; padding: .4rem .25rem calc(.4rem + env(safe-area-inset-bottom)); z-index: 20; }
+  .tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; color: rgba(47,47,47,.45); cursor: pointer; -webkit-tap-highlight-color: transparent; transition: color .2s ease; }
+  .tab.active { color: #5B8DEF; }
+  .tab svg { transition: transform .2s ease; }
+  .tab.active svg { transform: translateY(-1px); }
+  .tab span { font-size: 10px; font-weight: 700; letter-spacing: .02em; }
+
+  .screen-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #2F2F2F; }
+
+  .chip { display: inline-flex; align-items: center; gap: .25rem; border: 1px solid #e5e7eb; background: #fff; color: rgba(47,47,47,.7); font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 9999px; white-space: nowrap; cursor: pointer; transition: all .18s ease; -webkit-tap-highlight-color: transparent; }
+  .chip.active { background: #5B8DEF; border-color: #5B8DEF; color: #fff; box-shadow: 0 2px 8px rgba(91,141,239,.3); }
+
+  .search-box { display: flex; align-items: center; gap: .5rem; background: #F6F2EA; border: 1px solid #ece7db; border-radius: 9999px; padding: 9px 14px; color: rgba(47,47,47,.4); }
+  .search-box input { background: transparent; border: 0; outline: 0; font-size: 14px; color: #2F2F2F; flex: 1; min-width: 0; }
+  .search-box input::placeholder { color: rgba(47,47,47,.4); }
+
+  .topbar-icon { width: 2.25rem; height: 2.25rem; border-radius: 9999px; border: 1px solid #ece7db; background: #fff; display: flex; align-items: center; justify-content: center; color: rgba(47,47,47,.6); position: relative; cursor: pointer; }
+  .notif-dot { position: absolute; top: .3rem; right: .3rem; width: .45rem; height: .45rem; border-radius: 9999px; background: #ef4444; }
+  .service-card { border: 1px solid #f0ede6; border-radius: 1.1rem; background: #fff; padding: 1rem; display: flex; flex-direction: column; }
+  .service-card .svc-icon { width: 2.5rem; height: 2.5rem; border-radius: .85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.15rem; }
+  #viewer-frame { width: 100%; height: 100%; border: 0; background: #fff; flex: 1; }
+  .help-item { border: 1px solid #f0ede6; border-radius: 1rem; background: #fff; padding: .9rem 1rem; display: flex; align-items: center; gap: .75rem; }
+
+  /* ---- Dark mode ---- */
+  body.dark { background: #121417; }
+  body.dark .app-shell { background: #16181C; box-shadow: 0 0 40px rgba(0,0,0,.5); }
+  body.dark .app-topbar, body.dark .app-tabbar, body.dark .quiz-header, body.dark #quiz-overlay, body.dark #page-viewer { background: #1B1F24; }
+  body.dark .app-topbar, body.dark .app-tabbar { border-color: #2A3036; }
+  body.dark .screen-title { color: #F1EDE4; }
+  body.dark .text-dark { color: #F1EDE4; }
+  body.dark .text-dark\/25 { color: rgba(232,228,218,.25); }
+  body.dark .text-dark\/30, body.dark .text-dark\/35 { color: rgba(232,228,218,.35); }
+  body.dark .text-dark\/40, body.dark .text-dark\/45 { color: rgba(232,228,218,.45); }
+  body.dark .text-dark\/50, body.dark .text-dark\/55 { color: rgba(232,228,218,.55); }
+  body.dark .text-dark\/60 { color: rgba(232,228,218,.62); }
+  body.dark .text-dark\/70 { color: rgba(232,228,218,.72); }
+  body.dark .text-dark\/80, body.dark .text-dark\/85 { color: rgba(232,228,218,.85); }
+  body.dark .bg-white, body.dark .article-card, body.dark .quiz-card, body.dark .service-card, body.dark .help-item, body.dark .q-option, body.dark .quiz-back, body.dark #install-help > div, body.dark #notif-sheet > div:last-child { background: #1F2429; }
+  body.dark .border-\[\#f0ede6\], body.dark .border-\[\#ece7db\], body.dark .border-\[\#e5e7eb\], body.dark .border-gray-200, body.dark .border-gray-100 { border-color: #2A3036; }
+  body.dark .bg-\[\#F6F2EA\], body.dark .bg-accent { background: #23282D; }
+  body.dark .bg-accent\/50 { background: rgba(35,40,45,.5); }
+  body.dark .bg-accent\/60 { background: rgba(35,40,45,.6); }
+  body.dark .bg-\[\#f0fbf1\], body.dark .bg-\[\#e5f3e6\] { background: rgba(34,197,94,.08); }
+  body.dark .bg-red-50 { background: rgba(239,68,68,.1); }
+  body.dark .border-red-100 { border-color: rgba(239,68,68,.25); }
+  body.dark .search-box { background: #23282D; border-color: #2A3036; }
+  body.dark .search-box input { color: #F1EDE4; }
+  body.dark .search-box input::placeholder { color: rgba(232,228,218,.4); }
+  body.dark .chip { background: #1F2429; border-color: #333B42; color: rgba(232,228,218,.8); }
+  body.dark .chip.active { background: #5B8DEF; border-color: #5B8DEF; color: #fff; }
+  body.dark .q-option { border-color: #333B42; }
+  body.dark .q-option .dot { border-color: #4A525B; }
+  body.dark .lang-toggle { background: #23282D; border-color: #333B42; }
+  body.dark .lang-toggle button { color: rgba(232,228,218,.55); }
+  body.dark .lang-toggle button.active { background: #5B8DEF; color: #fff; }
+  body.dark .start-btn { box-shadow: none; }
+  body.dark .topbar-icon { background: #1F2429; border-color: #333B42; color: rgba(232,228,218,.7); }
+  body.dark .gauge-ticks line { stroke: #3A424A; }
+  body.dark #viewer-frame { background: #fff; }
+  body.dark .divide-\[\#f5f2ea\] > :not([hidden]) ~ :not([hidden]) { border-color: #2A3036; }
+
+  /* ---- High contrast mode ---- */
+  body.high-contrast .text-dark\/25 { color: rgba(47,47,47,.5); }
+  body.high-contrast .text-dark\/30, body.high-contrast .text-dark\/35 { color: rgba(47,47,47,.62); }
+  body.high-contrast .text-dark\/40, body.high-contrast .text-dark\/45 { color: rgba(47,47,47,.72); }
+  body.high-contrast .text-dark\/50, body.high-contrast .text-dark\/55 { color: rgba(47,47,47,.82); }
+  body.high-contrast .text-dark\/60 { color: rgba(47,47,47,.88); }
+  body.high-contrast .text-dark\/70 { color: rgba(47,47,47,.96); }
+  body.high-contrast .border-\[\#f0ede6\], body.high-contrast .border-\[\#ece7db\], body.high-contrast .border-\[\#e5e7eb\], body.high-contrast .divide-\[\#f5f2ea\] > :not([hidden]) ~ :not([hidden]) { border-color: #cfc8b8; }
+  body.dark.high-contrast .text-dark\/25 { color: rgba(232,228,218,.5); }
+  body.dark.high-contrast .text-dark\/30, body.dark.high-contrast .text-dark\/35 { color: rgba(232,228,218,.62); }
+  body.dark.high-contrast .text-dark\/40, body.dark.high-contrast .text-dark\/45 { color: rgba(232,228,218,.72); }
+  body.dark.high-contrast .text-dark\/50, body.dark.high-contrast .text-dark\/55 { color: rgba(232,228,218,.82); }
+  body.dark.high-contrast .text-dark\/60 { color: rgba(232,228,218,.88); }
+  body.dark.high-contrast .text-dark\/70 { color: rgba(232,228,218,.96); }
+  body.dark.high-contrast .border-\[\#f0ede6\], body.dark.high-contrast .border-\[\#ece7db\], body.dark.high-contrast .border-\[\#e5e7eb\], body.dark.high-contrast .divide-\[\#f5f2ea\] > :not([hidden]) ~ :not([hidden]) { border-color: #4A525B; }
+
+  /* ---- Reader settings sheet ---- */
+  .reader-opt { border-color: #e5e7eb; background: #fff; color: rgba(47,47,47,.7); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .reader-opt.active { border-color: #5B8DEF; background: rgba(91,141,239,.08); color: #5B8DEF; }
+  body.dark .reader-opt { background: #1F2429; border-color: #333B42; color: rgba(232,228,218,.8); }
+  body.dark .reader-opt.active { border-color: #5B8DEF; background: rgba(91,141,239,.15); color: #fff; }
+
+  /* ---- Like resource button ---- */
+  .like-res { transition: all .18s ease; -webkit-tap-highlight-color: transparent; }
+  .like-res.liked { background: #fee2e2; border-color: #fca5a5; color: #ef4444; }
+  .like-res.liked svg { fill: #ef4444; }
+
+  /* ---- Team accordion ---- */
+  .team-acc-head { -webkit-tap-highlight-color: transparent; transition: background .18s ease; }
+  .team-acc-head:hover, .team-acc-head[aria-expanded="true"] { background: #FBF9F4; }
+  body.dark .team-acc-head:hover, body.dark .team-acc-head[aria-expanded="true"] { background: #23282D; }
+  .team-acc-chev { transition: transform .2s ease; flex-shrink: 0; }
+  .team-acc-head[aria-expanded="true"] .team-acc-chev { transform: rotate(90deg); }
+  .team-acc-panel { animation: accOpen .25s ease both; }
+  @keyframes accOpen { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+  /* ---- Focus visibility ---- */
+  :focus-visible { outline: 2px solid #5B8DEF; outline-offset: 2px; border-radius: 4px; }
+
+  /* ---- Reduced motion ---- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    .screen.active { animation: none; }
+  }
+
+  .article-card { display: block; border: 1px solid #f0ede6; border-radius: 1rem; overflow: hidden; background: #fff; transition: transform .18s ease, box-shadow .18s ease; }
+  .article-card:active { transform: scale(.985); }
+  .article-card img { width: 100%; height: 132px; object-fit: cover; }
+
+  .quiz-card { border: 1px solid #f0ede6; border-radius: 1.1rem; background: #fff; overflow: hidden; }
+  .quiz-card .q-head { padding: 1rem 1rem .75rem; display: flex; align-items: center; gap: .75rem; }
+  .quiz-card .q-icon { width: 2.75rem; height: 2.75rem; border-radius: .9rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .quiz-card .q-body { padding: 0 1rem 1rem; }
+  .start-btn { display: inline-flex; align-items: center; gap: .4rem; background: #5B8DEF; color: #fff; font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 9999px; cursor: pointer; transition: background .18s ease, transform .18s ease; box-shadow: 0 4px 12px rgba(91,141,239,.3); }
+  .start-btn:active { transform: scale(.96); }
+
+  /* ---- Quiz player ---- */
+  .quiz-header { display: flex; align-items: center; gap: .75rem; padding: .9rem 1rem; background: #fff; border-bottom: 1px solid #f0ede6; }
+  .quiz-back { width: 2.1rem; height: 2.1rem; border-radius: 9999px; border: 1px solid #ece7db; display: flex; align-items: center; justify-content: center; color: rgba(47,47,47,.6); cursor: pointer; background: #fff; flex-shrink: 0; }
+  .quiz-progress-track { height: 4px; background: #F0ECE2; border-radius: 9999px; overflow: hidden; margin-top: .6rem; }
+  .quiz-progress-fill { height: 100%; background: linear-gradient(90deg, #5B8DEF, #8DAA91); border-radius: 9999px; transition: width .35s ease; }
+  .q-option { display: flex; align-items: center; gap: .75rem; width: 100%; text-align: left; border: 1.5px solid #ece7db; background: #fff; border-radius: .9rem; padding: .85rem .95rem; cursor: pointer; transition: all .16s ease; -webkit-tap-highlight-color: transparent; }
+  .q-option:active { transform: scale(.985); }
+  .q-option .dot { width: 1.15rem; height: 1.15rem; border-radius: 9999px; border: 2px solid #d8d2c4; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .16s ease; }
+  .q-option.picked { border-color: #5B8DEF; background: rgba(91,141,239,.06); }
+  .q-option.picked .dot { border-color: #5B8DEF; background: #5B8DEF; }
+  .q-option.picked .dot::after { content: ""; width: 5px; height: 5px; border-radius: 9999px; background: #fff; }
+  .q-slide { animation: qIn .3s ease both; }
+  @keyframes qIn { from { opacity: 0; transform: translateX(26px); } to { opacity: 1; transform: none; } }
+
+  /* ---- Interactive question types: slider + writing ---- */
+  .slider-box { padding: .4rem .2rem .9rem; }
+  .slider-track { position: relative; height: 40px; display: flex; align-items: center; cursor: pointer; touch-action: none; -webkit-tap-highlight-color: transparent; }
+  .slider-rail { position: absolute; left: 8px; right: 8px; height: 6px; border-radius: 9999px; background: #F0ECE2; }
+  .slider-fill { position: absolute; left: 8px; height: 6px; border-radius: 9999px; background: linear-gradient(90deg, #8DAA91, #5B8DEF); }
+  .slider-handle { position: absolute; top: 50%; width: 34px; height: 34px; border-radius: 9999px; background: #fff; border: 3px solid #5B8DEF; transform: translate(-50%, -50%); box-shadow: 0 3px 10px rgba(91,141,239,.4); display: flex; align-items: center; justify-content: center; }
+  .slider-handle::after { content: ""; width: 8px; height: 8px; border-radius: 9999px; background: #5B8DEF; }
+  .slider-labels { display: flex; justify-content: space-between; gap: .5rem; margin-top: .15rem; }
+  .slider-labels span { font-size: 11px; font-weight: 600; color: rgba(47,47,47,.5); }
+  .slider-value { text-align: center; font-size: 13px; font-weight: 800; color: #5B8DEF; margin-top: .65rem; min-height: 1.25rem; }
+  body.dark .slider-rail { background: #333B42; }
+  body.dark .slider-handle { background: #1F2429; border-color: #5B8DEF; }
+  .q-text { width: 100%; border: 1.5px solid #ece7db; background: #fff; border-radius: .9rem; padding: .85rem .95rem; font-size: 14px; color: #2F2F2F; outline: none; resize: none; line-height: 1.5; transition: border-color .16s ease; }
+  .q-text:focus { border-color: #5B8DEF; }
+  body.dark .q-text { background: #1F2429; border-color: #333B42; color: #F1EDE4; }
+  .q-next { width: 100%; margin-top: 1.1rem; background: #5B8DEF; color: #fff; font-size: 14px; font-weight: 700; padding: 12px 20px; border-radius: 9999px; cursor: pointer; transition: background .18s ease, transform .18s ease; box-shadow: 0 4px 12px rgba(91,141,239,.3); }
+  .q-next:active { transform: scale(.97); }
+  body.dark .q-next { box-shadow: none; }
+
+  /* ---- Speedometer gauge ---- */
+  .gauge-wrap { position: relative; width: 220px; margin: 0 auto; }
+  .gauge-wrap svg { width: 100%; display: block; }
+  .gauge-num { position: absolute; left: 50%; transform: translateX(-50%); bottom: 2px; text-align: center; width: 100%; }
+  .band-pill { display: inline-flex; align-items: center; gap: .35rem; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 9999px; }
+
+  .fade-in { animation: screenIn .3s ease both; }
+  [dir="rtl"] .screen-title { font-family: 'DM Sans', sans-serif; }
+  [dir="rtl"] body, [dir="rtl"] .app-shell { }
+  .urdu-font { font-family: 'Noto Nastaliq Urdu', 'DM Sans', serif; }
+  @media (max-width: 380px) { .gauge-wrap { width: 190px; } }
+</style>
+</head>
+<body class="font-sans text-dark">
+
+<div class="app-shell" id="app-shell">
+
+  <!-- TOP BAR -->
+  <header class="app-topbar">
+    <div class="flex items-center gap-2.5">
+      <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-9 w-9 rounded-full">
+      <div>
+        <p class="font-bold text-sm leading-tight text-dark">PRC Pakistan</p>
+        <p class="text-[10px] text-dark/50" data-i18n="app.tagline">Better Parenting. Stronger Families.</p>
+      </div>
+    </div>
+    <button type="button" id="saved-btn" class="topbar-icon" aria-label="Saved & Liked">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+      <span id="saved-badge" class="notif-dot" style="display:none;"></span>
+    </button>
+    <button type="button" id="notif-btn" class="topbar-icon" aria-label="Notifications">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+      <span id="notif-dot" class="notif-dot"></span>
+    </button>
+  </header>
+
+  <!-- SCREENS -->
+  <main class="app-content" id="app-content">
+
+    <!-- HOME -->
+    <section class="screen active" id="screen-home">
+      <div class="rounded-2xl p-5 text-white relative overflow-hidden" style="background:linear-gradient(135deg,#5B8DEF,#8DAA91);">
+        <p class="text-[11px] font-bold uppercase tracking-wider text-white/80" id="home-greeting"></p>
+        <p class="font-display text-2xl leading-tight font-bold mt-1" id="home-hero-line"></p>
+        <p class="text-white/85 text-xs mt-1.5 leading-relaxed" data-i18n="home.heroSub">Read practical articles, check in with yourself and get expert support — all in one place.</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2.5 mt-3">
+        <button type="button" class="go-articles rounded-xl border border-[#f0ede6] bg-white p-3 flex items-center gap-3 text-left" style="box-shadow:0 2px 8px rgba(47,47,47,.05);">
+          <span class="w-11 h-11 rounded-xl flex items-center justify-center text-primary flex-shrink-0" style="background:rgba(91,141,239,.12);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+          </span>
+          <span class="block text-xs font-bold text-dark leading-snug" data-i18n="home.read">Read Articles</span>
+        </button>
+        <button type="button" class="go-resources rounded-xl border border-[#f0ede6] bg-white p-3 flex items-center gap-3 text-left" style="box-shadow:0 2px 8px rgba(47,47,47,.05);">
+          <span class="w-11 h-11 rounded-xl flex items-center justify-center text-secondary flex-shrink-0" style="background:rgba(141,170,145,.2);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          </span>
+          <span class="block text-xs font-bold text-dark leading-snug" data-i18n="home.assess">Self-Assessment</span>
+        </button>
+        <button type="button" class="open-contact rounded-xl border border-[#f0ede6] bg-white p-3 flex items-center gap-3 text-left" style="box-shadow:0 2px 8px rgba(47,47,47,.05);">
+          <span class="w-11 h-11 rounded-xl flex items-center justify-center text-green-600 flex-shrink-0" style="background:rgba(34,197,94,.15);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </span>
+          <span class="block text-xs font-bold text-dark leading-snug" data-i18n="home.book">Book a Session</span>
+        </button>
+        <button type="button" class="go-services rounded-xl border border-[#f0ede6] bg-white p-3 flex items-center gap-3 text-left" style="box-shadow:0 2px 8px rgba(47,47,47,.05);">
+          <span class="w-11 h-11 rounded-xl flex items-center justify-center text-secondary flex-shrink-0" style="background:rgba(141,170,145,.2);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>
+          </span>
+          <span class="block text-xs font-bold text-dark leading-snug" data-i18n="home.services">Our Services</span>
+        </button>
+      </div>
+
+      <div id="home-continue" class="mt-3"></div>
+      <div id="home-streak" class="mt-3"></div>
+
+      <div class="grid grid-cols-3 gap-2.5 mt-3">
+        <div class="rounded-xl bg-[#F6F2EA] p-3 text-center">
+          <p class="font-display text-xl font-bold text-dark">17</p>
+          <p class="text-[10px] font-semibold text-dark/50 mt-0.5" data-i18n="home.statArticles">Articles</p>
+        </div>
+        <div class="rounded-xl bg-[#F6F2EA] p-3 text-center">
+          <p class="font-display text-xl font-bold text-dark">2</p>
+          <p class="text-[10px] font-semibold text-dark/50 mt-0.5" data-i18n="home.statBooks">Free E-books</p>
+        </div>
+        <div class="rounded-xl bg-[#F6F2EA] p-3 text-center">
+          <p class="font-display text-xl font-bold text-dark">3</p>
+          <p class="text-[10px] font-semibold text-dark/50 mt-0.5" data-i18n="home.statQuizzes">Self-Assessments</p>
+        </div>
+      </div>
+
+      <button type="button" class="open-help flex items-center gap-3 rounded-xl border border-red-100 bg-red-50 p-3.5 mt-4 w-full text-left">
+        <span class="w-10 h-10 rounded-full flex items-center justify-center bg-red-500 text-white flex-shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        </span>
+        <span class="flex-1 min-w-0">
+          <span class="block text-sm font-bold text-dark" data-i18n="home.help">Need help now?</span>
+          <span class="block text-xs text-dark/55 mt-0.5" data-i18n="home.helpSub">Free helplines &amp; emergency numbers</span>
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/30" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+      </button>
+
+      <div id="home-tip" class="mt-3"></div>
+
+      <p class="screen-title mt-5" data-i18n="home.featured">Featured</p>
+      <div id="home-featured" class="mt-3"></div>
+
+      <a href="https://chat.whatsapp.com/K3smDsKrzqfGnM4vkQlS7E?s=sh&p=i&ilr=4&amv=0" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 rounded-xl border border-[#e5f3e6] bg-[#f0fbf1] p-3.5 mt-4">
+        <span class="w-10 h-10 rounded-full flex items-center justify-center bg-green-500 text-white flex-shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </span>
+        <span class="flex-1 min-w-0">
+          <span class="block text-sm font-bold text-dark" data-i18n="home.waTitle">Join our WhatsApp community</span>
+          <span class="block text-xs text-dark/55 mt-0.5" data-i18n="home.waSub">Tips, reminders and updates — straight to your phone.</span>
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/30" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+      </a>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="screen" id="screen-services">
+      <p class="screen-title" data-i18n="services.title">Our Services</p>
+      <p class="text-xs text-dark/50 mt-1" data-i18n="services.sub">Professional coaching and counselling to support you and your family.</p>
+      <div id="service-list" class="grid grid-cols-1 gap-3 mt-4"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="screen" id="screen-about">
+      <p class="screen-title" data-i18n="about.title">About PRC Pakistan</p>
+      <p class="text-xs text-dark/50 mt-1 leading-relaxed">We are a team of certified coaches, counselors, therapists, NLP practitioners, Trauma Healing Therapists and Educators dedicated to strengthening families.</p>
+
+      <div class="rounded-2xl border border-[#f0ede6] bg-white p-4 mt-4">
+        <p class="font-display text-base font-bold text-dark">Our Story</p>
+        <p class="text-[13px] text-dark/60 leading-relaxed mt-2">Established in 2012, PRC Pakistan began with a simple yet powerful vision: to provide accessible, high-quality parenting and relationship education to families across the nation.</p>
+        <p class="text-[13px] text-dark/60 leading-relaxed mt-2">What started as a small initiative by a group of passionate educators and counselors has grown into a trusted organization serving thousands of families. We recognized that many of the challenges parents and couples face in Pakistan — from communication breakdowns to the pressures of modern parenting — require both professional expertise and cultural understanding.</p>
+        <p class="text-[13px] text-dark/60 leading-relaxed mt-2">Over the years, we have developed evidence-based programs that honor Pakistani values while incorporating the latest research in family psychology, education, and relationship science. Our mission is to help every family thrive.</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 mt-3">
+        <div class="rounded-2xl border border-[#f0ede6] bg-white p-4">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-lg" style="background:rgba(91,141,239,.12);">🎯</span>
+          <p class="font-display text-sm font-bold text-dark mt-3">Our Mission</p>
+          <p class="text-[12px] text-dark/60 leading-relaxed mt-1.5">To empower parents, couples, and educators with practical tools and compassionate guidance for building healthier, happier families rooted in Pakistani values.</p>
+        </div>
+        <div class="rounded-2xl border border-[#f0ede6] bg-white p-4">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-lg" style="background:rgba(141,170,145,.2);">🌅</span>
+          <p class="font-display text-sm font-bold text-dark mt-3">Our Vision</p>
+          <p class="text-[12px] text-dark/60 leading-relaxed mt-1.5">A Pakistan where every family has access to quality parenting education and relationship support.</p>
+        </div>
+      </div>
+
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-5 mb-2.5">Why PRC Pakistan?</p>
+      <div class="grid grid-cols-1 gap-2.5">
+        <div class="help-item"><span class="w-10 h-10 rounded-full flex items-center justify-center text-lg flex-shrink-0" style="background:rgba(91,141,239,.12);">🎓</span><span class="min-w-0"><span class="block text-sm font-bold text-dark">Certified Professionals</span><span class="block text-[11px] text-dark/50 mt-0.5">Our team holds internationally recognized certifications in coaching, counseling, and education.</span></span></div>
+        <div class="help-item"><span class="w-10 h-10 rounded-full flex items-center justify-center text-lg flex-shrink-0" style="background:rgba(141,170,145,.2);">📚</span><span class="min-w-0"><span class="block text-sm font-bold text-dark">Evidence-Based</span><span class="block text-[11px] text-dark/50 mt-0.5">Every program we offer is grounded in the latest research and proven methodologies.</span></span></div>
+        <div class="help-item"><span class="w-10 h-10 rounded-full flex items-center justify-center text-lg flex-shrink-0" style="background:rgba(251,146,60,.15);">🤝</span><span class="min-w-0"><span class="block text-sm font-bold text-dark">Culturally Sensitive</span><span class="block text-[11px] text-dark/50 mt-0.5">We tailor our approach to reflect the unique cultural context and values of Pakistani families.</span></span></div>
+        <div class="help-item"><span class="w-10 h-10 rounded-full flex items-center justify-center text-lg flex-shrink-0" style="background:rgba(239,68,68,.12);">🔒</span><span class="min-w-0"><span class="block text-sm font-bold text-dark">Confidential &amp; Safe</span><span class="block text-[11px] text-dark/50 mt-0.5">We maintain the highest standards of privacy so you can share openly without fear of judgment.</span></span></div>
+      </div>
+
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-5 mb-2.5">Meet Our Team</p>
+      <p class="text-[12px] text-dark/50 leading-relaxed -mt-1 mb-3">Tap a name to read their introduction.</p>
+      <div class="flex flex-col gap-2.5">
+        <div class="team-acc rounded-2xl border border-[#f0ede6] bg-white overflow-hidden">
+          <button type="button" class="team-acc-head flex items-center gap-3 p-4 w-full text-left" aria-expanded="false" aria-controls="team-panel-munira" data-team-toggle="munira">
+            <img src="images/team/munira.webp" alt="Munira Ahmed" class="w-10 h-10 rounded-full object-cover flex-shrink-0" loading="lazy" width="40" height="40">
+            <span class="flex-1 min-w-0">
+              <span class="block text-sm font-semibold text-dark">Munira Ahmed</span>
+              <span class="block text-[11px] text-dark/50 mt-0.5">Founder &amp; Lead Therapeutic Specialist</span>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25 team-acc-chev" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+          <div id="team-panel-munira" class="team-acc-panel hidden px-4 pb-4" role="region" aria-label="Introduction to Munira Ahmed">
+            <img src="images/team/munira-card.webp" alt="" class="w-full rounded-xl" loading="lazy">
+            <p class="text-[11px] font-bold text-primary mt-3">CBT | Emotional Health Coach | Relationship Coach</p>
+            <p class="text-[12px] text-dark/60 leading-relaxed mt-2">Founder of PRC Pakistan, Munira leads the organisation's therapeutic direction. A certified CBT-based emotional health and relationship coach, she has spent over a decade helping couples and families rebuild trust, communicate openly, and heal after hardship.</p>
+            <a href="https://wa.me/923328274000" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-primary text-xs font-bold mt-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg> Book a Session</a>
+          </div>
+        </div>
+        <div class="team-acc rounded-2xl border border-[#f0ede6] bg-white overflow-hidden">
+          <button type="button" class="team-acc-head flex items-center gap-3 p-4 w-full text-left" aria-expanded="false" aria-controls="team-panel-amna" data-team-toggle="amna">
+            <img src="images/team/amna.webp" alt="Amna Ahmed" class="w-10 h-10 rounded-full object-cover flex-shrink-0" loading="lazy" width="40" height="40">
+            <span class="flex-1 min-w-0">
+              <span class="block text-sm font-semibold text-dark">Amna Ahmed</span>
+              <span class="block text-[11px] text-dark/50 mt-0.5">Coaching &amp; Emotional Wellness Specialist</span>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25 team-acc-chev" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+          <div id="team-panel-amna" class="team-acc-panel hidden px-4 pb-4" role="region" aria-label="Introduction to Amna Ahmed">
+            <img src="images/team/amnacard.webp" alt="" class="w-full rounded-xl" loading="lazy">
+            <p class="text-[11px] font-bold text-primary mt-3">Parenting Coach | NLP Practitioner | TBT Practitioner</p>
+            <p class="text-[12px] text-dark/60 leading-relaxed mt-2">Amna designs and delivers PRC's parenting programmes. As a certified parenting coach, NLP practitioner and TBT practitioner, she helps parents understand their children's emotional needs — and heal their own patterns along the way.</p>
+            <a href="https://wa.me/923328274000" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-primary text-xs font-bold mt-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg> Book a Session</a>
+          </div>
+        </div>
+        <div class="team-acc rounded-2xl border border-[#f0ede6] bg-white overflow-hidden">
+          <button type="button" class="team-acc-head flex items-center gap-3 p-4 w-full text-left" aria-expanded="false" aria-controls="team-panel-yasmine" data-team-toggle="yasmine">
+            <img src="images/team/yasmin.webp" alt="Yasmine Khatri" class="w-10 h-10 rounded-full object-cover flex-shrink-0" loading="lazy" width="40" height="40">
+            <span class="flex-1 min-w-0">
+              <span class="block text-sm font-semibold text-dark">Yasmine Khatri</span>
+              <span class="block text-[11px] text-dark/50 mt-0.5">Life Coach, Counselor &amp; Media Expert</span>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25 team-acc-chev" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+          <div id="team-panel-yasmine" class="team-acc-panel hidden px-4 pb-4" role="region" aria-label="Introduction to Yasmine Khatri">
+            <img src="images/team/yasmine-card.webp" alt="" class="w-full rounded-xl" loading="lazy">
+            <p class="text-[11px] font-bold text-primary mt-3">NLP | TBT | Parenting Expert @ FM 107</p>
+            <p class="text-[12px] text-dark/60 leading-relaxed mt-2">Yasmine is a life coach, counselor and a well-known parenting voice on FM 107. She blends NLP and TBT with practical, everyday advice so families can apply real change from the very first session.</p>
+            <a href="https://wa.me/923328274000" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-primary text-xs font-bold mt-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg> Book a Session</a>
+          </div>
+        </div>
+        <div class="team-acc rounded-2xl border border-[#f0ede6] bg-white overflow-hidden">
+          <button type="button" class="team-acc-head flex items-center gap-3 p-4 w-full text-left" aria-expanded="false" aria-controls="team-panel-mariam" data-team-toggle="mariam">
+            <img src="images/team/mariam.webp" alt="Mariam Khan" class="w-10 h-10 rounded-full object-cover flex-shrink-0" loading="lazy" width="40" height="40">
+            <span class="flex-1 min-w-0">
+              <span class="block text-sm font-semibold text-dark">Mariam Khan</span>
+              <span class="block text-[11px] text-dark/50 mt-0.5">Operations Manager &amp; Holistic Health Specialist</span>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25 team-acc-chev" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+          <div id="team-panel-mariam" class="team-acc-panel hidden px-4 pb-4" role="region" aria-label="Introduction to Mariam Khan">
+            <img src="images/team/mariam-card.webp" alt="" class="w-full rounded-xl" loading="lazy">
+            <p class="text-[11px] font-bold text-primary mt-3">Registered Dietitian | Wellness Coach | Soft Skills Coach</p>
+            <p class="text-[12px] text-dark/60 leading-relaxed mt-2">Mariam runs PRC's day-to-day operations and brings a holistic lens to wellbeing as a registered dietitian and wellness coach. Her work connects healthy bodies, healthy minds and healthy homes.</p>
+            <a href="https://wa.me/923328274000" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-primary text-xs font-bold mt-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg> Book a Session</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRIVACY POLICY -->
+    <section class="screen" id="screen-privacy">
+      <p class="screen-title" data-i18n="privacy.title">Privacy Policy</p>
+      <p class="text-[11px] text-dark/50 mt-1">Last updated: 13 August 2026</p>
+      <div class="mt-4 flex flex-col gap-3">
+        <div class="rounded-2xl border border-[#f0ede6] bg-white p-4">
+          <p class="font-display text-base font-bold text-dark">Our Confidentiality Commitment</p>
+          <p class="text-[13px] text-dark/60 leading-relaxed mt-2">What you share with us during coaching, counselling or any session stays with us. Your conversations are treated as private and are never shared without your consent, except where the law requires it or where there is a risk of serious harm. This is the foundation of our work.</p>
+        </div>
+        <div class="rounded-2xl border border-[#f0ede6] bg-white p-4">
+          <p class="font-display text-base font-bold text-dark">Information We Collect</p>
+          <ul class="mt-2 flex flex-col gap-1.5">
+            <li class="text-[13px] text-dark/60 leading-relaxed">• Information you give us — your name, contact details, and the details you share through our contact form, booking requests, feedback, self-assessments or resource feedback.</li>
+            <li class="text-[13px] text-dark/60 leading-relaxed">• Information you choose to share in sessions — anything you discuss with our coaches, kept confidential.</li>
+            <li class="text-[13px] text-dark/60 leading-relaxed">• Basic usage information — pages visited and similar technical data, if analytics is enabled, used only to improve the website.</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-[#f0ede6] bg-white p-4">
+          <p class="font-display text-base font-bold text-dark">How We Use Your Information</p>
+          <p class="text-[13px] text-dark/60 leading-relaxed mt-2">We do not sell your personal information, and we do not share it with third parties for marketing.</p>
+          <ul class="mt-2 flex flex-col gap-1.5">
+            <li class="text-[13px] text-dark/60 leading-relaxed">• To respond to your enquiries and arrange sessions.</li>
+            <li class="text-[13px] text-dark/60 leading-relaxed">• To provide coaching, counselling and support services.</li>
+            <li class="text-[13px] text-dark/60 leading-relaxed">• To improve our website, articles and resources.</li>
+            <li class="text-[13px] text-dark/60 leading-relaxed">• To send you updates only if you have opted in.</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-[#f0ede6] bg-white p-4">
+          <p class="font-display text-base font-bold text-dark">Self-Assessments &amp; Scores</p>
+          <p class="text-[13px] text-dark/60 leading-relaxed mt-2">Self-assessments in our app run entirely in your browser. Your answers and scores stay on your device and are not sent to us. They are a simple personal check-in, not a diagnosis.</p>
+        </div>
+        <div class="rounded-2xl border border-[#f0ede6] bg-white p-4">
+          <p class="font-display text-base font-bold text-dark">Third-Party Services</p>
+          <p class="text-[13px] text-dark/60 leading-relaxed mt-2">Some features rely on trusted third-party services:</p>
+          <ul class="mt-2 flex flex-col gap-1.5">
+            <li class="text-[13px] text-dark/60 leading-relaxed">• WhatsApp — used when you choose to contact us or join our community. Messages are subject to WhatsApp's own privacy terms.</li>
+            <li class="text-[13px] text-dark/60 leading-relaxed">• Web3Forms — used to deliver contact and feedback messages to our email.</li>
+            <li class="text-[13px] text-dark/60 leading-relaxed">• Canva — used to display our e-books and guides in the resource viewer.</li>
+            <li class="text-[13px] text-dark/60 leading-relaxed">• Google Fonts — used for website typography.</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-[#f0ede6] bg-white p-4">
+          <p class="font-display text-base font-bold text-dark">Data Security</p>
+          <p class="text-[13px] text-dark/60 leading-relaxed mt-2">We take reasonable steps to protect the information you share with us, and we limit access to it within our team. You should also protect any device you use to reach us.</p>
+        </div>
+        <div class="rounded-2xl border border-[#f0ede6] bg-white p-4">
+          <p class="font-display text-base font-bold text-dark">Your Rights</p>
+          <p class="text-[13px] text-dark/60 leading-relaxed mt-2">You can ask us what information we hold about you, request that it be corrected or deleted, or ask us to stop using it. To make any such request, contact us using the details below.</p>
+        </div>
+        <div class="rounded-2xl border border-[#f0ede6] bg-white p-4">
+          <p class="font-display text-base font-bold text-dark">Contact Us</p>
+          <p class="text-[13px] text-dark/60 leading-relaxed mt-2">If you have any questions about this policy or about your privacy, please reach out:</p>
+          <a href="mailto:tech.prc.pk@gmail.com" class="text-[13px] font-semibold text-primary mt-2 block">tech.prc.pk@gmail.com</a>
+          <a href="https://wa.me/923328274000" target="_blank" rel="noopener" class="text-[13px] font-semibold text-primary mt-1 block">WhatsApp: +92 332 827 4000</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="screen" id="screen-contact">
+      <p class="screen-title" data-i18n="contact.title">Contact Us</p>
+      <p class="text-xs text-dark/50 mt-1">We are here for you — reach out any way you like.</p>
+      <div class="mt-4 flex flex-col gap-2.5">
+        <a href="https://wa.me/923328274000?text=Hi%20PRC%20Pakistan!%20I%20would%20like%20to%20talk." target="_blank" rel="noopener" class="help-item"><span class="w-10 h-10 rounded-full flex items-center justify-center bg-green-500 text-white flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span><span class="flex-1 min-w-0"><span class="block text-sm font-bold text-dark">WhatsApp</span><span class="block text-[11px] text-dark/50 mt-0.5">+92 332 827 4000 — fastest response</span></span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/30" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a>
+        <a href="mailto:tech.prc.pk@gmail.com" class="help-item"><span class="w-10 h-10 rounded-full flex items-center justify-center text-white flex-shrink-0" style="background:#5B8DEF"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></span><span class="flex-1 min-w-0"><span class="block text-sm font-bold text-dark">Email</span><span class="block text-[11px] text-dark/50 mt-0.5">tech.prc.pk@gmail.com</span></span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/30" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a>
+        <div class="help-item"><span class="w-10 h-10 rounded-full flex items-center justify-center text-secondary flex-shrink-0" style="background:rgba(141,170,145,.2);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span><span class="flex-1 min-w-0"><span class="block text-sm font-bold text-dark">Hours</span><span class="block text-[11px] text-dark/50 mt-0.5">Mon–Sat: 9AM – 6PM · Online Worldwide</span></span></div>
+        <button type="button" class="open-ask help-item w-full text-left"><span class="w-10 h-10 rounded-full flex items-center justify-center text-lg flex-shrink-0" style="background:rgba(91,141,239,.12);">❓</span><span class="flex-1 min-w-0"><span class="block text-sm font-bold text-dark">Ask a Question</span><span class="block text-[11px] text-dark/50 mt-0.5">Get answers from our coaches</span></span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/30" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+        <a href="https://wa.me/923328274000?text=Hi%20PRC%20Pakistan!%20I%20would%20like%20to%20book%20a%20session." target="_blank" rel="noopener" class="bg-primary text-white text-center py-3.5 rounded-full text-sm font-bold mt-1">Book a Session</a>
+      </div>
+    </section>
+
+    <!-- HELPLINES -->
+    <section class="screen" id="screen-help">
+      <p class="screen-title" data-i18n="help.title">Helplines &amp; Emergency</p>
+      <p class="text-xs text-dark/50 mt-1" data-i18n="help.sub">Free, confidential support — one tap away.</p>
+      <div id="help-prc" class="mt-4"></div>
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-5 mb-2.5" data-i18n="help.emergency">Emergency</p>
+      <div id="help-emergency" class="grid grid-cols-1 gap-2.5"></div>
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-5 mb-2.5" data-i18n="help.mental">Mental Health &amp; Counselling</p>
+      <div id="help-mental" class="grid grid-cols-1 gap-2.5"></div>
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-5 mb-2.5" data-i18n="help.women">Women &amp; Children</p>
+      <div id="help-women" class="grid grid-cols-1 gap-2.5"></div>
+      <p class="text-[10px] text-dark/40 mt-5 leading-relaxed" data-i18n="help.disclaimer">Helpline numbers are verified as of 2026. In an emergency, call Rescue 1122 or your local emergency number.</p>
+    </section>
+
+    <!-- ASK A QUESTION -->
+    <section class="screen" id="screen-ask">
+      <p class="screen-title" data-i18n="ask.title">Ask a Question</p>
+      <p class="text-xs text-dark/50 mt-1" data-i18n="ask.sub">Ask our coaches anything about parenting, marriage or relationships.</p>
+      <div class="mt-4 rounded-2xl border border-[#f0ede6] bg-white p-4">
+        <label class="text-xs font-bold text-dark/60 block" data-i18n="ask.topic">Topic</label>
+        <select id="ask-topic" class="mt-1 w-full rounded-xl border border-[#ece7db] bg-white px-3 py-2.5 text-sm text-dark outline-none focus:border-primary">
+          <option value="Parenting">Parenting</option>
+          <option value="Marriage">Marriage</option>
+          <option value="Relationships">Relationships</option>
+          <option value="Emotional Health">Emotional Health</option>
+          <option value="Other">Other</option>
+        </select>
+        <label class="text-xs font-bold text-dark/60 mt-4 block" data-i18n="ask.question">Your question</label>
+        <textarea id="ask-question" rows="4" class="mt-1 w-full rounded-xl border border-[#ece7db] bg-white px-3 py-2.5 text-sm text-dark outline-none focus:border-primary resize-none" placeholder="e.g. How can I help my child stop shouting?" data-i18n-ph="ask.ph"></textarea>
+        <label class="text-xs font-bold text-dark/60 mt-4 block" data-i18n="ask.name">Your name (optional)</label>
+        <input id="ask-name" type="text" class="mt-1 w-full rounded-xl border border-[#ece7db] bg-white px-3 py-2.5 text-sm text-dark outline-none focus:border-primary">
+        <button type="button" id="ask-send" class="mt-4 w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-full text-sm font-bold transition">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 inline-block align-[-2px] mr-1.5" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span data-i18n="ask.send">Send via WhatsApp</span>
+        </button>
+        <a id="ask-email" href="mailto:tech.prc.pk@gmail.com" class="block text-center text-xs font-semibold text-primary mt-3" data-i18n="ask.email">Or email us instead</a>
+        <p class="text-[10px] text-dark/40 mt-3 text-center" data-i18n="ask.note">We usually reply within 1–2 working days.</p>
+      </div>
+    </section>
+
+    <!-- ARTICLES -->
+    <section class="screen" id="screen-articles">
+      <p class="screen-title" data-i18n="articles.title">Articles</p>
+      <p class="text-xs text-dark/50 mt-1" data-i18n="articles.sub">Practical guidance for parenting, relationships and everyday life.</p>
+
+      <div class="search-box mt-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <input type="search" id="article-search" placeholder="Search articles…" data-i18n-ph="articles.search">
+      </div>
+
+      <div id="article-lang-chips" class="flex gap-2 overflow-x-auto mt-3 pb-1 -mx-1 px-1" style="scrollbar-width:none;"></div>
+      <div id="article-chips" class="flex gap-2 overflow-x-auto mt-3 pb-1 -mx-1 px-1" style="scrollbar-width:none;"></div>
+      <div id="article-list" class="grid grid-cols-1 gap-3 mt-3"></div>
+    </section>
+
+    <!-- RESOURCES -->
+    <section class="screen" id="screen-resources">
+      <p class="screen-title" data-i18n="resources.title">Resources</p>
+      <p class="text-xs text-dark/50 mt-1" data-i18n="resources.sub">Free e-books and quick self-assessments to check in with yourself.</p>
+
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-5 mb-2.5" data-i18n="resources.books">Free E-books</p>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="relative rounded-xl border border-[#f0ede6] bg-white p-4" style="box-shadow:0 2px 8px rgba(47,47,47,.05);">
+          <a href="./resource-viewer.html?doc=kids" data-viewer="./resource-viewer.html?doc=kids&embed=1" data-title-key="resources.bookKids" class="block">
+            <span class="w-11 h-11 rounded-xl bg-primary text-white flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg>
+            </span>
+            <p class="text-xs font-bold text-dark leading-snug mt-3" data-i18n="resources.bookKids">Kids Story E-book</p>
+            <p class="text-[10px] text-primary font-semibold mt-1" data-i18n="resources.read">Read now</p>
+          </a>
+          <button type="button" class="like-res absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center border border-[#f0ede6] text-dark/40 bg-white" data-like="kids" aria-label="Like resource" data-like-label="resources.bookKids">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+          </button>
+        </div>
+        <div class="relative rounded-xl border border-[#f0ede6] bg-white p-4" style="box-shadow:0 2px 8px rgba(47,47,47,.05);">
+          <a href="./resource-viewer.html?doc=palestine" data-viewer="./resource-viewer.html?doc=palestine&embed=1" data-title-key="resources.bookPal" class="block">
+            <span class="w-11 h-11 rounded-xl bg-secondary text-white flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path></svg>
+            </span>
+            <p class="text-xs font-bold text-dark leading-snug mt-3" data-i18n="resources.bookPal">Palestine — Land of Prophets</p>
+            <p class="text-[10px] text-primary font-semibold mt-1" data-i18n="resources.read">Read now</p>
+          </a>
+          <button type="button" class="like-res absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center border border-[#f0ede6] text-dark/40 bg-white" data-like="palestine" aria-label="Like resource" data-like-label="resources.bookPal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-6 mb-2.5" data-i18n="resources.quizzes">Self-Assessments</p>
+      <p class="text-xs text-dark/50 leading-relaxed mb-3" data-i18n="resources.quizNote">Honest answers, no judgement. Get a private score and see what support could help.</p>
+      <div id="quiz-list" class="grid grid-cols-1 gap-3"></div>
+    </section>
+
+    <!-- MORE -->
+    <section class="screen" id="screen-more">
+      <p class="screen-title" data-i18n="more.title">More</p>
+      <div class="mt-4 rounded-2xl border border-[#f0ede6] bg-white overflow-hidden divide-y divide-[#f5f2ea]">
+        <a href="./about.html" class="open-about flex items-center gap-3 p-4">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-primary" style="background:rgba(91,141,239,.12);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg></span>
+          <span class="flex-1 text-sm font-semibold text-dark" data-i18n="more.about">About PRC Pakistan</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </a>
+        <a href="./services.html" class="go-services flex items-center gap-3 p-4">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-secondary" style="background:rgba(141,170,145,.2);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path></svg></span>
+          <span class="flex-1 text-sm font-semibold text-dark" data-i18n="more.services">Our Services</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </a>
+        <a href="./contact.html" class="open-contact flex items-center gap-3 p-4">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-green-600" style="background:rgba(34,197,94,.15);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>
+          <span class="flex-1 text-sm font-semibold text-dark" data-i18n="more.contact">Contact Us</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </a>
+        <a href="./privacy-policy.html" class="open-privacy flex items-center gap-3 p-4">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-dark/60" style="background:rgba(47,47,47,.07);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>
+          <span class="flex-1 text-sm font-semibold text-dark" data-i18n="more.privacy">Privacy Policy</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </a>
+        <button type="button" class="open-help flex items-center gap-3 p-4 w-full text-left">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-red-500" style="background:rgba(239,68,68,.12);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>
+          <span class="flex-1 text-sm font-semibold text-dark" data-i18n="more.help">Helplines &amp; Emergency</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </button>
+        <button type="button" class="open-ask flex items-center gap-3 p-4 w-full text-left">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-secondary" style="background:rgba(141,170,145,.2);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg></span>
+          <span class="flex-1 text-sm font-semibold text-dark" data-i18n="more.ask">Ask a Question</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </button>
+        <button type="button" class="open-saved flex items-center gap-3 p-4 w-full text-left">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-primary" style="background:rgba(91,141,239,.12);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></span>
+          <span class="flex-1 text-sm font-semibold text-dark" data-i18n="more.saved">Saved &amp; Liked</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </button>
+      </div>
+
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-6 mb-2.5" data-i18n="more.accessibility">Accessibility & Language</p>
+      <div class="rounded-2xl border border-[#f0ede6] bg-white overflow-hidden">
+        <div class="p-4">
+          <p class="text-sm font-semibold text-dark" data-i18n="more.language">Language</p>
+          <p class="text-[11px] text-dark/50 mt-0.5" data-i18n="more.languageSub">Switch between English and Urdu.</p>
+          <div class="lang-toggle mt-3" role="group" aria-label="Language">
+            <button type="button" data-lang="en" class="active">EN</button>
+            <button type="button" data-lang="ur">اردو</button>
+          </div>
+        </div>
+        <button type="button" id="dark-toggle" class="flex items-center gap-3 p-4 w-full text-left border-t border-[#f5f2ea]">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-dark/60" style="background:rgba(47,47,47,.07);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></span>
+          <span class="flex-1 text-sm font-semibold text-dark" data-i18n="more.dark">Dark Mode</span>
+          <span id="dark-switch" class="text-[11px] font-bold px-3 py-1 rounded-full bg-[#F6F2EA] text-dark/60">OFF</span>
+        </button>
+        <div class="flex items-center gap-3 p-4 w-full text-left border-t border-[#f5f2ea]">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-primary" style="background:rgba(91,141,239,.12);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"></path></svg></span>
+          <span class="flex-1">
+            <span class="block text-sm font-semibold text-dark" data-i18n="acc.textSize">Text size</span>
+            <span class="block text-[11px] text-dark/50 mt-0.5" id="text-size-label">100%</span>
+          </span>
+          <button type="button" id="text-size-minus" class="w-10 h-10 rounded-full border border-[#ece7db] flex items-center justify-center font-bold text-dark/70" aria-label="Decrease text size">A−</button>
+          <button type="button" id="text-size-plus" class="w-10 h-10 rounded-full border border-[#ece7db] flex items-center justify-center font-bold text-dark/70" aria-label="Increase text size">A+</button>
+        </div>
+        <button type="button" id="contrast-toggle" class="flex items-center gap-3 p-4 w-full text-left border-t border-[#f5f2ea]">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-secondary" style="background:rgba(141,170,145,.2);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path></svg></span>
+          <span class="flex-1">
+            <span class="block text-sm font-semibold text-dark" data-i18n="acc.contrast">High contrast</span>
+            <span class="block text-[11px] text-dark/50 mt-0.5" data-i18n="acc.contrastSub">Stronger contrast for easier reading.</span>
+          </span>
+          <span id="contrast-switch" class="text-[11px] font-bold px-3 py-1 rounded-full bg-[#F6F2EA] text-dark/60">OFF</span>
+        </button>
+        <button type="button" id="reader-settings-btn" class="flex items-center gap-3 p-4 w-full text-left border-t border-[#f5f2ea]">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-secondary" style="background:rgba(141,170,145,.2);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg></span>
+          <span class="flex-1">
+            <span class="block text-sm font-semibold text-dark" data-i18n="acc.reader">Reader settings</span>
+            <span class="block text-[11px] text-dark/50 mt-0.5" data-i18n="acc.readerSub">Font, spacing and text size for articles.</span>
+          </span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </button>
+        <button type="button" id="listen-toggle" class="flex items-center gap-3 p-4 w-full text-left border-t border-[#f5f2ea]">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-green-600" style="background:rgba(34,197,94,.15);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></span>
+          <span class="flex-1">
+            <span class="block text-sm font-semibold text-dark" data-i18n="acc.listen">Listen to articles</span>
+            <span class="block text-[11px] text-dark/50 mt-0.5" data-i18n="acc.listenSub">Read articles aloud with your device voice.</span>
+          </span>
+          <span id="listen-switch" class="text-[11px] font-bold px-3 py-1 rounded-full bg-[#F6F2EA] text-dark/60">ON</span>
+        </button>
+        <button type="button" id="install-btn" class="flex items-center gap-3 p-4 w-full text-left border-t border-[#f5f2ea]">
+          <span class="w-9 h-9 rounded-full flex items-center justify-center text-green-600" style="background:rgba(34,197,94,.15);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg></span>
+          <span class="flex-1 text-sm font-semibold text-dark" data-i18n="more.install">Install App</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+        </button>
+      </div>
+
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-6 mb-2.5" data-i18n="more.social">Follow us</p>
+      <div class="flex gap-2.5">
+        <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" target="_blank" rel="noopener" class="w-10 h-10 rounded-full flex items-center justify-center border border-[#ece7db] text-dark/60"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+        <a href="https://instagram.com/prc_pakistan" target="_blank" rel="noopener" class="w-10 h-10 rounded-full flex items-center justify-center border border-[#ece7db] text-dark/60"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+        <a href="https://www.youtube.com/@prc_pakistan" target="_blank" rel="noopener" class="w-10 h-10 rounded-full flex items-center justify-center border border-[#ece7db] text-dark/60"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
+      </div>
+      <p class="text-[10px] text-dark/35 mt-6 text-center">Developed by <a href="https://modigital.vercel.app" target="_blank" rel="noopener" class="font-semibold text-dark/50">mo digital</a> · Version 1.4.0 (Prototype)</p>
+    </section>
+
+    <!-- SAVED & LIKED -->
+    <section class="screen" id="screen-saved">
+      <p class="screen-title" data-i18n="saved.title">Saved &amp; Liked</p>
+      <p class="text-xs text-dark/50 mt-1" data-i18n="saved.empty" id="saved-empty-hint"></p>
+      <div id="saved-list" class="mt-4 flex flex-col gap-3"></div>
+    </section>
+  </main>
+
+  <!-- BOTTOM TAB BAR -->
+  <nav class="app-tabbar" id="tabbar">
+    <button type="button" class="tab active" data-tab="home">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      <span data-i18n="tab.home">Home</span>
+    </button>
+    <button type="button" class="tab" data-tab="articles">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+      <span data-i18n="tab.articles">Articles</span>
+    </button>
+    <button type="button" class="tab" data-tab="resources">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13"></path><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path></svg>
+      <span data-i18n="tab.resources">Resources</span>
+    </button>
+    <button type="button" class="tab" data-tab="more">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+      <span data-i18n="tab.more">More</span>
+    </button>
+  </nav>
+
+  <!-- NOTIFICATIONS SHEET -->
+  <div id="notif-sheet" class="hidden absolute inset-0 z-40">
+    <div class="absolute inset-0 bg-black/30" id="notif-backdrop"></div>
+    <div class="absolute bottom-0 inset-x-0 bg-white rounded-t-3xl p-5 pb-8 max-h-[70vh] overflow-y-auto">
+      <div class="w-10 h-1 rounded-full bg-[#E5DFD2] mx-auto mb-4"></div>
+      <p class="font-bold text-dark text-base" data-i18n="notif.title">Notifications</p>
+      <div class="mt-4 flex flex-col gap-2.5" id="notif-list"></div>
+    </div>
+  </div>
+
+  <!-- IN-APP PAGE VIEWER -->
+  <div id="page-viewer" class="hidden absolute inset-0 bg-white z-30 flex flex-col">
+    <div class="quiz-header">
+      <button type="button" id="viewer-back" class="quiz-back" aria-label="Back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+      </button>
+      <p class="font-bold text-sm text-dark leading-tight truncate flex-1" id="viewer-title"></p>
+      <button type="button" id="viewer-listen" class="quiz-back" aria-label="Listen" style="display:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+      </button>
+      <button type="button" id="viewer-bookmark" class="quiz-back" aria-label="Bookmark this line">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+      </button>
+    </div>
+    <iframe id="viewer-frame" title="Page"></iframe>
+  </div>
+
+  <!-- READER SETTINGS -->
+  <div id="reader-settings" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/50">
+    <div class="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl">
+      <p class="font-display text-lg font-bold text-dark" data-i18n="reader.title">Reader settings</p>
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-5 mb-2" data-i18n="reader.font">Font</p>
+      <div class="flex gap-2" id="reader-font-opts">
+        <button type="button" data-font="default" class="reader-opt flex-1 text-xs font-bold py-2.5 rounded-full border">Default</button>
+        <button type="button" data-font="serif" class="reader-opt flex-1 text-xs font-bold py-2.5 rounded-full border">Serif</button>
+        <button type="button" data-font="rounded" class="reader-opt flex-1 text-xs font-bold py-2.5 rounded-full border">Rounded</button>
+      </div>
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-5 mb-2" data-i18n="reader.spacing">Line spacing</p>
+      <div class="flex gap-2" id="reader-line-opts">
+        <button type="button" data-line="compact" class="reader-opt flex-1 text-xs font-bold py-2.5 rounded-full border">Compact</button>
+        <button type="button" data-line="cozy" class="reader-opt flex-1 text-xs font-bold py-2.5 rounded-full border">Cozy</button>
+        <button type="button" data-line="relaxed" class="reader-opt flex-1 text-xs font-bold py-2.5 rounded-full border">Relaxed</button>
+      </div>
+      <p class="text-xs font-bold uppercase tracking-wider text-dark/40 mt-5 mb-2" data-i18n="reader.size">Text size</p>
+      <div class="flex items-center gap-3">
+        <button type="button" id="reader-size-minus" class="w-10 h-10 rounded-full border border-[#ece7db] flex items-center justify-center font-bold text-dark/70" aria-label="Decrease reader text size">A−</button>
+        <div class="flex-1 h-1.5 rounded-full bg-[#F0ECE2] overflow-hidden"><div class="h-full rounded-full bg-primary transition-all" id="reader-size-bar" style="width:50%"></div></div>
+        <button type="button" id="reader-size-plus" class="w-10 h-10 rounded-full border border-[#ece7db] flex items-center justify-center font-bold text-dark/70" aria-label="Increase reader text size">A+</button>
+      </div>
+      <button type="button" id="reader-settings-close" class="mt-6 w-full bg-primary text-white py-3 rounded-full text-sm font-semibold" data-i18n="reader.done">Done</button>
+    </div>
+  </div>
+
+  <!-- INSTALL HELP -->
+  <div id="install-help" class="hidden absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/50">
+    <div class="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl">
+      <p class="font-display text-lg font-bold text-dark">Install the PRC Pakistan App</p>
+      <div class="mt-4 flex flex-col gap-3 text-sm text-dark/70 leading-relaxed">
+        <p><span class="font-bold text-dark">Android / Chrome:</span> open the menu (&#8943;) → “Add to Home screen” → “Install”.</p>
+        <p><span class="font-bold text-dark">iPhone / Safari:</span> tap the Share button → “Add to Home Screen”.</p>
+      </div>
+      <button type="button" id="install-help-close" class="mt-5 w-full bg-primary text-white py-3 rounded-full text-sm font-semibold">Got it</button>
+    </div>
+  </div>
+
+  <!-- QUIZ OVERLAY -->
+  <div id="quiz-overlay" class="hidden absolute inset-0 bg-white z-30 flex flex-col">
+    <div id="quiz-start" class="flex-1 flex flex-col overflow-y-auto">
+      <div class="quiz-header">
+        <button type="button" id="quiz-close" class="quiz-back" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+        <div>
+          <p class="font-bold text-sm text-dark leading-tight" id="quiz-name"></p>
+          <p class="text-[11px] text-dark/50 mt-0.5" id="quiz-meta"></p>
+        </div>
+      </div>
+      <div class="flex-1 flex flex-col items-center justify-center p-6 text-center">
+        <div id="quiz-icon-big" class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4"></div>
+        <p class="font-display text-xl font-bold text-dark" id="quiz-intro-title"></p>
+        <p class="text-xs text-dark/55 leading-relaxed mt-2 max-w-[270px]" id="quiz-intro-desc"></p>
+        <div class="flex items-center gap-2 mt-5 text-[11px] font-semibold text-dark/50">
+          <span class="inline-flex items-center gap-1 bg-[#F6F2EA] rounded-full px-3 py-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg><span data-i18n="quiz.questions" data-i18n-var="count">8 questions</span></span>
+          <span class="inline-flex items-center gap-1 bg-[#F6F2EA] rounded-full px-3 py-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg><span data-i18n="quiz.time">~2 min</span></span>
+        </div>
+        <button type="button" id="quiz-begin" class="start-btn mt-7" style="font-size:15px;padding:12px 34px;">
+          <span data-i18n="quiz.begin">Start Assessment</span>
+        </button>
+        <p class="text-[10px] text-dark/35 mt-3" data-i18n="quiz.private">Private &amp; instant — no account needed.</p>
+      </div>
+    </div>
+
+    <div id="quiz-play" class="hidden flex-1 flex flex-col">
+      <div class="quiz-header">
+        <button type="button" id="quiz-exit" class="quiz-back" aria-label="Exit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+        <div class="flex-1 min-w-0">
+          <p class="font-bold text-sm text-dark leading-tight truncate" id="quiz-play-name"></p>
+          <p class="text-[11px] text-dark/50 mt-0.5"><span data-i18n="quiz.step" data-i18n-var="n">Question</span> <span id="quiz-step">1</span> <span data-i18n="quiz.of">of</span> <span id="quiz-total">8</span></p>
+        </div>
+      </div>
+      <div class="px-4 pt-3">
+        <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quiz-progress" style="width:0%"></div></div>
+      </div>
+      <div class="flex-1 overflow-y-auto px-4 py-4" id="quiz-questions"></div>
+    </div>
+
+    <div id="quiz-result" class="hidden flex-1 flex-col overflow-y-auto">
+      <div class="flex-1 flex flex-col items-center px-5 py-7">
+        <p class="text-[11px] font-bold uppercase tracking-wider text-dark/40" data-i18n="result.youScored">You scored</p>
+        <div class="gauge-wrap mt-2">
+          <svg viewBox="0 0 220 130">
+            <path d="M 30 120 A 80 80 0 0 1 190 120" fill="none" stroke="#F0ECE2" stroke-width="16" stroke-linecap="round"></path>
+            <path id="gauge-arc" d="M 30 120 A 80 80 0 0 1 190 120" fill="none" stroke="#8DAA91" stroke-width="16" stroke-linecap="round" style="transition:stroke-dashoffset 1.4s cubic-bezier(.25,.8,.3,1);"></path>
+            <g id="gauge-ticks"></g>
+            <line id="gauge-needle" x1="110" y1="120" x2="110" y2="42" stroke="#2F2F2F" stroke-width="3" stroke-linecap="round" style="transition:transform 1.4s cubic-bezier(.25,.8,.3,1); transform-origin:110px 120px;"></line>
+            <circle cx="110" cy="120" r="6" fill="#2F2F2F"></circle>
+          </svg>
+          <div class="gauge-num">
+            <p class="font-display text-4xl font-bold text-dark leading-none"><span id="gauge-count">0</span><span class="text-lg text-dark/40">/100</span></p>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-dark/40 mt-1" data-i18n="result.scoreLabel">Attention score</p>
+          </div>
+        </div>
+        <span class="band-pill mt-3" id="result-band"></span>
+        <p class="text-sm font-bold text-dark text-center mt-4" id="result-title"></p>
+        <p class="text-xs text-dark/60 leading-relaxed text-center mt-2 max-w-[290px]" id="result-desc"></p>
+
+        <div class="w-full rounded-2xl border border-[#f0ede6] bg-[#F6F2EA] p-4 mt-5">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-dark/40" data-i18n="result.suggested">Suggested for you</p>
+          <p class="text-sm font-bold text-dark mt-1.5" id="result-service"></p>
+          <p class="text-xs text-dark/60 leading-relaxed mt-1" id="result-service-desc"></p>
+          <div class="flex gap-2 mt-3">
+            <a id="result-book" href="./contact.html?topic=book-session" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-primary text-white text-xs font-bold rounded-full px-4 py-2.5" style="box-shadow:0 4px 10px rgba(91,141,239,.3);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <span data-i18n="result.book">Book a Session</span>
+            </a>
+            <a id="result-wa" href="https://wa.me/923328274000?text=Hi%20PRC%20Pakistan!" target="_blank" rel="noopener" class="inline-flex items-center justify-center bg-green-500 text-white w-10 rounded-full flex-shrink-0" aria-label="Share on WhatsApp">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div id="result-recs" class="w-full"></div>
+
+        <div class="flex gap-2.5 w-full mt-4">
+          <button type="button" id="result-retake" class="flex-1 inline-flex items-center justify-center gap-1.5 border border-[#e5e7eb] text-dark/70 text-xs font-bold rounded-full px-4 py-2.5 bg-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            <span data-i18n="result.retake">Retake</span>
+          </button>
+          <button type="button" id="result-close" class="flex-1 inline-flex items-center justify-center gap-1.5 border border-[#e5e7eb] text-dark/70 text-xs font-bold rounded-full px-4 py-2.5 bg-white">
+            <span data-i18n="result.done">Done</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ================= DATA ================= */
+var ARTICLES = [
+  { href: 'blog-accept-our-daughters.html', img: 'images/other/accept-our-daughter.webp', cat: 'Family', title: "Let's Accept Our Daughters", desc: "After divorce, a daughter in our society is treated like a criminal. Accepting our daughters — without conditions and without judgment — is the love they truly need.", readMin: 5, ur: false },
+  { href: 'blog-discord.html', img: 'images/other/difference of opinion.webp', cat: 'Relationships', title: 'Discord: The Right to Differ', desc: 'Difference of opinion is not enmity. Here is why every relationship needs room for mistakes and disagreement.', readMin: 3, ur: true },
+  { href: 'blog-inheritance.html', img: 'images/other/inheritance.webp', cat: 'Marriage', title: 'Inheritance', desc: "A husband has no legal or religious right over his wife's inheritance. It is her right, not anyone's favour.", readMin: 3, ur: true },
+  { href: 'blog-plastic-pollution.html', img: 'images/other/plastic-pollution.webp', cat: 'Environment', title: 'Plastic Pollution', desc: 'Plastic waste is choking our seas, rivers and lands and harming wildlife. Can we reduce our plastic use for the sake of our environment?', readMin: 3, ur: true },
+  { href: 'blog-being-controlled.html', img: 'images/other/controlled.webp', cat: 'Relationships', title: 'Are You Being Controlled?', desc: 'Sometimes love, service and sacrifice are used as a way of control. Purify your heart and do everything only for the sake of Allah.', readMin: 2, ur: true },
+  { href: 'blog-making-everyone-happy.html', img: 'images/other/juggling.webp', cat: 'Relationships', title: 'Making Everyone Happy', desc: 'It is almost impossible that everyone stays happy with us while we do what we want. Choose yourself within your values and boundaries.', readMin: 2, ur: true },
+  { href: 'blog-no-secrets.html', img: 'images/other/parent s pulling child to thier sides from both sides.webp', cat: 'Family', title: 'No Secrets', desc: "Children have a right to know their father and the important facts of their life. Let's not hide the truth — let there be no secrets.", readMin: 3, ur: false },
+  { href: 'blog-assertiveness.html', img: 'images/other/calm women.webp', cat: 'Emotional Health', title: 'Assertiveness', desc: 'Being firm yet gentle — state facts, feelings and needs clearly without blame or judgement, listen to be heard, and repeat yourself until you are.', readMin: 3, ur: false },
+  { href: 'blog-other-side-of-the-picture.html', img: 'images/other/trauma illusration.webp', cat: 'Relationships', title: 'Other Side of the Picture', desc: "Women complain that men don't talk or give time. But what do we bring for a man's peace of mind? Do taunts win love — or poison it?", readMin: 3, ur: true },
+  { href: 'blog-hidden-sins.html', img: 'images/other/locked door.webp', cat: 'Self-Growth', title: 'Hidden Sins', desc: 'Job holders and business people must be careful with amanat. Company items, work time, data and contracts — hidden sins that we overlook.', readMin: 2, ur: true },
+  { href: 'blog-kintsugi.html', img: 'images/other/bowl.webp', cat: 'Self-Growth', title: 'Kintsugi', desc: "The Japanese art of repairing broken pottery with gold. Trials don't reduce our worth — join the broken parts with love.", readMin: 2, ur: true },
+  { href: 'blog-values.html', img: 'images/other/compass.webp', cat: 'Self-Growth', title: 'Values', desc: "Our choices are based on our values. Accepting others' choices doesn't mean adopting them — and it is never about better or lesser.", readMin: 2, ur: true },
+  { href: 'blog-domino-effect.html', img: 'images/other/chain reaction.webp', cat: 'Society', title: 'Domino Effect', desc: "Today's painful events are the result of a domino effect triggered generations ago. Stop the chain — starting with yourself.", readMin: 3, ur: true },
+  { href: 'blog-goodness.html', img: 'images/other/helping.webp', cat: 'Self-Growth', title: 'Goodness', desc: "Don't turn yourself into stone while teaching someone a lesson. Keep your goodness — find the people who deserve it.", readMin: 2, ur: true },
+  { href: 'blog-good-listener.html', img: 'images/other/listner.webp', cat: 'Communication', title: 'The Good Listener', desc: "Don't compete with others' suffering. Eye contact, no phone, no interrupting, listening to understand — practice with your children.", readMin: 2, ur: true },
+  { href: 'blog-hard-times.html', img: 'images/other/family in strom.webp', cat: 'Family', title: 'Hard Times', desc: 'Children are never taught to handle hard times. Indulged children, people-pleasers and passive-aggressive parents — what the child learns.', readMin: 5, ur: true },
+  { href: 'blog-caregivers.html', img: 'images/other/trust.webp', cat: 'Relationships', title: 'Two Kinds of Caregivers', titleUr: 'دو طرح کے خدمت گار', desc: "Two kinds of caregivers exist — those who genuinely want your wellbeing, and those who serve to control. Which one surrounds you?", readMin: 3, ur: true }
+];
+var CATS = ['All', 'Family', 'Relationships', 'Marriage', 'Emotional Health', 'Communication', 'Self-Growth', 'Society', 'Environment'];
+
+var QUIZZES = [
+  {
+    id: 'listening', icon: 'wa', iconBg: 'rgba(141,170,145,.2)', iconColor: '#5f7a63', color: '#8DAA91',
+    title: 'Listening & Communication Check', titleUr: 'سننے اور بات چیت کی جانچ',
+    tagline: 'How well do you truly listen?',
+    taglineUr: 'آپ واقعی کتنی اچھی طرح سنتے ہیں؟',
+    desc: 'A quick check of your listening habits, how you handle disagreement and what your children and partner experience when they talk to you.',
+    descUr: 'آپ کی سننے کی عادتوں، اختلاف سے نمٹنے کے انداز اور اس کا جائزہ کہ آپ کے بچے اور شریک حیات جب آپ سے بات کرتے ہیں تو کیا محسوس کرتے ہیں۔',
+    service: 'Relationship Coaching',
+    serviceUr: 'ریلیشن شپ کوچنگ',
+    serviceDesc: 'One-on-one coaching to help you become the listener people feel safe talking to.',
+    serviceDescUr: 'ون آن ون کوچنگ تاکہ آپ ایسے سننے والے بنیں جن سے بات کر کے لوگ محفوظ محسوس کریں۔',
+    serviceRef: 'Relationship Coaching',
+    questions: [
+      { q: 'When someone is upset and talking to you, what do you usually do?', opts: [['I listen until they finish, then respond', 0], ['I listen, but my mind is already planning my reply', 3], ['I interrupt quickly to give advice', 6], ['I change the topic or check my phone', 10]] },
+      { q: "When someone disagrees with you, what's your first reaction?", opts: [["I'm comfortable — disagreement doesn't feel like an attack", 0], ['I feel defensive but stay calm', 3], ['I raise my voice to make my point', 6], ['I shut down or give the silent treatment', 10]] },
+      { type: 'slider', q: 'How often do you interrupt others mid-sentence?', low: 'Almost never', high: 'Very often' },
+      { q: 'When your child talks about their day, how do you usually respond?', opts: [['I put my phone down and really listen', 0], ['I listen while doing other things', 3], ['I quickly give advice or a lecture', 6], ['I dismiss it — "it\'s nothing, forget it"', 10]] },
+      { type: 'slider', q: 'When you are angry, how do you communicate?', low: 'Calm and collected', high: 'Hurtful words' },
+      { type: 'slider', q: 'How comfortable are you with silence in a conversation?', low: 'Very comfortable', high: 'Very uneasy' },
+      { q: 'When someone shares a problem, what do they mostly get from you?', opts: [['My full attention and empathy', 0], ['A mix of listening and my opinion', 3], ['Solutions and advice before they finish', 6], ['Judgment, or "I told you so"', 10]] },
+      { type: 'slider', q: 'How often do you check your phone while someone is talking to you?', low: 'Rarely', high: 'Constantly' },
+      { type: 'text', q: 'When did you last feel truly heard? What made it different?', ph: 'Write a few lines...' },
+      { type: 'text', q: 'What is one listening habit you would like to change this week?', ph: 'Write a few lines...' }
+    ]
+  },
+  {
+    id: 'parenting', icon: 'heart', iconBg: 'rgba(91,141,239,.12)', iconColor: '#5B8DEF', color: '#5B8DEF',
+    title: 'Parenting Stress Check', titleUr: 'والدین کے دباؤ کی جانچ',
+    tagline: 'How is your load as a parent?',
+    taglineUr: 'بطور والدین آپ کا بوجھ کیسا ہے؟',
+    desc: 'A gentle check on your stress, patience and energy as a parent — and what could make daily life lighter for you and your children.',
+    descUr: 'آپ کے دباؤ، صبر اور توانائی کا ایک نرم جائزہ — اور کیا چیز آپ اور آپ کے بچوں کے لیے روزمرہ زندگی آسان بنا سکتی ہے۔',
+    service: 'Parenting Coaching',
+    serviceUr: 'پیرنٹنگ کوچنگ',
+    serviceDesc: 'Practical parenting coaching that helps you respond calmly, not react in anger.',
+    serviceDescUr: 'عملی پیرنٹنگ کوچنگ جو آپ کو غصے میں ردعمل دینے کے بجائے پرسکون انداز میں جواب دینے میں مدد دیتی ہے۔',
+    serviceRef: 'Parenting',
+    questions: [
+      { type: 'slider', q: 'How often do you feel overwhelmed by your responsibilities as a parent?', low: 'Rarely', high: 'Most of the time' },
+      { q: 'When your child misbehaves, how do you usually react?', opts: [['I stay calm and address it', 0], ['I get tense but manage', 3], ['I shout more than I would like', 6], ['I lose my temper or feel out of control', 10]] },
+      { type: 'slider', q: 'How much "you time" do you get in a week?', low: 'Regularly', high: 'None at all' },
+      { q: 'Do you compare yourself or your children with other families?', opts: [['No', 0], ['Sometimes', 3], ['Often', 6], ['Constantly', 10]] },
+      { type: 'slider', q: 'When relatives or others judge your child\u2019s behaviour, how do you feel?', low: 'It does not shake me', high: 'It ruins my day' },
+      { q: 'How are your sleep and energy these days?', opts: [['Good', 0], ['Fairly good', 3], ['Poor', 6], ['Very poor', 10]] },
+      { q: 'Do you and your partner agree on how to raise the children?', opts: [['Mostly yes', 0], ['We differ sometimes', 3], ['We argue about it often', 6], ["We are on very different pages", 10]] },
+      { type: 'slider', q: 'When you feel stressed, what do you usually do?', low: 'Healthy release', high: 'Take it out on children' },
+      { type: 'text', q: 'What is the heaviest part of your day as a parent right now?', ph: 'Write a few lines...' },
+      { type: 'text', q: 'What is one small thing that would lighten your load this week?', ph: 'Write a few lines...' }
+    ]
+  },
+  {
+    id: 'relationship', icon: 'heart', iconBg: 'rgba(251,146,60,.15)', iconColor: '#ea8a3c', color: '#F59E0B',
+    title: 'Relationship Connection Check', titleUr: 'تعلقات کی جانچ',
+    tagline: 'How connected are you right now?',
+    taglineUr: 'اس وقت آپ کا رشتہ کتنا جڑا ہوا ہے؟',
+    desc: 'A check of how much real connection, appreciation and understanding you and your partner share these days.',
+    descUr: 'اس بات کا جائزہ کہ آپ اور آپ کے شریک حیات کے درمیان ان دنوں حقیقی تعلق، قدر دانی اور افہام و تفہیم کتنی ہے۔',
+    service: 'Marriage Guidance',
+    serviceUr: 'ازدواجی رہنمائی',
+    serviceDesc: 'Confidential marriage guidance to rebuild closeness, trust and honest communication.',
+    serviceDescUr: 'قربت، اعتماد اور کھلی بات چیت کو دوبارہ بنانے کے لیے رازدارانہ ازدواجی رہنمائی۔',
+    serviceRef: 'Marriage Guidance',
+    questions: [
+      { type: 'slider', q: 'How often do you and your partner talk beyond daily logistics (kids, bills, chores)?', low: 'Daily', high: 'Almost never' },
+      { q: 'When conflict happens, how does it usually end?', opts: [['We talk it through and reconnect', 0], ['We calm down and move on', 3], ['Someone gives the silent treatment', 6], ['The same issue repeats every time', 10]] },
+      { type: 'slider', q: 'Do you feel your partner understands your feelings?', low: 'Mostly', high: 'Never' },
+      { q: 'How do you express appreciation to each other?', opts: [['Regularly, in words and actions', 0], ['Sometimes', 3], ['Rarely — we mostly point out faults', 6], ['Never — we have stopped trying', 10]] },
+      { type: 'slider', q: 'When was the last time you did something enjoyable together, just the two of you?', low: 'This week', high: "Can't remember" },
+      { q: 'How do you handle each other\u2019s families and in-laws?', opts: [['We support each other', 0], ['It causes occasional tension', 3], ['It causes frequent conflict', 6], ["It's a constant source of war", 10]] },
+      { q: 'When you are upset, what do you do?', opts: [['I share it openly', 0], ['I share it sometimes', 3], ['I keep it to myself and distance', 6], ["I don't even know what's wrong anymore", 10]] },
+      { type: 'slider', q: 'How would you describe the emotional distance between you right now?', low: 'Close', high: 'Very distant' },
+      { type: 'text', q: 'Describe one recent moment you felt connected (or distant) with your partner.', ph: 'Write a few lines...' },
+      { type: 'text', q: 'What is one thing you wish your partner understood about you right now?', ph: 'Write a few lines...' }
+    ]
+  }
+];
+var BANDS = [
+  { max: 24, label: 'Strong', labelUr: 'بہترین', color: '#22c55e', bg: 'rgba(34,197,94,.14)', title: "You're in a good place.", titleUr: 'آپ اچھی جگہ پر ہیں۔', desc: 'You show care, patience and presence. Keep practising what you do — and give yourself credit for it.', descUr: 'آپ محبت، صبر اور موجودگی کا ثبوت دیتے ہیں۔ جو آپ کرتے ہیں اسے جاری رکھیں — اور اپنی داد دیں۔', suggested: 'Keep growing with our free articles and community.', suggestedUr: 'ہمارے مفت مضامین اور کمیونٹی کے ساتھ بڑھتے رہیں۔' },
+  { max: 50, label: 'Some Attention', labelUr: 'کچھ توجہ درکار', color: '#f59e0b', bg: 'rgba(245,158,11,.15)', title: 'You need some attention here.', titleUr: 'یہاں کچھ توجہ درکار ہے۔', desc: 'You care, but some habits are quietly draining you or your relationships. Small, guided changes can make a real difference.', descUr: 'آپ پرواہ کرتے ہیں، لیکن کچھ عادتیں خاموشی سے آپ کو یا آپ کے رشتوں کو تھکا رہی ہیں۔ چھوٹی، رہنمائی والی تبدیلیاں حقیقی فرق لا سکتی ہیں۔', suggested: 'A short session can help you build healthier habits.', suggestedUr: 'ایک مختصر سیشن صحت مند عادات بنانے میں مدد دے سکتا ہے۔' },
+  { max: 80, label: 'Time to Reach Out', labelUr: 'مدد کا وقت', color: '#ef4444', bg: 'rgba(239,68,68,.12)', title: 'You deserve support — not just effort.', titleUr: 'آپ صرف کوشش نہیں، مدد کے مستحق ہیں۔', desc: 'The score is high because you are carrying a lot. Please know this is common, and professional support genuinely helps.', descUr: 'اسکور زیادہ ہے کیونکہ آپ بہت کچھ اٹھا رہے ہیں۔ جان لیں کہ یہ عام بات ہے، اور پیشہ ورانہ مدد واقعی کارگر ثابت ہوتی ہے۔', suggested: 'Speaking to a coach is the strongest step you can take.', suggestedUr: 'کسی کوچ سے بات کرنا سب سے مضبوط قدم ہے جو آپ اٹھا سکتے ہیں۔' }
+];
+var QUIZ_RECS = {
+  listening: ['blog-good-listener.html', 'blog-assertiveness.html', 'blog-discord.html'],
+  parenting: ['blog-hard-times.html', 'blog-caregivers.html', 'blog-goodness.html'],
+  relationship: ['blog-other-side-of-the-picture.html', 'blog-being-controlled.html', 'blog-inheritance.html']
+};
+
+/* ================= I18N ================= */
+var I18N = {
+  en: {
+    'app.tagline': 'Better Parenting. Stronger Families.',
+    'home.greetMorning': 'Good morning!', 'home.greetAfternoon': 'Good afternoon!', 'home.greetEvening': 'Good evening!', 'home.greetNight': 'Hi there!',
+    'home.whatDo': 'What would you like to learn today?',
+    'home.continue': 'Continue learning', 'home.continueSub': 'Picked up where you left off', 'home.continueBtn': 'Continue',
+    'home.streak': 'Daily learning streak', 'home.streakSub': 'Learn a little every day — keep your streak alive.', 'home.streakStart': 'Start today', 'home.streakDays': 'day streak',
+    'home.hero': 'Small steps today.\nStronger families tomorrow.',
+    'home.heroSub': 'Read practical articles, check in with yourself and get expert support — all in one place.',
+    'home.read': 'Read Articles', 'home.assess': 'Self-Assessment', 'home.book': 'Book a Session', 'home.services': 'Our Services',
+    'home.statArticles': 'Articles', 'home.statBooks': 'Free E-books', 'home.statQuizzes': 'Self-Assessments',
+    'home.featured': 'Featured', 'home.waTitle': 'Join our WhatsApp community', 'home.waSub': 'Tips, reminders and updates — straight to your phone.',
+    'tab.home': 'Home', 'tab.articles': 'Articles', 'tab.resources': 'Resources', 'tab.more': 'More',
+    'services.title': 'Our Services', 'services.sub': 'Professional coaching and counselling to support you and your family.', 'services.learn': 'Learn More', 'services.book': 'Book a Session',
+    'help.title': 'Helplines & Emergency', 'help.sub': 'Free, confidential support — one tap away.', 'help.emergency': 'Emergency', 'help.mental': 'Mental Health & Counselling', 'help.women': 'Women & Children', 'help.call': 'Call', 'help.disclaimer': 'Helpline numbers are verified as of 2026. In an emergency, call Rescue 1122 or your local emergency number.',
+    'ask.title': 'Ask a Question', 'ask.sub': 'Ask our coaches anything about parenting, marriage or relationships.', 'ask.topic': 'Topic', 'ask.question': 'Your question', 'ask.ph': 'e.g. How can I help my child stop shouting?', 'ask.name': 'Your name (optional)', 'ask.send': 'Send via WhatsApp', 'ask.email': 'Or email us instead', 'ask.note': 'We usually reply within 1–2 working days.',
+    'home.tip': 'Tip of the Day', 'home.help': 'Need help now?', 'home.helpSub': 'Free helplines & emergency numbers',
+    'notif.tip': "Today's parenting tip",
+    'about.title': 'About PRC Pakistan', 'privacy.title': 'Privacy Policy', 'contact.title': 'Contact Us',
+    'articles.title': 'Articles', 'articles.sub': 'Practical guidance for parenting, relationships and everyday life.',
+    'articles.search': 'Search articles…', 'articles.empty': 'No articles match your search.',
+    'articles.langAll': 'All', 'articles.langEn': 'English', 'articles.langUr': 'اردو',
+    'articles.urOnly': 'اردو articles', 'articles.urSoon': 'More Urdu articles are on the way.',
+    'articles.min': 'min read', 'articles.open': 'Open article',
+    'resources.title': 'Resources', 'resources.sub': 'Free e-books and quick self-assessments to check in with yourself.',
+    'resources.books': 'Free E-books', 'resources.bookKids': 'Kids Story E-book', 'resources.bookPal': 'Palestine — Land of Prophets',
+    'resources.read': 'Read now', 'resources.quizzes': 'Self-Assessments', 'resources.quizNote': 'Honest answers, no judgement. Get a private score and see what support could help.',
+    'quiz.start': 'Start', 'quiz.questions': '10 questions', 'quiz.time': 'It only takes 3 min', 'quiz.begin': 'Start Assessment',
+    'quiz.next': 'Next', 'quiz.sliderHint': 'Drag the circle along the line',
+    'quiz.private': 'Private & instant — no account needed.', 'quiz.step': 'Question', 'quiz.of': 'of',
+    'result.youScored': 'You scored', 'result.scoreLabel': 'Attention score', 'result.suggested': 'Suggested for you',
+    'result.recommended': 'Recommended reading',
+    'result.book': 'Book a Session', 'result.retake': 'Retake', 'result.done': 'Done',
+    'more.title': 'More', 'more.about': 'About PRC Pakistan', 'more.services': 'Our Services', 'more.contact': 'Contact Us',
+    'more.privacy': 'Privacy Policy', 'more.social': 'Follow us',
+    'more.accessibility': 'Accessibility & Language', 'more.language': 'Language', 'more.languageSub': 'Switch between English and Urdu.', 'more.install': 'Install App', 'more.help': 'Helplines & Emergency', 'more.ask': 'Ask a Question', 'more.dark': 'Dark Mode', 'more.saved': 'Saved & Liked',
+    'acc.textSize': 'Text size', 'acc.contrast': 'High contrast', 'acc.contrastSub': 'Stronger contrast for easier reading.',
+    'acc.reader': 'Reader settings', 'acc.readerSub': 'Font, spacing and text size for articles.',
+    'acc.listen': 'Listen to articles', 'acc.listenSub': 'Read articles aloud with your device voice.',
+    'reader.title': 'Reader settings', 'reader.font': 'Font', 'reader.fontDefault': 'Default', 'reader.fontSerif': 'Serif', 'reader.fontRounded': 'Rounded',
+    'reader.spacing': 'Line spacing', 'reader.compact': 'Compact', 'reader.cozy': 'Cozy', 'reader.relaxed': 'Relaxed',
+    'reader.size': 'Text size', 'reader.done': 'Done',
+    'saved.title': 'Saved & Liked', 'saved.empty': 'Nothing saved yet — bookmark a line in an article or like a resource and it will appear here.',
+    'saved.lines': 'Bookmarked lines', 'saved.resources': 'Liked resources', 'saved.remove': 'Remove', 'saved.open': 'Open',
+    'viewer.listen': 'Listen', 'viewer.stop': 'Stop', 'viewer.bookmark': 'Bookmark this line', 'viewer.bookmarked': 'Line bookmarked', 'viewer.savedTo': 'Saved to your library',
+    'notif.title': 'Notifications', 'notif.articles': '14 Urdu articles now available in the Learning Hub', 'notif.wa': 'Join our WhatsApp community for daily parenting tips', 'notif.books': 'Free e-books — Kids Story & Palestine: Land of Prophets',
+    'notif.streakOn': 'Day {n} of your learning streak — keep going!', 'notif.streakOff': 'Your learning streak is at risk — read one article today.',
+    'cat.All': 'All', 'cat.Family': 'Family', 'cat.Relationships': 'Relationships', 'cat.Marriage': 'Marriage',
+    'cat.Emotional Health': 'Emotional Health', 'cat.Communication': 'Communication', 'cat.Self-Growth': 'Self-Growth',
+    'cat.Society': 'Society', 'cat.Environment': 'Environment'
+  },
+  ur: {
+    'app.tagline': 'بہتر والدین۔ مضبوط خاندان۔',
+    'home.greetMorning': 'صبح بخیر!', 'home.greetAfternoon': 'دوپہر بخیر!', 'home.greetEvening': 'شام بخیر!', 'home.greetNight': 'السلام علیکم!',
+    'home.whatDo': 'آج آپ کیا سیکھنا چاہیں گے؟',
+    'home.continue': 'سیکھنا جاری رکھیں', 'home.continueSub': 'جہاں چھوڑا تھا وہیں سے اٹھائیں', 'home.continueBtn': 'جاری رکھیں',
+    'home.streak': 'روزانہ سیکھنے کا سلسلہ', 'home.streakSub': 'ہر روز کچھ نیا سیکھیں — اپنا سلسلہ زندہ رکھیں۔', 'home.streakStart': 'آج شروع کریں', 'home.streakDays': 'دن کا سلسلہ',
+    'home.hero': 'آج چھوٹے قدم۔\nکل مضبوط خاندان۔',
+    'home.heroSub': 'عملی مضامین پڑھیں، خود کا جائزہ لیں اور ماہر رہنمائی حاصل کریں — سب ایک جگہ۔',
+    'home.read': 'مضامین پڑھیں', 'home.assess': 'خود جانچ', 'home.book': 'سیشن بک کریں', 'home.services': 'ہماری خدمات',
+    'home.statArticles': 'مضامین', 'home.statBooks': 'مفت کتابیں', 'home.statQuizzes': 'خود جانچ',
+    'home.featured': 'نمایاں', 'home.waTitle': 'واٹس ایپ کمیونٹی میں شامل ہوں', 'home.waSub': 'ٹپس، یاد دہانیاں اور تازہ ترین معلومات — براہِ راست آپ کے فون پر۔',
+    'tab.home': 'ہوم', 'tab.articles': 'مضامین', 'tab.resources': 'وسائل', 'tab.more': 'مزید',
+    'services.title': 'ہماری خدمات', 'services.sub': 'آپ اور آپ کے خاندان کے لیے پیشہ ورانہ کوچنگ اور کاؤنسلنگ۔', 'services.learn': 'مزید جانیں', 'services.book': 'سیشن بک کریں',
+    'help.title': 'ہیلپ لائنز اور ایمرجنسی', 'help.sub': 'مفت اور رازدارانہ مدد — صرف ایک ٹیپ پر۔', 'help.emergency': 'ایمرجنسی', 'help.mental': 'ذہنی صحت اور کاؤنسلنگ', 'help.women': 'خواتین اور بچے', 'help.call': 'کال کریں', 'help.disclaimer': 'ہیلپ لائن نمبرز 2026 تک تصدیق شدہ ہیں۔ ایمرجنسی میں 1122 یا اپنے مقامی ایمرجنسی نمبر پر کال کریں۔',
+    'ask.title': 'سوال پوچھیں', 'ask.sub': 'والدین، شادی یا تعلقات کے بارے میں اپنے کوچز سے کچھ بھی پوچھیں۔', 'ask.topic': 'موضوع', 'ask.question': 'آپ کا سوال', 'ask.ph': 'مثال: میں اپنے بچے کو چیخنا چھڑوانے میں کیسے مدد کروں؟', 'ask.name': 'آپ کا نام (اختیاری)', 'ask.send': 'واٹس ایپ سے بھیجیں', 'ask.email': 'یا ہمیں ای میل کریں', 'ask.note': 'ہم عام طور پر 1–2 کام کے دنوں میں جواب دیتے ہیں۔',
+    'home.tip': 'آج کی ٹپ', 'home.help': 'ابھی مدد چاہیے؟', 'home.helpSub': 'مفت ہیلپ لائنز اور ایمرجنسی نمبرز',
+    'notif.tip': 'آج کی پیرنٹنگ ٹپ',
+    'about.title': 'پی آر سی پاکستان کے بارے میں', 'privacy.title': 'پرائیویسی پالیسی', 'contact.title': 'رابطہ کریں',
+    'articles.title': 'مضامین', 'articles.sub': 'والدین، تعلقات اور روزمرہ زندگی کے لیے عملی رہنمائی۔',
+    'articles.search': 'مضامین تلاش کریں…', 'articles.empty': 'کوئی مضمون نہیں ملا۔',
+    'articles.langAll': 'سب', 'articles.langEn': 'انگریزی', 'articles.langUr': 'اردو',
+    'articles.urOnly': 'اردو مضامین', 'articles.urSoon': 'مزید اردو مضامین جلد آرہے ہیں۔',
+    'articles.min': 'منٹ', 'articles.open': 'مضمون کھولیں',
+    'resources.title': 'وسائل', 'resources.sub': 'مفت کتابیں اور فوری خود جانچ — خود کا جائزہ لیں۔',
+    'resources.books': 'مفت کتابیں', 'resources.bookKids': 'بچوں کی کہانی', 'resources.bookPal': 'فلسطین — انبیاء کی سرزمین',
+    'resources.read': 'ابھی پڑھیں', 'resources.quizzes': 'خود جانچ', 'resources.quizNote': 'دیانتدار جوابات، کوئی فیصلہ نہیں۔ نجی اسکور حاصل کریں اور دیکھیں کہ کون سی مدد کارگر ہو سکتی ہے۔',
+    'quiz.start': 'شروع کریں', 'quiz.questions': '10 سوالات', 'quiz.time': 'صرف 3 منٹ لگتے ہیں', 'quiz.begin': 'جانچ شروع کریں',
+    'quiz.next': 'اگلا', 'quiz.sliderHint': 'لائن پر دائرہ گھسیٹیں',
+    'quiz.private': 'نجی اور فوری — کسی اکاؤنٹ کی ضرورت نہیں۔', 'quiz.step': 'سوال', 'quiz.of': 'از',
+    'result.youScored': 'آپ کا اسکور', 'result.scoreLabel': 'توجہ کا اسکور', 'result.suggested': 'آپ کے لیے تجویز',
+    'result.recommended': 'تجویز کردہ مطالعہ',
+    'result.book': 'سیشن بک کریں', 'result.retake': 'دوبارہ', 'result.done': 'ختم',
+    'more.title': 'مزید', 'more.about': 'پی آر سی پاکستان کے بارے میں', 'more.services': 'ہماری خدمات', 'more.contact': 'رابطہ کریں',
+    'more.privacy': 'پرائیویسی پالیسی', 'more.social': 'ہمیں فالو کریں',
+    'more.accessibility': 'رسائی اور زبان', 'more.language': 'زبان', 'more.languageSub': 'انگریزی اور اردو کے درمیان سوئچ کریں۔', 'more.install': 'ایپ انسٹال کریں', 'more.help': 'ہیلپ لائنز اور ایمرجنسی', 'more.ask': 'سوال پوچھیں', 'more.dark': 'ڈارک موڈ', 'more.saved': 'محفوظ اور پسندیدہ',
+    'acc.textSize': 'متن کا سائز', 'acc.contrast': 'زیادہ کنٹراسٹ', 'acc.contrastSub': 'آسان پڑھنے کے لیے مضبوط کنٹراسٹ۔',
+    'acc.reader': 'ریڈر کی ترتیبات', 'acc.readerSub': 'مضامین کے لیے فونٹ، فاصلہ اور متن کا سائز۔',
+    'acc.listen': 'مضامین سنیں', 'acc.listenSub': 'اپنی ڈیوائس کی آواز سے مضامین پڑھ کر سنائیں۔',
+    'reader.title': 'ریڈر کی ترتیبات', 'reader.font': 'فونٹ', 'reader.fontDefault': 'ڈیفالٹ', 'reader.fontSerif': 'سیرف', 'reader.fontRounded': 'گول',
+    'reader.spacing': 'سطر کا فاصلہ', 'reader.compact': 'کمپیکٹ', 'reader.cozy': 'آرام دہ', 'reader.relaxed': 'کشادہ',
+    'reader.size': 'متن کا سائز', 'reader.done': 'ختم',
+    'saved.title': 'محفوظ اور پسندیدہ', 'saved.empty': 'ابھی کچھ محفوظ نہیں — کسی مضمون میں سطر محفوظ کریں یا وسائل کو پسند کریں، یہ یہاں ظاہر ہو گا۔',
+    'saved.lines': 'محفوظ کردہ سطریں', 'saved.resources': 'پسندیدہ وسائل', 'saved.remove': 'ہٹائیں', 'saved.open': 'کھولیں',
+    'viewer.listen': 'سنیں', 'viewer.stop': 'روکیں', 'viewer.bookmark': 'اس سطر کو محفوظ کریں', 'viewer.bookmarked': 'سطر محفوظ ہو گئی', 'viewer.savedTo': 'آپ کی لائبریری میں محفوظ',
+    'notif.title': 'اطلاعات', 'notif.articles': 'لرننگ ہب میں اب 14 اردو مضامین دستیاب ہیں', 'notif.wa': 'روزانہ پیرنٹنگ ٹپس کے لیے ہماری واٹس ایپ کمیونٹی میں شامل ہوں', 'notif.books': 'مفت کتابیں — بچوں کی کہانی اور فلسطین: انبیاء کی سرزمین',
+    'notif.streakOn': 'آپ کے سیکھنے کا سلسلہ {n} دن کا ہے — جاری رکھیں!', 'notif.streakOff': 'آپ کا سیکھنے کا سلسلہ خطرے میں ہے — آج ایک مضمون پڑھیں۔',
+    'cat.All': 'سب', 'cat.Family': 'خاندان', 'cat.Relationships': 'تعلقات', 'cat.Marriage': 'شادی',
+    'cat.Emotional Health': 'جذباتی صحت', 'cat.Communication': 'بات چیت', 'cat.Self-Growth': 'خود کی بہتری',
+    'cat.Society': 'معاشرہ', 'cat.Environment': 'ماحول'
+  }
+};
+
+/* ================= APP STATE ================= */
+var lang = localStorage.getItem('prc_app_lang') || 'en';
+var activeTab = 'home';
+var activeCat = 'All';
+var activeLang = lang === 'ur' ? 'ur' : 'all';
+var searchQ = '';
+var quiz = null;        // current quiz object
+var quizStep = 0;
+
+/* ================= ACCESSIBILITY STATE ================= */
+var textSizes = [87.5, 100, 112.5, 125];
+var textSizeIdx = (function () { var i = parseInt(localStorage.getItem('prc_app_textsize') || '1', 10); return (i >= 0 && i < textSizes.length) ? i : 1; })();
+var highContrast = localStorage.getItem('prc_app_contrast') === '1';
+var readAloud = localStorage.getItem('prc_app_readaloud') !== '0';
+var readerPrefs = (function () {
+  try { var p = JSON.parse(localStorage.getItem('prc_app_reader') || '{}'); return { font: p.font || 'default', line: p.line || 'cozy', size: parseFloat(p.size) || 1 }; }
+  catch (e) { return { font: 'default', line: 'cozy', size: 1 }; }
+})();
+var reading = false;   // text-to-speech active?
+var quizScore = 0;
+var quizAnswers = [];
+
+var $ = function (id) { return document.getElementById(id); };
+
+/* ================= NAV ================= */
+function showTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('active'); });
+  $('screen-' + tab).classList.add('active');
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.classList.toggle('active', t.dataset.tab === tab);
+  });
+  $('app-content').scrollTop = 0;
+  if (tab === 'articles') renderArticles();
+  if (tab === 'home') { renderFeatured(); renderTip(); }
+  if (tab === 'resources') renderQuizList();
+  if (tab === 'services') renderServices();
+  if (tab === 'help') renderHelp();
+  if (tab === 'saved') renderSaved();
+  if (tab === 'more') applyLang();
+}
+document.querySelectorAll('.tab').forEach(function (t) {
+  t.addEventListener('click', function () { closeQuiz(); showTab(t.dataset.tab); });
+});
+document.querySelector('.go-articles').addEventListener('click', function () { showTab('articles'); });
+document.querySelector('.go-resources').addEventListener('click', function () { showTab('resources'); });
+document.querySelectorAll('.go-services').forEach(function (el) {
+  el.addEventListener('click', function (e) { e.preventDefault(); showTab('services'); });
+});
+document.querySelectorAll('.open-help').forEach(function (el) {
+  el.addEventListener('click', function () { showTab('help'); });
+});
+document.querySelectorAll('.open-ask').forEach(function (el) {
+  el.addEventListener('click', function () { showTab('ask'); });
+});
+document.querySelectorAll('.open-about').forEach(function (el) {
+  el.addEventListener('click', function (e) { e.preventDefault(); showTab('about'); });
+});
+document.querySelectorAll('.open-contact').forEach(function (el) {
+  el.addEventListener('click', function (e) { e.preventDefault(); showTab('contact'); });
+});
+document.querySelectorAll('.open-privacy').forEach(function (el) {
+  el.addEventListener('click', function (e) { e.preventDefault(); showTab('privacy'); });
+});
+
+/* ================= ARTICLES ================= */
+var LANG_FILTERS = { all: 'articles.langAll', en: 'articles.langEn', ur: 'articles.langUr' };
+function renderLangChips() {
+  var box = $('article-lang-chips');
+  box.innerHTML = '';
+  Object.keys(LANG_FILTERS).forEach(function (l) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip' + (l === activeLang ? ' active' : '');
+    b.textContent = t(LANG_FILTERS[l]);
+    b.addEventListener('click', function () {
+      activeLang = l;
+      renderLangChips();
+      renderArticles();
+    });
+    box.appendChild(b);
+  });
+}
+function renderChips() {
+  var box = $('article-chips');
+  box.innerHTML = '';
+  CATS.forEach(function (c) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip' + (c === activeCat ? ' active' : '');
+    b.textContent = t('cat.' + c);
+    b.addEventListener('click', function () {
+      activeCat = c;
+      renderChips();
+      renderArticles();
+    });
+    box.appendChild(b);
+  });
+}
+function renderArticles() {
+  var list = $('article-list');
+  var q = searchQ.trim().toLowerCase();
+  var urMode = lang === 'ur';
+  var items = ARTICLES.filter(function (a) {
+    if (activeLang === 'en' && a.ur) return false;
+    if (activeLang === 'ur' && !a.ur) return false;
+    if (activeCat !== 'All' && a.cat !== activeCat) return false;
+    if (q && a.title.toLowerCase().indexOf(q) === -1 && a.desc.toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  });
+  if (!items.length) {
+    var msg = activeLang === 'ur' ? t('articles.urOnly') + ' — ' + t('articles.urSoon') : t('articles.empty');
+    list.innerHTML = '<div class="text-center py-10"><p class="text-sm font-semibold text-dark/60">' + msg + '</p></div>';
+    return;
+  }
+  list.innerHTML = items.map(function (a) {
+    var title = urMode && a.titleUr ? a.titleUr : a.title;
+    return '<button type="button" class="article-card flex gap-3 p-2.5 w-full text-left" data-open-article="' + a.href + '" data-article-title="' + title.replace(/"/g, '&quot;') + '">' +
+      '<img src="' + a.img + '" alt="' + title.replace(/"/g, '&quot;') + '" loading="lazy" width="120" height="90" style="width:104px;height:90px;border-radius:.75rem;flex-shrink:0;object-fit:cover;">' +
+      '<div class="min-w-0 flex-1 py-0.5">' +
+      '<div class="flex items-center gap-1.5">' +
+      '<span class="text-[10px] font-bold text-primary bg-primary/10 rounded-full px-2 py-0.5">' + t('cat.' + a.cat) + '</span>' +
+      '<span class="text-[10px] font-semibold text-dark/40">' + a.readMin + ' ' + t('articles.min') + '</span>' +
+      '</div>' +
+      '<p class="text-[13px] font-bold text-dark leading-snug mt-1.5 line-clamp-2">' + title + '</p>' +
+      '<p class="text-[11px] text-dark/55 leading-snug mt-1 line-clamp-1">' + a.desc + '</p>' +
+      '</div></button>';
+  }).join('');
+  list.querySelectorAll('[data-open-article]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      openPageViewer('./' + b.getAttribute('data-open-article'), b.getAttribute('data-article-title'));
+    });
+  });
+}
+$('article-search').addEventListener('input', function () { searchQ = this.value; renderArticles(); });
+
+/* ================= HOME FEATURED ================= */
+function renderFeatured() {
+  var a = ARTICLES.find(function (x) { return x.href === 'blog-good-listener.html'; });
+  if (!a) return;
+  var title = lang === 'ur' && a.titleUr ? a.titleUr : a.title;
+  $('home-featured').innerHTML =
+    '<button type="button" class="article-card flex gap-3 p-2.5 w-full text-left" data-open-article="' + a.href + '" data-article-title="' + title.replace(/"/g, '&quot;') + '">' +
+    '<img src="' + a.img + '" alt="" loading="lazy" width="120" height="90" style="width:104px;height:90px;border-radius:.75rem;flex-shrink:0;object-fit:cover;">' +
+    '<div class="min-w-0 flex-1 py-0.5">' +
+    '<span class="text-[10px] font-bold text-primary bg-primary/10 rounded-full px-2 py-0.5">' + t('cat.' + a.cat) + '</span>' +
+    '<p class="text-[13px] font-bold text-dark leading-snug mt-1.5 line-clamp-2">' + title + '</p>' +
+    '<p class="text-[11px] text-dark/55 leading-snug mt-1 line-clamp-2">' + a.desc + '</p>' +
+    '</div></button>';
+  var fb = document.querySelector('#home-featured [data-open-article]');
+  if (fb) fb.addEventListener('click', function () {
+    openPageViewer('./' + fb.getAttribute('data-open-article'), fb.getAttribute('data-article-title'));
+  });
+}
+
+/* ================= TIP OF THE DAY ================= */
+var TIPS = [
+  { en: 'Listen twice as much as you speak — children open up when they feel heard.', ur: 'جتنا بولتے ہیں اس سے دگنا سنیں — بچے تب کھلتے ہیں جب وہ محسوس کریں کہ ان کی بات سنی جا رہی ہے۔' },
+  { en: 'Put your phone down when your child talks to you. Presence beats presents.', ur: 'جب بچہ آپ سے بات کرے تو فون رکھ دیں۔ موجودگی، تحفوں سے زیادہ اہم ہے۔' },
+  { en: 'Praise the effort, not just the result — it builds resilience.', ur: 'صرف نتیجہ نہیں، کوشش کی تعریف کریں — اس سے برداشت پیدا ہوتی ہے۔' },
+  { en: 'A calm "no" carries more weight than a shouted one.', ur: 'پرسکون "نہیں" چیخے ہوئے "نہیں" سے زیادہ اثر رکھتی ہے۔' },
+  { en: 'Apologize to your children when you are wrong — it teaches them humility.', ur: 'جب آپ غلط ہوں تو بچوں سے معافی مانگیں — اس سے انہیں عاجزی سیکھنے کو ملتی ہے۔' },
+  { en: 'Fixed family time, even 15 minutes a day, creates belonging.', ur: 'روزانہ 15 منٹ کا مقررہ خاندانی وقت بھی اپنائیت پیدا کرتا ہے۔' },
+  { en: 'Let children make small decisions — it builds confidence.', ur: 'بچوں کو چھوٹے فیصلے کرنے دیں — اس سے اعتماد بڑھتا ہے۔' },
+  { en: 'Sleep is a parenting tool: an overtired child is an overwhelmed child.', ur: 'نیند والدین کا ہتھیار ہے: زیادہ تھکا ہوا بچہ زیادہ پریشان بچہ ہوتا ہے۔' },
+  { en: 'Disagreement is not disrespect. Model how to differ kindly.', ur: 'اختلاف رائے بے ادبی نہیں۔ نرمی سے اختلاف کرنا سکھائیں۔' },
+  { en: 'Thank your partner in front of the children — they learn respect by watching.', ur: 'بچوں کے سامنے اپنے شریک حیات کا شکریہ ادا کریں — وہ دیکھ کر احترام سیکھتے ہیں۔' },
+  { en: 'Breathe before you react. Anger said out loud cannot be unsaid.', ur: 'ردعمل سے پہلے ایک سانس لیں۔ غصے میں کہی گئی بات واپس نہیں آتی۔' },
+  { en: 'Consistency beats intensity — small daily habits shape children more than rare grand gestures.', ur: 'مستقل مزاجی شدت سے بہتر ہے — چھوٹی روزانہ عادات بچوں کو کبھی کبھار کی بڑی حرکتوں سے زیادہ ڈھالتی ہیں۔' }
+];
+function dayIndex() {
+  var now = new Date();
+  var start = new Date(now.getFullYear(), 0, 0);
+  return Math.floor((now - start) / 86400000);
+}
+function renderGreeting() {
+  var h = new Date().getHours();
+  var key = h < 12 ? 'home.greetMorning' : (h < 17 ? 'home.greetAfternoon' : 'home.greetNight');
+  var g = $('home-greeting');
+  if (g) g.textContent = t(key);
+  var hero = $('home-hero-line');
+  if (hero) hero.textContent = t('home.whatDo');
+}
+function renderTip() {
+  var ur = lang === 'ur';
+  var tip = TIPS[dayIndex() % TIPS.length];
+  $('home-tip').innerHTML =
+    '<div class="flex items-start gap-3 rounded-xl border border-[#e5f3e6] bg-[#f0fbf1] p-3.5">' +
+    '<span class="w-9 h-9 rounded-full flex items-center justify-center bg-green-500 text-white flex-shrink-0">\uD83D\uDCA1</span>' +
+    '<div class="min-w-0 flex-1">' +
+    '<p class="text-[10px] font-bold uppercase tracking-wider text-dark/40">' + t('home.tip') + '</p>' +
+    '<p class="text-[13px] font-semibold text-dark leading-snug mt-1">' + (ur ? tip.ur : tip.en) + '</p>' +
+    '</div></div>';
+}
+
+/* ================= CONTINUE LEARNING ================= */
+function saveLastArticle(href, title) {
+  try { localStorage.setItem('prc_app_last', JSON.stringify({ href: href, title: title, at: Date.now() })); } catch (e) {}
+  markLearningDay();
+}
+function renderContinue() {
+  var box = $('home-continue');
+  if (!box) return;
+  var raw = null;
+  try { raw = JSON.parse(localStorage.getItem('prc_app_last') || 'null'); } catch (e) {}
+  if (!raw || !raw.href) { box.innerHTML = ''; return; }
+  var a = ARTICLES.find(function (x) { return x.href === raw.href; });
+  var title = a ? (lang === 'ur' && a.titleUr ? a.titleUr : a.title) : raw.title;
+  box.innerHTML =
+    '<div class="rounded-2xl border border-[#e5f3e6] bg-[#f0fbf1] p-4">' +
+    '<p class="text-[10px] font-bold uppercase tracking-wider text-dark/40">' + t('home.continue') + '</p>' +
+    '<div class="flex items-center gap-3 mt-2">' +
+    '<span class="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-white border border-[#e5f3e6] flex-shrink-0">\uD83D\uDCD6</span>' +
+    '<div class="min-w-0 flex-1">' +
+    '<p class="text-[13px] font-bold text-dark leading-snug line-clamp-1">' + title + '</p>' +
+    '<p class="text-[11px] text-dark/50 mt-0.5">' + t('home.continueSub') + '</p>' +
+    '</div>' +
+    '<button type="button" id="continue-btn" style="flex-shrink:0;padding:8px 16px;background:#5B8DEF;color:#fff;font-size:13px;font-weight:700;border-radius:9999px;cursor:pointer;box-shadow:0 4px 12px rgba(91,141,239,.3);">' + t('home.continueBtn') + '</button>' +
+    '</div></div>';
+  var b = $('continue-btn');
+  if (b) b.addEventListener('click', function () { openPageViewer('./' + raw.href, raw.title); });
+}
+
+/* ================= DAILY LEARNING STREAK ================= */
+function getStreakDays() {
+  try { return JSON.parse(localStorage.getItem('prc_app_streak') || '{}'); } catch (e) { return {}; }
+}
+function dayKey(d) {
+  return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+}
+function markLearningDay() {
+  try {
+    var days = getStreakDays();
+    days[dayKey(new Date())] = true;
+    localStorage.setItem('prc_app_streak', JSON.stringify(days));
+  } catch (e) {}
+}
+function streakInfo() {
+  var days = getStreakDays();
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var streak = 0;
+  var d = new Date(today);
+  while (days[dayKey(d)]) { streak++; d.setDate(d.getDate() - 1); }
+  var monday = new Date(today);
+  monday.setDate(today.getDate() - ((today.getDay() + 6) % 7));
+  var dots = [];
+  var labels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  for (var i = 0; i < 7; i++) {
+    var dd = new Date(monday);
+    dd.setDate(monday.getDate() + i);
+    dots.push({ key: dayKey(dd), label: labels[i], done: !!days[dayKey(dd)] });
+  }
+  return { streak: streak, todayDone: !!days[dayKey(today)], dots: dots };
+}
+function renderStreak() {
+  var box = $('home-streak');
+  if (!box) return;
+  var info = streakInfo();
+  var ur = lang === 'ur';
+  box.innerHTML =
+    '<div class="rounded-2xl border border-[#f0ede6] bg-white p-4">' +
+    '<div class="flex items-center justify-between gap-2">' +
+    '<p class="text-[10px] font-bold uppercase tracking-wider text-dark/40">' + t('home.streak') + '</p>' +
+    '<span class="text-[11px] font-bold text-primary whitespace-nowrap">' + (info.streak > 0 ? info.streak + ' ' + t('home.streakDays') + ' \uD83D\uDD25' : t('home.streakStart') + ' \uD83D\uDD25') + '</span>' +
+    '</div>' +
+    '<div class="flex items-center justify-between mt-3">' +
+    info.dots.map(function (d) {
+      return '<div class="flex flex-col items-center gap-1.5">' +
+        '<span class="w-2.5 h-2.5 rounded-full" style="background:' + (d.done ? '#5B8DEF' : '#E5DFD2') + '"></span>' +
+        '<span class="text-[9px] font-bold text-dark/40">' + d.label + '</span></div>';
+    }).join('') +
+    '</div>' +
+    '<p class="text-[11px] text-dark/50 mt-3">' + t('home.streakSub') + '</p>' +
+    '</div>';
+}
+
+/* ================= RESOURCES ================= */
+var QUIZ_META = [
+  { id: 'listening', title: 'Listening & Communication', titleUr: 'سننے اور بات چیت', tagline: 'Good listener or quick to react?', taglineUr: 'اچھے سننے والے یا جلدی ردعمل دینے والے؟', iconBg: 'rgba(141,170,145,.2)', iconColor: '#5f7a63' },
+  { id: 'parenting', title: 'Parenting Stress', titleUr: 'والدین کا دباؤ', tagline: 'How heavy is your load?', taglineUr: 'آپ کا بوجھ کتنا بھاری ہے؟', iconBg: 'rgba(91,141,239,.12)', iconColor: '#5B8DEF' },
+  { id: 'relationship', title: 'Relationship Connection', titleUr: 'تعلق کی مضبوطی', tagline: 'Are you and your partner connected?', taglineUr: 'کیا آپ اور آپ کا شریک حیات جڑے ہوئے ہیں؟', iconBg: 'rgba(251,146,60,.15)', iconColor: '#ea8a3c' }
+];
+function renderQuizList() {
+  var box = $('quiz-list');
+  box.innerHTML = QUIZ_META.map(function (m) {
+    var qz = QUIZZES.find(function (z) { return z.id === m.id; });
+    return '<div class="quiz-card">' +
+      '<div class="q-head">' +
+      '<span class="q-icon" style="background:' + m.iconBg + ';color:' + m.iconColor + '">' +
+      '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>' +
+      '</span>' +
+      '<div class="flex-1 min-w-0">' +
+      '<p class="text-sm font-bold text-dark leading-tight">' + (lang === 'ur' ? m.titleUr : m.title) + '</p>' +
+      '<p class="text-[11px] text-dark/50 mt-0.5">' + (lang === 'ur' ? m.taglineUr : m.tagline) + '</p>' +
+      '</div></div>' +
+      '<div class="q-body flex items-center justify-between">' +
+      '<p class="text-[11px] font-semibold text-dark/45">' + qz.questions.length + ' ' + t('quiz.questions').replace(/^\d+ /, '').toLowerCase() + ' · ' + t('quiz.time') + '</p>' +
+      '<button type="button" class="start-btn" data-quiz="' + m.id + '">' + t('quiz.start') + ' <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>' +
+      '</div></div>';
+  }).join('');
+  box.querySelectorAll('.start-btn').forEach(function (b) {
+    b.addEventListener('click', function () { openQuiz(b.dataset.quiz); });
+  });
+}
+
+/* ================= QUIZ PLAYER ================= */
+function openQuiz(id) {
+  quiz = QUIZZES.find(function (z) { return z.id === id; });
+  quizStep = 0; quizScore = 0; quizAnswers = [];
+  var meta = QUIZ_META.find(function (m) { return m.id === id; });
+  $('quiz-name').textContent = lang === 'ur' ? quiz.titleUr : quiz.title;
+  $('quiz-icon-big').style.background = meta.iconBg;
+  $('quiz-icon-big').style.color = meta.iconColor;
+  $('quiz-icon-big').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>';
+  $('quiz-intro-title').textContent = lang === 'ur' ? quiz.taglineUr : quiz.tagline;
+  $('quiz-intro-desc').textContent = lang === 'ur' ? quiz.descUr : quiz.desc;
+  $('quiz-meta').textContent = quiz.questions.length + ' ' + t('quiz.questions').replace(/^\d+ /, '') + ' · ' + t('quiz.time');
+  $('quiz-total').textContent = quiz.questions.length;
+  $('quiz-overlay').classList.remove('hidden');
+  $('tabbar').classList.add('hidden');
+  $('quiz-start').classList.remove('hidden');
+  $('quiz-play').classList.add('hidden');
+  $('quiz-result').classList.add('hidden');
+  applyLang();
+}
+function startQuiz() {
+  $('quiz-start').classList.add('hidden');
+  $('quiz-play').classList.remove('hidden');
+  renderQuestion();
+}
+function renderQuestion() {
+  var q = quiz.questions[quizStep];
+  $('quiz-step').textContent = quizStep + 1;
+  $('quiz-progress').style.width = ((quizStep) / quiz.questions.length * 100) + '%';
+  $('quiz-play-name').textContent = lang === 'ur' ? quiz.titleUr : quiz.title;
+  var box = $('quiz-questions');
+  var html = '<div class="q-slide">' +
+    '<p class="font-bold text-[15px] text-dark leading-snug">' + (quizStep + 1) + '. ' + q.q + '</p>';
+  if (q.type === 'slider') {
+    html += '<div class="slider-box mt-5">' +
+      '<div class="slider-track" id="q-slider">' +
+      '<div class="slider-rail"></div>' +
+      '<div class="slider-fill" id="q-slider-fill"></div>' +
+      '<div class="slider-handle" id="q-slider-handle"></div>' +
+      '</div>' +
+      '<div class="slider-labels"><span>' + q.low + '</span><span>' + q.high + '</span></div>' +
+      '<p class="slider-value" id="q-slider-value"></p>' +
+      '<button type="button" class="q-next" id="q-slider-next" disabled style="opacity:.45">' + t('quiz.next') + '</button>' +
+      '</div>';
+  } else if (q.type === 'text') {
+    html += '<textarea class="q-text mt-4" id="q-text" rows="4" placeholder="' + (q.ph || '') + '"></textarea>' +
+      '<button type="button" class="q-next" id="q-text-next">' + t('quiz.next') + '</button>';
+  } else {
+    html += '<div class="flex flex-col gap-2.5 mt-4">' +
+      q.opts.map(function (o, i) {
+        return '<button type="button" class="q-option" data-i="' + i + '"><span class="dot"></span><span class="text-sm font-medium text-dark/85 leading-snug">' + o[0] + '</span></button>';
+      }).join('') +
+      '</div>';
+  }
+  html += '</div>';
+  box.innerHTML = html;
+  box.querySelectorAll('.q-option').forEach(function (b) {
+    b.addEventListener('click', function () { pickAnswer(b); });
+  });
+  if (q.type === 'slider') initSlider();
+  if (q.type === 'text') {
+    $('q-text-next').addEventListener('click', function () {
+      quizAnswers.push(0);
+      nextQuestion();
+    });
+  }
+}
+function initSlider() {
+  var track = $('q-slider');
+  var fill = $('q-slider-fill');
+  var handle = $('q-slider-handle');
+  var valueEl = $('q-slider-value');
+  var nextBtn = $('q-slider-next');
+  var val = 5;
+  function setVal(v) {
+    val = Math.max(0, Math.min(10, Math.round(v)));
+    var pct = val / 10 * 100;
+    fill.style.width = pct + '%';
+    handle.style.left = pct + '%';
+    valueEl.textContent = val + '/10';
+    nextBtn.disabled = false;
+    nextBtn.style.opacity = '1';
+  }
+  function pos(e) {
+    var r = track.getBoundingClientRect();
+    return (e.clientX - r.left) / r.width * 10;
+  }
+  function down(e) {
+    e.preventDefault();
+    setVal(pos(e));
+    var move = function (ev) { setVal(pos(ev)); };
+    var up = function () {
+      document.removeEventListener('pointermove', move);
+      document.removeEventListener('pointerup', up);
+    };
+    document.addEventListener('pointermove', move);
+    document.addEventListener('pointerup', up);
+  }
+  track.addEventListener('pointerdown', down);
+  setVal(5);
+  nextBtn.addEventListener('click', function () {
+    quizAnswers.push(val);
+    nextQuestion();
+  });
+}
+function nextQuestion() {
+  quizStep++;
+  if (quizStep >= quiz.questions.length) {
+    showResult();
+  } else {
+    renderQuestion();
+  }
+}
+function pickAnswer(btn) {
+  if (btn.classList.contains('picked')) return;
+  var i = parseInt(btn.dataset.i, 10);
+  quizAnswers.push(quiz.questions[quizStep].opts[i][1]);
+  btn.classList.add('picked');
+  setTimeout(function () { nextQuestion(); }, 320);
+}
+function showResult() {
+  quizScore = quizAnswers.reduce(function (a, b) { return a + b; }, 0);
+  if (quizScore > 80) quizScore = 80; // cap
+  $('quiz-play').classList.add('hidden');
+  $('quiz-result').classList.remove('hidden');
+  $('quiz-result').classList.add('flex');
+  var band = BANDS.find(function (b) { return quizScore <= b.max; }) || BANDS[2];
+  var ur = lang === 'ur';
+  var bp = $('result-band');
+  bp.textContent = ur ? band.labelUr : band.label;
+  bp.style.background = band.bg; bp.style.color = band.color;
+  $('result-title').textContent = ur ? band.titleUr : band.title;
+  $('result-desc').textContent = ur ? band.descUr : band.desc;
+  $('result-service').textContent = ur ? quiz.serviceUr : quiz.service;
+  $('result-service-desc').textContent = ur ? band.suggestedUr + ' ' + quiz.serviceDescUr : band.suggested + ' ' + quiz.serviceDesc;
+  $('result-wa').href = 'https://wa.me/923328274000?text=' + encodeURIComponent('I took the ' + quiz.title + ' self-assessment on PRC Pakistan. My attention score: ' + quizScore + '/100. I would like to talk about ' + quiz.service + '.');
+  $('result-book').href = './contact.html?topic=book-session';
+  $('result-book').addEventListener('click', function (e) { e.preventDefault(); closeQuiz(); showTab('contact'); });
+  renderQuizRecs();
+  markLearningDay(); // completing an assessment counts toward the daily streak
+  animateGauge(quizScore, band.color);
+  applyLang();
+}
+function renderQuizRecs() {
+  var box = $('result-recs');
+  var recs = QUIZ_RECS[quiz.id] || [];
+  if (!recs.length) { box.innerHTML = ''; return; }
+  var ur = lang === 'ur';
+  box.innerHTML = '<p class="text-[10px] font-bold uppercase tracking-wider text-dark/40 mt-5">' + t('result.recommended') + '</p>' +
+    recs.map(function (href) {
+      var a = ARTICLES.find(function (x) { return x.href === href; });
+      if (!a) return '';
+      var title = ur && a.titleUr ? a.titleUr : a.title;
+      return '<button type="button" class="flex items-center gap-3 rounded-xl border border-[#f0ede6] bg-white p-3 w-full text-left mt-2" data-rec-article="' + a.href + '" data-rec-title="' + title.replace(/"/g, '&quot;') + '">' +
+        '<img src="' + a.img + '" alt="" width="72" height="54" loading="lazy" style="width:72px;height:54px;border-radius:.6rem;object-fit:cover;flex-shrink:0;">' +
+        '<span class="min-w-0 flex-1">' +
+        '<span class="block text-[12px] font-bold text-dark leading-snug line-clamp-2">' + title + '</span>' +
+        '<span class="block text-[10px] text-dark/45 mt-1">' + a.readMin + ' ' + t('articles.min') + '</span></span>' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/25 flex-shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>' +
+        '</button>';
+    }).join('');
+  box.querySelectorAll('[data-rec-article]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var href = b.getAttribute('data-rec-article');
+      var title = b.getAttribute('data-rec-title');
+      closeQuiz();
+      openPageViewer('./' + href, title);
+    });
+  });
+}
+function animateGauge(score, color) {
+  var R = 80, CX = 110, CY = 120, MAX = 100;
+  var frac = Math.min(1, score / MAX); // dial shows /100; max gainable is 80 (kept a secret)
+  var arc = $('gauge-arc');
+  var len = Math.PI * R; // semicircle length
+  arc.style.stroke = color;
+  arc.style.strokeDasharray = len;
+  arc.style.strokeDashoffset = len;
+  void arc.getBoundingClientRect();
+  arc.style.strokeDashoffset = len * (1 - frac);
+  var needle = $('gauge-needle');
+  needle.style.transform = 'rotate(' + (180 * frac - 90) + 'deg)';
+  var ticks = $('gauge-ticks');
+  ticks.innerHTML = '';
+  for (var s = 0; s <= 100; s += 10) {
+    var a = Math.PI + (Math.PI * s / MAX);
+    var x1 = CX + Math.cos(a) * 66, y1 = CY + Math.sin(a) * 66;
+    var x2 = CX + Math.cos(a) * 74, y2 = CY + Math.sin(a) * 74;
+    ticks.innerHTML += '<line x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '" stroke="#d8d2c4" stroke-width="2" stroke-linecap="round"></line>';
+  }
+  var count = $('gauge-count');
+  var t0 = performance.now();
+  function frame(now) {
+    var p = Math.min(1, (now - t0) / 1400);
+    var eased = 1 - Math.pow(1 - p, 3);
+    count.textContent = Math.round(eased * score);
+    if (p < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+function closeQuiz() {
+  $('quiz-overlay').classList.add('hidden');
+  $('tabbar').classList.remove('hidden');
+  quiz = null;
+}
+$('quiz-close').addEventListener('click', closeQuiz);
+$('quiz-exit').addEventListener('click', closeQuiz);
+$('quiz-begin').addEventListener('click', startQuiz);
+$('result-retake').addEventListener('click', function () { openQuiz(quiz.id); startQuiz(); });
+$('result-close').addEventListener('click', closeQuiz);
+
+/* ================= SERVICES ================= */
+var SERVICES = [
+  { id: 'couple', icon: '\uD83D\uDC91', bg: 'rgba(251,146,60,.15)', title: 'Couple Counseling', titleUr: 'جوڑے کی کاؤنسلنگ', desc: 'Strengthen your relationship through effective communication, conflict resolution, and rebuilding trust.', descUr: 'موثر بات چیت، تنازعات کے حل اور اعتماد کی بحالی کے ذریعے اپنے رشتے کو مضبوط کریں۔' },
+  { id: 'anger', icon: '\uD83E\uDDD8', bg: 'rgba(239,68,68,.12)', title: 'Anger Management', titleUr: 'غصے کا انتظام', desc: 'Transform anger into a constructive force with practical tools for self-regulation and calm communication.', descUr: 'خود پر قابو اور پرسکون گفتگو کی عملی مشقوں سے غصے کو تعمیری قوت میں بدلیں۔' },
+  { id: 'emotional', icon: '\uD83C\uDF31', bg: 'rgba(141,170,145,.2)', title: 'Emotional Health Counseling', titleUr: 'جذباتی صحت کی کاؤنسلنگ', desc: 'Build emotional resilience, self-awareness, and nurture a healthy emotional life for you and your family.', descUr: 'جذباتی مضبوطی اور خود آگاہی پیدا کریں، اور اپنے اور اپنے خاندان کے لیے صحت مند جذباتی زندگی بنائیں۔' },
+  { id: 'mental', icon: '\uD83E\uDDE0', bg: 'rgba(91,141,239,.12)', title: 'Mental Health Counseling', titleUr: 'ذہنی صحت کی کاؤنسلنگ', desc: 'Professional support for anxiety, depression, and mental health concerns in a safe, confidential space.', descUr: 'بے چینی، افسردگی اور ذہنی صحت کے مسائل کے لیے محفوظ اور رازدارانہ پیشہ ورانہ مدد۔' },
+  { id: 'parenting', icon: '\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67', bg: 'rgba(141,170,145,.2)', title: 'Parenting', titleUr: 'والدین کی رہنمائی', desc: 'Evidence-based parenting strategies for every stage — from toddlers to teens — to raise confident children.', descUr: 'ہر مرحلے کے لیے شواہد پر مبنی پیرنٹنگ حکمت عملی — چھوٹے بچوں سے لے کر نوعمروں تک — پراعتماد بچوں کی پرورش کے لیے۔' },
+  { id: 'relationship', icon: '\uD83E\uDD1D', bg: 'rgba(251,146,60,.15)', title: 'Relationship Coaching', titleUr: 'تعلقات کی کوچنگ', desc: 'Strengthen connection with your life partner, children, parents, in-laws, team members and colleagues.', descUr: 'زندگی کے ساتھی، بچوں، والدین، سسرال، ٹیم اور ساتھیوں کے ساتھ تعلق مضبوط کریں۔' },
+  { id: 'teen', icon: '\uD83E\uDDD2', bg: 'rgba(91,141,239,.12)', title: 'Teen Parenting', titleUr: 'نوعمر والدین', desc: 'Specialized guidance for navigating the teenage years with understanding, boundaries, and lasting connection.', descUr: 'نوعمری کے سالوں کو سمجھ، حدود اور دیرپا تعلق کے ساتھ گزارنے کے لیے خصوصی رہنمائی۔' },
+  { id: 'marriage', icon: '\uD83D\uDC8D', bg: 'rgba(239,68,68,.12)', title: 'Marriage Guidance', titleUr: 'ازدواجی رہنمائی', desc: 'Pre-marital and marital guidance to build strong foundations, navigate challenges, and deepen your partnership.', descUr: 'مضبوط بنیادوں، چیلنجز سے نمٹنے اور رشتے کو مزید گہرا کرنے کے لیے شادی سے پہلے اور بعد کی رہنمائی۔' }
+];
+function renderServices() {
+  var box = $('service-list');
+  box.innerHTML = SERVICES.map(function (s) {
+    var ur = lang === 'ur';
+    return '<div class="service-card">' +
+      '<div class="flex items-center gap-3">' +
+      '<span class="svc-icon" style="background:' + s.bg + '">' + s.icon + '</span>' +
+      '<div class="min-w-0 flex-1">' +
+      '<p class="text-sm font-bold text-dark leading-snug">' + (ur && s.titleUr ? s.titleUr : s.title) + '</p>' +
+      '<p class="text-[11px] text-dark/50 mt-0.5 leading-snug">' + (ur && s.descUr ? s.descUr : s.desc) + '</p>' +
+      '</div></div>' +
+      '<button type="button" class="svc-book w-full bg-primary text-white text-xs font-bold rounded-full px-4 py-2.5 mt-3" data-service="' + s.id + '">' + t('services.book') + '</button>' +
+      '</div>';
+  }).join('');
+  box.querySelectorAll('.svc-book').forEach(function (b) {
+    b.addEventListener('click', function () { showTab('contact'); });
+  });
+}
+
+/* ================= HELPLINES ================= */
+var HELPLINES = [
+  { group: 'emergency', icon: '\uD83D\uDE91', iconUr: '\uD83D\uDE91', color: '#ef4444', name: 'Rescue 1122', nameUr: 'ریسکیو 1122', phone: '1122', desc: 'Emergency response across Pakistan', descUr: 'پاکستان بھر میں ایمرجنسی رسپانس' },
+  { group: 'emergency', icon: '\uD83D\uDE90', iconUr: '\uD83D\uDE90', color: '#f59e0b', name: 'Edhi Ambulance', nameUr: 'ایڈھی ایمبولینس', phone: '115', desc: 'Nationwide emergency ambulance', descUr: 'ملک گیر ایمرجنسی ایمبولینس' },
+  { group: 'emergency', icon: '\uD83D\uDC6E', iconUr: '\uD83D\uDC6E', color: '#5B8DEF', name: 'Police', nameUr: 'پولیس', phone: '15', desc: 'Police emergency helpline', descUr: 'پولیس ایمرجنسی ہیلپ لائن' },
+  { group: 'mental', icon: '\uD83E\uDDE0', iconUr: '\uD83E\uDDE0', color: '#5f7a63', name: 'Umang (Rozan)', nameUr: 'امنگ (روزان)', phone: '0311-7786264', desc: 'Free 24/7 mental health helpline', descUr: 'مفت 24/7 ذہنی صحت ہیلپ لائن' },
+  { group: 'mental', icon: '\uD83E\uDD1D', iconUr: '\uD83E\uDD1D', color: '#8DAA91', name: 'Rozan Counselling', nameUr: 'روزان کاؤنسلنگ', phone: '0304-1111741', desc: 'Mon–Fri, 9am–5pm', descUr: 'پیر تا جمعہ، صبح 9 تا شام 5' },
+  { group: 'women', icon: '\uD83D\uDC69', iconUr: '\uD83D\uDC69', color: '#ec4899', name: 'Women Helpline', nameUr: 'خواتین ہیلپ لائن', phone: '1099', desc: 'Support against violence', descUr: 'تشدد کے خلاف مدد' },
+  { group: 'women', icon: '\uD83E\uDDD2', iconUr: '\uD83E\uDDD2', color: '#8B5CF6', name: 'Child Protection', nameUr: 'بچوں کا تحفظ', phone: '1121', desc: 'Child protection helpline', descUr: 'چائلڈ پروٹیکشن ہیلپ لائن' }
+];
+function renderHelp() {
+  var ur = lang === 'ur';
+  $('help-prc').innerHTML =
+    '<a href="https://wa.me/923328274000?text=' + encodeURIComponent('Hi PRC Pakistan! I would like to talk to someone.') + '" target="_blank" rel="noopener" class="flex items-center gap-3 rounded-xl border border-[#e5f3e6] bg-[#f0fbf1] p-4">' +
+    '<span class="w-11 h-11 rounded-xl flex items-center justify-center bg-green-500 text-white flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>' +
+    '<span class="flex-1 min-w-0">' +
+    '<span class="block text-sm font-bold text-dark">' + (ur ? 'پی آر سی پاکستان سے بات کریں' : 'Talk to PRC Pakistan') + '</span>' +
+    '<span class="block text-xs text-dark/55 mt-0.5">' + (ur ? 'واٹس ایپ +92 332 827 4000 · tech.prc.pk@gmail.com' : 'WhatsApp +92 332 827 4000 · tech.prc.pk@gmail.com') + '</span>' +
+    '</span>' +
+    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-dark/30" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a>';
+  ['emergency', 'mental', 'women'].forEach(function (g) {
+    $('help-' + g).innerHTML = HELPLINES.filter(function (h) { return h.group === g; }).map(function (h) {
+      return '<a href="tel:' + h.phone.replace(/[^0-9+]/g, '') + '" class="help-item">' +
+        '<span class="w-10 h-10 rounded-full flex items-center justify-center text-white text-base flex-shrink-0" style="background:' + h.color + '">' + (ur ? h.iconUr : h.icon) + '</span>' +
+        '<span class="flex-1 min-w-0">' +
+        '<span class="block text-sm font-bold text-dark">' + (ur ? h.nameUr : h.name) + '</span>' +
+        '<span class="block text-[11px] text-dark/50 mt-0.5">' + (ur ? h.descUr : h.desc) + '</span></span>' +
+        '<span class="flex-shrink-0 text-xs font-bold text-primary">' + h.phone + '</span>' +
+        '</a>';
+    }).join('');
+  });
+}
+
+/* ================= ASK A QUESTION ================= */
+$('ask-send').addEventListener('click', function () {
+  var q = $('ask-question').value.trim();
+  if (!q) { $('ask-question').focus(); return; }
+  var topic = $('ask-topic').value;
+  var name = $('ask-name').value.trim();
+  var msg = 'Question (' + topic + ')';
+  if (name) msg += ' from ' + name;
+  msg += ': ' + q;
+  window.open('https://wa.me/923328274000?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  $('ask-question').value = '';
+  $('ask-name').value = '';
+});
+
+/* ================= IN-APP PAGE VIEWER ================= */
+function openPageViewer(url, titleKey, scrollToLine) {
+  lastFocus = document.activeElement;
+  viewerScrollLine = scrollToLine || null;
+  $('viewer-title').textContent = t(titleKey);
+  $('viewer-frame').src = url;
+  $('page-viewer').classList.remove('hidden');
+  $('tabbar').classList.add('hidden');
+  // Remember where the user left off so Home can offer "Continue learning".
+  if (url.indexOf('blog-') !== -1) {
+    var title = t(titleKey);
+    saveLastArticle(url.replace(/^\.\//, ''), title);
+    renderContinue();
+  }
+  updateListenBtn();
+  // Attach cleanup BEFORE the document parses so the site chrome never flashes.
+  onFrameReady();
+  // Safety net for delayed loads / frames that never fire load (PDF embeds).
+  [150, 400, 900, 1600, 2500].forEach(function (ms) { setTimeout(cleanFrame, ms); });
+}
+function closePageViewer() {
+  $('page-viewer').classList.add('hidden');
+  $('viewer-frame').src = 'about:blank';
+  $('tabbar').classList.remove('hidden');
+  viewerScrollLine = null;
+  if (reading) { try { speechSynthesis.cancel(); } catch (e) {} reading = false; updateListenBtn(); }
+  if (lastFocus && lastFocus.focus) { try { lastFocus.focus(); } catch (e) {} }
+}
+$('viewer-back').addEventListener('click', closePageViewer);
+document.querySelectorAll('[data-viewer]').forEach(function (a) {
+  a.addEventListener('click', function (e) {
+    e.preventDefault();
+    openPageViewer(a.getAttribute('data-viewer'), a.getAttribute('data-title-key'));
+  });
+});
+var viewerScrollLine = null;
+function readerPrefsCss() {
+  var p = readerPrefs;
+  var fam = p.font === 'serif' ? "'Georgia', 'Noto Nastaliq Urdu', serif" : (p.font === 'rounded' ? "'Verdana', 'DM Sans', sans-serif" : 'inherit');
+  var lh = p.line === 'compact' ? 1.5 : (p.line === 'relaxed' ? 2.05 : 1.75);
+  return 'article { font-family: ' + fam + ' !important; line-height: ' + lh + ' !important; font-size: ' + p.size + 'rem !important; }' +
+    'article p, article li { line-height: inherit !important; }';
+}
+function cleanFrame() {
+  var f = $('viewer-frame');
+  try {
+    var doc = f.contentDocument;
+    if (!doc || !doc.head) return;
+    // Persistent stylesheet: site chrome can never appear, reader prefs apply.
+    var st = doc.getElementById('prc-reader-clean');
+    if (!st) {
+      st = doc.createElement('style');
+      st.id = 'prc-reader-clean';
+      doc.head.appendChild(st);
+      // If the article's own scripts wipe the head, re-inject immediately.
+      try {
+        var mo = new MutationObserver(function () {
+          if (!doc.getElementById('prc-reader-clean')) {
+            var s2 = doc.createElement('style');
+            s2.id = 'prc-reader-clean';
+            s2.textContent = readerChromeCss() + readerPrefsCss();
+            doc.head.appendChild(s2);
+          }
+        });
+        mo.observe(doc.head, { childList: true });
+      } catch (e) {}
+    }
+    st.textContent = readerChromeCss() + readerPrefsCss();
+    scrollToBookmarkLine(doc);
+  } catch (e) { /* cross-origin: leave as-is */ }
+}
+function readerChromeCss() {
+  return '#main-nav, header, footer, .whatsapp-float, #mobileMenu, #mobileOverlay, #nav-panel { display: none !important; }' +
+    '.pt-24, [class*="pt-24"] { padding-top: 0 !important; }' +
+    '.pt-20, [class*="pt-20"] { padding-top: 0 !important; }';
+}
+function scrollToBookmarkLine(doc) {
+  if (viewerScrollLine == null || !doc) return;
+  var nodes = doc.querySelectorAll('article p, article h1, article h2, article h3, article li');
+  var target = nodes[viewerScrollLine];
+  if (!target) return;
+  try { target.scrollIntoView({ block: 'start' }); } catch (e) { target.scrollIntoView(); }
+}
+function onFrameReady() {
+  var f = $('viewer-frame');
+  try {
+    var doc = f.contentDocument;
+    if (!doc) return;
+    if (doc.readyState === 'loading') {
+      doc.addEventListener('DOMContentLoaded', cleanFrame);
+    } else {
+      cleanFrame();
+    }
+  } catch (e) {}
+}
+$('viewer-frame').addEventListener('load', function () { cleanFrame(); onFrameReady(); });
+
+/* ================= NOTIFICATIONS ================= */
+var NOTIFS = [
+  { icon: '\uD83D\uDCA1', key: 'notif.tip', action: 'tip' },
+  { icon: '\uD83D\uDCF0', key: 'notif.articles', action: 'articles' },
+  { icon: '\uD83D\uDCAC', key: 'notif.wa', action: 'wa' },
+  { icon: '\uD83D\uDCDA', key: 'notif.books', action: 'books' }
+];
+function renderNotifs() {
+  var box = $('notif-list');
+  var info = streakInfo();
+  var streakMsg = info.todayDone
+    ? t('notif.streakOn').replace('{n}', info.streak)
+    : t('notif.streakOff');
+  var streakBtn =
+    '<button type="button" class="flex items-center gap-3 rounded-xl border border-[#e5f3e6] bg-[#f0fbf1] p-3.5 text-left" data-notif-streak="1">' +
+    '<span class="w-10 h-10 rounded-full flex items-center justify-center text-lg bg-white border border-[#e5f3e6] flex-shrink-0">\uD83D\uDD25</span>' +
+    '<span class="text-[13px] font-semibold text-dark leading-snug">' + streakMsg + '</span>' +
+    '</button>';
+  box.innerHTML = streakBtn + NOTIFS.map(function (n, i) {
+    return '<button type="button" class="flex items-center gap-3 rounded-xl border border-[#f0ede6] bg-white p-3.5 text-left" data-notif="' + i + '">' +
+      '<span class="w-10 h-10 rounded-full flex items-center justify-center text-lg bg-[#F6F2EA] flex-shrink-0">' + n.icon + '</span>' +
+      '<span class="text-[13px] font-semibold text-dark leading-snug">' + t(n.key) + '</span>' +
+      '</button>';
+  }).join('');
+  box.querySelectorAll('[data-notif]').forEach(function (b) {
+    b.addEventListener('click', function () { notifAction(NOTIFS[parseInt(b.dataset.notif, 10)].action); });
+  });
+  box.querySelectorAll('[data-notif-streak]').forEach(function (b) {
+    b.addEventListener('click', function () { notifAction('streak'); });
+  });
+}
+function notifAction(action) {
+  closeNotifs();
+  if (action === 'tip' || action === 'streak') showTab('home');
+  else if (action === 'articles') showTab('articles');
+  else if (action === 'wa') window.open('https://chat.whatsapp.com/K3smDsKrzqfGnM4vkQlS7E?s=sh&p=i&ilr=4&amv=0', '_blank', 'noopener');
+  else if (action === 'books') openPageViewer('./resource-viewer.html?doc=kids&embed=1', 'resources.bookKids');
+}
+function openNotifs() {
+  lastFocus = document.activeElement;
+  renderNotifs();
+  $('notif-sheet').classList.remove('hidden');
+  $('notif-dot').classList.add('hidden');
+}
+function closeNotifs() {
+  $('notif-sheet').classList.add('hidden');
+  if (lastFocus && lastFocus.focus) { try { lastFocus.focus(); } catch (e) {} }
+}
+$('notif-btn').addEventListener('click', openNotifs);
+$('notif-backdrop').addEventListener('click', closeNotifs);
+
+/* ================= INSTALL ================= */
+var deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', function (e) {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+$('install-btn').addEventListener('click', function () {
+  if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; }
+  else { $('install-help').classList.remove('hidden'); }
+});
+$('install-help-close').addEventListener('click', function () { $('install-help').classList.add('hidden'); });
+
+/* ================= DARK MODE ================= */
+var theme = localStorage.getItem('prc_app_theme') || 'light';
+function applyTheme() {
+  document.body.classList.toggle('dark', theme === 'dark');
+  document.body.classList.toggle('high-contrast', highContrast);
+  var sw = $('dark-switch');
+  if (sw) sw.textContent = theme === 'dark' ? 'ON' : 'OFF';
+  var m = document.querySelector('meta[name="theme-color"]');
+  if (m) m.content = theme === 'dark' ? '#16181C' : '#5B8DEF';
+}
+$('dark-toggle').addEventListener('click', function () {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('prc_app_theme', theme);
+  applyTheme();
+});
+
+/* ================= TEXT SIZE ================= */
+function applyTextSize() {
+  document.documentElement.style.fontSize = textSizes[textSizeIdx] + '%';
+  var el = $('text-size-label');
+  if (el) el.textContent = textSizes[textSizeIdx] === 100 ? '100%' : textSizes[textSizeIdx] + '%';
+  localStorage.setItem('prc_app_textsize', textSizeIdx);
+}
+$('text-size-minus').addEventListener('click', function () { if (textSizeIdx > 0) { textSizeIdx--; applyTextSize(); } });
+$('text-size-plus').addEventListener('click', function () { if (textSizeIdx < textSizes.length - 1) { textSizeIdx++; applyTextSize(); } });
+
+/* ================= HIGH CONTRAST ================= */
+function applyContrast() {
+  document.body.classList.toggle('high-contrast', highContrast);
+  var sw = $('contrast-switch');
+  if (sw) sw.textContent = highContrast ? 'ON' : 'OFF';
+  localStorage.setItem('prc_app_contrast', highContrast ? '1' : '0');
+}
+$('contrast-toggle').addEventListener('click', function () { highContrast = !highContrast; applyContrast(); });
+
+/* ================= READER SETTINGS ================= */
+var readerSizes = [0.9, 1, 1.15, 1.3];
+function readerSizeIdx() { return Math.max(0, Math.min(readerSizes.length - 1, readerSizes.indexOf(readerPrefs.size))); }
+function saveReaderPrefs() { localStorage.setItem('prc_app_reader', JSON.stringify(readerPrefs)); }
+function renderReaderOpts() {
+  document.querySelectorAll('#reader-font-opts .reader-opt').forEach(function (b) {
+    b.classList.toggle('active', b.dataset.font === readerPrefs.font);
+    b.textContent = t('reader.font' + b.dataset.font.charAt(0).toUpperCase() + b.dataset.font.slice(1));
+  });
+  document.querySelectorAll('#reader-line-opts .reader-opt').forEach(function (b) {
+    b.classList.toggle('active', b.dataset.line === readerPrefs.line);
+    b.textContent = t('reader.' + b.dataset.line);
+  });
+  var bar = $('reader-size-bar');
+  if (bar) bar.style.width = (readerSizeIdx() / (readerSizes.length - 1) * 100) + '%';
+}
+function applyReaderPrefsNow() { if (!$('page-viewer').classList.contains('hidden')) cleanFrame(); }
+$('reader-settings-btn').addEventListener('click', function () { renderReaderOpts(); $('reader-settings').classList.remove('hidden'); });
+$('reader-settings-close').addEventListener('click', function () { $('reader-settings').classList.add('hidden'); });
+document.querySelectorAll('#reader-font-opts .reader-opt').forEach(function (b) {
+  b.addEventListener('click', function () { readerPrefs.font = b.dataset.font; saveReaderPrefs(); renderReaderOpts(); applyReaderPrefsNow(); });
+});
+document.querySelectorAll('#reader-line-opts .reader-opt').forEach(function (b) {
+  b.addEventListener('click', function () { readerPrefs.line = b.dataset.line; saveReaderPrefs(); renderReaderOpts(); applyReaderPrefsNow(); });
+});
+$('reader-size-minus').addEventListener('click', function () {
+  var i = readerSizeIdx(); if (i > 0) { readerPrefs.size = readerSizes[i - 1]; saveReaderPrefs(); renderReaderOpts(); applyReaderPrefsNow(); }
+});
+$('reader-size-plus').addEventListener('click', function () {
+  var i = readerSizeIdx(); if (i < readerSizes.length - 1) { readerPrefs.size = readerSizes[i + 1]; saveReaderPrefs(); renderReaderOpts(); applyReaderPrefsNow(); }
+});
+
+/* ================= LISTEN (TEXT TO SPEECH) ================= */
+function applyListenState() {
+  var sw = $('listen-switch');
+  if (sw) sw.textContent = readAloud ? 'ON' : 'OFF';
+  localStorage.setItem('prc_app_readaloud', readAloud ? '1' : '0');
+  updateListenBtn();
+}
+$('listen-toggle').addEventListener('click', function () { readAloud = !readAloud; applyListenState(); });
+function updateListenBtn() {
+  var b = $('viewer-listen');
+  if (!b) return;
+  b.style.display = (readAloud && !$('page-viewer').classList.contains('hidden')) ? '' : 'none';
+  b.setAttribute('aria-label', t(reading ? 'viewer.stop' : 'viewer.listen'));
+}
+$('viewer-listen').addEventListener('click', function () {
+  if (!('speechSynthesis' in window)) return;
+  if (reading) { speechSynthesis.cancel(); reading = false; updateListenBtn(); return; }
+  var doc = $('viewer-frame').contentDocument;
+  if (!doc) return;
+  var text = ((doc.querySelector('article') || doc.body).innerText || '').replace(/\s+/g, ' ').trim().slice(0, 6000);
+  if (!text) return;
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = lang === 'ur' ? 'ur-PK' : 'en-US';
+  u.rate = 0.95;
+  u.onend = u.onerror = function () { reading = false; updateListenBtn(); };
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+  reading = true;
+  updateListenBtn();
+});
+
+/* ================= BOOKMARK LINE ================= */
+function getBookmarks() {
+  try { return JSON.parse(localStorage.getItem('prc_app_bookmarks') || '[]'); } catch (e) { return []; }
+}
+function saveBookmarks(list) { try { localStorage.setItem('prc_app_bookmarks', JSON.stringify(list)); } catch (e) {} }
+$('viewer-bookmark').addEventListener('click', function () {
+  var doc = $('viewer-frame').contentDocument;
+  if (!doc || !doc.querySelector('article')) { toast(t('viewer.savedTo')); return; }
+  var nodes = doc.querySelectorAll('article p, article h1, article h2, article h3, article li');
+  if (!nodes.length) return;
+  var best = nodes[0], bestIdx = 0, bestTop = Infinity;
+  nodes.forEach(function (n, i) {
+    var r = n.getBoundingClientRect();
+    if (r.bottom < -20) return;
+    var d = Math.abs(r.top);
+    if (d < bestTop) { bestTop = d; best = n; bestIdx = i; }
+  });
+  var src = $('viewer-frame').getAttribute('src') || '';
+  var href = (src.match(/blog-[^?&]+/) || [''])[0];
+  if (!href) { toast(t('viewer.savedTo')); return; }
+  var list = getBookmarks();
+  if (list.some(function (b) { return b.href === href && b.lineIndex === bestIdx; })) { toast(t('viewer.savedTo')); return; }
+  list.unshift({ href: href, lineIndex: bestIdx, lineText: (best.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 160), at: Date.now() });
+  saveBookmarks(list);
+  updateSavedBadge();
+  toast(t('viewer.bookmarked'));
+});
+function toast(msg) {
+  var el = document.createElement('div');
+  el.textContent = msg;
+  el.style.cssText = 'position:absolute;bottom:96px;left:50%;transform:translateX(-50%);z-index:99;background:#2F2F2F;color:#fff;font-size:12px;font-weight:700;padding:9px 18px;border-radius:9999px;box-shadow:0 6px 20px rgba(0,0,0,.25);white-space:nowrap;';
+  $('app-shell').appendChild(el);
+  setTimeout(function () { el.remove(); }, 2200);
+}
+
+/* ================= LIKE RESOURCE ================= */
+function getLikes() {
+  try { return JSON.parse(localStorage.getItem('prc_app_likes') || '[]'); } catch (e) { return []; }
+}
+function saveLikes(list) { try { localStorage.setItem('prc_app_likes', JSON.stringify(list)); } catch (e) {} }
+function renderLikes() {
+  document.querySelectorAll('.like-res').forEach(function (b) {
+    b.classList.toggle('liked', getLikes().indexOf(b.dataset.like) !== -1);
+  });
+}
+document.querySelectorAll('.like-res').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var list = getLikes();
+    var i = list.indexOf(b.dataset.like);
+    if (i === -1) list.push(b.dataset.like); else list.splice(i, 1);
+    saveLikes(list);
+    renderLikes();
+    updateSavedBadge();
+  });
+});
+
+/* ================= SAVED & LIKED ================= */
+var RESOURCES_META = {
+  kids: { key: 'resources.bookKids', url: './resource-viewer.html?doc=kids&embed=1' },
+  palestine: { key: 'resources.bookPal', url: './resource-viewer.html?doc=palestine&embed=1' }
+};
+function updateSavedBadge() {
+  var n = getBookmarks().length + getLikes().length;
+  var b = $('saved-badge');
+  if (b) b.style.display = n ? '' : 'none';
+}
+function openSaved() { renderSaved(); showTab('saved'); }
+$('saved-btn').addEventListener('click', openSaved);
+document.querySelectorAll('.open-saved').forEach(function (b) { b.addEventListener('click', openSaved); });
+function renderSaved() {
+  var box = $('saved-list');
+  if (!box) return;
+  var ur = lang === 'ur';
+  var bms = getBookmarks();
+  var likes = getLikes();
+  var html = '';
+  var svgBm = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>';
+  var svgHeart = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>';
+  var svgChev = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>';
+  if (bms.length) {
+    html += '<p class="text-[10px] font-bold uppercase tracking-wider text-dark/40">' + t('saved.lines') + '</p>';
+    html += bms.map(function (b, idx) {
+      var a = ARTICLES.find(function (x) { return x.href === b.href; });
+      var title = a ? (ur && a.titleUr ? a.titleUr : a.title) : b.href;
+      return '<div class="rounded-xl border border-[#f0ede6] bg-white p-3.5">' +
+        '<div class="flex items-center gap-3">' +
+        '<span class="w-9 h-9 rounded-full flex items-center justify-center text-primary flex-shrink-0" style="background:rgba(91,141,239,.12);">' + svgBm + '</span>' +
+        '<div class="min-w-0 flex-1">' +
+        '<p class="text-[13px] font-bold text-dark leading-snug line-clamp-1">' + title + '</p>' +
+        '<p class="text-[11px] text-dark/55 leading-snug mt-1 line-clamp-2">“' + b.lineText + '”</p>' +
+        '</div></div>' +
+        '<div class="flex gap-2 mt-3">' +
+        '<button type="button" class="saved-open flex-1 bg-primary text-white text-xs font-bold rounded-full px-4 py-2" data-bm="' + idx + '">' + t('saved.open') + '</button>' +
+        '<button type="button" class="saved-remove flex-1 border border-[#e5e7eb] text-dark/60 text-xs font-bold rounded-full px-4 py-2" data-bm="' + idx + '">' + t('saved.remove') + '</button>' +
+        '</div></div>';
+    }).join('');
+  }
+  if (likes.length) {
+    html += '<p class="text-[10px] font-bold uppercase tracking-wider text-dark/40 mt-1">' + t('saved.resources') + '</p>';
+    html += likes.map(function (id) {
+      var r = RESOURCES_META[id];
+      if (!r) return '';
+      return '<div class="rounded-xl border border-[#f0ede6] bg-white p-3.5 flex items-center gap-3">' +
+        '<span class="w-9 h-9 rounded-full flex items-center justify-center text-red-500 flex-shrink-0" style="background:rgba(239,68,68,.12);">' + svgHeart + '</span>' +
+        '<div class="min-w-0 flex-1"><p class="text-[13px] font-bold text-dark leading-snug">' + t(r.key) + '</p>' +
+        '<p class="text-[11px] text-primary font-semibold mt-0.5">' + t('resources.read') + '</p></div>' +
+        '<button type="button" class="saved-res-open w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center flex-shrink-0" data-res="' + id + '" aria-label="Open">' + svgChev + '</button>' +
+        '</div>';
+    }).join('');
+  }
+  if (!html) {
+    html = '<div class="rounded-2xl border border-[#f0ede6] bg-white p-6 text-center">' +
+      '<p class="text-2xl">🔖</p>' +
+      '<p class="text-[13px] text-dark/60 leading-relaxed mt-3">' + t('saved.empty') + '</p></div>';
+  }
+  box.innerHTML = html;
+  box.querySelectorAll('.saved-open').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var bm = bms[parseInt(b.dataset.bm, 10)];
+      if (!bm) return;
+      var a = ARTICLES.find(function (x) { return x.href === bm.href; });
+      var title = a ? (ur && a.titleUr ? a.titleUr : a.title) : bm.href;
+      openPageViewer('./' + bm.href, title, bm.lineIndex);
+    });
+  });
+  box.querySelectorAll('.saved-remove').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var i = parseInt(b.dataset.bm, 10);
+      bms.splice(i, 1);
+      saveBookmarks(bms);
+      updateSavedBadge();
+      renderSaved();
+    });
+  });
+  box.querySelectorAll('.saved-res-open').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var r = RESOURCES_META[b.dataset.res];
+      if (r) openPageViewer(r.url, r.key);
+    });
+  });
+}
+
+/* ================= I18N ================= */
+function t(key) { return (I18N[lang] && I18N[lang][key]) || I18N.en[key] || key; }
+function applyLang() {
+  var ur = lang === 'ur';
+  document.documentElement.lang = ur ? 'ur' : 'en';
+  document.documentElement.dir = ur ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-toggle button').forEach(function (b) {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var key = el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+    el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
+  });
+  $('article-search').setAttribute('placeholder', t('articles.search'));
+  renderLangChips();
+  renderChips();
+  renderArticles();
+  if (activeTab === 'home') { renderGreeting(); renderFeatured(); renderTip(); renderContinue(); renderStreak(); }
+  if (activeTab === 'resources') renderQuizList();
+  if (activeTab === 'help') renderHelp();
+}
+document.querySelectorAll('.lang-toggle button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    lang = b.dataset.lang;
+    localStorage.setItem('prc_app_lang', lang);
+    applyLang();
+  });
+});
+
+/* ================= INIT ================= */
+(function init() {
+  applyTheme();
+  applyTextSize();
+  applyContrast();
+  applyListenState();
+  updateSavedBadge();
+  renderLikes();
+  renderChips();
+  renderGreeting();
+  renderFeatured();
+  renderQuizList();
+  renderContinue();
+  renderStreak();
+  applyLang();
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('quiz')) { openQuiz(params.get('quiz')); return; }
+  if (params.get('tab')) showTab(params.get('tab'));
+  else showTab('home');
+})();
+
+/* ================= TEAM ACCORDION ================= */
+document.querySelectorAll('[data-team-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var panel = $(btn.getAttribute('aria-controls'));
+    var isOpen = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('[data-team-toggle]').forEach(function (b) {
+      b.setAttribute('aria-expanded', 'false');
+      $(b.getAttribute('aria-controls')).classList.add('hidden');
+    });
+    if (!isOpen) {
+      btn.setAttribute('aria-expanded', 'true');
+      panel.classList.remove('hidden');
+    }
+  });
+});
+
+/* ================= ESCAPE + FOCUS MANAGEMENT ================= */
+var lastFocus = null;
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'Escape') return;
+  if (!$('page-viewer').classList.contains('hidden')) closePageViewer();
+  else if (!$('quiz-overlay').classList.contains('hidden')) closeQuiz();
+  else if (!$('notif-sheet').classList.contains('hidden')) closeNotifs();
+  else if (!$('reader-settings').classList.contains('hidden')) $('reader-settings').classList.add('hidden');
+  else if (!$('install-help').classList.contains('hidden')) $('install-help').classList.add('hidden');
+});
+$('install-btn').addEventListener('click', function () {
+  setTimeout(function () {
+    if (!$('install-help').classList.contains('hidden')) $('install-help-close').focus();
+  }, 60);
+});
+</script>
+
+<script>
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js').catch(function () {});
+  });
+}
+</script>
+</body>
+</html>

@@ -4,20 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning Hub - PRC Pakistan</title>
-  <link rel="icon" type="image/x-icon" href="./images/assets/logo.webp"><link href="./tailwind.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="./images/assets/logo.webp">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./images/assets/logo-192.png"><link href="./tailwind.css" rel="stylesheet">
 <meta name="description" content="Expert articles and resources on parenting, marriage, child psychology, and family wellness.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://prcpakistan.vercel.app/learning-hub.html">
+<meta property="og:url" content="https://prcpakistan.com/learning-hub.html">
 <meta property="og:title" content="Learning Hub - PRC Pakistan">
 <meta property="og:description" content="Expert articles and resources on parenting, marriage, child psychology, and family wellness.">
-<meta property="og:image" content="https://prcpakistan.vercel.app/images/assets/og-image.webp">
+<meta property="og:image" content="https://prcpakistan.com/images/assets/og-image.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Learning Hub - PRC Pakistan">
 <meta name="twitter:description" content="Expert articles and resources on parenting, marriage, child psychology, and family wellness.">
-<meta name="twitter:image" content="https://prcpakistan.vercel.app/images/assets/og-image.webp">
+<meta name="twitter:image" content="https://prcpakistan.com/images/assets/og-image.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* Quiz slider + writing question types */
+    .slider-box { padding: .4rem .2rem .9rem; }
+    .slider-track { position: relative; height: 40px; display: flex; align-items: center; cursor: pointer; touch-action: none; -webkit-tap-highlight-color: transparent; }
+    .slider-rail { position: absolute; left: 8px; right: 8px; height: 6px; border-radius: 9999px; background: #F0ECE2; }
+    .slider-fill { position: absolute; left: 8px; height: 6px; border-radius: 9999px; background: linear-gradient(90deg, #8DAA91, #5B8DEF); }
+    .slider-handle { position: absolute; top: 50%; width: 34px; height: 34px; border-radius: 9999px; background: #fff; border: 3px solid #5B8DEF; transform: translate(-50%, -50%); box-shadow: 0 3px 10px rgba(91,141,239,.4); display: flex; align-items: center; justify-content: center; }
+    .slider-handle::after { content: ""; width: 8px; height: 8px; border-radius: 9999px; background: #5B8DEF; }
+    .slider-labels { display: flex; justify-content: space-between; gap: .5rem; margin-top: .15rem; }
+    .slider-labels span { font-size: 11px; font-weight: 600; color: rgba(47,47,47,.5); }
+    .slider-value { text-align: center; font-size: 13px; font-weight: 800; color: #5B8DEF; margin-top: .65rem; min-height: 1.25rem; }
+    .q-text { width: 100%; border: 1.5px solid #ece7db; background: #fff; border-radius: .9rem; padding: .85rem .95rem; font-size: 14px; color: #2F2F2F; outline: none; resize: none; line-height: 1.5; transition: border-color .16s ease; }
+    .q-text:focus { border-color: #5B8DEF; }
+    .q-next { width: 100%; margin-top: 1.1rem; background: #5B8DEF; color: #fff; font-size: 14px; font-weight: 700; padding: 12px 20px; border-radius: 9999px; cursor: pointer; transition: background .18s ease, transform .18s ease; box-shadow: 0 4px 12px rgba(91,141,239,.3); }
+    .q-next:active { transform: scale(.97); }
+    .q-next:disabled { opacity: .45; cursor: default; box-shadow: none; }
+    /* Speedometer gauge */
+    .gauge-wrap { position: relative; width: 220px; margin: 0 auto; }
+    .gauge-wrap svg { width: 100%; display: block; }
+    .gauge-num { position: absolute; left: 50%; transform: translateX(-50%); bottom: 2px; text-align: center; width: 100%; }
+  </style>
 </head>
 <body class="font-sans text-dark bg-white">
 
@@ -91,30 +114,37 @@
         <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="society">Society</button>
         <button class="cat-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-category="emotional-health">Emotional Health</button>
       </div>
+
+      <div class="flex items-center gap-3 mt-4 pt-4 border-t border-gray-100 overflow-x-auto pb-1 scrollbar-hide">
+        <span class="text-xs font-semibold uppercase tracking-wider text-dark/40 flex-shrink-0">Language</span>
+        <button class="lang-pill active rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-lang="all">All</button>
+        <button class="lang-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-lang="en">English</button>
+        <button class="lang-pill rounded-full px-4 py-2 text-sm border border-gray-200 whitespace-nowrap font-medium transition-all duration-200" data-lang="ur">اردو</button>
+      </div>
     </div>
   </section>
 
   <!-- ARTICLES GRID -->
   <section class="py-12 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="article-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="article-grid grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
 
         <a href="./blog-accept-our-daughters.html" class="block"><!-- Article 1 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="society">
            <div class="overflow-hidden">
-              <img src="images/other/accept-our-daughter.webp" alt="Let's Accept Our Daughters" class="w-full h-48 object-cover" loading="lazy" width="678" height="452">
+              <img src="images/other/accept-our-daughter.webp" alt="Let's Accept Our Daughters" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="678" height="452">
           </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
-            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Let's Accept Our Daughters</h3>
-            <p class="text-dark/60 text-sm line-clamp-2 mb-4">After divorce, a daughter in our society is treated like a criminal. Accepting our daughters — without conditions and without judgment — is the love they truly need.</p>
-            <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+          <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+            <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Family</span>
+            <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Let's Accept Our Daughters</h3>
+            <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">After divorce, a daughter in our society is treated like a criminal. Accepting our daughters — without conditions and without judgment — is the love they truly need.</p>
+            <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">5 min read</span>
               <span>·</span>
               <span>Munira Ahmed</span>
             </div>
-            <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-              <span class="text-xs text-dark/40">Share:</span>
+            <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+              <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
             </div>
@@ -122,21 +152,21 @@
         </article></a>
 
         <a href="./blog-discord.html" class="block"><!-- Article 2 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/difference of opinion.webp" alt="Difference of opinion" class="w-full h-48 object-cover" loading="lazy" width="490" height="403">
+              <img src="images/other/difference of opinion.webp" alt="Difference of opinion" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="490" height="403">
           </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
-            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Discord: The Right to Differ</h3>
-            <p class="text-dark/60 text-sm line-clamp-2 mb-4">Difference of opinion is not enmity. Here is why every relationship needs room for mistakes and disagreement.</p>
-            <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+          <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+            <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Relationships</span>
+            <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Discord: The Right to Differ</h3>
+            <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Difference of opinion is not enmity. Here is why every relationship needs room for mistakes and disagreement.</p>
+            <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
               <span>·</span>
               <span>Munira Ahmed</span>
             </div>
-            <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-              <span class="text-xs text-dark/40">Share:</span>
+            <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+              <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
               
               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -145,21 +175,21 @@
         </article></a>
 
         <a href="./blog-inheritance.html" class="block"><!-- Article 3 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/inheritance.webp" alt="Happy couple" class="w-full h-48 object-cover" loading="lazy" width="612" height="344">
+              <img src="images/other/inheritance.webp" alt="Happy couple" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="612" height="344">
           </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Marriage</span>
-            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Inheritance</h3>
-            <p class="text-dark/60 text-sm line-clamp-2 mb-4">A husband has no legal or religious right over his wife's inheritance. It is her right, not anyone's favour.</p>
-            <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+          <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+            <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Marriage</span>
+            <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Inheritance</h3>
+            <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">A husband has no legal or religious right over his wife's inheritance. It is her right, not anyone's favour.</p>
+            <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
               <span>·</span>
               <span>Munira Ahmed</span>
             </div>
-            <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-              <span class="text-xs text-dark/40">Share:</span>
+            <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+              <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
               
               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -168,21 +198,21 @@
         </article></a>
 
         <a href="./blog-plastic-pollution.html" class="block"><!-- Article 4 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="environment">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="environment" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/plastic-pollution.webp" alt="Plastic pollution" class="w-full h-48 object-cover" loading="lazy" width="547" height="365">
+              <img src="images/other/plastic-pollution.webp" alt="Plastic pollution" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="547" height="365">
           </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <span class="inline-block bg-amber-100 text-amber-600 text-xs font-semibold px-3 py-1 rounded-full mb-3">Environment</span>
-            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Plastic Pollution</h3>
-            <p class="text-dark/60 text-sm line-clamp-2 mb-4">Plastic waste is choking our seas, rivers and lands and harming wildlife. Can we reduce our plastic use for the sake of our environment?</p>
-            <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+          <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+            <span class="inline-block bg-amber-100 text-amber-600 text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Environment</span>
+            <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Plastic Pollution</h3>
+            <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Plastic waste is choking our seas, rivers and lands and harming wildlife. Can we reduce our plastic use for the sake of our environment?</p>
+            <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
               <span>·</span>
               <span>Munira Ahmed</span>
             </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -191,21 +221,21 @@
          </article></a>
 
         <a href="./blog-being-controlled.html" class="block"><!-- Article 5 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/controlled.webp" alt="Emotional control" class="w-full h-48 object-cover" loading="lazy" width="612" height="408">
+              <img src="images/other/controlled.webp" alt="Emotional control" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="612" height="408">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Are You Being Controlled?</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Sometimes love, service and sacrifice are used as a way of control. Purify your heart and do everything only for the sake of Allah.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Relationships</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Are You Being Controlled?</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Sometimes love, service and sacrifice are used as a way of control. Purify your heart and do everything only for the sake of Allah.</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
                <span>·</span>
                <span>Munira Ahmed</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -214,21 +244,21 @@
          </article></a>
 
         <a href="./blog-making-everyone-happy.html" class="block"><!-- Article 6 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/juggling.webp" alt="Choosing yourself" class="w-full h-48 object-cover" loading="lazy" width="698" height="400">
+              <img src="images/other/juggling.webp" alt="Choosing yourself" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="698" height="400">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Making Everyone Happy</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">It is almost impossible that everyone stays happy with us while we do what we want. Choose yourself within your values and boundaries.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Relationships</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Making Everyone Happy</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">It is almost impossible that everyone stays happy with us while we do what we want. Choose yourself within your values and boundaries.</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
                <span>·</span>
                <span>Munira Ahmed</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -239,19 +269,19 @@
         <a href="./blog-no-secrets.html" class="block"><!-- Article 7 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
            <div class="overflow-hidden">
-              <img src="images/other/parent s pulling child to thier sides from both sides.webp" alt="No secrets" class="w-full h-48 object-cover" loading="lazy" width="612" height="408">
+              <img src="images/other/parent s pulling child to thier sides from both sides.webp" alt="No secrets" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="612" height="408">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-secondary/10 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">No Secrets</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Children have a right to know their father and the important facts of their life. Let's not hide the truth — let there be no secrets.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-secondary/10 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Family</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">No Secrets</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Children have a right to know their father and the important facts of their life. Let's not hide the truth — let there be no secrets.</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
                <span>·</span>
                <span>Munira Ahmed</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -262,19 +292,19 @@
         <a href="./blog-assertiveness.html" class="block"><!-- Article 8 -->
         <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="emotional-health">
            <div class="overflow-hidden">
-              <img src="images/other/calm women.webp" alt="Assertiveness" class="w-full h-48 object-cover" loading="lazy" width="390" height="512">
+              <img src="images/other/calm women.webp" alt="Assertiveness" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="390" height="512">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Emotional Health</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Assertiveness</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Being firm yet gentle — state facts, feelings and needs clearly without blame or judgement, listen to be heard, and repeat yourself until you are.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Emotional Health</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Assertiveness</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Being firm yet gentle — state facts, feelings and needs clearly without blame or judgement, listen to be heard, and repeat yourself until you are.</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
                <span>·</span>
                <span>Munira Ahmed</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -283,21 +313,21 @@
          </article></a>
 
         <a href="./blog-other-side-of-the-picture.html" class="block"><!-- Article 9 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/trauma illusration.webp" alt="Other side of the picture" class="w-full h-48 object-cover" loading="lazy" width="490" height="612">
+              <img src="images/other/trauma illusration.webp" alt="Other side of the picture" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="490" height="612">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Other Side of the Picture</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Women complain that men don't talk or give time. But what do we bring for a man's peace of mind? Do taunts win love — or poison it?</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Relationships</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Other Side of the Picture</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Women complain that men don't talk or give time. But what do we bring for a man's peace of mind? Do taunts win love — or poison it?</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
                <span>·</span>
                <span>Munira Ahmed</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -306,21 +336,21 @@
          </article></a>
 
         <a href="./blog-hidden-sins.html" class="block"><!-- Article 10 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/locked door.webp" alt="Hidden sins" class="w-full h-48 object-cover" loading="lazy" width="447" height="447">
+              <img src="images/other/locked door.webp" alt="Hidden sins" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="447" height="447">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Hidden Sins</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Job holders and business people must be careful with amanat. Company items, work time, data and contracts — hidden sins that we overlook.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Self-Growth</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Hidden Sins</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Job holders and business people must be careful with amanat. Company items, work time, data and contracts — hidden sins that we overlook.</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
                <span>·</span>
                <span>Munira Ahmed</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -329,21 +359,21 @@
          </article></a>
 
         <a href="./blog-kintsugi.html" class="block"><!-- Article 11 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/bowl.webp" alt="Kintsugi" class="w-full h-48 object-cover" loading="lazy" width="1600" height="1200">
+              <img src="images/other/bowl.webp" alt="Kintsugi" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="1600" height="1200">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Kintsugi</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">The Japanese art of repairing broken pottery with gold. Trials don't reduce our worth — join the broken parts with love.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Self-Growth</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Kintsugi</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">The Japanese art of repairing broken pottery with gold. Trials don't reduce our worth — join the broken parts with love.</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
                <span>·</span>
                <span>Mariam Khan</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -352,21 +382,21 @@
          </article></a>
 
         <a href="./blog-values.html" class="block"><!-- Article 12 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/compass.webp" alt="Values" class="w-full h-48 object-cover" loading="lazy" width="547" height="365">
+              <img src="images/other/compass.webp" alt="Values" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="547" height="365">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Values</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Our choices are based on our values. Accepting others' choices doesn't mean adopting them — and it is never about better or lesser.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Self-Growth</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Values</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Our choices are based on our values. Accepting others' choices doesn't mean adopting them — and it is never about better or lesser.</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
                <span>·</span>
                <span>Mariam Khan</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -375,21 +405,21 @@
          </article></a>
 
         <a href="./blog-domino-effect.html" class="block"><!-- Article 13 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="society">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="society" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/chain reaction.webp" alt="Domino effect" class="w-full h-48 object-cover" loading="lazy" width="1200" height="675">
+              <img src="images/other/chain reaction.webp" alt="Domino effect" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="1200" height="675">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Society</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Domino Effect</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Today's painful events are the result of a domino effect triggered generations ago. Stop the chain — starting with yourself.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Society</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Domino Effect</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Today's painful events are the result of a domino effect triggered generations ago. Stop the chain — starting with yourself.</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
                <span>·</span>
                <span>Mariam Khan</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -398,21 +428,21 @@
          </article></a>
 
         <a href="./blog-goodness.html" class="block"><!-- Article 14 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="self-growth" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/helping.webp" alt="Goodness" class="w-full h-48 object-cover" loading="lazy" width="1600" height="1062">
+              <img src="images/other/helping.webp" alt="Goodness" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="1600" height="1062">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Self-Growth</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Goodness</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Don't turn yourself into stone while teaching someone a lesson. Keep your goodness — find the people who deserve it.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Self-Growth</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Goodness</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Don't turn yourself into stone while teaching someone a lesson. Keep your goodness — find the people who deserve it.</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
                <span>·</span>
                <span>Mariam Khan</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -421,21 +451,21 @@
          </article></a>
 
         <a href="./blog-good-listener.html" class="block"><!-- Article 15 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="communication">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="communication" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/listner.webp" alt="Good listener" class="w-full h-48 object-cover" loading="lazy" width="678" height="452">
+              <img src="images/other/listner.webp" alt="Good listener" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="678" height="452">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-secondary/10 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Communication</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">The Good Listener</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Don't compete with others' suffering. Eye contact, no phone, no interrupting, listening to understand — practice with your children.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-secondary/10 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Communication</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">The Good Listener</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Don't compete with others' suffering. Eye contact, no phone, no interrupting, listening to understand — practice with your children.</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 min read</span>
                <span>·</span>
                <span>Mariam Khan</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -444,21 +474,21 @@
          </article></a>
 
         <a href="./blog-hard-times.html" class="block"><!-- Article 16 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/family in strom.webp" alt="Hard times" class="w-full h-48 object-cover" loading="lazy" width="260" height="280">
+              <img src="images/other/family in strom.webp" alt="Hard times" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="260" height="280">
            </div>
-           <div class="p-5 flex-1 flex flex-col">
-             <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3">Family</span>
-             <h3 class="font-semibold text-dark text-lg mb-2 leading-snug">Hard Times</h3>
-             <p class="text-dark/60 text-sm line-clamp-2 mb-4">Children are never taught to handle hard times. Indulged children, people-pleasers and passive-aggressive parents — what the child learns.</p>
-             <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+           <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+             <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Family</span>
+             <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug">Hard Times</h3>
+             <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Children are never taught to handle hard times. Indulged children, people-pleasers and passive-aggressive parents — what the child learns.</p>
+             <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
                <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">5 min read</span>
                <span>·</span>
                <span>Mariam Khan</span>
              </div>
-             <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-               <span class="text-xs text-dark/40">Share:</span>
+             <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+               <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
                
                <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -468,21 +498,21 @@
 
 
         <a href="./blog-caregivers.html" class="block"><!-- Article 17 -->
-        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships">
+        <article class="rounded-2xl border border-gray-100 overflow-hidden bg-white card-hover flex flex-col h-full" data-category="relationships" data-lang="ur">
            <div class="overflow-hidden">
-              <img src="images/other/trust.webp" alt="Two kinds of caregivers" class="w-full h-48 object-cover" loading="lazy" width="552" height="362">
+              <img src="images/other/trust.webp" alt="Two kinds of caregivers" class="w-full h-32 sm:h-44 lg:h-48 object-cover" loading="lazy" width="552" height="362">
           </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3">Relationships</span>
-            <h3 class="font-semibold text-dark text-lg mb-2 leading-snug" dir="rtl" lang="ur">دو طرح کے خدمت گار</h3>
-            <p class="text-dark/60 text-sm line-clamp-2 mb-4">Two kinds of caregivers exist — those who genuinely want your wellbeing, and those who serve to control. Which one surrounds you?</p>
-            <div class="flex items-center gap-3 text-xs text-dark/50 mb-4">
+          <div class="p-3.5 sm:p-6 flex-1 flex flex-col">
+            <span class="inline-block bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">Relationships</span>
+            <h3 class="font-semibold text-dark text-sm sm:text-lg mb-2 leading-snug" dir="rtl" lang="ur">دو طرح کے خدمت گار</h3>
+            <p class="text-dark/60 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-5">Two kinds of caregivers exist — those who genuinely want your wellbeing, and those who serve to control. Which one surrounds you?</p>
+            <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-dark/50 mb-3 sm:mb-5">
               <span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">3 min read</span>
               <span>·</span>
               <span>Munira Ahmed</span>
             </div>
-            <div class="flex items-center gap-3 border-t border-gray-100 pt-3 mt-auto">
-              <span class="text-xs text-dark/40">Share:</span>
+            <div class="flex items-center gap-2 sm:gap-3 border-t border-gray-100 pt-2.5 sm:pt-4 mt-auto">
+              <span class="text-[11px] sm:text-xs text-dark/40 hidden sm:inline">Share:</span>
               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
               
               <span class="text-dark/40"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg></span>
@@ -492,14 +522,35 @@
 
        </div>
 
-       <div class="text-center mt-12">
-         <a href="https://canva.link/11fcqqv7l60hqyd" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-primary text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-primary/90 transition">
-           Explore Blog Designs on Canva
-           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
-         </a>
+       <div id="hub-empty" class="hidden text-center py-16">
+         <p class="text-lg font-semibold text-dark/70">No articles found</p>
+         <p class="text-sm text-dark/50 mt-1">Try a different language or category filter.</p>
        </div>
+
      </div>
    </section>
+
+  <!-- LOAD MORE / VIEW BLOGS -->
+  <section class="pt-2 pb-12 bg-white" id="loadMoreWrap">
+    <div class="text-center">
+      <a href="https://canva.link/11fcqqv7l60hqyd" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-primary text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-primary/90 transition">
+        View Blogs on Canva
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- SELF-ASSESSMENTS -->
+  <section class="py-16 bg-accent/50" id="self-assessments">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <h2 class="font-display text-3xl md:text-4xl text-dark mb-3">Check In With Yourself</h2>
+        <p class="text-dark/60 text-base max-w-2xl mx-auto">Quick self-assessments on listening, parenting stress and relationship connection. Honest answers, no judgement — get a private score and see what support could help.</p>
+      </div>
+      <div id="quiz-cards" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <p class="text-center text-xs text-dark/40 mt-8">Prefer your phone? <a href="./app.html#resources" class="text-primary font-semibold hover:underline">Open the PRC App</a> for assessments in English and Urdu.</p>
+    </div>
+  </section>
 
   <!-- WHATSAPP COMMUNITY CTA -->
   <section class="py-12 bg-white">
@@ -516,57 +567,25 @@
     </div>
   </section>
 
-  <!-- LOAD MORE -->
-  <section class="py-8 bg-white" id="loadMoreWrap">
-    <div class="text-center">
-      <button id="loadMoreBtn" class="inline-flex items-center gap-2 border border-gray-200 rounded-full px-8 py-3 text-sm font-medium text-dark hover:border-primary hover:text-primary transition-colors">
-        <span id="loadMoreLabel">Load More Articles</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
-      </button>
-    </div>
-  </section>
-
   <!-- FOOTER -->
-  <footer class="bg-dark text-white pt-16 pb-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-        <div>
-          <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-14 w-auto mb-4 brightness-0 invert" loading="lazy">
-          <p class="text-white/60 text-sm leading-relaxed mb-4">Building stronger families through education, support, and community engagement across Pakistan.</p>
-          <div class="flex items-center gap-3">
-            <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" class="text-white/40 hover:text-primary transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-            
-            
-            <a href="https://www.youtube.com/@prc_pakistan" class="text-white/40 hover:text-primary transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
-          </div>
-        </div>
-        <div>
-          <h5 class="font-semibold text-sm uppercase tracking-wider mb-4">Quick Links</h5>
-          <ul class="space-y-2">
-            <li><a href="./about.html" class="text-white/60 hover:text-white text-sm transition-colors">About Us</a></li>
-            <li><a href="./services.html" class="text-white/60 hover:text-white text-sm transition-colors">Services</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="font-semibold text-sm uppercase tracking-wider mb-4">Resources</h5>
-          <ul class="space-y-2">
-            <li><a href="./learning-hub.html" class="text-white/60 hover:text-white text-sm transition-colors">Learning Hub</a></li>
-            <li><a href="./media.html" class="text-white/60 hover:text-white text-sm transition-colors">Media</a></li>
-            </ul>
-        </div>
-        <div>
-          <h5 class="font-semibold text-sm uppercase tracking-wider mb-4">Contact</h5>
-          <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" x2="22" y1="12" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> Online Worldwide</li>
-            <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg> tech.prc.pk@gmail.com</li>
-            <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> +92 332 827 4000</li>
-            <li class="flex items-center gap-2 text-white/60 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Mon-Sat: 9AM - 6PM</li>
-          </ul>
-        </div>
+  <footer class="bg-dark text-white pt-20 pb-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <img src="images/assets/logo.webp" alt="PRC Pakistan" class="h-14 w-auto mx-auto mb-6 brightness-0 invert" loading="lazy">
+      <p class="text-white/60 text-sm leading-relaxed max-w-md mx-auto mb-8">Empowering families across Pakistan with expert parenting and relationship coaching.</p>
+      <div class="flex items-center justify-center gap-4 mb-12">
+        <a href="https://web.facebook.com/ParentingAndRelationshipCoaching/" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+        <a href="https://instagram.com/prc_pakistan" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+        <a href="https://www.youtube.com/@prc_pakistan" target="_blank" rel="noopener" aria-label="YouTube" class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-white hover:border-white/40 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
       </div>
-      <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="border-t border-white/10 pt-8">
         <p class="text-white/40 text-sm">&copy; 2026 PRC Pakistan. All rights reserved.</p>
-        <p class="text-xs text-white/40">Developed by <a href="https://modigital.vercel.app" target="_blank" rel="noopener" class="hover:text-white transition-colors">mo digital</a></p>
+        <div class="mt-3 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-2 flex-wrap text-xs text-white/40">
+          <a href="./app.html" data-install-app class="hover:text-white transition-colors">App</a>
+          <span aria-hidden="true" class="hidden sm:inline text-white/20">·</span>
+          <a href="./privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+          <span aria-hidden="true" class="hidden sm:inline text-white/20">·</span>
+          <span>Developed by <a href="https://modigital.vercel.app" target="_blank" rel="noopener" class="hover:text-white transition-colors">mo digital</a></span>
+        </div>
       </div>
     </div>
   </footer>
@@ -616,55 +635,42 @@
     if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
     if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMobileMenu); });
 
-    // Category filter, search + Load More
+    // Category filter + search
     const allArticleCards = Array.from(document.querySelectorAll('.article-grid article[data-category]'));
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    const loadMoreWrap = document.getElementById('loadMoreWrap');
-    const LOAD_STEP = 6;
-    let visibleCount = LOAD_STEP;
 
     function filterHubArticles() {
       const query = document.getElementById('hub-search').value.toLowerCase().trim();
       const activePill = document.querySelector('.cat-pill.active');
       const cat = activePill ? activePill.dataset.category : 'all';
-      const filtering = cat !== 'all' || !!query;
+      const langPill = document.querySelector('.lang-pill.active');
+      const lang = langPill ? langPill.dataset.lang : 'all';
 
-      allArticleCards.forEach((article, i) => {
+      let visible = 0;
+      allArticleCards.forEach((article) => {
         const card = article.closest('a') || article;
         const matchCat = cat === 'all' || article.dataset.category === cat;
+        const matchLang = lang === 'all' || (article.dataset.lang || 'en') === lang;
         const text = article.textContent.toLowerCase();
         const matchSearch = !query || text.includes(query);
-        const show = matchCat && matchSearch;
-        // When filtering, show every match; otherwise paginate (6 per page).
-        card.style.display = (show && (filtering || i < visibleCount)) ? '' : 'none';
+        const show = matchCat && matchLang && matchSearch;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
       });
-
-      // Load more button state
-      if (loadMoreBtn && loadMoreWrap) {
-        if (filtering) {
-          loadMoreWrap.style.display = 'none';
-        } else {
-          loadMoreWrap.style.display = '';
-          const loadMoreLabel = document.getElementById('loadMoreLabel');
-          if (loadMoreLabel) loadMoreLabel.textContent = visibleCount >= allArticleCards.length ? 'Show Less' : 'Load More Articles';
-        }
-      }
-    }
-
-    if (loadMoreBtn) {
-      loadMoreBtn.addEventListener('click', () => {
-        if (visibleCount >= allArticleCards.length) {
-          visibleCount = LOAD_STEP;
-        } else {
-          visibleCount = Math.min(visibleCount + LOAD_STEP, allArticleCards.length);
-        }
-        filterHubArticles();
-      });
+      const empty = document.getElementById('hub-empty');
+      if (empty) empty.style.display = visible ? 'none' : '';
     }
 
     document.querySelectorAll('.cat-pill').forEach(pill => {
       pill.addEventListener('click', () => {
         document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        filterHubArticles();
+      });
+    });
+
+    document.querySelectorAll('.lang-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
         filterHubArticles();
       });
@@ -705,5 +711,331 @@
   });
 })();
 </script>
+
+<!-- SELF-ASSESSMENT MODAL -->
+<div id="quiz-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50" role="dialog" aria-modal="true" aria-label="Self-Assessment quiz">
+  <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-100 flex-shrink-0">
+      <button type="button" id="quiz-close" class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-dark/60 hover:bg-gray-100 transition" aria-label="Close quiz">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+      <div class="min-w-0">
+        <p id="quiz-title" class="font-semibold text-dark text-base leading-tight truncate"></p>
+        <p id="quiz-sub" class="text-xs text-dark/50 mt-0.5"></p>
+      </div>
+    </div>
+    <div id="quiz-body" class="flex-1 overflow-y-auto px-5 py-5"></div>
+  </div>
+</div>
+
+<script>
+/* ================= SELF-ASSESSMENT QUIZZES ================= */
+(function () {
+  if (!document.getElementById('quiz-cards')) return;
+  var QUIZZES = [
+    {
+      id: 'listening', icon: '\uD83D\uDC42', color: '#5f7a63',
+      title: 'Listening & Communication Check',
+      tagline: 'How well do you truly listen?',
+      desc: 'A quick check of your listening habits, how you handle disagreement and what your children and partner experience when they talk to you.',
+      service: 'Relationship Coaching',
+      serviceDesc: 'One-on-one coaching to help you become the listener people feel safe talking to.',
+      questions: [
+        { q: 'When someone is upset and talking to you, what do you usually do?', opts: [['I listen until they finish, then respond', 0], ['I listen, but my mind is already planning my reply', 3], ['I interrupt quickly to give advice', 6], ['I change the topic or check my phone', 10]] },
+        { q: "When someone disagrees with you, what's your first reaction?", opts: [["I'm comfortable — disagreement doesn't feel like an attack", 0], ['I feel defensive but stay calm', 3], ['I raise my voice to make my point', 6], ['I shut down or give the silent treatment', 10]] },
+        { type: 'slider', q: 'How often do you interrupt others mid-sentence?', low: 'Almost never', high: 'Very often' },
+        { q: 'When your child talks about their day, how do you usually respond?', opts: [['I put my phone down and really listen', 0], ['I listen while doing other things', 3], ['I quickly give advice or a lecture', 6], ['I dismiss it — "it\'s nothing, forget it"', 10]] },
+        { type: 'slider', q: 'When you are angry, how do you communicate?', low: 'Calm and collected', high: 'Hurtful words' },
+        { type: 'slider', q: 'How comfortable are you with silence in a conversation?', low: 'Very comfortable', high: 'Very uneasy' },
+        { q: 'When someone shares a problem, what do they mostly get from you?', opts: [['My full attention and empathy', 0], ['A mix of listening and my opinion', 3], ['Solutions and advice before they finish', 6], ['Judgment, or "I told you so"', 10]] },
+        { type: 'slider', q: 'How often do you check your phone while someone is talking to you?', low: 'Rarely', high: 'Constantly' },
+        { type: 'text', q: 'When did you last feel truly heard? What made it different?', ph: 'Write a few lines...' },
+        { type: 'text', q: 'What is one listening habit you would like to change this week?', ph: 'Write a few lines...' }
+      ]
+    },
+    {
+      id: 'parenting', icon: '\uD83C\uDF31', color: '#5B8DEF',
+      title: 'Parenting Stress Check',
+      tagline: 'How is your load as a parent?',
+      desc: 'A gentle check on your stress, patience and energy as a parent — and what could make daily life lighter for you and your children.',
+      service: 'Parenting Coaching',
+      serviceDesc: 'Practical parenting coaching that helps you respond calmly, not react in anger.',
+      questions: [
+        { type: 'slider', q: 'How often do you feel overwhelmed by your responsibilities as a parent?', low: 'Rarely', high: 'Most of the time' },
+        { q: 'When your child misbehaves, how do you usually react?', opts: [['I stay calm and address it', 0], ['I get tense but manage', 3], ['I shout more than I would like', 6], ['I lose my temper or feel out of control', 10]] },
+        { type: 'slider', q: 'How much "you time" do you get in a week?', low: 'Regularly', high: 'None at all' },
+        { q: 'Do you compare yourself or your children with other families?', opts: [['No', 0], ['Sometimes', 3], ['Often', 6], ['Constantly', 10]] },
+        { type: 'slider', q: 'When relatives or others judge your child\u2019s behaviour, how do you feel?', low: 'It does not shake me', high: 'It ruins my day' },
+        { q: 'How are your sleep and energy these days?', opts: [['Good', 0], ['Fairly good', 3], ['Poor', 6], ['Very poor', 10]] },
+        { q: 'Do you and your partner agree on how to raise the children?', opts: [['Mostly yes', 0], ['We differ sometimes', 3], ['We argue about it often', 6], ["We are on very different pages", 10]] },
+        { type: 'slider', q: 'When you feel stressed, what do you usually do?', low: 'Healthy release', high: 'Take it out on children' },
+        { type: 'text', q: 'What is the heaviest part of your day as a parent right now?', ph: 'Write a few lines...' },
+        { type: 'text', q: 'What is one small thing that would lighten your load this week?', ph: 'Write a few lines...' }
+      ]
+    },
+    {
+      id: 'relationship', icon: '\uD83D\uDC99', color: '#ea8a3c',
+      title: 'Relationship Connection Check',
+      tagline: 'How connected are you right now?',
+      desc: 'A check of how much real connection, appreciation and understanding you and your partner share these days.',
+      service: 'Marriage Guidance',
+      serviceDesc: 'Confidential marriage guidance to rebuild closeness, trust and honest communication.',
+      questions: [
+        { type: 'slider', q: 'How often do you and your partner talk beyond daily logistics (kids, bills, chores)?', low: 'Daily', high: 'Almost never' },
+        { q: 'When conflict happens, how does it usually end?', opts: [['We talk it through and reconnect', 0], ['We calm down and move on', 3], ['Someone gives the silent treatment', 6], ['The same issue repeats every time', 10]] },
+        { type: 'slider', q: 'Do you feel your partner understands your feelings?', low: 'Mostly', high: 'Never' },
+        { q: 'How do you express appreciation to each other?', opts: [['Regularly, in words and actions', 0], ['Sometimes', 3], ['Rarely — we mostly point out faults', 6], ['Never — we have stopped trying', 10]] },
+        { type: 'slider', q: 'When was the last time you did something enjoyable together, just the two of you?', low: 'This week', high: "Can't remember" },
+        { q: 'How do you handle each other\u2019s families and in-laws?', opts: [['We support each other', 0], ['It causes occasional tension', 3], ['It causes frequent conflict', 6], ["It's a constant source of war", 10]] },
+        { q: 'When you are upset, what do you do?', opts: [['I share it openly', 0], ['I share it sometimes', 3], ['I keep it to myself and distance', 6], ["I don't even know what's wrong anymore", 10]] },
+        { type: 'slider', q: 'How would you describe the emotional distance between you right now?', low: 'Close', high: 'Very distant' },
+        { type: 'text', q: 'Describe one recent moment you felt connected (or distant) with your partner.', ph: 'Write a few lines...' },
+        { type: 'text', q: 'What is one thing you wish your partner understood about you right now?', ph: 'Write a few lines...' }
+      ]
+    }
+  ];
+  var BANDS = [
+    { max: 24, label: 'Strong', color: '#22c55e', bg: 'rgba(34,197,94,.14)', title: "You're in a good place.", desc: 'You show care, patience and presence. Keep practising what you do — and give yourself credit for it.', suggested: 'Keep growing with our free articles and community.' },
+    { max: 50, label: 'Some Attention', color: '#f59e0b', bg: 'rgba(245,158,11,.15)', title: 'You need some attention here.', desc: 'You care, but some habits are quietly draining you or your relationships. Small, guided changes can make a real difference.', suggested: 'A short session can help you build healthier habits.' },
+    { max: 80, label: 'Time to Reach Out', color: '#ef4444', bg: 'rgba(239,68,68,.12)', title: 'You deserve support — not just effort.', desc: 'The score is high because you are carrying a lot. Please know this is common, and professional support genuinely helps.', suggested: 'Speaking to a coach is the strongest step you can take.' }
+  ];
+  var BOOK_URL = './contact.html?topic=book-session';
+  var WA_URL = 'https://wa.me/923328274000?text=';
+  var modal = document.getElementById('quiz-modal');
+  var body = document.getElementById('quiz-body');
+  var titleEl = document.getElementById('quiz-title');
+  var subEl = document.getElementById('quiz-sub');
+  var state = null;
+
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+  function renderCards() {
+    var box = document.getElementById('quiz-cards');
+    box.innerHTML = QUIZZES.map(function (q) {
+      return '<div class="rounded-2xl border border-gray-100 bg-white card-hover p-6 flex flex-col shadow-sm">' +
+        '<span class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background:' + q.color + '1f">' + q.icon + '</span>' +
+        '<h3 class="font-semibold text-dark text-lg mt-4">' + esc(q.title) + '</h3>' +
+        '<p class="text-sm text-dark/60 mt-1">' + esc(q.tagline) + '</p>' +
+        '<p class="text-xs text-dark/45 leading-relaxed mt-3 flex-1">' + esc(q.desc) + '</p>' +
+        '<div class="flex items-center gap-2 mt-5 pt-4 border-t border-gray-100">' +
+        '<span class="text-[11px] font-semibold text-dark/45">' + q.questions.length + ' questions \u00B7 ~2 min</span>' +
+        '<span class="flex-1"></span>' +
+        '<button type="button" class="quiz-open bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary/90 transition" data-id="' + q.id + '">Start</button>' +
+        '</div></div>';
+    }).join('');
+    box.querySelectorAll('.quiz-open').forEach(function (b) {
+      b.addEventListener('click', function () { openQuiz(b.dataset.id); });
+    });
+  }
+
+  function openQuiz(id) {
+    var q = QUIZZES.find(function (z) { return z.id === id; });
+    state = { quiz: q, step: 0, score: 0, answers: [] };
+    titleEl.textContent = q.title;
+    subEl.textContent = q.tagline;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    renderIntro();
+  }
+
+  function renderIntro() {
+    var q = state.quiz;
+    body.innerHTML =
+      '<div class="text-center py-2">' +
+      '<span class="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center text-3xl" style="background:' + q.color + '1f">' + q.icon + '</span>' +
+      '<h3 class="font-display text-xl font-bold text-dark mt-4">' + esc(q.title) + '</h3>' +
+      '<p class="text-sm text-dark/55 leading-relaxed mt-2">' + esc(q.desc) + '</p>' +
+      '<div class="flex justify-center gap-2 mt-4">' +
+      '<span class="inline-flex items-center gap-1 bg-accent rounded-full px-3 py-1.5 text-xs font-semibold text-dark/70">' + q.questions.length + ' questions</span>' +
+      '<span class="inline-flex items-center gap-1 bg-accent rounded-full px-3 py-1.5 text-xs font-semibold text-dark/70">~2 min</span>' +
+      '</div>' +
+      '<button type="button" id="quiz-begin" class="mt-6 bg-primary text-white px-8 py-3 rounded-full text-sm font-semibold hover:bg-primary/90 transition">Start Assessment</button>' +
+      '<p class="text-[10px] text-dark/35 mt-3">Private &amp; instant \u2014 no account needed.</p>' +
+      '</div>';
+    document.getElementById('quiz-begin').addEventListener('click', renderQuestion);
+  }
+
+  function renderQuestion() {
+    var q = state.quiz;
+    var cur = q.questions[state.step];
+    subEl.textContent = 'Question ' + (state.step + 1) + ' of ' + q.questions.length;
+    var inner = '';
+    if (cur.type === 'slider') {
+      inner =
+        '<div class="slider-box mt-5">' +
+        '<div class="slider-track" id="q-slider">' +
+        '<div class="slider-rail"></div>' +
+        '<div class="slider-fill" id="q-slider-fill"></div>' +
+        '<div class="slider-handle" id="q-slider-handle"></div>' +
+        '</div>' +
+        '<div class="slider-labels"><span>' + esc(cur.low) + '</span><span>' + esc(cur.high) + '</span></div>' +
+        '<p class="slider-value" id="q-slider-value"></p>' +
+        '<button type="button" class="q-next" id="q-slider-next" disabled style="opacity:.45">Next</button>' +
+        '</div>';
+    } else if (cur.type === 'text') {
+      inner =
+        '<textarea class="q-text mt-4" id="q-text" rows="4" placeholder="' + esc(cur.ph || '') + '"></textarea>' +
+        '<button type="button" class="q-next" id="q-text-next">Next</button>';
+    } else {
+      inner = '<div class="flex flex-col gap-2.5">' +
+        cur.opts.map(function (o, i) {
+          return '<button type="button" class="q-opt text-left flex items-start gap-3 border border-gray-200 rounded-xl px-4 py-3 hover:border-primary hover:bg-primary/5 transition" data-i="' + i + '">' +
+          '<span class="w-4 h-4 rounded-full border-2 border-gray-300 flex-shrink-0 mt-0.5"></span>' +
+          '<span class="text-sm font-medium text-dark/85 leading-snug">' + esc(o[0]) + '</span></button>';
+        }).join('') +
+        '</div>';
+    }
+    body.innerHTML =
+      '<div class="mb-4">' +
+      '<div class="h-1.5 bg-accent rounded-full overflow-hidden"><div class="h-full bg-primary rounded-full transition-all duration-300" style="width:' + (state.step / q.questions.length * 100) + '%"></div></div>' +
+      '<p class="font-bold text-[15px] text-dark leading-snug mt-4">' + (state.step + 1) + '. ' + esc(cur.q) + '</p>' +
+      '</div>' +
+      inner;
+    body.querySelectorAll('.q-opt').forEach(function (b) {
+      b.addEventListener('click', function () { pick(b); });
+    });
+    if (cur.type === 'slider') initSlider();
+    if (cur.type === 'text') {
+      document.getElementById('q-text-next').addEventListener('click', function () {
+        state.answers.push(0);
+        next();
+      });
+    }
+  }
+
+  function initSlider() {
+    var track = document.getElementById('q-slider');
+    var fill = document.getElementById('q-slider-fill');
+    var handle = document.getElementById('q-slider-handle');
+    var valueEl = document.getElementById('q-slider-value');
+    var nextBtn = document.getElementById('q-slider-next');
+    var val = 5;
+    function setVal(v) {
+      val = Math.max(0, Math.min(10, Math.round(v)));
+      var pct = val / 10 * 100;
+      fill.style.width = pct + '%';
+      handle.style.left = pct + '%';
+      valueEl.textContent = val + '/10';
+      nextBtn.disabled = false;
+      nextBtn.style.opacity = '1';
+    }
+    function pos(e) {
+      var r = track.getBoundingClientRect();
+      return (e.clientX - r.left) / r.width * 10;
+    }
+    function down(e) {
+      e.preventDefault();
+      setVal(pos(e));
+      var move = function (ev) { setVal(pos(ev)); };
+      var up = function () {
+        document.removeEventListener('pointermove', move);
+        document.removeEventListener('pointerup', up);
+      };
+      document.addEventListener('pointermove', move);
+      document.addEventListener('pointerup', up);
+    }
+    track.addEventListener('pointerdown', down);
+    setVal(5);
+    nextBtn.addEventListener('click', function () {
+      state.answers.push(val);
+      next();
+    });
+  }
+
+  function next() {
+    state.step++;
+    if (state.step >= state.quiz.questions.length) showResult();
+    else renderQuestion();
+  }
+
+  function pick(btn) {
+    var i = parseInt(btn.dataset.i, 10);
+    state.answers.push(state.quiz.questions[state.step].opts[i][1]);
+    btn.classList.add('pointer-events-none', 'border-primary', 'bg-primary/5');
+    btn.querySelector('span').classList.add('border-primary', 'bg-primary');
+    setTimeout(function () { next(); }, 280);
+  }
+
+  function showResult() {
+    var q = state.quiz;
+    state.score = Math.min(80, state.answers.reduce(function (a, b) { return a + b; }, 0));
+    var band = BANDS.find(function (b) { return state.score <= b.max; }) || BANDS[2];
+    subEl.textContent = 'Your result';
+    body.innerHTML =
+      '<div class="text-center py-1">' +
+      '<p class="text-xs font-bold uppercase tracking-wider text-dark/40">Your attention score</p>' +
+      '<div class="gauge-wrap mt-3">' +
+      '<svg viewBox="0 0 220 130">' +
+      '<path d="M 30 120 A 80 80 0 0 1 190 120" fill="none" stroke="#F0ECE2" stroke-width="16" stroke-linecap="round"></path>' +
+      '<path id="lh-gauge-arc" d="M 30 120 A 80 80 0 0 1 190 120" fill="none" stroke="' + band.color + '" stroke-width="16" stroke-linecap="round" style="transition:stroke-dashoffset 1.4s cubic-bezier(.25,.8,.3,1);"></path>' +
+      '<g id="lh-gauge-ticks"></g>' +
+      '<line id="lh-gauge-needle" x1="110" y1="120" x2="110" y2="42" stroke="#2F2F2F" stroke-width="3" stroke-linecap="round" style="transition:transform 1.4s cubic-bezier(.25,.8,.3,1); transform-origin:110px 120px;"></line>' +
+      '<circle cx="110" cy="120" r="6" fill="#2F2F2F"></circle>' +
+      '</svg>' +
+      '<div class="gauge-num">' +
+      '<p class="font-display text-4xl font-bold text-dark leading-none"><span id="lh-gauge-count">0</span><span class="text-lg text-dark/40">/100</span></p>' +
+      '<p class="text-[10px] font-bold uppercase tracking-widest text-dark/40 mt-1">Attention score</p>' +
+      '</div>' +
+      '</div>' +
+      '<span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold mt-3" style="background:' + band.bg + ';color:' + band.color + '">' + esc(band.label) + '</span>' +
+      '<p class="font-bold text-dark text-base mt-4">' + esc(band.title) + '</p>' +
+      '<p class="text-sm text-dark/55 leading-relaxed mt-2">' + esc(band.desc) + '</p>' +
+      '<div class="bg-accent/60 rounded-xl p-4 text-left mt-5">' +
+      '<p class="text-[10px] font-bold uppercase tracking-wider text-dark/40">Suggested for you</p>' +
+      '<p class="text-sm text-dark/70 mt-1 leading-relaxed">' + esc(band.suggested) + ' <span class="font-semibold">' + esc(q.service) + '</span> \u2014 ' + esc(q.serviceDesc) + '</p>' +
+      '</div>' +
+      '<div class="flex gap-2.5 mt-5">' +
+      '<button type="button" id="quiz-retake" class="flex-1 border border-gray-200 text-dark/70 text-sm font-bold rounded-full px-4 py-2.5 hover:bg-gray-50 transition">Retake</button>' +
+      '<a href="' + BOOK_URL + '" class="flex-1 bg-primary text-white text-sm font-bold rounded-full px-4 py-2.5 text-center hover:bg-primary/90 transition">Book a Session</a>' +
+      '</div>' +
+      '<a href="' + WA_URL + encodeURIComponent('I took the ' + q.title + ' self-assessment on PRC Pakistan. My attention score: ' + state.score + '/100. I would like to talk about ' + q.service + '.') + '" target="_blank" rel="noopener" class="inline-block mt-3 text-xs font-semibold text-green-600 hover:underline">Chat with us on WhatsApp instead</a>' +
+      '</div>';
+    animateGauge(state.score, band.color);
+    document.getElementById('quiz-retake').addEventListener('click', function () { openQuiz(q.id); });
+  }
+
+  function animateGauge(score, color) {
+    var R = 80, CX = 110, CY = 120, MAX = 100;
+    var frac = Math.min(1, score / MAX);
+    var arc = document.getElementById('lh-gauge-arc');
+    var len = Math.PI * R;
+    arc.style.strokeDasharray = len;
+    arc.style.strokeDashoffset = len;
+    void arc.getBoundingClientRect();
+    arc.style.strokeDashoffset = len * (1 - frac);
+    var needle = document.getElementById('lh-gauge-needle');
+    needle.style.transform = 'rotate(' + (180 * frac - 90) + 'deg)';
+    var ticks = document.getElementById('lh-gauge-ticks');
+    ticks.innerHTML = '';
+    for (var s = 0; s <= 100; s += 10) {
+      var a = Math.PI + (Math.PI * s / MAX);
+      var x1 = CX + Math.cos(a) * 66, y1 = CY + Math.sin(a) * 66;
+      var x2 = CX + Math.cos(a) * 74, y2 = CY + Math.sin(a) * 74;
+      ticks.innerHTML += '<line x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '" stroke="#d8d2c4" stroke-width="2" stroke-linecap="round"></line>';
+    }
+    var count = document.getElementById('lh-gauge-count');
+    var t0 = performance.now();
+    function frame(now) {
+      var p = Math.min(1, (now - t0) / 1400);
+      var eased = 1 - Math.pow(1 - p, 3);
+      count.textContent = Math.round(eased * score);
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function closeQuiz() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+    state = null;
+  }
+  document.getElementById('quiz-close').addEventListener('click', closeQuiz);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeQuiz(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeQuiz(); });
+
+  renderCards();
+})();
+</script>
+  <script src="./app-install.js" defer></script>
 </body>
 </html>

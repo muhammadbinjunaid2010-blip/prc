@@ -32,6 +32,8 @@ html { scroll-behavior: smooth; }
 /* Category pills */
 .cat-pill { transition: background 0.2s, color 0.2s; }
 .cat-pill.active, .cat-pill:hover { background: #5B8DEF; color: white; }
+.lang-pill { transition: background 0.2s, color 0.2s; }
+.lang-pill.active, .lang-pill:hover { background: #5B8DEF; color: white; }
 
 /* Testimonial slider */
 .testimonial-slide { display: none; }
